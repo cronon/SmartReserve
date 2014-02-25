@@ -1,6 +1,7 @@
 class Club < ActiveRecord::Base
-  has_many :table
+  has_many :table, dependent: :destroy
   after_validation :create_tables
+
 
   protected
     def create_tables

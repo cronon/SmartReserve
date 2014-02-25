@@ -5,7 +5,9 @@ describe Club do
   before(:each) do
     @attr = {
       :name => "metropole",
-      :tables_count => "24"
+      :tables_count => "24",
+      :after_booking => "300", # 300 sec == 5 min
+      :description => "inka-chaka-zuma"
     }
   end
 
@@ -17,4 +19,6 @@ describe Club do
     club=Club.create(@attr)
     expect(club.table.length).to eq(24)
   end
+
+
 end
