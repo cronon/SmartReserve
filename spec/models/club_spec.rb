@@ -20,5 +20,4 @@ describe Club do
     expect(club.table.length).to eq(24)
   end
 
-
 end
