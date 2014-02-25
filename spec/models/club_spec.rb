@@ -6,8 +6,8 @@ describe Club do
     @attr = {
       :name => "metropole",
       :tables_count => "24",
-      :after_booking => "300", # 300 sec == 5 min
-      :description => "inka-chaka-zuma"
+      :average_time => "300", # 300 sec == 5 min
+      #:description => "inka-chaka-zuma"
     }
   end
 
