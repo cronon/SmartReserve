@@ -16,6 +16,21 @@
     <%= f.text_field :name %>
   </div>
 
+  <div class="field">
+    <%= f.label :tables_count %><br>
+    <%= f.text_field :tables_count%>
+  </div>
+
+  <div class="field">
+    <%= f.label :after_booking %><br>
+    <%= f.text_field :after_booking%>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, :cols => "30", :rows => "10"%>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
