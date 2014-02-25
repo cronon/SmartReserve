@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225164357) do
+ActiveRecord::Schema.define(version: 20140225170515) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140225164357) do
     t.integer  "tables_count"
     t.integer  "after_booking"
     t.text     "description"
+    t.datetime "average_time"
   end
 
   create_table "orders", force: true do |t|
