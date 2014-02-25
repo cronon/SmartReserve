@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  table_id: 
+  since: 2014-02-25 10:32:48
+  until: 2014-02-25 10:32:48
+
+two:
+  table_id: 
+  since: 2014-02-25 10:32:48
+  until: 2014-02-25 10:32:48

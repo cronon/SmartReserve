@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @club.name %>
+  <table>
+    <thead>
+      <tr>
+        <th>Table</th>
+        <th>Number</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @club.table.each_with_index do |table,i| %>
+        <tr>
+          <td><%= table %></td>
+          <td><%= i+1 %></td>
+          <td><%= link_to 'Show', table %></td>
+          <td><%= link_to 'Edit', edit_table_path(table) %></td>
+          <td><%= link_to 'Destroy', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+
+<%= link_to 'Edit', edit_club_path(@club) %> |
+<%= link_to 'Back', clubs_path %>

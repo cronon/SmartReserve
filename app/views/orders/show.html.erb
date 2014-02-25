@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Table:</strong>
+  <%= @order.table %>
+</p>
+
+<p>
+  <strong>Since:</strong>
+  <%= @order.since %>
+</p>
+
+<p>
+  <strong>Until:</strong>
+  <%= @order.until %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>
