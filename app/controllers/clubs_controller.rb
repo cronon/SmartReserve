@@ -25,8 +25,6 @@ class ClubsController < ApplicationController
   # POST /clubs.json
   def create
     @club = Club.new(club_params)
-    #для отладки проблемы с валидацией
-    puts "CLUBS PARAMS" + club_params.to_s
     respond_to do |format|
       if @club.save
         format.html { redirect_to @club, notice: 'Club was successfully created.' }

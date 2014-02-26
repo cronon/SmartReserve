@@ -20,7 +20,7 @@ describe Club do
     expect(club.table.length).to eq(5)
   end
 
-  it "should raise error when invalid attribute" do
+  it "should raises error when invalid attribute" do
     @attr = {
       :name => "fff"
     }

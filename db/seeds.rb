@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+clubs = Club.create([
+  { :name => 'Baza', :description => '21+', :tables_count => '23', :average_time => 1.hour },
+  { :name => 'Aplha', :description => 'expensive', :tables_count => '1', :average_time => 2.hours },
+  { :name => 'Stopline', :description => 'great drunken party', :tables_count => '242', :average_time => 5.minutes },
+])
