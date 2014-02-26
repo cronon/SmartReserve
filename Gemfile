@@ -43,7 +43,9 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'rspec', :group => [:development, :test]
-gem 'rspec-rails', :group => [:development, :test]
-gem "database_cleaner", :group => :test
-gem 'factory_girl_rails', :group => :test
+group :development, :test do 
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+end
