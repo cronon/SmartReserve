@@ -73,28 +73,20 @@ describe ClubsController do
   end
 
   describe "clubs#destroy on DELETE /clubs/:id/edit" do
-    before :each do Club.create :name => 'Cosmos69', :description => '21+', :tables_count => '23', :average_time => 1.hour end
-    it "redirects to the index template" do
+    it "destroys club and redirects to the index template" do
+      Club.create :name => 'Cosmos69', :description => '21+', :tables_count => '23', :average_time => 1.hour
       post :destroy, :id => Club.last.id
       expect(response).to redirect_to(:clubs)
-    end
-    it "destroys club" do
-      post :destroy, :id => Club.last.id
       expect(Club.last.name).not_to be('Cosmos69')
     end
   end
 
-  describe "clubs#update POST /clubs" do
-    before :each do Club.create :name => 'Cosmos69', :description => '21+', :tables_count => '23', :average_time => 1.hour end
-    it "creates new club" do
+  describe "clubs#update POST /clubs" do    
+    it "updates a club and redirects to the show template" do
+      Club.create :name => 'Cosmos69', :description => '21+', :tables_count => '23', :average_time => 1.hour
       post :update, :id=>Club.last,:club=>{:name => 'Baza', :description => '21+', :tables_count => '23', :average_time => 1.hour}
       expect(Club.last.name).to eq('Baza')
-    end
-
-    it "redirects to the show template" do
-      post :update, :id=>Club.last,:club=>{:name => 'Baza', :description => '21+', :tables_count => '23', :average_time => 1.hour}
       expect(response).to redirect_to(Club.last)
     end
   end
-
 end

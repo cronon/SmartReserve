@@ -1,9 +1,10 @@
 SmartReserve::Application.routes.draw do
   resources :clubs do
-    resources :tables do
-      resources :orders
-    end
   end
+  get 'clubs/:id/tables' => 'tables#index', as: :tables
+  get 'clubs/:id/tables/:id' => 'tables#show', as: :table #shows orders
+  get 'clubs/:id/tables/:id/edit' =>'tables#edit', as: :edit_club_table #links to orders#create and orders#destroy
+
   resources :orders
 
   # The priority is based upon order of creation: first created -> highest priority.
