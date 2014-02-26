@@ -3,7 +3,8 @@ class Order < ActiveRecord::Base
 
   validate :until_should_be_later_than_since,
           :since_cannot_be_in_the_past,
-          :until_cannot_be_in_the_past
+          :until_cannot_be_in_the_past,
+          :orders_should_not_intersect
 
   def intersects? other_order
     self.until.between? other_order.since, other_order.until or \
@@ -28,9 +29,10 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def orders_should_not_intersects
-    if table.order.find{|o| self.intersects? o}
-      errors.add(:order, "Time #{self.until} is already booked!")
+  def orders_should_not_intersect
+    return true if not self.table
+    if self.table.order.find{|o| self.intersects? o}
+      errors.add(:base, "Time #{self.until} is already booked!")
     end
   end
 end

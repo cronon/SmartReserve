@@ -12,7 +12,13 @@ class Table < ActiveRecord::Base
   end
 
   def add_order new_order
-    self.order << new_order
+    new_order.table = self
+    if new_order.valid?
+      self.order << new_order
+    else
+      errors.add(:base, new_order.errors)
+      #raise ActiveRecord::RecordInvalid
+    end
   end
 
 end

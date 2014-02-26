@@ -32,7 +32,7 @@ describe Table do
 
   it "should be busy when has order now" do
     current_order = Order.new ({
-      :since => Time.now - 15.minutes,
+      :since => Time.now,
       :until => Time.now + 15.minutes
     })
 
