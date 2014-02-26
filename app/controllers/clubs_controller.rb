@@ -25,7 +25,8 @@ class ClubsController < ApplicationController
   # POST /clubs.json
   def create
     @club = Club.new(club_params)
-
+    #для отладки проблемы с валидацией
+    puts "CLUBS PARAMS" + club_params.to_s
     respond_to do |format|
       if @club.save
         format.html { redirect_to @club, notice: 'Club was successfully created.' }
@@ -69,6 +70,6 @@ class ClubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
-      params.require(:club).permit(:name)
+      params.require(:club).permit(:name, :tables_count)
     end
 end
