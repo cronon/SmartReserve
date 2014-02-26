@@ -20,4 +20,11 @@ describe Club do
     expect(club.table.length).to eq(24)
   end
 
+  it "should raise error when invalid attribute" do
+    @attr = {
+      :name => "fff"
+    }
+    expect {Club.create!(@attr)}.to raise_error(ActiveRecord::RecordInvalid)
+  end
+
 end

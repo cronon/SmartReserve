@@ -11,14 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140225174527) do
+ActiveRecord::Schema.define(version: 20140226132329) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tables_count"
-    t.integer  "after_booking"
     t.text     "description"
     t.datetime "average_time"
   end
@@ -27,7 +26,8 @@ ActiveRecord::Schema.define(version: 20140225174527) do
     t.integer  "table_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "time"
+    t.datetime "since"
+    t.datetime "until"
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
