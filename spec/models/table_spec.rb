@@ -51,8 +51,8 @@ describe Table do
   end
 
   it "should raise exception when orders intersects" do
-    @table.add_order Order.new({:since=>Time.now - 10.minutes, :until => Time.now+10.minutes})
-    o = Order.new({:since=>Time.now, :until => Time.now+20.minutes})
+    @table.add_order Order.new({:since=>Time.now, :until => Time.now+10.minutes})
+    o = Order.new({:since=>Time.now+5.minutes, :until => Time.now+20.minutes})
     expect {@table.add_order(o)}.to raise_error(ActiveRecord::RecordInvalid)
   end 
 end

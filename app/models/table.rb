@@ -16,8 +16,8 @@ class Table < ActiveRecord::Base
     if new_order.valid?
       self.order << new_order
     else
-      errors.add(:base, new_order.errors)
-      #raise ActiveRecord::RecordInvalid
+      errors.add(:order, new_order.errors)
+      raise ActiveRecord::RecordInvalid.new(self)
     end
   end
 
