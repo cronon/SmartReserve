@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226132329) do
+ActiveRecord::Schema.define(version: 20140227142107) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -19,15 +19,15 @@ ActiveRecord::Schema.define(version: 20140226132329) do
     t.datetime "updated_at"
     t.integer  "tables_count"
     t.text     "description"
-    t.datetime "average_time"
+    t.integer  "average_time"
   end
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.datetime "until"
     t.datetime "since"
+    t.datetime "until"
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
