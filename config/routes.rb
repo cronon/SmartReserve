@@ -1,14 +1,13 @@
 SmartReserve::Application.routes.draw do
   resources :clubs do
     get 'tables' => 'tables#index', as: :tables
-    get 'tables/:id' => 'tables#show', as: :table #shows orders
-    get 'tables/:id/edit' =>'tables#edit', as: :edit_table
+    get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button
+    get 'tables/:id/edit' =>'tables#edit', as: :edit_table #shows orders
+    get 'orders' => 'orders#index', as: :orders
   end
-  # get 'clubs/:club_id/tables' => 'tables#index', as: :tables
-  # get 'clubs/:club_id/tables/:id' => 'tables#show', as: :table #shows orders
-  # get 'clubs/:club_id/tables/:id/edit' =>'tables#edit', as: :edit_club_table #links to orders#create and orders#destroy
-
-  resources :orders
+  post 'orders' => 'orders#create'
+  get 'orders/:id' => 'orders#show', as: :order
+  delete 'orders/:id' => 'orders#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
