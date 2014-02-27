@@ -1,7 +1,6 @@
 class Table < ActiveRecord::Base
   belongs_to :club
   has_many :order
-  #validate :orders_cannot_intersect, on: :add_order
 
   def status time
     orders = self.order

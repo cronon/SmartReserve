@@ -16,7 +16,7 @@ describe Club do
   end
 
   it "should create a new tables" do
-    club=Club.new(@attr)
+    club=Club.create(@attr)
     expect(club.table.length).to eq(5)
   end
 
@@ -28,7 +28,7 @@ describe Club do
   end
 
   it "should be free when all tables free" do
-    club = Club.new(@attr)
+    club = Club.create(@attr)
     club.table.map.with_index do |t,i| 
       allow(t).to receive(:will_free) {Time.now}
     end
@@ -36,7 +36,7 @@ describe Club do
   end
 
   it "should be free when first table will free" do
-    club = Club.new(@attr)
+    club = Club.create(@attr)
     club.table.map.with_index do |t,i| 
       allow(t).to receive(:will_free) {Time.now + (i+10).minutes}
     end

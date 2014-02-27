@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20140227142107) do
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.datetime "since"
     t.datetime "until"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"

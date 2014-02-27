@@ -8,15 +8,13 @@ describe ClubsController do
     Club.create(
       :name => 'Stopline', 
       :description => 'great drunken party', 
-      :tables_count => '242', 
+      :tables_count => 1, 
       :average_time => 5.minutes
     )
   end
 
-  #it "redirects to the show page upon saves" do
   describe "clubs#index on GET index" do
     it "assigns @clubs" do
-      @club.save
       get :index
       expect(assigns(:clubs)).to eq(Club.all)
     end

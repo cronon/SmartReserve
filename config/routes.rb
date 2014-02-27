@@ -1,9 +1,12 @@
 SmartReserve::Application.routes.draw do
   resources :clubs do
+    get 'tables' => 'tables#index', as: :tables
+    get 'tables/:id' => 'tables#show', as: :table #shows orders
+    get 'tables/:id/edit' =>'tables#edit', as: :edit_table
   end
-  get 'clubs/:id/tables' => 'tables#index', as: :tables
-  get 'clubs/:id/tables/:id' => 'tables#show', as: :table #shows orders
-  get 'clubs/:id/tables/:id/edit' =>'tables#edit', as: :edit_club_table #links to orders#create and orders#destroy
+  # get 'clubs/:club_id/tables' => 'tables#index', as: :tables
+  # get 'clubs/:club_id/tables/:id' => 'tables#show', as: :table #shows orders
+  # get 'clubs/:club_id/tables/:id/edit' =>'tables#edit', as: :edit_club_table #links to orders#create and orders#destroy
 
   resources :orders
 
