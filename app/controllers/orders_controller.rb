@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @orders = Club.find(params[:club_id]).table.map{|t| t.order}.flatten
   end
 
   # GET /orders/1
@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
+        puts '@@@##'
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
@@ -33,7 +34,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url }
+      format.html { redirect_to club_tables_url(@order.table.club) }
       format.json { head :no_content }
     end
   end

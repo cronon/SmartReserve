@@ -4,7 +4,7 @@ describe OrdersController do
   before(:all) do
     @club = Club.create :name => 'Baza', :description => '21+', :tables_count => 1, :average_time => 1.hour
     @table = @club.table.first
-    @order = Order.create :since => Time.now, :until => Time.now+5.hours
+    @order = Order.create :since => Time.now, :until => Time.now+5.minutes
     @table.add_order @order
   end
 
@@ -34,7 +34,8 @@ describe OrdersController do
 
   describe "orders#destroy on DELETE /orders/:id" do
     it "destroys order and redirects to the tables index template" do
-      o = Order.create :since => Time.now, :until => Time.now+5.hours
+      o = Order.create :since => Time.now+1.hour, :until => Time.now+2.hours
+      @table.add_order o
       post :destroy, :id => o.id
       expect(response).to redirect_to(club_tables_url(@club))
       expect(Order.last.id).not_to be(o.id)
@@ -43,12 +44,14 @@ describe OrdersController do
 
   describe "order#create on POST /orders" do
     it "creates new order" do
-      post :create, :order => {:table_id => Table.last.id, :since => Time.now, :until => Time.now+5.minutes}
+      post :create, :order => {:table_id => Table.last.id, :since => Time.now+3.hours, :until => Time.now+4.hours}
       expect(Order.last.table.id).to eq(Table.last.id)
+      Order.last.destroy
     end
     it "redirects to show template" do
-      post :create, :order => {:table_id => Table.last.id, :since => Time.now, :until => Time.now+5.minutes}
+      post :create, :order => {:table_id => Table.last.id, :since => Time.now+3.hours, :until => Time.now+4.hours}
       expect(response).to redirect_to(:show)
+      Order.last.destroy
     end
   end
 end

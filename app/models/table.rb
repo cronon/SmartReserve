@@ -1,6 +1,8 @@
 class Table < ActiveRecord::Base
   belongs_to :club
   has_many :order
+  after_save :save_orders
+  after_initialize :set_orders
 
   def status time
     orders = self.order
@@ -13,7 +15,7 @@ class Table < ActiveRecord::Base
   def add_order new_order
     new_order.table = self
     if new_order.valid?
-      self.order << new_order
+      @orders << new_order
     else
       errors.add(:order, new_order.errors)
       raise ActiveRecord::RecordInvalid.new(self)
@@ -33,4 +35,18 @@ class Table < ActiveRecord::Base
     end while true
     result - time
   end
+
+  private
+    def save_orders
+      @orders.each do |o|
+        o.table_id = self.id
+        if not o.save
+          errors.add(:order, new_order.errors)
+          raise ActiveRecord::RecordInvalid.new(self)
+        end
+      end
+    end
+    def set_orders
+      @orders = self.order
+    end
 end
