@@ -11,10 +11,32 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :club_id %><br>
-    <%= f.text_field :club_id %>
-  </div>
+<h1>Listing orders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Since</th>
+      <th>Until</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @table.order.each do |order| %>
+      <tr>
+        <td><%= order.since %></td>
+        <td><%= order.until %></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
   <div class="actions">
     <%= f.submit %>
   </div>

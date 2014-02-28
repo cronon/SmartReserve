@@ -8,13 +8,8 @@ describe TablesController do
       :tables_count => 1, 
       :average_time => 5.minutes
     )
-    #Table.create(:club_id => Club.last.id)
   end
-  # get 'clubs/:id/tables' => 'tables#index', as: :tables
-  # get 'clubs/:id/tables/:id' => 'tables#show', as: :table #shows orders
-  # get 'clubs/:id/tables/:id/edit' =>'tables#edit', as: :edit_club_table #links to orders#create and orders#destroy
 
-  #it "redirects to the show page upon saves" do
   describe "tables#index on GET index" do
     it "assigns @tables" do
       get :index, :club_id => Club.last.id

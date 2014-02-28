@@ -26,12 +26,12 @@ describe OrdersController do
 
   describe "orders#show on GET /orders/:id" do
     it "assigns @order" do
-      get :show, :id => @order.id
+      get :show, :id => @order.id, :club_id => @order.table.club.id
       expect(assigns(:order)).to eq(@order)
     end
 
     it "renders the show template" do
-      get :show, :id => @order.id
+      get :show, :id => @order.id, :club_id => @order.table.club.id
       expect(response).to render_template("show")
     end
   end
@@ -40,7 +40,7 @@ describe OrdersController do
     it "destroys order and redirects to the tables index template" do
       o = Order.create :since => Time.now+1.hour, :until => Time.now+2.hours
       @table.add_order o
-      post :destroy, :id => o.id
+      post :destroy, :id => o.id, :club_id => @table.club.id
       expect(response).to redirect_to(club_tables_url(@club))
       expect(Order.last.id).not_to be(o.id)
     end
@@ -48,12 +48,12 @@ describe OrdersController do
 
   describe "order#create on POST /orders" do
     it "creates new order" do
-      post :create, :order => {:table_id => Table.last.id, :since => Time.now+3.hours, :until => Time.now+4.hours}
+      post :create, :club_id => Club.last.id, :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
       expect(Order.last.table.id).to eq(Table.last.id)
       Order.last.destroy
     end
     it "redirects to show template" do
-      post :create, :order => {:table_id => Table.last.id, :since => Time.now+3.hours, :until => Time.now+4.hours}
+      post :create, :club_id => Club.last.id, :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
       expect(response).to redirect_to(Order.last)
       Order.last.destroy
     end

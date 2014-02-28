@@ -1,6 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Status</strong>
+  <%= @table.status(Time.now) %>
+</p><br />
+<p>
+  <strong>Will free in</strong>
+  <%= @table.will_free(Time.now) %>
+</p>
+<p>
   <table>
     <thead>
       <tr>
@@ -27,4 +35,4 @@
 </p>
 
 <%= link_to 'Edit', club_edit_table_path(@table.club, @table) %> |
-<%= link_to 'Back', club_tables_path(@table.club,@table) %>
+<%= link_to 'Back', club_tables_path(@table.club) %>

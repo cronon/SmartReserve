@@ -4,10 +4,13 @@ SmartReserve::Application.routes.draw do
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button
     get 'tables/:id/edit' =>'tables#edit', as: :edit_table #shows orders
     get 'orders' => 'orders#index', as: :orders
+    get 'orders/new' => 'orders#new', as: :new_order
+    post 'orders' => 'orders#create'
+    get 'orders/:id/edit' => 'orders#edit', as: :edit_order
+    put 'orders' => 'orders#update'
+    get 'orders/:id' => 'orders#show', as: :order
+    delete 'orders/:id' => 'orders#destroy'
   end
-  post 'orders' => 'orders#create'
-  get 'orders/:id' => 'orders#show', as: :order
-  delete 'orders/:id' => 'orders#destroy'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
