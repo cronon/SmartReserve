@@ -19,7 +19,6 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        puts '@@@##'
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else

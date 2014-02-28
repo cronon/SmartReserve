@@ -9,13 +9,17 @@ describe OrdersController do
   end
 
   describe "orders#index on GET /club/:id/orders" do
+    club = Club.create :name => 'Baza', :description => '21+', :tables_count => 1, :average_time => 1.hour
+    table = club.table.first
+    order = Order.create :since => Time.now, :until => Time.now+5.minutes
+    table.add_order order
     it "assigns @orders" do
-      get :index, :club_id => @club.id
-      expect(assigns(:orders)).to eq(@club.table.map{|t| t.order}.flatten)
+      get :index, :club_id => club.id
+      expect(assigns(:orders)).to eq(club.table.map{|t| t.order}.flatten)
     end
 
     it "renders the index template" do
-      get :index, :club_id => @club.id
+      get :index, :club_id => club.id
       expect(response).to render_template("index")
     end
   end
@@ -50,7 +54,7 @@ describe OrdersController do
     end
     it "redirects to show template" do
       post :create, :order => {:table_id => Table.last.id, :since => Time.now+3.hours, :until => Time.now+4.hours}
-      expect(response).to redirect_to(:show)
+      expect(response).to redirect_to(Order.last)
       Order.last.destroy
     end
   end
