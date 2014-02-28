@@ -3,30 +3,10 @@
 <p>
   <strong>Name:</strong>
   <%= @club.name %>
-  <table>
-    <thead>
-      <tr>
-        <th>Table number</th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @club.table.each_with_index do |table,i| %>
-        <tr>
-          <td><%= table %></td>
-          <td><%= i+1 %></td>
-          <td><%= link_to 'Show', table %></td>
-          <td><%= link_to 'Edit', edit_table_path(table) %></td>
-          <td><%= link_to 'Destroy', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <strong>Description</strong>
+  <%= @club.description %>
 </p>
 
+<%= link_to 'Tables', club_tables_path(@club) %> |
 <%= link_to 'Edit', edit_club_path(@club) %> |
 <%= link_to 'Back', clubs_path %>

@@ -1,9 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Club:</strong>
-  <%= @table.club %>
+  <table>
+    <thead>
+      <tr>
+        <th>Order</th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @table.order.each_with_index do |o,i| %>
+        <tr>
+          <td><%= o %></td>
+          <td><%= i+1 %></td>
+          <td><%= link_to 'Show', order(o) %></td>
+          <td><%= link_to 'Edit', edit_table_path(table) %></td>
+          <td><%= link_to 'Destroy', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </p>
 
-<%= link_to 'Edit', edit_table_path(@table) %> |
-<%= link_to 'Back', tables_path %>
+<%= link_to 'Edit', club_edit_table_path(@table.club, @table) %> |
+<%= link_to 'Back', club_tables_path(@table.club,@table) %>

@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @table %> |
-<%= link_to 'Back', tables_path %>
+<%= link_to 'Show', club_table_path(@table.club,@table) %> |
+<%= link_to 'Back', club_tables_path(@table.club,@table) %>

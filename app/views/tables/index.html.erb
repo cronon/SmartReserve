@@ -13,15 +13,11 @@
   <tbody>
     <% @tables.each do |table| %>
       <tr>
-        <td><%= table.club %></td>
-        <td><%= link_to 'Show', table %></td>
-        <td><%= link_to 'Edit', edit_table_path(table) %></td>
-        <td><%= link_to 'Destroy', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= table.club.id %></td>
+        <td><%= link_to 'Show', club_table_path(table.club, table) %></td>
+        <td><%= link_to 'Edit', club_edit_table_path(table.club, table) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Table', new_table_path %>
