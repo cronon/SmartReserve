@@ -7,10 +7,16 @@ describe Club do
       :name => "metropole",
       :tables_count => "5",
       :time_after => 1.hour, # 300 sec == 5 min
-      :time_before => 15.minutes
-      :time_last => Time.parse('23:00')
-      :time_waiting => 20.minutes
-      :schedule => :mon => {:opens => Time.pase('8:00'), :closes => Time.parse('23:50')}, :tue => {:opens => Time.pase('8:00'), :closes => Time.parse('23:50')}, :wed => {:opens => Time.pase('8:00'), :closes => Time.parse('23:50')}, :thu => {:opens => Time.pase('8:00'), :closes => Time.parse('23:50')}, :fri => {:opens => Time.pase('8:00'), :closes => Time.parse('23:50')}, :sat => {:opens => Time.pase('8:00'), :closes => Time.parse('23:50')}, :sun => {:opens => Time.pase('8:00'), :closes => Time.parse('23:50')}
+      :time_before => 15.minutes,
+      :time_last => Time.parse('23:00'),
+      :time_waiting => 20.minutes,
+      :mon_opens => '8:00', :mon_closes => '23:50',
+      :tue_opens => '8:00', :tue_closes => '23:50',
+      :wed_opens => '8:00', :wed_closes => '23:50',
+      :thu_opens => '8:00', :thu_closes => '23:50',
+      :fri_opens => '8:00', :fri_closes => '23:50',
+      :sat_opens => '8:00', :sat_closes => '23:50',
+      :sun_opens => '8:00', :sun_closes => '23:50',
       :description => "inka-chaka-zuma"
     }
   end
@@ -24,7 +30,7 @@ describe Club do
     expect(club.table.length).to eq(5)
   end
 
-  it "should raises error when invalid attribute" do
+  it "should raise error when invalid attribute" do
     @attr = {
       :name => "fff"
     }

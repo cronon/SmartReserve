@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301151717) do
+ActiveRecord::Schema.define(version: 20140301171539) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -19,20 +19,33 @@ ActiveRecord::Schema.define(version: 20140301151717) do
     t.datetime "updated_at"
     t.integer  "tables_count"
     t.text     "description"
-    t.integer  "average_time", limit: 255
+    t.integer  "average_time"
     t.datetime "time_waiting"
     t.datetime "time_before"
     t.datetime "time_after"
     t.datetime "time_last"
-    t.string   "schedule"
+    t.string   "mon_opens"
+    t.string   "mon_closes"
+    t.string   "tue_opens"
+    t.string   "tue_closes"
+    t.string   "wed_opens"
+    t.string   "wed_closes"
+    t.string   "thu_opens"
+    t.string   "thu_closes"
+    t.string   "fri_opens"
+    t.string   "fri_closes"
+    t.string   "sat_opens"
+    t.string   "sat_closes"
+    t.string   "sun_opens"
+    t.string   "sun_closes"
   end
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.datetime "since"
     t.datetime "until"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
