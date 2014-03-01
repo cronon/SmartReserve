@@ -4,22 +4,27 @@ class Table < ActiveRecord::Base
   after_save :save_orders
   after_initialize :set_orders
 
+  class Time
+    def now?
+      self.between? Time.now - TIMEOUT, Time.now + TIMEOUT
+    end
+  end
+
   def status time
-    orders = self.order
-    order = orders.find{|o| time < o.until}
-    return :free if not order or order.since > time.tomorrow.midnight
-    return :busy if order.since < time
-    return :booked if order.since > time
+    return :busy if self.status_now == :busy and  time < self.updated_at + self.club.time_after
+    order = @orders.find{|o| time < o.until and time > o.since}
+    return :free if not order
+    if order.since - time > 30.minutes and time.now?
+      return :free
+    else
+      return :booked
+    end
+    return :free if self.status_now == :busy and  time > self.updated_at + self.club.time_after
   end
 
   def add_order new_order
     new_order.table = self
-    if new_order.valid?
-      @orders << new_order
-    else
-      errors.add(:order, new_order.errors)
-      raise ActiveRecord::RecordInvalid.new(self)
-    end
+    @orders << new_order
   end
 
   def will_free(time)
@@ -30,7 +35,7 @@ class Table < ActiveRecord::Base
     result = orders.first.since < time ? orders.first.until : orders.first.since
     begin
       order = orders.shift
-      return result - time if order.nil? or (result + self.club.average_time) < order.since 
+      return result - time if order.nil? or (result + self.club.time_after + self.club.time_before) < order.since 
       result = order.until
     end while true
     result - time

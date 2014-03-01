@@ -82,12 +82,14 @@ describe Table do
 
     it "busy now+time_after when status_now is busy" do
       @table.status_now = :busy
-      expect(@table.status(Time.now +30.minutes)).to eq(:busy)
+      @table.save
+      expect(@table.status(Time.now + 30.minutes)).to eq(:busy)
     end
 
     it "isnt busy after a lot of time when status_now is busy" do
       @table.status_now = :busy
-      expect(@table.status(Time.now +3.hours)).to eq(:free)
+      @table.save
+      expect(@table.status(Time.now + 3.hours)).to eq(:free)
     end
 
     it "isnt busy when no one come to mah party in time_waiting" do
