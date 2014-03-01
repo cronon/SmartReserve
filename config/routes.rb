@@ -5,7 +5,7 @@ SmartReserve::Application.routes.draw do
     get 'tables/:id/edit' =>'tables#edit', as: :edit_table #shows orders
     get 'orders' => 'orders#index', as: :orders
     get 'orders/new' => 'orders#new', as: :new_order
-    post 'orders' => 'orders#create'
+    post 'orders' => 'club#create_order'
     get 'orders/:id/edit' => 'orders#edit', as: :edit_order
     put 'orders' => 'orders#update'
     get 'orders/:id' => 'orders#show', as: :order

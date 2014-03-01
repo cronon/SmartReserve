@@ -30,7 +30,7 @@ describe Table do
   end
 
   describe "status method" do
-    it "should be free when has no orders today" do
+    it "free when has no orders today" do
       tomorrow_order = Order.new ({
         :since => Time.now + 5.days,
         :until => Time.now + 15.minutes + 5.days
@@ -40,7 +40,7 @@ describe Table do
       expect(@table.status(Time.now)).to be(:free)
     end
 
-    it "should be busy when has order now" do
+    it "booked when has order now" do
       current_order = Order.new ({
         :since => Time.now,
         :until => Time.now + 15.minutes

@@ -47,6 +47,7 @@ describe OrdersController do
   end
 
   describe "order#create on POST /orders" do
+    odrer.table.club.table.map{|t| t.will_free}.min
     it "creates new order" do
       post :create, :club_id => Club.last.id, :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
       expect(Order.last.table.id).to eq(Table.last.id)
