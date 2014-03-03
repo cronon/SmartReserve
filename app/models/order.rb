@@ -31,7 +31,7 @@ class Order < ActiveRecord::Base
 
   def orders_should_not_intersect
     return true if not self.table
-    if self.table.order.find{|o| self.intersects? o}
+    if self.table.order.find{|o| (self.intersects? o) and (not o==self)}
       errors.add(:base, "Time #{self.until} is already booked!")
     end
   end
