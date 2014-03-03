@@ -1,1 +1,1 @@
-TIMEOUT = 180.seconds
+TIMEOUT = 5.minutes

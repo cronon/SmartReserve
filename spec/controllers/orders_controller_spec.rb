@@ -46,17 +46,52 @@ describe OrdersController do
     end
   end
 
-  describe "order#create on POST /orders" do
-    odrer.table.club.table.map{|t| t.will_free}.min
-    it "creates new order" do
-      post :create, :club_id => Club.last.id, :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
-      expect(Order.last.table.id).to eq(Table.last.id)
-      Order.last.destroy
+  describe "order#update on POST /orders" do
+    before(:all){@table.save}
+    it "updates order" do
+      put :update, {:club_id => @club.id, 
+                    :tables_id => @table.id,
+                    :id => @order.id,
+                    :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
+                  }
+      expect(Order.find(@order.id).since).to be >= (Time.now+2.hours)
     end
     it "redirects to show template" do
-      post :create, :club_id => Club.last.id, :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
-      expect(response).to redirect_to(Order.last)
-      Order.last.destroy
+      put :update, {:club_id => @club.id, 
+                    :tables_id => @table.id,
+                    :id => @order.id,
+                    :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
+                  }
+      expect(response).to redirect_to(club_order_url(@club, @order))
+    end
+  end
+
+  describe "orders#create on POST /tables/:table_id/orders" do
+    it "should create new order" do
+      post :create, {
+          :club_id => @club.id, 
+          :table_id => @table.id,
+          :time => Time.now+1.hour
+        }
+      expect(Order.last.table).to be(@table)
+    end
+    it "sets appropriate since and until" do
+      post :create, {
+          :club_id => @club.id, 
+          :table_id => @table.id,
+          :time => Time.now+1.hour
+        }
+      expect(Order.last.since).to be_within(TIMEOUT).of(Time.now + 1.hour - @club.time_before)
+      expect(Order.last.until).to be_within(TIMEOUT).of(Time.now + 1.hour + @club.time_after)
+    end
+    it "can set until to Time.now" do
+      post :create, {
+          :club_id => @club.id, 
+          :table_id => @table.id,
+          :time => Time.now
+        }
+      expect(Order.last.since).to be_within(TIMEOUT).of(Time.now)
+      expect(Order.last.until).to be_within(TIMEOUT).of(Time.now + @club.time_after)
     end
   end
 end

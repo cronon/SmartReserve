@@ -46,7 +46,7 @@ class Table < ActiveRecord::Base
       @orders.each do |o|
         o.table_id = self.id
         if not o.save
-          errors.add(:order, new_order.errors)
+          errors.add(:order, o.errors)
           raise ActiveRecord::RecordInvalid.new(self)
         end
       end

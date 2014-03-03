@@ -10,7 +10,7 @@ end
 
 class Club < ActiveRecord::Base
   has_many :table, dependent: :destroy
-  before_save :create_tables
+  before_create :create_tables
   after_initialize :set_schedule
   attr_reader :schedule
 

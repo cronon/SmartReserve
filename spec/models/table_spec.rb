@@ -43,8 +43,7 @@ describe Table do
 
     it "should raise exception when orders intersects" do
       @table.add_order Order.new({:since=>Time.now, :until => Time.now+10.minutes})
-      o = Order.new({:since=>Time.now+5.minutes, :until => Time.now+20.minutes})
-      @table.add_order(o)
+      @table.add_order Order.new({:since=>Time.now+5.minutes, :until => Time.now+20.minutes})
       expect {@table.save!}.to raise_error(ActiveRecord::RecordInvalid)
     end 
   end
@@ -86,13 +85,13 @@ describe Table do
       expect(@table.status(Time.now + 30.minutes)).to eq(:busy)
     end
 
-    it "isnt busy after a lot of time when status_now is busy" do
+    it "free in far future when status_now is busy" do
       @table.status_now = :busy
       @table.save
       expect(@table.status(Time.now + 3.hours)).to eq(:free)
     end
 
-    it "isnt busy when no one come to mah party in time_waiting" do
+    it "free when no one come to mah party in time_waiting" do
       past_order = Order.new ({
         :since => Time.now - 30.minutes,
         :until => Time.now + 15.minutes
