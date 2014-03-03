@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20140227142107) do
     t.datetime "until"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "time"
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"

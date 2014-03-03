@@ -1,23 +1,50 @@
-<h1>Listing tables</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Club</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<script type="text/javascript">
+  function showDialogModal() 
+  {
+    alert("hide");
+    $('#dialog_form').dialog( {
+      show : "slide",
+      hide : "toggle",
+      width: 800,
+      height: 200,
+      modal: true,
+      title: "Add New Editor",
+      buttons: {
+        "Cancel" : function()
+        {
+            $("#dialog_form").dialog("close");
+        }
+      }
+    }).prev().find(".ui-dialog-titlebar-close").hide(); // To hide the standard close button
+  }
 
-  <tbody>
-    <% @tables.each do |table| %>
-      <tr>
-        <td><%= table.club.id %></td>
-        <td><%= link_to 'Show', club_table_path(table.club, table) %></td>
-        <td><%= link_to 'Edit', club_edit_table_path(table.club, table) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  $(document).ready(function() {
+    $('#dialog_form').hide();
+    $('#do_order').button().click(showDialogModal);
+  });
+
+  $("#dialog_form").submit();
+</script>
+
+<div id="tables">
+<% @tables.each do |table|%>
+  <div id="table_<%= table.id %>">
+    <div id="<%= get_color_table(table, @time)%>">
+      <button id="do_order"><%= table.id %></button>
+    </div>
+  </div>
+<% end -%>
+</div>
+
+<div id="navigation_column">
+  Time on witch want do order:
+  <b></b>
+  <br>
+  <%= select_datetime(@time, {day: true, month: true, year: true}) %>
+</div>
+
+<div id="dialog_form">
+  <%= render "orders/form" %>
+</div>
 
