@@ -1,13 +1,15 @@
 require 'spec_helper'
 
+
 describe OrdersController do
   before(:all) do
+    @nine_oclock = Time.parse('9:00').tomorrow
     attr = {
       :name => "metropole",
       :tables_count => "5",
       :time_after => 1.hour, # 300 sec == 5 min
       :time_before => 15.minutes,
-      :time_last => Time.parse('23:00'),
+      :time_last => '23:00',
       :time_waiting => 20.minutes,
       :mon_opens => '8:00', :mon_closes => '23:50',
       :tue_opens => '8:00', :tue_closes => '23:50',
@@ -22,7 +24,7 @@ describe OrdersController do
     @table = @club.table.first
   end
   before(:each) do
-    @order = Order.create :since => Time.now+4.hours+55.minutes, :until => Time.now+5.hours, :table_id => @table.id
+    @order = Order.create! :since => @nine_oclock+4.hours+55.minutes, :until => @nine_oclock+5.hours, :table_id => @table.id
   end
   after(:each) do
     Order.all.each{|o| o.destroy}
@@ -55,61 +57,62 @@ describe OrdersController do
 
   describe "orders#destroy on DELETE /orders/:id" do
     it "destroys order and redirects to the tables index template" do
-      o = Order.create :since => Time.now+1.hour, :until => Time.now+2.hours, :table_id => @table.id
+      o = Order.create :since => @nine_oclock+1.hour, :until => @nine_oclock+2.hours, :table_id => @table.id
       post :destroy, :id => o.id, :club_id => @table.club.id
       expect(response).to redirect_to(club_tables_url(@club))
       expect(Order.last.id).not_to be(o.id)
     end
   end
 
-  describe "order#update on POST /orders" do
+  describe "order#update on PUT /orders" do
     it "updates order" do    
       put :update, {:club_id => @club.id, 
                     :tables_id => @table.id,
                     :id => @order.id,
-                    :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
+                    :order => {:since => @nine_oclock+3.hours, :until => @nine_oclock+4.hours}
                   }
-      expect(Order.find(@order.id).since).to be_within(TIMEOUT).of(Time.now+3.hours)
+      expect(Order.find(@order.id).since).to be_within(TIMEOUT).of(@nine_oclock+3.hours)
     end
     it "redirects to show template" do
       put :update, {:club_id => @club.id, 
                     :tables_id => @table.id,
                     :id => @order.id,
-                    :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
+                    :order => {:since => @nine_oclock+3.hours, :until => @nine_oclock+4.hours}
                   }
       expect(response).to redirect_to(club_order_url(@club, @order))
     end
   end
 
   describe "orders#create on POST /tables/:table_id/orders" do
+    before(:each){Order.last.destroy;Order.last.destroy;Order.last.destroy}
     it "should create new order" do
       post :create, {
           :club_id => @club.id, 
           :id => @table.id,
-          :time => Time.now+1.hour
+          :time => @nine_oclock+1.hour
         }
       expect(Order.last.table).to eq(@table)
-      Order.last.destroy
+      #Order.last.destroy
     end
     it "sets appropriate since and until" do
       post :create, {
           :club_id => @club.id, 
           :id => @table.id,
-          :time => Time.now+1.hour
+          :time => @nine_oclock+1.hour
         }
-      expect(Order.last.since).to be_within(TIMEOUT).of(Time.now + 1.hour - @club.time_before)
-      expect(Order.last.until).to be_within(TIMEOUT).of(Time.now + 1.hour + @club.time_after)
-      Order.last.destroy
+      expect(Order.last.since).to be_within(TIMEOUT).of(@nine_oclock + 1.hour - @club.time_before)
+      expect(Order.last.until).to be_within(TIMEOUT).of(@nine_oclock + 1.hour + @club.time_after)
+      #Order.last.destroy
     end
     it "can set since to Time.now" do
       post :create, {
           :club_id => @club.id, 
           :id => @table.id,
-          :time => Time.now + 10.minutes
+          :time => @nine_oclock + 10.minutes
         }
-      expect(Order.last.since).to be_within(TIMEOUT).of(Time.now)
-      expect(Order.last.until).to be_within(TIMEOUT).of(Time.now + 10.minutes + @club.time_after)
-      Order.last.destroy
+      expect(Order.last.since).to be_within(TIMEOUT).of(@nine_oclock)
+      expect(Order.last.until).to be_within(TIMEOUT).of(@nine_oclock + 10.minutes + @club.time_after)
+      #Order.last.destroy
     end
   end
 end

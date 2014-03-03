@@ -24,6 +24,8 @@ class OrdersController < ApplicationController
       @order.since = time - club.time_before
       @order.since = Time.now if @order.since < Time.now
       @order.until = time + club.time_after
+    else
+      puts table.status(time), club.whether_order?(time)
     end
     respond_to do |format|
       if @order.save

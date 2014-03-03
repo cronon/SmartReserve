@@ -8,7 +8,7 @@ describe Club do
       :tables_count => "5",
       :time_after => 1.hour, # 300 sec == 5 min
       :time_before => 15.minutes,
-      :time_last => Time.parse('23:00'),
+      :time_last => '23:00',
       :time_waiting => 20.minutes,
       :mon_opens => '8:00', :mon_closes => '23:50',
       :tue_opens => '8:00', :tue_closes => '23:50',
