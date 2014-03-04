@@ -1,27 +1,14 @@
 <h1>Listing clubs</h1>
 
-<table>
-  <thead>
-    <tr>
-      <% @clubs.first.serializable_hash.keys.each do |key| %>
-        <th><%= key %></th>
-      <% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @clubs.each do |club| %>
-      <tr>
-        <% club.serializable_hash.values.each do |value| %>
-          <td><%= value %></td>
-        <% end %>
-        <td><%= link_to 'Show', club %></td>
-        <td><%= link_to 'Edit', edit_club_path(club) %></td>
-        <td><%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @clubs.each do |club| %>
+  <div>
+    <h2> <%= club.name %> </h2>
+    <div> <%= club.description %> </div>
+    <%= link_to 'Show', club %>
+    <%= link_to 'Edit', edit_club_path(club) %>
+    <%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </div>    
+<% end %>
 
 <br>
 
