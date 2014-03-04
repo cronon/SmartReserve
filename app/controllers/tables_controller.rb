@@ -5,6 +5,8 @@ class TablesController < ApplicationController
   # GET /tables.json
   def index
     @tables = Club.find(params[:club_id]).table
+    @time = Time.now
+    @order = Order.new
   end
 
   # GET /tables/1

@@ -1,6 +1,13 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+  #for user, which off js in brouser
+  def new
+    @table = Table.where(id: params[:table_id]).first
+    respond_to do |format|
+      format.js
+    end
+  end
   # GET /orders
   # GET /orders.json
   def index
