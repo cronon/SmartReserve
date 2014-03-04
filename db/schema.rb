@@ -44,12 +44,8 @@ ActiveRecord::Schema.define(version: 20140301183747) do
     t.integer  "table_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-    t.datetime "time"
-=======
     t.datetime "since"
     t.datetime "until"
->>>>>>> master
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
