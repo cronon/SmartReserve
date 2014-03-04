@@ -1,6 +1,7 @@
-<%= form_for :order, :url => "/clubs/#{@club.id}/tables/#{@table.id}/orders" do |f| %>
+<%= form_for(@order, url: club_order_create_path, remote: true) do |f| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
+
       <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
       <ul>
@@ -8,13 +9,11 @@
         <li><%= msg %></li>
       <% end %>
       </ul>
+
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :table_id %><br>
-    <%= f.text_field :table_id %>
-  </div>
+  <%= f.hidden_field :table_id %>
   <div class="field">
     <%= f.label :time %><br>
     <%= select_datetime Time.now, prefix: :time %>
@@ -22,4 +21,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

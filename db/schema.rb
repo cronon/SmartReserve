@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20140304142238) do
     t.datetime "updated_at"
     t.integer  "tables_count"
     t.text     "description"
-    t.integer  "average_time", limit: 255
+    t.integer  "average_time"
     t.integer  "time_waiting"
     t.integer  "time_before"
     t.integer  "time_after"
@@ -42,11 +42,17 @@ ActiveRecord::Schema.define(version: 20140304142238) do
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
+<<<<<<< HEAD
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "time"
+=======
+>>>>>>> 4561844d1968c8dd0a68af4936548ccd43a4e640
     t.datetime "since"
     t.datetime "until"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "time"
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"

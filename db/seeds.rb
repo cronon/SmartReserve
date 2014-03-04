@@ -7,7 +7,18 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 clubs = Club.create([
-  { :name => 'Baza', :description => '21+', :tables_count => '3', :average_time => 1.hour },
-  { :name => 'Aplha', :description => 'expensive', :tables_count => '1', :average_time => 2.hours },
-  { :name => 'Stopline', :description => 'great drunken party', :tables_count => '2', :average_time => 5.minutes },
+  { 
+  	:name => 'Baza',
+  	:description => '21+',
+  	:tables_count => '3', 
+  	:average_time => 1.hour, 
+  	:time_last => Time.parse('22:50')
+  },
+
+  { :name => 'Aplha', :description => 'expensive', :tables_count => '1', 
+  	:average_time => 2.hours, :time_last => Time.parse('22:50')},
+
+  { :name => 'Stopline', :description => 'great drunken party', 
+  	:tables_count => '2', :average_time => 5.minutes,
+  	 :time_last => Time.parse('22:50') },
 ])

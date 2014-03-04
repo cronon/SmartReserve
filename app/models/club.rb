@@ -40,6 +40,8 @@ class Club < ActiveRecord::Base
   end
 
   def set_time_last
+    #почему это время существует одно, а не для каждого дня отдельно?
+    #заказчик так пожелал
     @time_last = Time.parse(self.time_last) if self.time_last
   end
 
