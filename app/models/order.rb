@@ -1,5 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :table
+  #attr_accessor :time
 
   validate :until_should_be_later_than_since,
           :since_cannot_be_in_the_past,

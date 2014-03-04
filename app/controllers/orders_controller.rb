@@ -12,13 +12,20 @@ class OrdersController < ApplicationController
   def show
   end  
 
+  def new
+    puts params
+    @order = Order.new 
+    @table = Table.find params[:id]
+    @club = Club.find params[:club_id]
+  end
+
   # POST /orders
   # POST /orders.json
   def create
     @order = Order.new
     club = Club.find params[:club_id]
     table = Table.find params[:id]
-    time = Time.parse params[:time]
+    time = parse_time params[:time]
     @order.table = table
     if table.status(time) == :free and club.whether_order?(time)   
       @order.since = time - club.time_before
@@ -68,6 +75,10 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:table_id, :since, :until)
+      params.require(:order).permit(:table_id, :since, :until, :time)
+    end
+
+    def parse_time params
+      Time.new(params[:year].to_i, params[:month].to_i, params[:day].to_i, params[:hour].to_i, params[:minute].to_i)
     end
 end

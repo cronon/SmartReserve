@@ -1,4 +1,4 @@
-<%= form_for(@order) do |f| %>
+<%= form_for :order, :url => "/clubs/#{@club.id}/tables/#{@table.id}/orders" do |f| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
@@ -16,12 +16,8 @@
     <%= f.text_field :table_id %>
   </div>
   <div class="field">
-    <%= f.label :since %><br>
-    <%= f.datetime_select :since %>
-  </div>
-  <div class="field">
-    <%= f.label :until %><br>
-    <%= f.datetime_select :until %>
+    <%= f.label :time %><br>
+    <%= select_datetime Time.now, prefix: :time %>
   </div>
   <div class="actions">
     <%= f.submit %>

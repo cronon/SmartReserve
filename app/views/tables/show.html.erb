@@ -6,7 +6,7 @@
 </p><br />
 <p>
   <strong>Will free in</strong>
-  <%= @table.will_free(Time.now) %>
+  <%= Time.now+@table.will_free(Time.now) %>
 </p>
 <p>
   <table>
@@ -25,9 +25,7 @@
         <tr>
           <td><%= o %></td>
           <td><%= i+1 %></td>
-          <td><%= link_to 'Show', order(o) %></td>
-          <td><%= link_to 'Edit', edit_table_path(table) %></td>
-          <td><%= link_to 'Destroy', table, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', club_order_path(@table.club,o) %></td>
         </tr>
       <% end %>
     </tbody>

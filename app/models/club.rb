@@ -40,7 +40,7 @@ class Club < ActiveRecord::Base
   end
 
   def set_time_last
-    @time_last = Time.parse(self.time_last)
+    @time_last = Time.parse(self.time_last) if self.time_last
   end
 
   protected
@@ -48,7 +48,7 @@ class Club < ActiveRecord::Base
       self.tables_count.times{ self.table << Table.new } if self.tables_count
     end
 
-    def cT time #converts datetime to time 
+    def cT time #converts datetime to time
       Time.at(time.hour * 60 * 60 + time.min * 60 + time.sec)
     end
   end

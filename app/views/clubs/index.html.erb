@@ -3,17 +3,18 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <% @clubs.first.serializable_hash.keys.each do |key| %>
+        <th><%= key %></th>
+      <% end %>
     </tr>
   </thead>
 
   <tbody>
     <% @clubs.each do |club| %>
       <tr>
-        <td><%= club.name %></td>
+        <% club.serializable_hash.values.each do |value| %>
+          <td><%= value %></td>
+        <% end %>
         <td><%= link_to 'Show', club %></td>
         <td><%= link_to 'Edit', edit_club_path(club) %></td>
         <td><%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %></td>

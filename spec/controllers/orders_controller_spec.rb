@@ -1,5 +1,14 @@
 require 'spec_helper'
 
+class Time
+  def to_hash
+    result = {}
+    [:year,:month,:day,:hour].each{|x| result[x]=self.send(x)}
+    result[:minute]=self.min
+    result[:second]=self.sec
+    result
+  end
+end
 
 describe OrdersController do
   before(:all) do
@@ -89,7 +98,7 @@ describe OrdersController do
       post :create, {
           :club_id => @club.id, 
           :id => @table.id,
-          :time => @nine_oclock+1.hour
+          :time => (@nine_oclock+1.hour).to_hash
         }
       expect(Order.last.table).to eq(@table)
       #Order.last.destroy
@@ -98,7 +107,7 @@ describe OrdersController do
       post :create, {
           :club_id => @club.id, 
           :id => @table.id,
-          :time => @nine_oclock+1.hour
+          :time => (@nine_oclock+1.hour).to_hash
         }
       expect(Order.last.since).to be_within(TIMEOUT).of(@nine_oclock + 1.hour - @club.time_before)
       expect(Order.last.until).to be_within(TIMEOUT).of(@nine_oclock + 1.hour + @club.time_after)
@@ -108,7 +117,7 @@ describe OrdersController do
       post :create, {
           :club_id => @club.id, 
           :id => @table.id,
-          :time => @nine_oclock + 10.minutes
+          :time => (@nine_oclock + 10.minutes).to_hash
         }
       expect(Order.last.since).to be_within(TIMEOUT).of(@nine_oclock)
       expect(Order.last.until).to be_within(TIMEOUT).of(@nine_oclock + 10.minutes + @club.time_after)
