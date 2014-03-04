@@ -27,9 +27,7 @@
 <div id="tables">
 <% @tables.each do |table|%>
   <div id="table_<%= table.id %>">
-    <div id="<%= get_color_table(table, @time)%>">
-      <button id="do_order"><%= table.id %></button>
-    </div>
+    <button id="do_order" class="<%= get_color_table(table, @time)%>"><%= table.id %></button>
   </div>
 <% end -%>
 </div>

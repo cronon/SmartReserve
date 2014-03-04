@@ -42,12 +42,6 @@ ActiveRecord::Schema.define(version: 20140304142238) do
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
-<<<<<<< HEAD
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.datetime "time"
-=======
->>>>>>> 4561844d1968c8dd0a68af4936548ccd43a4e640
     t.datetime "since"
     t.datetime "until"
     t.datetime "created_at"

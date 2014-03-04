@@ -29,18 +29,18 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new
     club = Club.find params[:club_id]
     table = Table.find params[:id]
     time = parse_time params[:time]
-    @order.table = table
-    if table.status(time) == :free and club.whether_order?(time)   
-      @order.since = time - club.time_before
-      @order.since = Time.now if @order.since < Time.now
-      @order.until = time + club.time_after
-    else
-      puts table.status(time), club.whether_order?(time)
-    end
+    # @order.table = table
+    # if table.status(time) == :free and club.whether_order?(time)   
+    #   @order.since = time - club.time_before
+    #   @order.since = Time.now if @order.since < Time.now
+    #   @order.until = time + club.time_after
+    # else
+    #   puts table.status(time), club.whether_order?(time)
+    # end
+    @order = table.new_order_at time
     respond_to do |format|
       if @order.save
         format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }

@@ -1,13 +1,30 @@
+class Time
+  def now?
+    self.between? Time.now - TIMEOUT, Time.now + TIMEOUT
+  end
+end
 class Table < ActiveRecord::Base
   belongs_to :club
   has_many :order
   after_save :save_orders
   after_initialize :set_orders
 
-  class Time
-    def now?
-      self.between? Time.now - TIMEOUT, Time.now + TIMEOUT
+  def new_order_at time
+    club = self.club
+    order = Order.new    
+    if not self.status(time) == :free 
+      errors.add(:table, "is not free at this time")
+      raise ActiveRecord::RecordInvalid.new(self)
     end
+    if not club.whether_order?(time)
+      errors.add(:club, "is not open or doesn't take orders at this time")
+      raise ActiveRecord::RecordInvalid.new(self)
+    end
+    order.table = self
+    order.since = time - club.time_before
+    order.since = Time.now if order.since < Time.now
+    order.until = time + club.time_after
+    order
   end
 
   def status time
