@@ -20,7 +20,13 @@
 
   $(document).ready(function() {
     $('#dialog_form').hide();
-    $('#do_order').each.button().click(showDialogModal);
+    $('button#do_order').each(function(){
+      $(this).on("click", function(){
+        var table_id = $(this)[0].parentElement.id;
+        $("dialog_form").attr("value", table_id);
+        showDialogModal();
+      });
+    });
   });
 </script>
 
