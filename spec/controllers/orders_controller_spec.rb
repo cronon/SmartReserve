@@ -2,24 +2,41 @@ require 'spec_helper'
 
 describe OrdersController do
   before(:all) do
-    @club = Club.create :name => 'Baza', :description => '21+', :tables_count => 1, :average_time => 1.hour
+    attr = {
+      :name => "metropole",
+      :tables_count => "5",
+      :time_after => 1.hour, # 300 sec == 5 min
+      :time_before => 15.minutes,
+      :time_last => Time.parse('23:00'),
+      :time_waiting => 20.minutes,
+      :mon_opens => '8:00', :mon_closes => '23:50',
+      :tue_opens => '8:00', :tue_closes => '23:50',
+      :wed_opens => '8:00', :wed_closes => '23:50',
+      :thu_opens => '8:00', :thu_closes => '23:50',
+      :fri_opens => '8:00', :fri_closes => '23:50',
+      :sat_opens => '8:00', :sat_closes => '23:50',
+      :sun_opens => '8:00', :sun_closes => '23:50',
+      :description => "inka-chaka-zuma"
+    }
+    @club = Club.create attr
     @table = @club.table.first
-    @order = Order.create :since => Time.now, :until => Time.now+5.minutes
-    @table.add_order @order
+  end
+  before(:each) do
+    @order = Order.create :since => Time.now+4.hours+55.minutes, :until => Time.now+5.hours, :table_id => @table.id
+  end
+  after(:each) do
+    Order.all.each{|o| o.destroy}
+    @order = nil
   end
 
   describe "orders#index on GET /club/:id/orders" do
-    club = Club.create :name => 'Baza', :description => '21+', :tables_count => 1, :average_time => 1.hour
-    table = club.table.first
-    order = Order.create :since => Time.now, :until => Time.now+5.minutes
-    table.add_order order
     it "assigns @orders" do
-      get :index, :club_id => club.id
-      expect(assigns(:orders)).to eq(club.table.map{|t| t.order}.flatten)
+      get :index, :club_id => @club.id
+      expect(assigns(:orders)).to eq(Order.where(:table_id => @table.id))
     end
 
     it "renders the index template" do
-      get :index, :club_id => club.id
+      get :index, :club_id => @club.id
       expect(response).to render_template("index")
     end
   end
@@ -38,23 +55,60 @@ describe OrdersController do
 
   describe "orders#destroy on DELETE /orders/:id" do
     it "destroys order and redirects to the tables index template" do
-      o = Order.create :since => Time.now+1.hour, :until => Time.now+2.hours
-      @table.add_order o
+      o = Order.create :since => Time.now+1.hour, :until => Time.now+2.hours, :table_id => @table.id
       post :destroy, :id => o.id, :club_id => @table.club.id
       expect(response).to redirect_to(club_tables_url(@club))
       expect(Order.last.id).not_to be(o.id)
     end
   end
 
-  describe "order#create on POST /orders" do
-    it "creates new order" do
-      post :create, :club_id => Club.last.id, :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
-      expect(Order.last.table.id).to eq(Table.last.id)
-      Order.last.destroy
+  describe "order#update on POST /orders" do
+    it "updates order" do    
+      put :update, {:club_id => @club.id, 
+                    :tables_id => @table.id,
+                    :id => @order.id,
+                    :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
+                  }
+      expect(Order.find(@order.id).since).to be_within(TIMEOUT).of(Time.now+3.hours)
     end
     it "redirects to show template" do
-      post :create, :club_id => Club.last.id, :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
-      expect(response).to redirect_to(Order.last)
+      put :update, {:club_id => @club.id, 
+                    :tables_id => @table.id,
+                    :id => @order.id,
+                    :order => {:since => Time.now+3.hours, :until => Time.now+4.hours}
+                  }
+      expect(response).to redirect_to(club_order_url(@club, @order))
+    end
+  end
+
+  describe "orders#create on POST /tables/:table_id/orders" do
+    it "should create new order" do
+      post :create, {
+          :club_id => @club.id, 
+          :id => @table.id,
+          :time => Time.now+1.hour
+        }
+      expect(Order.last.table).to eq(@table)
+      Order.last.destroy
+    end
+    it "sets appropriate since and until" do
+      post :create, {
+          :club_id => @club.id, 
+          :id => @table.id,
+          :time => Time.now+1.hour
+        }
+      expect(Order.last.since).to be_within(TIMEOUT).of(Time.now + 1.hour - @club.time_before)
+      expect(Order.last.until).to be_within(TIMEOUT).of(Time.now + 1.hour + @club.time_after)
+      Order.last.destroy
+    end
+    it "can set since to Time.now" do
+      post :create, {
+          :club_id => @club.id, 
+          :id => @table.id,
+          :time => Time.now + 10.minutes
+        }
+      expect(Order.last.since).to be_within(TIMEOUT).of(Time.now)
+      expect(Order.last.until).to be_within(TIMEOUT).of(Time.now + 10.minutes + @club.time_after)
       Order.last.destroy
     end
   end

@@ -22,10 +22,30 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
-
+    @order = Order.new
+    club = Club.find params[:club_id]
+    table = Table.find params[:id]
+    time = Time.parse params[:time]
+    @order.table = table
+    if table.status(time) == :free and club.whether_order?(time)   
+      @order.since = time - club.time_before
+      @order.since = Time.now if @order.since < Time.now
+      @order.until = time + club.time_after
+    end
     respond_to do |format|
       if @order.save
+        format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @order }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @order.update!(order_params)
         format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
