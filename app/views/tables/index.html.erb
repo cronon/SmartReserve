@@ -2,14 +2,13 @@
 <script type="text/javascript">
   function showDialogModal() 
   {
-    alert("hide");
     $('#dialog_form').dialog( {
       show : "slide",
       hide : "toggle",
       width: 800,
-      height: 200,
+      height: 300,
       modal: true,
-      title: "Add New Editor",
+      title: "Create order",
       buttons: {
         "Cancel" : function()
         {
@@ -23,8 +22,6 @@
     $('#dialog_form').hide();
     $('#do_order').button().click(showDialogModal);
   });
-
-  $("#dialog_form").submit();
 </script>
 
 <div id="tables">
