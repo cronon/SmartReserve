@@ -1,12 +1,16 @@
 <h1>Listing clubs</h1>
 
-<% @clubs.each do |club| %>
-  <div>
-    <h2> <%= club.name %> </h2>
-    <div> <%= club.description %> </div>
-    <%= link_to 'Show', club %>
-    <%= link_to 'Edit', edit_club_path(club) %>
-    <%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% @clubs.each_slice(3) do |three_clubs| %>
+  <div class="row-fluid">
+    <% three_clubs.each do |club| %>
+      <div class="col-md-4">
+        <h2> <%= club.name %> </h2>
+        <div> <%= club.description %> </div>
+        <%= link_to 'Show', club %>
+        <%= link_to 'Edit', edit_club_path(club) %>
+        <%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
   </div>    
 <% end %>
 
