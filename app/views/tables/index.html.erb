@@ -30,23 +30,25 @@
     });
   });
 </script>
+<div class="row-fluid">
+  <div class="col-md-9">
+    <div>
+      Time on witch want do order:
+      <b></b>
+      <br>
+      <%= select_datetime(@time, {day: true, month: true, year: true}) %>
+    </div>
+    <div id="tables">
+    <% @tables.each do |table|%>
+      <div id="table_<%= table.id %>">
+        <button id="do_order" class="<%= get_color_table(table, @time)%>"><%= table.id %></button>
+      </div>
+    <% end -%>
+    </div>
+  </div>  
 
-<div id="tables">
-<% @tables.each do |table|%>
-  <div id="table_<%= table.id %>">
-    <button id="do_order" class="<%= get_color_table(table, @time)%>"><%= table.id %></button>
+  <div class="col-md-3">
+    <%= render "orders/form" %>
   </div>
-<% end -%>
-</div>
-
-<div id="navigation_column">
-  Time on witch want do order:
-  <b></b>
-  <br>
-  <%= select_datetime(@time, {day: true, month: true, year: true}) %>
-</div>
-
-<div id="dialog_form">
-  <%= render "orders/form" %>
 </div>
 
