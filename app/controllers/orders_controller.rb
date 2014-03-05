@@ -3,10 +3,17 @@ class OrdersController < ApplicationController
 
   #for user, which off js in brouser
   def new
-    @table = Table.where(id: params[:table_id]).first
+    @table = Table.find params[:table_id]
     respond_to do |format|
       format.js
     end
+  end
+
+  def prepare
+    @order = Order.new :table_id => params[:order][:table_id], :time => parse_time(params[:time]), :phone => params[:phone], :name => params[:name]
+    @order.token = Time.now.nsec*rand() % 1000000
+    send_sms(@order.phone)
+    render action: 'approve'
   end
   # GET /orders
   # GET /orders.json

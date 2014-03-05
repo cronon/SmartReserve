@@ -12,7 +12,9 @@ SmartReserve::Application.routes.draw do
     put 'orders' => 'orders#update'
     get 'orders/:id' => 'orders#show', as: :order
     delete 'orders/:id' => 'orders#destroy'
+    post 'orders/prepare' => 'orders#prepare', as: :prepare_order
   end
+
 
   get 'users/profile', as: 'user_root'
   # The priority is based upon order of creation: first created -> highest priority.

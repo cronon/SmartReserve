@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305172037) do
+ActiveRecord::Schema.define(version: 20140305181214) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140305172037) do
     t.datetime "until"
     t.string   "phone"
     t.string   "name"
+    t.string   "token"
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
