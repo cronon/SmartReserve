@@ -43,6 +43,7 @@ class OrdersController < ApplicationController
     @order = table.new_order_at time
     respond_to do |format|
       if @order.save
+        format.js
         format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
