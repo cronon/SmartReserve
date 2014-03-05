@@ -23,7 +23,8 @@
     $('button#do_order').each(function(){
       $(this).on("click", function(){
         var table_id = $(this)[0].parentElement.id;
-        $("dialog_form").attr("value", table_id);
+        table_id = table_id.replace("table_", "");
+        $("#order_table_id").attr("value", table_id);
         showDialogModal();
       });
     });
