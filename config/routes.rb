@@ -1,4 +1,6 @@
 SmartReserve::Application.routes.draw do
+  devise_for :users
+  #get "users/profile"
   resources :clubs do
     get 'tables' => 'tables#index', as: :tables
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button
@@ -12,6 +14,7 @@ SmartReserve::Application.routes.draw do
     delete 'orders/:id' => 'orders#destroy'
   end
 
+  get 'users/profile', as: 'user_root'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
