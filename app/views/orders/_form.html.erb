@@ -1,4 +1,4 @@
-<%= form_for(@order, url: club_order_create_path, remote: true) do |f| %>
+<%= form_for(@order, url: club_order_create_path) do |f| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
 
@@ -14,8 +14,11 @@
   <% end %>
 
   <%= f.hidden_field :table_id %>
+
   <div class="field">
     <%= f.label :time %><br>
+
+    <!-- не f.select_datetime не просто так-->
     <%= select_datetime Time.now, prefix: :time %>
   </div>
   <div class="actions">

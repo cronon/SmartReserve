@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     club = Club.find params[:club_id]
-    table = Table.find params[:id]
+    table = Table.find params[:order][:table_id]
     time = parse_time params[:time]
     # @order.table = table
     # if table.status(time) == :free and club.whether_order?(time)   
