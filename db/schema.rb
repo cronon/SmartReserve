@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20140301183747) do
     t.datetime "updated_at"
     t.integer  "tables_count"
     t.text     "description"
-    t.integer  "average_time"
     t.integer  "time_waiting"
     t.integer  "time_before"
     t.integer  "time_after"
