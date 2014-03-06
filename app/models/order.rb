@@ -8,7 +8,7 @@ class Order < ActiveRecord::Base
           :orders_should_not_intersect
   validates :confirm_code, presence: :true, :if => Proc.new { |a| a.confirm_code.hash == a.token }
   validates :phone, format: { with: /\A\+\d{12}\z/,
-    message: "%{value} Invalid phone number" }
+    message: "Invalid phone number" }
 
   def prepare params
     

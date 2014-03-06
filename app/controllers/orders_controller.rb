@@ -39,7 +39,10 @@ class OrdersController < ApplicationController
     club = Club.find params[:club_id]
     table = Table.find params[:order][:table_id]
     time = parse_time params[:time]
-    @order = table.new_order_at time
+    @order = Order.new order_params
+    o = table.new_order_at(time)
+    @order.until = o.until
+    @order.since = o.since      
     respond_to do |format|
       if @order.save!
         format.js
@@ -55,7 +58,6 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update!(order_params)
-        puts @order, '#####', order_params
         format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
@@ -83,7 +85,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:table_id, :since, :until, :time)
+      params.require(:order).permit(:table_id, :since, :until, :time, :name, :phone)
     end
 
     def parse_time params
