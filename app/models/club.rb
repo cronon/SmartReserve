@@ -14,7 +14,7 @@ class Club < ActiveRecord::Base
   after_initialize :set_time_last
   attr_reader :schedule
 
-  validates :tables_count, :name, :schedule, presence: true
+  validates :tables_count, :name, presence: true
   validates :tables_count, numericality: { grater_than_or_equal: 1 }
   validates :tables_count, presence: true
 

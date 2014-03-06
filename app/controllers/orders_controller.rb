@@ -39,17 +39,9 @@ class OrdersController < ApplicationController
     club = Club.find params[:club_id]
     table = Table.find params[:order][:table_id]
     time = parse_time params[:time]
-    # @order.table = table
-    # if table.status(time) == :free and club.whether_order?(time)   
-    #   @order.since = time - club.time_before
-    #   @order.since = Time.now if @order.since < Time.now
-    #   @order.until = time + club.time_after
-    # else
-    #   puts table.status(time), club.whether_order?(time)
-    # end
     @order = table.new_order_at time
     respond_to do |format|
-      if @order.save
+      if @order.save!
         format.js
         format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
@@ -63,6 +55,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update!(order_params)
+        puts @order, '#####', order_params
         format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
@@ -75,11 +68,11 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
-    @order.destroy
     respond_to do |format|
       format.html { redirect_to club_tables_url(@order.table.club) }
       format.json { head :no_content }
     end
+    @order.destroy
   end
 
   private

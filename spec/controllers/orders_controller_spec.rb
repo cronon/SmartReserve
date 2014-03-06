@@ -13,27 +13,13 @@ end
 describe OrdersController do
   before(:all) do
     @nine_oclock = Time.parse('9:00').tomorrow
-    attr = {
-      :name => "metropole",
-      :tables_count => "5",
-      :time_after => 1.hour, # 300 sec == 5 min
-      :time_before => 15.minutes,
-      :time_last => '23:00',
-      :time_waiting => 20.minutes,
-      :mon_opens => '8:00', :mon_closes => '23:50',
-      :tue_opens => '8:00', :tue_closes => '23:50',
-      :wed_opens => '8:00', :wed_closes => '23:50',
-      :thu_opens => '8:00', :thu_closes => '23:50',
-      :fri_opens => '8:00', :fri_closes => '23:50',
-      :sat_opens => '8:00', :sat_closes => '23:50',
-      :sun_opens => '8:00', :sun_closes => '23:50',
-      :description => "inka-chaka-zuma"
-    }
-    @club = Club.create attr
+    @club = create(:club)
     @table = @club.table.first
   end
   before(:each) do
-    @order = Order.create! :since => @nine_oclock+4.hours+55.minutes, :until => @nine_oclock+5.hours, :table_id => @table.id
+    @order = create(:order)
+    @order.table_id = @table.id
+    @order.save
   end
   after(:each) do
     Order.all.each{|o| o.destroy}
@@ -66,7 +52,9 @@ describe OrdersController do
 
   describe "orders#destroy on DELETE /orders/:id" do
     it "destroys order and redirects to the tables index template" do
-      o = Order.create :since => @nine_oclock+1.hour, :until => @nine_oclock+2.hours, :table_id => @table.id
+      o = create(:order)
+      o.table = @table
+      o.save
       post :destroy, :id => o.id, :club_id => @table.club.id
       expect(response).to redirect_to(club_tables_url(@club))
       expect(Order.last.id).not_to be(o.id)
@@ -76,17 +64,17 @@ describe OrdersController do
   describe "order#update on PUT /orders" do
     it "updates order" do    
       put :update, {:club_id => @club.id, 
-                    :tables_id => @table.id,
+                    :table_id => @table.id,
                     :id => @order.id,
-                    :order => {:since => @nine_oclock+3.hours, :until => @nine_oclock+4.hours}
+                    :order => attributes_for(:updated_order)
                   }
-      expect(Order.find(@order.id).since).to be_within(TIMEOUT).of(@nine_oclock+3.hours)
+      expect(Order.find(@order.id).phone).to be(attributes_for(:updated_order)[:phone])
     end
     it "redirects to show template" do
       put :update, {:club_id => @club.id, 
-                    :tables_id => @table.id,
+                    :table_id => @table.id,
                     :id => @order.id,
-                    :order => {:since => @nine_oclock+3.hours, :until => @nine_oclock+4.hours}
+                    :order => attributes_for(:order)
                   }
       expect(response).to redirect_to(club_order_url(@club, @order))
     end
@@ -97,7 +85,7 @@ describe OrdersController do
     it "should create new order" do
       post :create, {
           :club_id => @club.id, 
-          :table_id => @table.id,
+          :order => attributes_for(:order),
           :time => (@nine_oclock+1.hour).to_hash
         }
       expect(Order.last.table).to eq(@table)
@@ -106,7 +94,7 @@ describe OrdersController do
     it "sets appropriate since and until" do
       post :create, {
           :club_id => @club.id, 
-          :table_id => @table.id,
+          :order => attributes_for(:order),
           :time => (@nine_oclock+1.hour).to_hash
         }
       expect(Order.last.since).to be_within(TIMEOUT).of(@nine_oclock + 1.hour - @club.time_before)
@@ -116,9 +104,10 @@ describe OrdersController do
     it "can set since to Time.now" do
       post :create, {
           :club_id => @club.id, 
-          :table_id => @table.id,
+          :order => {:table_id => @table.id},
           :time => (@nine_oclock + 10.minutes).to_hash
         }
+      puts @nine_oclock + 10.minutes
       expect(Order.last.since).to be_within(TIMEOUT).of(@nine_oclock)
       expect(Order.last.until).to be_within(TIMEOUT).of(@nine_oclock + 10.minutes + @club.time_after)
       #Order.last.destroy

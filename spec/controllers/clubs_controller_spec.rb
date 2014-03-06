@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe ClubsController do
   before :each do 
-    @club = Club.new :name => 'Baza', :description => '21+', :tables_count => '23', :average_time => 1.hour
+    @club = Club.new :name => 'Baza', :description => '21+', :tables_count => '23', :time_last => '23:00'
   end
   before :all do
     Club.create(
       :name => 'Stopline', 
       :description => 'great drunken party', 
       :tables_count => 1, 
-      :average_time => 5.minutes
+      :time_last => '23:00'
     )
   end
 
@@ -38,12 +38,12 @@ describe ClubsController do
 
   describe "clubs#create POST /clubs" do
     it "creates new club" do
-      post :create, :club=>{:name => 'Baza', :description => '21+', :tables_count => '23', :average_time => 1.hour}
+      post :create, :club=>{:name => 'Baza', :description => '21+', :tables_count => '23', :time_last => '23:00'}
       expect(Club.last.name).to eq('Baza')
     end
 
     it "redirects to the show template" do
-      post :create, :club=>{:name => 'Baza', :description => '21+', :tables_count => '23', :average_time => 1.hour}
+      post :create, :club=>{:name => 'Baza', :description => '21+', :tables_count => '23', :time_last => '23:00'}
       expect(response).to redirect_to(Club.last)
     end
   end
@@ -72,7 +72,7 @@ describe ClubsController do
 
   describe "clubs#destroy on DELETE /clubs/:id/edit" do
     it "destroys club and redirects to the index template" do
-      Club.create :name => 'Cosmos69', :description => '21+', :tables_count => '23', :average_time => 1.hour
+      Club.create :name => 'Cosmos69', :description => '21+', :tables_count => '23', :time_last => '23:00'
       post :destroy, :id => Club.last.id
       expect(response).to redirect_to(:clubs)
       expect(Club.last.name).not_to be('Cosmos69')
@@ -81,8 +81,8 @@ describe ClubsController do
 
   describe "clubs#update POST /clubs" do    
     it "updates a club and redirects to the show template" do
-      Club.create :name => 'Cosmos69', :description => '21+', :tables_count => '23', :average_time => 1.hour
-      post :update, :id=>Club.last,:club=>{:name => 'Baza', :description => '21+', :tables_count => '23', :average_time => 1.hour}
+      Club.create :name => 'Cosmos69', :description => '21+', :tables_count => '23', :time_last => '23:00'
+      post :update, :id=>Club.last,:club=>{:name => 'Baza', :description => '21+', :tables_count => '23', :time_last => '23:00'}
       expect(Club.last.name).to eq('Baza')
       expect(response).to redirect_to(Club.last)
     end
