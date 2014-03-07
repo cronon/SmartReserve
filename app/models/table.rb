@@ -14,11 +14,9 @@ class Table < ActiveRecord::Base
     order = Order.new    
     if not self.status(time) == :free 
       errors.add(:table, "is not free at this time")
-      raise ActiveRecord::RecordInvalid.new(self)
     end
     if not club.whether_order?(time)
       errors.add(:club, "is not open or doesn't take orders at this time")
-      raise ActiveRecord::RecordInvalid.new(self)
     end
     order.table = self
     order.since = time - club.time_before

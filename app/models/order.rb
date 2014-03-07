@@ -9,16 +9,13 @@ class Order < ActiveRecord::Base
   validates :phone, format: { with: /\A\+\d{12}\z/,
     message: "is not valid" }
 
-  def self.prepare params
-    result = Order.new
-    unless params[:phone] =~ /\A\+\d{12}\z/
-      result.errors.add(:phone, "is not valid")
-      raise ActiveRecord::RecordInvalid.new(result)
-    end    
-    result = Order.new params
-    token = generate_token
-    send_sms(params[:phone], token)
+  def self.prepare params  
+    result = Table.find(params[:table_id]).new_order_at params[:time]
+    token = generate_token    
     result.token = token.hash
+    if result.valid?
+      send_sms(params[:phone], token)
+    end
     result
   end
 
@@ -35,10 +32,9 @@ class Order < ActiveRecord::Base
       self.since.between? other_order.since, other_order.until
   end
 
-  def validate_code! code
-    unless code.hash == self.token 
+  def validate_code
+    unless self.confirmation_code.hash == self.token 
       errors.add(:code, "is not valid")
-      raise ActiveRecord::RecordInvalid.new(self)
     end
     true
   end

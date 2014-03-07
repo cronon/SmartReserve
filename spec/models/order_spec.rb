@@ -33,13 +33,16 @@ describe Order do
     expect {Order.create!(@params)}.to raise_error(ActiveRecord::RecordInvalid)
   end
 
-  describe "confiramtion code" do
-    before(:each) do
-      @o = Order.prepare :phone => '+37533123456', :name => 'vasya'
-      allow(Order).to receive(:generate_token).and_return(1)
-    end
-    it "sets token for new order" do          
-      expect(@o.token).to be
-    end
-  end
+  # describe "confiramtion code" do
+  #   before(:each) do
+  #     @c = create(:club)
+  #     @t = @c.table.last
+  #     allow(@t).to receive(:new_order_at){build(:order)}
+  #     @o = Order.prepare :phone => '+37533123456', :name => 'vasya', :table_id => @t.id
+  #     allow(Order).to receive(:generate_token).and_return(1)
+  #   end
+  #   it "sets token for new order" do          
+  #     expect(@o.token).to be
+  #   end
+  # end
 end

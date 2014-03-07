@@ -1,0 +1,5 @@
+<% if @order.valid? %>
+  showDialogModal();
+<% else %>
+  $('#new_order').html(<%= j render(partial:'form', object: @order) %>);
+<% end %>

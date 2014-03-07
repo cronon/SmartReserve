@@ -9,10 +9,9 @@ class OrdersController < ApplicationController
     end
   end
 
+  # need year, month, day, hour, minute, phone, name, table_id
   def prepare
     @order = Order.prepare :table_id => order_params[:table_id], :time => parse_time(order_params), :phone => order_params[:phone], :name => order_params[:name]
-    #format.html{ render action: 'confirm' }
-    respond_to{|f| f.js {render 'confirm'}}
   end
   # GET /orders
   # GET /orders.json
@@ -34,6 +33,7 @@ class OrdersController < ApplicationController
 
   # POST /orders
   # POST /orders.json
+  # needs club_id, table_id, time, phone, confiramation_code, token
   def create
     club = Club.find params[:club_id]
     table = Table.find order_params[:table_id]

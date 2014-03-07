@@ -9,14 +9,16 @@
         <li><%= msg %></li>
       <% end %>
       </ul>
-
+<% puts @order.serializable_hash, @order.errors.to_json %>
     </div>
   <% end %>
-
+  
   <%= f.hidden_field :table_id %>
+
 
   <div class="field">
     <%= f.label :time %><br>
+    <%= @order%><%= @order.errors.to_json %>
 
     <!-- не f.select_datetime не просто так-->
     <%= select_datetime Time.now, prefix: :order %>
