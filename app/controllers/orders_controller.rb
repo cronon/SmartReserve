@@ -11,7 +11,8 @@ class OrdersController < ApplicationController
 
   def prepare
     @order = Order.prepare :table_id => order_params[:table_id], :time => parse_time(order_params), :phone => order_params[:phone], :name => order_params[:name]
-    render action: 'confirm'
+    #format.html{ render action: 'confirm' }
+    respond_to{|f| f.js {render 'confirm'}}
   end
   # GET /orders
   # GET /orders.json
