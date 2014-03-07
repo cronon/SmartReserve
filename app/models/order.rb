@@ -6,24 +6,22 @@ class Order < ActiveRecord::Base
           :since_cannot_be_in_the_past,
           :until_cannot_be_in_the_past,
           :orders_should_not_intersect
-  validates :confirm_code, presence: :true, :if => Proc.new { |a| a.confirm_code.hash == a.token }
   validates :phone, format: { with: /\A\+\d{12}\z/,
     message: "Invalid phone number" }
 
-  def prepare params
-    
+  def self.prepare params    
     result = Order.new params
     token = generate_token
     send_sms(params[:phone], token)
-    result.token = generate_token.hash
+    result.token = token.hash
     result
   end
 
-  def send_sms phone, token
+  def self.send_sms phone, token
     puts '########', phone, token
   end
 
-  def generate_token
+  def self.generate_token
     (Time.now.nsec*rand() % 10000000).floor
   end
 
@@ -32,7 +30,12 @@ class Order < ActiveRecord::Base
       self.since.between? other_order.since, other_order.until
   end
 
-  def confirm_code
+  def validate_code! code
+    unless code.hash == self.token 
+      errors.add(:code, "is not valid")
+      raise ActiveRecord::RecordInvalid.new(self)
+    end
+    true
   end
 
   def until_cannot_be_in_the_past

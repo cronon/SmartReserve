@@ -10,10 +10,8 @@ class OrdersController < ApplicationController
   end
 
   def prepare
-    @order = Order.new :table_id => params[:order][:table_id], :time => parse_time(params[:time]), :phone => params[:phone], :name => params[:name]
-    @order.token = Time.now.nsec*rand() % 1000000
-    send_sms(@order.phone)
-    render action: 'approve'
+    @order = Order.prepare :table_id => order_params[:table_id], :time => parse_time(order_params), :phone => order_params[:phone], :name => order_params[:name]
+    render action: 'confirm'
   end
   # GET /orders
   # GET /orders.json
@@ -37,8 +35,8 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     club = Club.find params[:club_id]
-    table = Table.find params[:order][:table_id]
-    time = parse_time params[:time]
+    table = Table.find order_params[:table_id]
+    time = Time.parse(order_params[:time])
     @order = Order.new order_params
     o = table.new_order_at(time)
     @order.until = o.until
@@ -85,10 +83,11 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:table_id, :since, :until, :time, :name, :phone)
+      params.require(:order).permit(:table_id, :since, :until, :time, :year, :month, :day, :hour,:minute, :name, :phone, :token, :confirmation_code)
     end
 
     def parse_time params
+      puts params
       Time.new(params[:year].to_i, params[:month].to_i, params[:day].to_i, params[:hour].to_i, params[:minute].to_i)
     end
 end

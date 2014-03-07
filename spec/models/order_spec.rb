@@ -32,4 +32,14 @@ describe Order do
     @params[:phone] = '321321A'
     expect {Order.create!(@params)}.to raise_error(ActiveRecord::RecordInvalid)
   end
+
+  describe "confiramtion code" do
+    before(:each) do
+      @o = Order.prepare :phone => '+37533123456', :name => 'vasya'
+      allow(Order).to receive(:generate_token).and_return(1)
+    end
+    it "sets token for new order" do          
+      expect(@o.token).to be
+    end
+  end
 end

@@ -81,35 +81,32 @@ describe OrdersController do
   end
 
   describe "orders#create on POST /tables/:table_id/orders" do
-    before(:each){Order.last.destroy;Order.last.destroy;Order.last.destroy}
+    before(:each){Order.last.destroy}
     it "should create new order" do
-      params = attributes_for(:order)
+      params = attributes_for(:order).merge(:time => (@nine_oclock+1.hour))
       params[:table_id] = @table.id
       post :create, {
           :club_id => @club.id, 
-          :order => params,
-          :time => (@nine_oclock+1.hour).to_hash
+          :order => params
         }
       expect(Order.last.table).to eq(@table)
     end
     it "sets appropriate since and until" do
-      params = attributes_for(:order)
+      params = attributes_for(:order).merge(:time => (@nine_oclock+1.hour))
       params[:table_id] = @table.id
       post :create, {
           :club_id => @club.id, 
-          :order => params,
-          :time => (@nine_oclock+1.hour).to_hash
+          :order => params
         }
       expect(Order.last.since).to be_within(TIMEOUT).of(@nine_oclock + 1.hour - @club.time_before)
       expect(Order.last.until).to be_within(TIMEOUT).of(@nine_oclock + 1.hour + @club.time_after)
     end
     it "can set since to Time.now" do
-      params = attributes_for(:order)
+      params = attributes_for(:order).merge(:time => (@nine_oclock+10.minutes))
       params[:table_id] = @table.id
       post :create, {
           :club_id => @club.id, 
-          :order => params,
-          :time => (@nine_oclock + 10.minutes).to_hash
+          :order => params
         }
       expect(Order.last.since).to be_within(TIMEOUT).of(@nine_oclock)
       expect(Order.last.until).to be_within(TIMEOUT).of(@nine_oclock + 10.minutes + @club.time_after)
