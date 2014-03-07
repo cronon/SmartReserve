@@ -7,9 +7,14 @@ class Order < ActiveRecord::Base
           :until_cannot_be_in_the_past,
           :orders_should_not_intersect
   validates :phone, format: { with: /\A\+\d{12}\z/,
-    message: "Invalid phone number" }
+    message: "is not valid" }
 
-  def self.prepare params    
+  def self.prepare params
+    result = Order.new
+    unless params[:phone] =~ /\A\+\d{12}\z/
+      result.errors.add(:phone, "is not valid")
+      raise ActiveRecord::RecordInvalid.new(result)
+    end    
     result = Order.new params
     token = generate_token
     send_sms(params[:phone], token)
