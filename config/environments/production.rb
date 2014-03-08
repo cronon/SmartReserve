@@ -77,4 +77,25 @@ SmartReserve::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  #for send email
+  #see manual here for deploy in production http://railsapps.github.io/rails-send-email.html
+  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  # ActionMailer Config
+  # Setup for production - deliveries, no errors raised
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.default :charset => "utf-8"
+
+  # see here http://stackoverflow.com/questions/18124878/netsmtpauthenticationerror-when-sending-email-from-rails-app-on-staging-envir
+  config.action_mailer.smtp_settings = {
+  address: "smtp.gmail.com",
+  port: 587,
+  domain: "localhost:3000", #root url site. its vitek comment
+  authentication: "plain",
+  enable_starttls_auto: true,
+  user_name: "real email on gmail from google",
+  password: "real password,"
+}
 end

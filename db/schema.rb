@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20140305181214) do
     t.datetime "updated_at"
     t.integer  "tables_count"
     t.text     "description"
-    t.integer  "average_time", limit: 255
     t.integer  "time_waiting"
     t.integer  "time_before"
     t.integer  "time_after"
@@ -42,11 +41,10 @@ ActiveRecord::Schema.define(version: 20140305181214) do
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.datetime "since"
     t.datetime "until"
-    t.datetime "time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "phone"
     t.string   "name"
     t.string   "token"
