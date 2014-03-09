@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305181214) do
+ActiveRecord::Schema.define(version: 20140309161752) do
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -37,7 +37,10 @@ ActiveRecord::Schema.define(version: 20140305181214) do
     t.string   "sat_closes"
     t.string   "sun_opens"
     t.string   "sun_closes"
+    t.integer  "owner_id"
   end
+
+  add_index "clubs", ["owner_id"], name: "index_clubs_on_owner_id"
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
@@ -62,13 +65,13 @@ ActiveRecord::Schema.define(version: 20140305181214) do
   add_index "tables", ["club_id"], name: "index_tables_on_club_id"
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "phone",                               null: false
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "phone",                                  null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -79,6 +82,7 @@ ActiveRecord::Schema.define(version: 20140305181214) do
     t.string   "unconfirmed_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "owner_clubs",            default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
