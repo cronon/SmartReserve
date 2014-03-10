@@ -3,9 +3,9 @@ module TablesHelper
 		status = table.status(time)
 
 		color = case
-			when status == :free then "green"
-			when status == :busy then "red"
-			else "gray"
+			when status == :free then "btn-success"
+			when status == :busy then "btn-danger"
+			else ""
 		end
 	end
 

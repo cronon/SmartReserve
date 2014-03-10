@@ -1,32 +1,3 @@
 // Place all the styles related to the Tables controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-div#tables{
-	float: left;
-	width: 60%;
-
-	div#the_table{
-		float: left;
-	}
-}
-
-div#navigation_column{
-	float: rigth;
-}
-
-.red{
-	background-color: red; 	
-}
-
-.green{
-	background-color: lime;
-}
-
-.gray{
-	background-color: #808080;
-}
-
-button#do_order{
-	float: left;
-}

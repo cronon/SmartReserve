@@ -11,11 +11,14 @@ class Order < ActiveRecord::Base
 
   def self.prepare params  
     result = Table.find(params[:table_id]).new_order_at params[:time]
+    result.attributes = params
     token = generate_token    
     result.token = token.hash
     if result.valid?
       send_sms(params[:phone], token)
     end
+    puts result.serializable_hash
+    puts result.errors.to_json
     result
   end
 

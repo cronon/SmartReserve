@@ -12,6 +12,11 @@ class OrdersController < ApplicationController
   # need year, month, day, hour, minute, phone, name, table_id
   def prepare
     @order = Order.prepare :table_id => order_params[:table_id], :time => parse_time(order_params), :phone => order_params[:phone], :name => order_params[:name]
+    @club = Club.find params[:club_id]
+    @tables = @club.table
+    respond_to do |format|
+      format.js
+    end
   end
   # GET /orders
   # GET /orders.json
@@ -25,10 +30,9 @@ class OrdersController < ApplicationController
   end  
 
   def new
-    puts params
     @order = Order.new 
-    @table = Table.find params[:id]
     @club = Club.find params[:club_id]
+    @tables = @club.table
   end
 
   # POST /orders

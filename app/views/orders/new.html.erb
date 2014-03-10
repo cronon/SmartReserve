@@ -1,5 +1,39 @@
 <h1>New order</h1>
 
-<%= render 'form' %>
+<script type="text/javascript">
+  function showDialogModal() 
+  {
+    $('#dialog_form').dialog( {
+      show : "slide",
+      hide : "toggle",
+      width: 800,
+      height: 300,
+      modal: true,
+      title: "Create order",
+      buttons: {
+        "Cancel" : function()
+        {
+            $("#dialog_form").dialog("close");
+        }
+      }
+    }).prev().find(".ui-dialog-titlebar-close").hide(); // To hide the standard close button
+  }
 
-<%= link_to 'Back', club_orders_path(@order.table.club) %>
+  $(document).ready(function() {
+    $('#dialog_form').hide();
+    $('#tables').buttonset();
+    $('#tables').children().each(function(){
+      $(this).on("click", function(){
+        var table_id = $(this)[0].id;
+        table_id = table_id.replace("table_", "");
+        $("#order_table_id").attr("value", table_id);
+      });
+    });
+  });
+</script>
+<div class="row-fluid" id="orders_form">
+  <%= render "orders/form" %>
+</div>
+<div class="modal fade" id="confirmation_dialog" tabindex="-1">
+</div>
+<%= link_to 'Back', club_orders_path(@club) %>

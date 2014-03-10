@@ -20,12 +20,12 @@
 
   $(document).ready(function() {
     $('#dialog_form').hide();
-    $('button#do_order').each(function(){
+    $('#tables').buttonset();
+    $('#tables').children().each(function(){
       $(this).on("click", function(){
-        var table_id = $(this)[0].parentElement.id;
+        var table_id = $(this)[0].id;
         table_id = table_id.replace("table_", "");
         $("#order_table_id").attr("value", table_id);
-        showDialogModal();
       });
     });
   });
@@ -38,11 +38,10 @@
       <br>
       <%= select_datetime(@time, {day: true, month: true, year: true}) %>
     </div>
-    <div id="tables">
+    <div id="tables" class="btn-group">
     <% @tables.each do |table|%>
-      <div id="table_<%= table.id %>">
-        <button id="do_order" class="<%= get_color_table(table, @time)%>"><%= table.id %></button>
-      </div>
+      <button class="btn btn-default <%= get_color_table(table, @time)%>" id="table_<%= table.id %>"/>
+      <label for="table_<%= table.id %>"><%= table.id %> </label>
     <% end %>
     </div>
   </div>  

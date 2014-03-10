@@ -6,7 +6,7 @@ SmartReserve::Application.routes.draw do
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button
     get 'tables/:id/edit' =>'tables#edit', as: :edit_table #shows orders
     get 'orders' => 'orders#index', as: :orders
-    get 'orders/new/:table_id' => 'orders#new', as: :new_order #для тех, кто выключил js
+    get 'orders/new' => 'orders#new', as: :new_order 
     post 'orders' => 'orders#create', as: :order_create
     get 'orders/:id/edit' => 'orders#edit', as: :edit_order
     put 'orders' => 'orders#update'

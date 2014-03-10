@@ -1,38 +1,30 @@
-<%= form_for(@order, url: club_prepare_order_path, :remote => true) do |f| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
+<%= form_for(@order, url: club_prepare_order_path, :remote => true, :authenticity_token => true, :format => :js) do |f| %>
+  <div class="col-md-9">
+     <%= render "tables/list" %>
+  </div> 
+  <div class="col-md-3">
+    <% if @order.errors.any? %>
+      <div id="error_explanation">
 
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+        <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <ul>
-      <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-<% puts @order.serializable_hash, @order.errors.to_json %>
+        <ul>
+        <% @order.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
     </div>
-  <% end %>
-  
-  <%= f.hidden_field :table_id %>
-
-
-  <div class="field">
-    <%= f.label :time %><br>
-    <%= @order%><%= @order.errors.to_json %>
-
-    <!-- не f.select_datetime не просто так-->
-    <%= select_datetime Time.now, prefix: :order %>
+    <div class="field">
+      <%= f.label :phone %><br />
+      <%= f.text_field :phone %>
+    </div>
+    <div class="actions">
+      <span class="btn btn-default" id='submit_form' onclick="makeCall()">Submit</span>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-
 <% end %>

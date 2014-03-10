@@ -1,0 +1,44 @@
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Phone confirmation</h4>
+      </div>
+      <div class="modal-body">
+<%= form_for(@order, url: club_order_create_path) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+
+    </div>
+  <% end %>
+  <% unless @order %>
+  $('#error-div').html('<%= j(render :partial => 'shared/error_messages', :object => @course) %>');
+  <% end %>
+
+  <%= f.hidden_field :table_id %>
+  <%= f.hidden_field :name %>
+  <%= f.hidden_field :phone %>
+  <%= f.hidden_field :time %>
+  <%= f.hidden_field :token %>
+  <div class="field">
+    <%= f.label :confirmation_code %><br />
+    <%= f.text_field :confirmation_code %>
+  </div>  
+  <div class="modal-footer">
+    <%= f.submit :class=>"btn btn-primary" %>
+  </div>
+
+<% end %>
+
+</div>
+      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
