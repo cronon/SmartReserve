@@ -1,9 +1,9 @@
-<% %>
+<% @table_id = @order.table.id if @order && @order.table %>
 <div class="btn-group" data-toggle="buttons">
   <% @tables.each do |table|%>  
-    <label for="table_<%= table.id %>" class="btn <%= get_color_table(table, @time)%> <%= 'active' if (@order.table_id ==table.id if @order) %>" >
+    <label for="table_<%= table.id %>" class="btn <%= get_color_table(table, @time)%> <%= 'active' if @table_id == table.id %>" >
       <%= table.id %> 
-      <input type="radio" name="order[table_id]" id="table_<%= table.id %>" value="<%= table.id %>" data-toggle="button" <%= 'checked' if (@order.table_id == table.id if @order) %>/>
+      <input type="radio" name="order[table_id]" id="table_<%= table.id %>" value="<%= table.id %>" data-toggle="button" <%= 'checked' if @table_id == table.id %>/>
     </label>
   <% end %>
 </div>

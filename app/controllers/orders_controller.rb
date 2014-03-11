@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
 
   # need year, month, day, hour, minute, phone, name, table_id
   def prepare
-    @order = Order.prepare :table_id => order_params[:table_id], :time => parse_time(order_params), :phone => order_params[:phone], :name => order_params[:name]
+    @order = Order.prepare :table_id => order_params[:table_id], :time => Time.parse(order_params[:time]), :phone => order_params[:phone], :name => order_params[:name]
     @club = Club.find params[:club_id]
     @tables = @club.table
     @order.confirmation_code = ""
