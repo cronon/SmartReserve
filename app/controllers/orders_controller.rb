@@ -34,6 +34,12 @@ class OrdersController < ApplicationController
     @order = Order.new 
     @club = Club.find params[:club_id]
     @tables = @club.table
+    if current_user
+      @order.name = current_user.name
+      @order.phone = current_user.phone
+    else
+      @order.phone = '+375'
+    end
   end
 
   # POST /orders
