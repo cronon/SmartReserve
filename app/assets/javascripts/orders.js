@@ -11,9 +11,21 @@ var makeCall = function() {
       data: valuesToSubmit
   });
 }
-$(function(){
-  $("#submit_form").click(function( event ) {
-    event.preventDefault();
-    makeCall();
+var postForm = function(form) {  
+  var valuesToSubmit = $(form).serialize();
+  $.ajax({
+      type: 'POST',
+      url: $(form).attr('action'), //sumbits it to the given url of the form
+      data: valuesToSubmit
   });
-});
+}
+// $(function(){
+//   $("#submit_form").click(function( event ) {
+//     event.preventDefault();
+//     makeCall();
+//   });
+//   $("#submit_confirmation").click(function( event ) {
+//     event.preventDefault();
+//     postForm('#confirmation_form');
+//   });
+// });

@@ -5,7 +5,7 @@
         <h4 class="modal-title">Phone confirmation</h4>
       </div>
       <div class="modal-body">
-<%= form_for(@order, url: club_order_create_path) do |f| %>
+<%= form_for(@order, url: club_order_create_path, remote: true, authenticity_token: true, html: {id: "confirmation_form"}) do |f| %>
   <% if @order.errors.any? %>
     <div id="error_explanation">
 
@@ -32,9 +32,9 @@
     <%= f.label :confirmation_code %><br />
     <%= f.text_field :confirmation_code %>
   </div>  
-  <div class="modal-footer">
-    <%= f.submit :class=>"btn btn-primary" %>
-  </div>
+  <div class="actions">
+      <span class="btn btn-default" id='submit_form' onclick="postForm('#confirmation_form')">Submit</span>
+    </div>>
 
 <% end %>
 

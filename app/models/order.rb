@@ -2,18 +2,19 @@ class Order < ActiveRecord::Base
   belongs_to :table
   attr_accessor :confirmation_code
 
-  validate :until_should_be_later_than_since,
-          :since_cannot_be_in_the_past,
-          :until_cannot_be_in_the_past,
-          :orders_should_not_intersect
+  validate :cannot_book_at_the_past,
+          :orders_should_not_intersect,
+          :validate_code
+
   validates :phone, format: { with: /\A\+\d{12}\z/,
-    message: "is not valid" }
+    message: "is invalid" }
 
   def self.prepare params  
     result = Table.find(params[:table_id]).new_order_at params[:time]
     result.attributes = params
     token = generate_token    
-    result.token = token.hash
+    result.token = token.hash.to_s
+    result.confirmation_code = token
     if result.valid?
       send_sms(params[:phone], token)
     end
@@ -27,7 +28,11 @@ class Order < ActiveRecord::Base
   end
 
   def self.generate_token
-    (Time.now.nsec*rand() % 10000000).floor
+    (Time.now.nsec*rand() % 10000000).floor.to_s
+  end
+
+  def cannot_book_at_the_past
+    errors.add(:time, "cannot be in the past") if self.time+TIMEOUT<Time.now
   end
 
   def intersects? other_order
@@ -36,10 +41,12 @@ class Order < ActiveRecord::Base
   end
 
   def validate_code
-    unless self.confirmation_code.hash == self.token 
-      errors.add(:code, "is not valid")
+    puts self.confirmation_code.hash, self.token
+    if self.confirmation_code.hash.to_s != self.token
+      errors.add(:code, "is invalid")
+      false
+      raise ArgumentError
     end
-    true
   end
 
   def until_cannot_be_in_the_past

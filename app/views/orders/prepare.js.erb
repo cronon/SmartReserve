@@ -1,7 +1,5 @@
-<% if @order.valid? %>
-  $('#confirmation_dialog').html("<%= j(render(partial:'confirmation', object: @order)) %>")
-  $('#confiramtion_dialog').modal()
-<% else %>  
-  console.log("<%=@order.errors.to_json %>")
+<% unless @order.errors.any? %>  
+$('#confirmation_dialog').html("<%= j(render(partial:'confirmation', object: @order)) %>")
+  $('#confirmation_dialog').modal()
 <% end %>
 $('#orders_form').html("<%= j(render(partial:'form', object: @order)) %>");
