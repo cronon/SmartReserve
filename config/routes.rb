@@ -13,6 +13,7 @@ SmartReserve::Application.routes.draw do
     get 'orders/:id' => 'orders#show', as: :order
     delete 'orders/:id' => 'orders#destroy'
     post 'orders/prepare' => 'orders#prepare', as: :prepare_order
+    get 'tables_status' => 'clubs#tables_status', as: :tables_status
   end
 
 

@@ -1,5 +1,10 @@
 class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy]
+
+  def tables_status
+    @tables = Club.find(params[:club_id]).table
+    @time = Time.parse params[:order][:time]
+  end
   # GET /clubs
   # GET /clubs.json
   def index

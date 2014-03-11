@@ -1,15 +1,9 @@
-<% @time = @order.time || Time.now %>
-<div>
-  Time on witch want do order:
-  <b></b>
-  <br>
-  <%= select_datetime(@time, prefix: :order) %>
-</div>
-<div id="tables" class="btn-group" data-toggle="buttons">
+<% %>
+<div class="btn-group" data-toggle="buttons">
   <% @tables.each do |table|%>  
-    <label for="table_<%= table.id %>" class="btn <%= get_color_table(table, @time)%> <%= 'active' if @order.table_id ==table.id %>" >
+    <label for="table_<%= table.id %>" class="btn <%= get_color_table(table, @time)%> <%= 'active' if (@order.table_id ==table.id if @order) %>" >
       <%= table.id %> 
-      <input type="radio" name="order[table_id]" id="table_<%= table.id %>" value="<%= table.id %>" data-toggle="button" <%= 'checked' if @order.table_id ==table.id %>/>
+      <input type="radio" name="order[table_id]" id="table_<%= table.id %>" value="<%= table.id %>" data-toggle="button" <%= 'checked' if (@order.table_id == table.id if @order) %>/>
     </label>
   <% end %>
 </div>

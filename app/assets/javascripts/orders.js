@@ -19,6 +19,9 @@ var postForm = function(form) {
       data: valuesToSubmit
   });
 }
+$(function () {
+  $('#datetimepicker').datetimepicker();
+});
 // $(function(){
 //   $("#submit_form").click(function( event ) {
 //     event.preventDefault();
