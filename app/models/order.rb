@@ -8,9 +8,10 @@ class Order < ActiveRecord::Base
 
   validates :phone, format: { with: /\A\+\d{12}\z/,
     message: "is invalid" }
+  validates :table_id, presence: true
 
-  def self.prepare params  
-    result = Table.find(params[:table_id]).new_order_at params[:time]
+  def self.prepare params 
+    result = Table.find(params[:table_id] || Table.last.id).new_order_at params[:time]
     result.attributes = params
     token = generate_token    
     result.token = token.hash.to_s
@@ -44,8 +45,6 @@ class Order < ActiveRecord::Base
     puts self.confirmation_code.hash, self.token
     if self.confirmation_code.hash.to_s != self.token
       errors.add(:code, "is invalid")
-      false
-      raise ArgumentError
     end
   end
 

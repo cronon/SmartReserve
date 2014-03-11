@@ -32,25 +32,6 @@
 </script>
 <div class="row-fluid">
   <div class="col-md-9">
-    <div>
-      Time on witch want do order:
-      <b></b>
-      <br>
-      <%= select_datetime(@time, {day: true, month: true, year: true}) %>
-    </div>
-    <div id="tables" class="btn-group">
-    <% @tables.each do |table|%>
-      <button class="btn btn-default <%= get_color_table(table, @time)%>" id="table_<%= table.id %>"/>
-      <label for="table_<%= table.id %>"><%= table.id %> </label>
-    <% end %>
-    </div>
-  </div>  
-
-  <div class="col-md-3">
-    <%= render "orders/form" %>
-  </div>
-</div>
-
-<div id="dialog_form">
-  <%= render "orders/confirm" %>
+    <%= render 'list' %>
+  </div> 
 </div>

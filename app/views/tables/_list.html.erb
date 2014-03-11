@@ -7,8 +7,9 @@
 </div>
 <div id="tables" class="btn-group" data-toggle="buttons">
   <% @tables.each do |table|%>  
-    <label for="table_<%= table.id %>" class="btn btn-default <%= get_color_table(table, @time)%>"><%= table.id %> 
-      <input type="radio" name="order[table_id]" id="table_<%= table.id %>" value="<%= table.id %>" data-toggle="button"/>
+    <label for="table_<%= table.id %>" class="btn <%= get_color_table(table, @time)%> <%= 'active' if @order.table_id ==table.id %>" >
+      <%= table.id %> 
+      <input type="radio" name="order[table_id]" id="table_<%= table.id %>" value="<%= table.id %>" data-toggle="button" <%= 'checked' if @order.table_id ==table.id %>/>
     </label>
   <% end %>
 </div>
