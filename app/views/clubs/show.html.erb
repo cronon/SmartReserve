@@ -5,6 +5,7 @@
   <%= @club.name %>
   <strong>Description</strong>
   <%= @club.description %>
+  <%= image_tag((@club.photos.first.image_url if @club.photos.first), height: '150') %>
 </p>
 
 <%= link_to 'Tables', club_tables_path(@club) %> |
