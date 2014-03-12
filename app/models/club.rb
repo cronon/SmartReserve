@@ -16,7 +16,6 @@ class Club < ActiveRecord::Base
 
   validates :tables_count, :name, presence: true
   validates :tables_count, numericality: { grater_than_or_equal: 1 }
-  validates :tables_count, presence: true
 
   def will_free time
     self.table.map{|t| t.will_free(time)}.min

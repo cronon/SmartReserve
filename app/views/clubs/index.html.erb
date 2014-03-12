@@ -7,8 +7,12 @@
         <h2> <%= club.name %> </h2>
         <div> <%= club.description %> </div>
         <%= link_to 'Show', club %>
-        <%= link_to 'Edit', edit_club_path(club) %>
-        <%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% if can? :update, club %>
+          <%= link_to 'Edit', edit_club_path(club) %>
+        <% end %>
+        <% if can? :destroy, club %>
+          <%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
       </div>
     <% end %>
   </div>    

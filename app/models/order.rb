@@ -1,6 +1,8 @@
 class Order < ActiveRecord::Base
   belongs_to :table
+  belongs_to :user
   attr_accessor :confirmation_code
+  #attr_reader :table
 
   validate :until_should_be_later_than_since,
           :since_cannot_be_in_the_past,

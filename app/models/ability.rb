@@ -28,12 +28,34 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
+    can :read, Club, Table
+    can [:create], Order
+    can [:read,:update, :destroy], Order, :user_id => user.id 
 
     if user.owner_clubs?
-      can :all, :club
-    else
-      can :read, :all
+      can :create, Club
+      can [:update,:destroy], Club, :owner_id => user.id
+      can [:create], Table
+      #can [:update, :destroy], Table if table_belongs_user?(:id, user.id)
+      can [:read,:update, :destroy], Order, :table => { club: {owner: user} }
     end
-
   end
+
+  private
+
+  def table_belongs_user?(table_id, user_id)
+    Table.where(id: table_id).first.club.owner_id == user_id
+  end
+
+  def order_belongs_owner_clubs?(order_id, user_id)
+    puts "OOOUUU order_id = #{order_id}, user_id = #{user_id}"
+    Order.where(id: order_id).first.table.club.owner_id == user_id
+  end
+  #   def owner_clubs_rules
+  #     can :manage, [Clubs, Orders, Tables] 
+  #   end
+
+  #   def user_rules
+      
+  #   end
 end
