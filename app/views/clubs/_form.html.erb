@@ -49,7 +49,11 @@
 <%= form_for(:photo_form, :url => club_create_photo_url(@club), :html => {:method => :post, :id => 'upload_form', :multipart => true}) do |f| %>
  Upload a file: <%= f.file_field :uploaded_data %>
 <% end %>
-
+<div id="gallery">
+  <% @club.photos.each do |photo| %>
+    <%= image_tag(photo.image_url, :html=>{:style=>"height:250px"}) %>
+  <% end %>
+</div>
 <script>
 $('#upload_form input').change(function(){
  $(this).closest('form').ajaxSubmit({
@@ -62,6 +66,7 @@ $('#upload_form input').change(function(){
    // For example, if you have an image elemtn with id "my_image", then
    //  $('#my_image').attr('src', XMLHttpRequest.responseText);
    // Will set that image tag to display the uploaded image.
+   $('#gallery').append('<img style="height:250px" src="'+XMLHttpRequest.responseText+'" />')
    console.log(XMLHttpRequest.responseText);
   },
  });

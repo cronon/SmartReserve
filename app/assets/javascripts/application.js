@@ -17,5 +17,4 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
-//= require jquery.datetimepicker
-//= require jquery.fileupload-ui
+// require jquery.datetimepicker
