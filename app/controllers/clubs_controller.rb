@@ -1,6 +1,9 @@
 class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy]
 
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:index,:show]
+
   def tables_status
     @tables = Club.find(params[:club_id]).table
     @time = Time.parse params[:order][:time]
@@ -73,6 +76,6 @@ class ClubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
-      params.require(:club).permit(:name, :tables_count)
+      params.require(:club).permit(:name, :tables_count, :description)
     end
 end

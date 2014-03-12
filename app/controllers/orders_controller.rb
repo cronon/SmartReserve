@@ -1,6 +1,9 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:index,:show]
+
   #for user, which off js in brouser
   def new
     @table = Table.find params[:table_id]

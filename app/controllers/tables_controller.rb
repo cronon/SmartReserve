@@ -1,6 +1,9 @@
 class TablesController < ApplicationController
   before_action :set_table, only: [:show, :edit, :update, :destroy]
 
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:index,:show]
+
   # GET /tables
   # GET /tables.json
   def index
