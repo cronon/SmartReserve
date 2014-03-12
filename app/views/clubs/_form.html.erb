@@ -45,3 +45,25 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<%= form_for(:photo_form, :url => club_create_photo_url(@club), :html => {:method => :post, :id => 'upload_form', :multipart => true}) do |f| %>
+ Upload a file: <%= f.file_field :uploaded_data %>
+<% end %>
+
+<script>
+$('#upload_form input').change(function(){
+ $(this).closest('form').ajaxSubmit({
+  beforeSubmit: function(a,f,o) {
+   o.dataType = 'json';
+  },
+  complete: function(XMLHttpRequest, textStatus) {
+   // XMLHttpRequest.responseText will contain the URL of the uploaded image.
+   // Put it in an image element you create, or do with it what you will.
+   // For example, if you have an image elemtn with id "my_image", then
+   //  $('#my_image').attr('src', XMLHttpRequest.responseText);
+   // Will set that image tag to display the uploaded image.
+   console.log(XMLHttpRequest.responseText);
+  },
+ });
+});
+</script>

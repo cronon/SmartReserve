@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311171120) do
+ActiveRecord::Schema.define(version: 20140312161407) do
+
+  create_table "club_images", force: true do |t|
+    t.string   "image"
+    t.string   "club_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -58,6 +65,15 @@ ActiveRecord::Schema.define(version: 20140311171120) do
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+
+  create_table "photos", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "club_id"
+    t.string   "image"
+  end
+
+  add_index "photos", ["club_id"], name: "index_photos_on_club_id"
 
   create_table "tables", force: true do |t|
     t.integer  "club_id"

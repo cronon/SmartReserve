@@ -30,9 +30,9 @@ gem 'jbuilder', '~> 1.2'
 gem "jquery-ui-rails", "~> 4.2.0"
 
 gem 'devise', '3.2.2'
-
 gem "cancan"
 
+gem 'carrierwave'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
