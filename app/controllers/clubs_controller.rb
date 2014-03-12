@@ -1,6 +1,11 @@
 class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!
+
+  def tables_status
+    @tables = Club.find(params[:club_id]).table
+    @time = Time.parse params[:order][:time]
+    @table_id = params[:order][:table_id].to_i
+  end
   # GET /clubs
   # GET /clubs.json
   def index

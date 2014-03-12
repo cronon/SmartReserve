@@ -21,14 +21,7 @@
 
   $(document).ready(function() {
     $('#dialog_form').hide();
-    $('#tables').buttonset();
-    $('#tables').children().each(function(){
-      $(this).on("click", function(){
-        var table_id = $(this)[0].id;
-        table_id = table_id.replace("table_", "");
-        $("#order_table_id").attr("value", table_id);
-      });
-    });
+
   });
 </script>
 <div class="row-fluid" id="orders_form">

@@ -5,7 +5,7 @@ module TablesHelper
 		color = case
 			when status == :free then "btn-success"
 			when status == :busy then "btn-danger"
-			else ""
+			else "btn-default"
 		end
 	end
 

@@ -11,9 +11,10 @@ class OrdersController < ApplicationController
 
   # need year, month, day, hour, minute, phone, name, table_id
   def prepare
-    @order = Order.prepare :table_id => order_params[:table_id], :time => parse_time(order_params), :phone => order_params[:phone], :name => order_params[:name]
+    @order = Order.prepare :table_id => order_params[:table_id], :time => Time.parse(order_params[:time]), :phone => order_params[:phone], :name => order_params[:name]
     @club = Club.find params[:club_id]
     @tables = @club.table
+    @order.confirmation_code = ""
     respond_to do |format|
       format.js
     end
@@ -33,6 +34,12 @@ class OrdersController < ApplicationController
     @order = Order.new 
     @club = Club.find params[:club_id]
     @tables = @club.table
+    if current_user
+      @order.name = current_user.name
+      @order.phone = current_user.phone
+    else
+      @order.phone = '+375'
+    end
   end
 
   # POST /orders
@@ -43,15 +50,17 @@ class OrdersController < ApplicationController
     table = Table.find order_params[:table_id]
     time = Time.parse(order_params[:time])
     @order = Order.new order_params
+    @order.validate_code
     o = table.new_order_at(time)
     @order.until = o.until
     @order.since = o.since      
     respond_to do |format|
-      if @order.save!
-        format.js
+      if @order.save
+        format.js {render action: 'create', notice: 'Order was successfully created.'}
         format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
+        format.js
         format.html { render action: 'new' }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
