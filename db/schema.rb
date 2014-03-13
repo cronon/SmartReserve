@@ -13,12 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20140313145024) do
 
-  create_table "club_images", force: true do |t|
-    t.string   "image"
-    t.string   "club_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -26,10 +22,10 @@ ActiveRecord::Schema.define(version: 20140313145024) do
     t.datetime "updated_at"
     t.integer  "tables_count"
     t.text     "description"
-    t.integer  "time_waiting"
-    t.integer  "time_before"
-    t.integer  "time_after"
-    t.string   "time_last"
+    t.datetime "time_waiting"
+    t.datetime "time_before"
+    t.datetime "time_after"
+    t.datetime "time_last"
     t.string   "mon_opens"
     t.string   "mon_closes"
     t.string   "tue_opens"
@@ -49,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140313145024) do
     t.string   "adress"
   end
 
-  add_index "clubs", ["owner_id"], name: "index_clubs_on_owner_id"
+  add_index "clubs", ["owner_id"], name: "index_clubs_on_owner_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
@@ -60,12 +56,12 @@ ActiveRecord::Schema.define(version: 20140313145024) do
     t.string   "phone"
     t.string   "name"
     t.string   "token"
-    t.integer  "user_id", :default => nil
+    t.integer  "user_id"
     t.datetime "time"
   end
 
-  add_index "orders", ["table_id"], name: "index_orders_on_table_id"
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  add_index "orders", ["table_id"], name: "index_orders_on_table_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.datetime "created_at"
@@ -74,7 +70,7 @@ ActiveRecord::Schema.define(version: 20140313145024) do
     t.string   "image"
   end
 
-  add_index "photos", ["club_id"], name: "index_photos_on_club_id"
+  add_index "photos", ["club_id"], name: "index_photos_on_club_id", using: :btree
 
   create_table "tables", force: true do |t|
     t.integer  "club_id"
@@ -83,7 +79,7 @@ ActiveRecord::Schema.define(version: 20140313145024) do
     t.string   "status_now", default: "free"
   end
 
-  add_index "tables", ["club_id"], name: "index_tables_on_club_id"
+  add_index "tables", ["club_id"], name: "index_tables_on_club_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -107,7 +103,7 @@ ActiveRecord::Schema.define(version: 20140313145024) do
     t.string   "name"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
