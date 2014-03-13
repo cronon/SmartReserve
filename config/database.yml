@@ -19,10 +19,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
+  adapter: postgresql
   #временно для тестирования
   #было production.sqlite3
-  database: db/development.sqlite3
+  database: db_development
   pool: 5
   timeout: 5000
 
