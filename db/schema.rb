@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140312161407) do
+ActiveRecord::Schema.define(version: 20140313145024) do
 
   create_table "club_images", force: true do |t|
     t.string   "image"
@@ -60,7 +60,8 @@ ActiveRecord::Schema.define(version: 20140312161407) do
     t.string   "phone"
     t.string   "name"
     t.string   "token"
-    t.integer  "user_id"
+    t.integer  "user_id", :default => nil
+    t.datetime "time"
   end
 
   add_index "orders", ["table_id"], name: "index_orders_on_table_id"
@@ -103,6 +104,7 @@ ActiveRecord::Schema.define(version: 20140312161407) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "owner_clubs",            default: false
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

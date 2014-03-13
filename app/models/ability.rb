@@ -29,8 +29,9 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
     can :read, Club, Table
-    can [:create], Order
-    can [:read,:update, :destroy], Order, :user_id => user.id 
+    can [:create, :prepare], Order
+    can [:read,:update, :destroy], Order, :user_id => user.id
+    can :tables_status, Club
 
     if user.owner_clubs?
       can :create, Club

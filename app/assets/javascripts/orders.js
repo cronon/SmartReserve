@@ -12,16 +12,13 @@ var makeCall = function() {
   });
 }
 var postForm = function(form) {  
-  var valuesToSubmit = $(form).serialize();
+  var valuesToSubmit = 1;//$(form).serialize();
   $.ajax({
       type: 'POST',
       url: $(form).attr('action'), //sumbits it to the given url of the form
       data: valuesToSubmit
   });
 }
-$(function () {
-  $('#datetimepicker').datetimepicker();
-});
 // $(function(){
 //   $("#submit_form").click(function( event ) {
 //     event.preventDefault();

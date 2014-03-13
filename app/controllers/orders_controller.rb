@@ -2,15 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   load_and_authorize_resource
-  skip_authorize_resource :only => [:index,:show]
-
-  #for user, which off js in brouser
-  def new
-    @table = Table.find params[:table_id]
-    respond_to do |format|
-      format.js
-    end
-  end
+  skip_authorize_resource :only => [:index,:show,:prepare,:create,:new]
 
   # need year, month, day, hour, minute, phone, name, table_id
   def prepare
@@ -56,7 +48,9 @@ class OrdersController < ApplicationController
     @order.validate_code
     o = table.new_order_at(time)
     @order.until = o.until
-    @order.since = o.since      
+    @order.since = o.since 
+    @order.time = Time.parse(order_params[:time])
+    @order.user = current_user
     respond_to do |format|
       if @order.save
         format.js {render action: 'create', notice: 'Order was successfully created.'}
@@ -71,6 +65,7 @@ class OrdersController < ApplicationController
   end
 
   def update
+    @order.user = current_user
     respond_to do |format|
       if @order.update!(order_params)
         format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
@@ -100,11 +95,10 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:table_id, :since, :until, :time, :year, :month, :day, :hour,:minute, :name, :phone, :token, :confirmation_code)
+      params.require(:order).permit(:table_id, :since, :until, :time, :name, :phone, :token, :confirmation_code, :user_id)
     end
 
     def parse_time params
-      puts params
       Time.new(params[:year].to_i, params[:month].to_i, params[:day].to_i, params[:hour].to_i, params[:minute].to_i)
     end
 end

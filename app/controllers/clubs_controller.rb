@@ -2,7 +2,7 @@ class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy]
 
   load_and_authorize_resource
-  skip_authorize_resource :only => [:index,:show]
+  skip_authorize_resource :only => [:index,:show,:tables_status]
 
   def tables_status
     @tables = Club.find(params[:club_id]).table
