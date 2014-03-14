@@ -1,0 +1,1 @@
+var makeCall=function(){var a=$("#new_order").serialize();$.ajax({type:"POST",url:$("#new_order").attr("action"),data:a})},postForm=function(a){var r=1;$.ajax({type:"POST",url:$(a).attr("action"),data:r})};
