@@ -12,7 +12,7 @@ var makeCall = function() {
   });
 }
 var postForm = function(form) {  
-  var valuesToSubmit = 1;//$(form).serialize();
+  var valuesToSubmit = $(form).serialize();
   $.ajax({
       type: 'POST',
       url: $(form).attr('action'), //sumbits it to the given url of the form
