@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
     @club = Club.find params[:club_id]
     @tables = @club.table
     @order.confirmation_code = ""
+    @time = Time.parse(order_params[:time])
     respond_to do |format|
       format.js
     end
@@ -35,6 +36,7 @@ class OrdersController < ApplicationController
     else
       @order.phone = '+375'
     end
+    @time = Time.now
   end
 
   # POST /orders
@@ -95,7 +97,7 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:table_id, :since, :until, :time, :name, :phone, :token, :confirmation_code, :user_id)
+      params.require(:order).permit!
     end
 
     def parse_time params
