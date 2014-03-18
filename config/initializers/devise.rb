@@ -12,7 +12,7 @@ Devise.setup do |config|
   # with default "from" parameter.
   # Витя хз, что делает сия хня. в production отправляет письмо
   # и без этого
-  config.mailer_sender = 'smart@reserve.com'
+  config.mailer_sender = 'no-reply@smartreserve.by'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
