@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns = "http://www.w3.org/1999/xhtml">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "Smart Reserve" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Smart Reserve" %>">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+<body>
+  <div id = "translate">
+    Рус |
+    <a href = "#"> Eng</a>
+  </div>
+  <div id = "head">
+    <div class="row">
+      <div class="col-md-4">
+        <a href = "#">
+          <img src="assets/temp-1.jpg" alt="Логотип" />
+        </a>
+      </div>
+        
+        
+      <div id = "head2" class="col-md-8">
+        <table id = "table1">
+          <tr>
+            <td>
+              <a href = "#">
+                <div class="market_icon" id="as">
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href = "#">
+                <div class="market_icon" id="gplay">
+                </div>
+              </a>
+            </td>
+            <td>
+              <a href = "#">
+                <div class="market_icon" id="mp">
+                </div>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  
+    <div class="row" id = "row2">
+      <div class="col-md-7">
+        <div id="video12">
+          <iframe src="http://www.youtube.com/embed/zLPbrSjiJI8" allowfullscreen="" frameborder="0"></iframe>
+        </div>
+      </div>
+
+      <div class="col-md-4" style="margin-top:-5px;">
+        <div>
+          <p>Сейчас вы можете получить возможность
+            первыми протестировать сервис, для этого
+            необходимо зарегистрироваться
+          </p>
+        </div>
+        <div class = "btn-group" id = "form">
+          <form action = "/users/sign_up" method = "GET" name = "mainForm">
+          <input type = "email"  class = "btn btn-block" name = "email" size = "30" maxlength = "20" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
+          <input type = "submit" class = "btn btn-block" value = "Зарегистрироваться" name = "button">
+          
+
+          <input type = "button" class = "btn btn-block" value = "Вход" name = "button"><br /><br /><br />
+          <input type = "button" class = "btn btn-block" value = "Тестировать сервис" name = "testingService" style="margin-top:27%;">
+          </form>
+        </div>
+        
+      </div>  
+      <div class="col-md-1">
+        <table id = "table2">
+          <tr>
+            <td>
+              <a href = "#">
+                <div class="sn_icon" id="fb"></div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href = "#">
+                <div class="sn_icon" id="twitter"></div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href = "#">
+                <div class="sn_icon" id="vk"></div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href = "#">
+                <div class="sn_icon" id="yt"></div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href = "#">
+                <div class="sn_icon" id="gp"></div>
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id = "text2">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus elementum, quam vel tincidunt scelerisque, urna mauris feugiat 
+        neque, nec scelerisque  ante neque ac  elit. Etiam vulputate urna accumsan tellus varius mattis. Integer sit amet pharetra erat, vitae 
+        sollicitudin ipsum. Proin posuere metus a orci accumsan, condimentum consectetur urna suscipit. Aenean volutpat turpis ipsum ut 
+        rutrum nulla faucibus nec. Morbi  quis  erat  eros. Sed sed erat malesuada, lobortis metus vitae, tristique magna. Fusce non orci nec 
+        tellus scelerisque iaculis ut sit amet urna. Nam fermentum tortor sodales, rhoncus tellus at, ultricies metus. Sed cursus auctor diam
+      </p>
+    </div>
+    <div class = "row" id = "end">
+      <div class="col-md-8">
+        <p>
+          SmartReserve @ 2014 <br />
+          <a href = "#">
+            info@smartreserve.by
+          </a>
+        </p>
+      </div>
+    
+      <div class="col-md-4" id = "lowerLogo">
+        <a href = "#">
+          <img src = "assets/temp-10.png" alt = "Логотип" />
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

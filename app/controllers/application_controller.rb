@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+# for teh cancan
   before_filter do
   resource = controller_name.singularize.to_sym
   method = "#{resource}_params"

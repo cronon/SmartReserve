@@ -1,0 +1,158 @@
+body {
+  background-color: #ffffff;
+  font-family: Verdana;
+  font-size: 13pt;
+  margin: 0;
+  padding: 0;
+}
+.market_icon {
+  height: 38px;
+  width: 132px;
+}
+
+#mp {
+  background-image: url('mp_b.png');
+}
+#mp:hover {
+  background-image: url('mp.png');
+}
+
+#as {
+  background-image: url('as_b.png');
+}
+#as:hover {
+  background-image: url('as.png');
+}
+
+#gplay {
+  background-image: url('gplay_b.png');
+  margin-left: -2px;
+}
+#gplay:hover {
+  background-image: url('gplay.png');
+}
+
+.sn_icon{
+  width: 37px;
+  height: 36px;
+  background-size:cover;
+}
+
+#fb{
+  background-image: url('fb_b.png');
+}
+#fb:hover {
+  background-image: url('fb.png');
+}
+#twitter{
+  background-image: url('twitter_b.png');
+}
+#twitter:hover {
+  background-image: url('twitter.png');
+}
+#vk{
+  background-image: url('vk_b.png');
+}
+#vk:hover {
+  background-image: url('vk.png');
+}
+#yt{
+  background-image: url('yt_b.png');
+}
+#yt:hover {
+  background-image: url('yt.png');
+}
+#gp{
+  background-image: url('gp_b.png');
+}
+#gp:hover {
+  background-image: url('gp.png');
+}
+
+#head {
+  margin: 40px 17% 0 17%;
+  max-width:70%;
+  margin-left: 20%;
+}
+
+#head2 {
+  width: 42%;
+  margin-left: 18%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table tr td {
+  padding-top: .3em;
+  padding-bottom: .3em;
+}
+
+#table1 tr td {
+  padding-left: .1em;
+  padding-right: .1em;
+}
+
+#regLink {
+  width:5%;
+
+}
+
+#row2 {
+  margin-top: 30px;
+}
+
+.col-md-4 div p {
+  font-size: 10pt;
+}
+
+#form {
+  
+}
+
+.input {
+  height: 35px;
+  font-size: 16pt;
+  margin: 3px;
+  width:100%;
+  background-color: #ffffff;
+}
+
+.btn-group input {
+  background-color: #ffffff;
+  border-color: #ed1b24;
+}
+
+
+#text2 {
+  margin-top: 30px;
+  max-width: 100%;
+}
+
+#lowerLogo{
+  padding: 0;
+}
+
+#video12 iframe {
+  width: 100%;
+  height: 360px;
+  padding:0;
+  }
+  
+ #end {
+  margin-top: 30px;
+}
+
+#span1 {
+  border: 1px solid;
+  border-radius: 5px;
+  text-align: center;
+}
+#translate {
+  position: absolute;
+  left: 75%;
+  top: 0;
+  margin-top: 5px;
+  font-size: 13pt;
+}
