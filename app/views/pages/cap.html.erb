@@ -47,7 +47,8 @@
         </table>
       </div>
     </div>
-  
+    <div class="container-fluid">
+    <section>
     <div class="row" id = "row2">
       <div class="col-md-7">
         <div id="video12">
@@ -55,22 +56,22 @@
         </div>
       </div>
 
-      <div class="col-md-4" style="margin-top:-5px;">
+      <div class="col-md-4 btn-group" style="margin-top:-5px;height:365px;">
         <div>
           <p>Сейчас вы можете получить возможность
             первыми протестировать сервис, для этого
             необходимо зарегистрироваться
           </p>
         </div>
-        <div class = "btn-group" id = "form">
           <form action = "/users/sign_up" method = "GET" name = "mainForm">
           <input type = "email"  class = "btn btn-block" name = "email" size = "30" maxlength = "20" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
           <input type = "submit" class = "btn btn-block" value = "Зарегистрироваться" name = "button">
           
-          <input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'"><br /><br /><br />
-          <input type = "button" class = "btn btn-block" value = "Тестировать сервис" name = "testingService" style="margin-top:27%;" nclick="window.location.href='/clubs'">
+          <input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'">
+          <div style="position:absolute;bottom:0;width:90%">
+            <input type = "button" class = "btn btn-block" value = "Тестировать сервис" name = "testingService" onclick="window.location.href='/clubs'">
+          </div>
           </form>
-        </div>
         
       </div>  
       <div class="col-md-1">
@@ -113,31 +114,36 @@
         </table>
       </div>
     </div>
-    <div id = "text2">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus elementum, quam vel tincidunt scelerisque, urna mauris feugiat 
-        neque, nec scelerisque  ante neque ac  elit. Etiam vulputate urna accumsan tellus varius mattis. Integer sit amet pharetra erat, vitae 
-        sollicitudin ipsum. Proin posuere metus a orci accumsan, condimentum consectetur urna suscipit. Aenean volutpat turpis ipsum ut 
-        rutrum nulla faucibus nec. Morbi  quis  erat  eros. Sed sed erat malesuada, lobortis metus vitae, tristique magna. Fusce non orci nec 
-        tellus scelerisque iaculis ut sit amet urna. Nam fermentum tortor sodales, rhoncus tellus at, ultricies metus. Sed cursus auctor diam
-      </p>
-    </div>
-    <div class = "row" id = "end">
-      <div class="col-md-8">
-        <p>
-          SmartReserve @ 2014 <br />
-          <a href = "#">
-            info@smartreserve.by
-          </a>
-        </p>
-      </div>
     
-      <div class="col-md-4" id = "lowerLogo">
-        <a href = "#">
-          <img src = "assets/temp-10.png" alt = "Логотип" />
-        </a>
+    <div class="row-fluid">
+      <div id = "text2" class="span12" style="text-align:justify;background-color: #ffffff;font-family: Verdana;font-size:13pt;padding:0;color:black;width:99%">        
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus elementum, quam vel tincidunt scelerisque, urna mauris feugiat 
+          neque, nec scelerisque  ante neque ac  elit. Etiam vulputate urna accumsan tellus varius mattis. Integer sit amet pharetra erat, vitae 
+          sollicitudin ipsum. Proin posuere metus a orci accumsan, condimentum consectetur urna suscipit. Aenean volutpat turpis ipsum ut 
+          rutrum nulla faucibus nec. Morbi  quis  erat  eros. Sed sed erat malesuada, lobortis metus vitae, tristique magna. Fusce non orci nec 
+          tellus scelerisque iaculis ut sit amet urna. Nam fermentum tortor sodales, rhoncus tellus at, ultricies metus. Sed cursus auctor diam
+        
       </div>
+        <div class="row">
+          <div class="col-md-4" style="height:86px">
+            <p style="position:absolute;bottom:0;">
+              SmartReserve @ 2014 <br />
+              <a href = "#">
+                info@smartreserve.by
+              </a>
+            </p>
+          </div>
+        
+          <div class="col-md-8" style="float:right">
+            <a href = "#">             
+              <img style="float:right" src='assets/temp-10.png' />
+            </a>
+          </div>
+        </div>
+      
     </div>
+    </section>
+  </div>
   </div>
 </body>
 </html>
