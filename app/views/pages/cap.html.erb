@@ -62,15 +62,17 @@
             необходимо зарегистрироваться
           </p>
         </div>
-          <form action = "/users/sign_up" method = "GET" name = "mainForm">
-          <input type = "email"  class = "btn btn-block" name = "email" size = "30" maxlength = "20" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
+          <%= form_for(User.new, remote: true, url: '/users', method:'POST', authenticity_token: true) do |f| %>
+          <input type = "email"  class = "btn btn-block" name = "user[email]" size = "30" maxlength = "20" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
           <input type = "submit" class = "btn btn-block" value = "Зарегистрироваться" name = "button">
           
           <input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'">
+          <input type="hidden" name="user[password]" value="123456" />
+          <input type="hidden" name="user[phone]" value="+375290123456" />
           <div style="position:absolute;bottom:0;width:90%">
-            <input type = "button" class = "btn btn-block" value = "Тестировать сервис" name = "testingService" onclick="window.location.href='/clubs'">
+            <input type = "submit" class = "btn btn-block" value = "Тестировать сервис" name = "testingService">
           </div>
-          </form>
+          <% end %>
         
       </div>  
       <div class="col-md-1">

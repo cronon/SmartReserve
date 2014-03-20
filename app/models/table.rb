@@ -19,7 +19,7 @@ class Table < ActiveRecord::Base
       errors.add(:club, "is not open or doesn't take orders at this time")
     end
     order.table = self
-    order.since = time - club.time_before
+    order.since = time - club.time_after
     order.since = Time.now if order.since < Time.now
     order.until = time + club.time_after
     order
