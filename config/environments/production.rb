@@ -82,7 +82,7 @@ SmartReserve::Application.configure do
 
   #for send email
   #see manual here for deploy in production http://railsapps.github.io/rails-send-email.html
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = { :host => 'smartreserve.by' }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
