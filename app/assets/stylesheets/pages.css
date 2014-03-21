@@ -1,6 +1,13 @@
+.text{
+  font-size: 11pt;
+  font-family: Verdana;
+  color: black;
+}
+
 .market_icon {
   height: 38px;
   width: 132px;
+  display:inline-block;
 }
 
 #mp {
@@ -19,7 +26,7 @@
 
 #gplay {
   background-image: url('gplay_b.png');
-  margin-left: -2px;
+  margin-left: -1px;
 }
 #gplay:hover {
   background-image: url('gplay.png');
@@ -29,6 +36,7 @@
   width: 37px;
   height: 36px;
   background-size:cover;
+  display: inline-block;
 }
 
 #fb{
@@ -73,20 +81,6 @@
   margin-left: 18%;
 }
 
-table {
-  border-collapse: collapse;
-}
-
-table tr td {
-  padding-top: .3em;
-  padding-bottom: .3em;
-}
-
-#table1 tr td {
-  padding-left: .1em;
-  padding-right: .1em;
-}
-
 #regLink {
   width:5%;
 
@@ -94,14 +88,6 @@ table tr td {
 
 #row2 {
   margin-top: 30px;
-}
-
-.col-md-4 div p {
-  font-size: 10pt;
-}
-
-#form {
-  
 }
 
 .input {
@@ -143,9 +129,8 @@ table tr td {
   text-align: center;
 }
 #translate {
-  position: absolute;
-  left: 76.1%;
-  top: 0;
-  margin-top: 5px;
+  position: relative;
+  margin-top: -35px;
   font-size: 13pt;
+  float:right;
 }

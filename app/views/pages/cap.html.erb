@@ -4,47 +4,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? yield(:title) : "Smart Reserve" %></title>
     <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Smart Reserve" %>">
-    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "application", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
 <body>
-  <div id = "translate">
-    Рус |
-    <a href = "#"> Eng</a>
-  </div>
   <div id = "head">
+
+
+        <div id="translate" class=="text">
+          Рус |
+          <a href = "#"> Eng</a>
+        </div>
+
     <div class="row">
-      <div class="col-md-11">
+      <div class="col-md-6">
         <a href = "#">
           <img src="assets/temp-1.jpg" alt="Логотип" style="float:left"/>
         </a>
       </div>
         
         
-      <div class="col-md-1">
-        <table id = "table1" style="float:right">
-          <tr>
-            <td>
-              <a href = "#">
-                <div class="market_icon" id="as">
-                </div>
-              </a>
-            </td>
-            <td>
-              <a href = "#">
-                <div class="market_icon" id="gplay">
-                </div>
-              </a>
-            </td>
-            <td>
-              <a href = "#">
-                <div class="market_icon" id="mp">
-                </div>
-              </a>
-            </td>
-          </tr>
-        </table>
+      <div class="col-md-6">
+        <div id = "table1" style="float:right;margin-top:20px">
+          <a href = "#">
+            <div class="market_icon" id="as">
+            </div>
+          </a>
+          <a href = "#">
+            <div class="market_icon" id="gplay">
+            </div>
+          </a>
+          <a href = "#">
+            <div class="market_icon" id="mp">
+            </div>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -57,14 +52,14 @@
 
       <div class="col-md-4 btn-group" style="margin-top:-5px;height:365px;">
         <div>
-          <p>Сейчас вы можете получить возможность
+          <p class="text">Сейчас вы можете получить возможность
             первыми протестировать сервис, для этого
             необходимо зарегистрироваться
           </p>
         </div>
           <%= form_for(User.new, remote: true, url: '/users', method:'POST', authenticity_token: true) do |f| %>
           <input type = "email"  class = "btn btn-block" name = "user[email]" size = "30" maxlength = "20" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
-          <input type = "submit" class = "btn btn-block" value = "Зарегистрироваться" name = "button">
+          <input type = "submit" class = "btn btn-block" value = "Зарегистрироваться" name = "button" onclick="$('#modal').modal()">
           
           <input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'">
           <input type="hidden" name="user[password]" value="123456" />
@@ -76,48 +71,28 @@
         
       </div>  
       <div class="col-md-1">
-        <table id = "table2" style="float:right">
-          <tr>
-            <td>
+        <div id = "table2" style="float:right">
               <a href = "#">
                 <div class="sn_icon" id="fb"></div>
               </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
               <a href = "#">
                 <div class="sn_icon" id="twitter"></div>
               </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
               <a href = "#">
                 <div class="sn_icon" id="vk"></div>
               </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
               <a href = "#">
                 <div class="sn_icon" id="yt"></div>
               </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
               <a href = "#">
                 <div class="sn_icon" id="gp"></div>
               </a>
-            </td>
-          </tr>
-        </table>
+        </div>
       </div>
     </div>
     
     <div class="row-fluid">
-      <div id = "text2" class="span12" style="text-align:justify;background-color: #ffffff;font-family: Verdana;font-size:13pt;padding:0;color:black;width:99%">        
+      <div id = "text2" class="span12 text" style="text-align:justify;background-color: #ffffff;padding:0;width:99%">        
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus elementum, quam vel tincidunt scelerisque, urna mauris feugiat 
           neque, nec scelerisque  ante neque ac  elit. Etiam vulputate urna accumsan tellus varius mattis. Integer sit amet pharetra erat, vitae 
           sollicitudin ipsum. Proin posuere metus a orci accumsan, condimentum consectetur urna suscipit. Aenean volutpat turpis ipsum ut 
@@ -127,7 +102,7 @@
       </div>
         <div class="row">
           <div class="col-md-4" style="height:86px">
-            <p style="position:absolute;bottom:0;">
+            <p class="text" style="position:absolute;bottom:0;font-size:9pt">
               SmartReserve @ 2014 <br />
               <a href = "#">
                 info@smartreserve.by
@@ -145,5 +120,20 @@
     </div>
 
   </div>
+
+
+<div class="modal fade" tabindex="-1" id="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="$('#modal').modal('hide')">&times;</button>
+        <h4 class="modal-title">Congratulations!</h4>
+      </div>
+      <div class="modal-body">
+        Now you are subscribed to the our news.
+      </div>      
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div>
 </body>
 </html>
