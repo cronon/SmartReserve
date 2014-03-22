@@ -32,7 +32,7 @@ class ClubsController < ApplicationController
   # POST /clubs
   # POST /clubs.json
   def create
-    @club = Club.new(club_params)
+    @club = current_user.clubs.build(club_params)
     respond_to do |format|
       if @club.save
         format.html { redirect_to edit_club_path(@club), notice: 'Club was successfully created.' }
