@@ -16,8 +16,10 @@ end
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :phone
-    devise_parameter_sanitizer.for(:sign_up) << :owner_clubs
+    #devise_parameter_sanitizer.for(:sign_up) << :phone
+    #devise_parameter_sanitizer.for(:sign_up) << :owner_clubs
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:phone, :owner_clubs)}
+    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:phone, :owner_clubs, :email, :password, :password_confirmation, :current_password)}
   end
 
 end

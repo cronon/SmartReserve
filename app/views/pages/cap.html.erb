@@ -52,16 +52,14 @@
 
       <div class="col-md-4 btn-group" style="margin-top:-5px;height:365px;">
         <div>
-          <p class="text">Сейчас вы можете получить возможность
-            первыми протестировать сервис, для этого
-            необходимо зарегистрироваться
+          <p class="text">Зарегистрируйтесь и получите возможность первыми протестировать систему SmartReserve
           </p>
         </div>
           <%= form_for(User.new, remote: true, url: '/users', method:'POST', authenticity_token: true) do |f| %>
           <input type = "email"  class = "btn btn-block" name = "user[email]" size = "30" maxlength = "20" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
           <input type = "submit" class = "btn btn-block" value = "Зарегистрироваться" name = "button" onclick="$('#modal').modal()">
           
-          <input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'">
+          <!--input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'"-->
           <input type="hidden" name="user[password]" value="123456" />
           <input type="hidden" name="user[phone]" value="+375290123456" />
           <div style="position:absolute;bottom:0;width:90%">
@@ -71,22 +69,22 @@
         
       </div>  
       <div class="col-md-1">
-        <div id = "table2" style="float:right">
-              <a href = "#">
-                <div class="sn_icon" id="fb"></div>
-              </a>
-              <a href = "#">
-                <div class="sn_icon" id="twitter"></div>
-              </a>
-              <a href = "#">
-                <div class="sn_icon" id="vk"></div>
-              </a>
-              <a href = "#">
-                <div class="sn_icon" id="yt"></div>
-              </a>
-              <a href = "#">
-                <div class="sn_icon" id="gp"></div>
-              </a>
+        <div id = "table2" style="float:right; padding:0px">
+          <a href = "#">
+            <div class="sn_icon" id="fb"></div>
+          </a><br />
+          <a href = "#">
+            <div class="sn_icon" id="twitter"></div>
+          </a><br />
+          <a href = "#">
+            <div class="sn_icon" id="vk"></div>
+          </a><br />
+          <a href = "#">
+            <div class="sn_icon" id="yt"></div>
+          </a><br />
+          <a href = "#">
+            <div class="sn_icon" id="gp"></div>
+          </a>
         </div>
       </div>
     </div>
