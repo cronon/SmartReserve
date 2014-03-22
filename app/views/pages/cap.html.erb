@@ -56,7 +56,7 @@
           </p>
         </div>
           <%= form_for(User.new, remote: true, url: '/users', method:'POST', authenticity_token: true) do |f| %>
-          <input type = "email"  class = "btn btn-block" name = "user[email]" size = "30" maxlength = "20" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
+          <input type = "email"  class = "btn btn-block" name = "user[email]" size = "30" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
           <input type = "submit" class = "btn btn-block" value = "Зарегистрироваться" name = "button" onclick="$('#modal').modal()">
           
           <!--input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'"-->
