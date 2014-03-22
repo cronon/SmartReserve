@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-md-6">
         <a href = "#">
-          <img src="assets/temp-1.jpg" alt="Логотип" style="float:left"/>
+          <img src="<%= asset_path('temp-1.jpg') %>" alt="Логотип" style="float:left"/>
         </a>
       </div>
         
@@ -112,7 +112,7 @@
         
           <div class="col-md-8" style="float:right">
             <a href = "#">             
-              <img style="float:right" src='assets/temp-10.png' />
+              <img style="float:right" src=url("<%= asset_path('temp-10.png') %>") />
             </a>
           </div>
         </div>
