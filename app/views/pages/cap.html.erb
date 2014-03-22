@@ -56,14 +56,14 @@
           </p>
         </div>
           <%= form_for(User.new, remote: true, url: '/users', method:'POST', authenticity_token: true) do |f| %>
-          <input type = "email"  class = "btn btn-block" name = "user[email]" size = "30" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
-          <input type = "submit" class = "btn btn-block" value = "Зарегистрироваться" name = "button" onclick="$('#modal').modal()">
+          <input type = "email"  class = "btn btn-block text" name = "user[email]" size = "30" placeholder="Ваш E-mail" style="border-color:black;cursor:text">
+          <input type = "submit" class = "btn btn-block text" value = "Зарегистрироваться" name = "button" onclick="$('#modal').modal()">
           
           <!--input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'"-->
           <input type="hidden" name="user[password]" value="123456" />
           <input type="hidden" name="user[phone]" value="+375290123456" />
           <div style="position:absolute;bottom:0;width:90%">
-            <input type = "submit" class = "btn btn-block" value = "Тестировать сервис" name = "testingService">
+            <input type = "submit" class = "btn btn-block text" value = "Тестировать сервис" name = "testingService">
           </div>
           <% end %>
         
@@ -73,10 +73,10 @@
           <a href = "#">
             <div class="sn_icon" id="fb"></div>
           </a><br />
-          <a href = "#">
+          <a href = "twitter.com/smartreserve?rel=nofollow">
             <div class="sn_icon" id="twitter"></div>
           </a><br />
-          <a href = "#">
+          <a href = "http://vk.com/smartreserve?rel=nofollow">
             <div class="sn_icon" id="vk"></div>
           </a><br />
           <a href = "#">
@@ -90,13 +90,12 @@
     </div>
     
     <div class="row-fluid">
-      <div id = "text2" class="span12 text" style="text-align:justify;background-color: #ffffff;padding:0;width:99%">        
+      <div id = "text2" class="span12 text" style="text-align:justify;background-color: #ffffff;padding:0;width:99.9%">        
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus elementum, quam vel tincidunt scelerisque, urna mauris feugiat 
           neque, nec scelerisque  ante neque ac  elit. Etiam vulputate urna accumsan tellus varius mattis. Integer sit amet pharetra erat, vitae 
           sollicitudin ipsum. Proin posuere metus a orci accumsan, condimentum consectetur urna suscipit. Aenean volutpat turpis ipsum ut 
           rutrum nulla faucibus nec. Morbi  quis  erat  eros. Sed sed erat malesuada, lobortis metus vitae, tristique magna. Fusce non orci nec 
-          tellus scelerisque iaculis ut sit amet urna. Nam fermentum tortor sodales, rhoncus tellus at, ultricies metus. Sed cursus auctor diam
-        
+          tellus scelerisque iaculis ut sit amet urna. Nam fermentum tortor sodales, rhoncus tellus at, ultricies metus. Sed cursus auctor diam        
       </div>
         <div class="row">
           <div class="col-md-4" style="height:86px">
