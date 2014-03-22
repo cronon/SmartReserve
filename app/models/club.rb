@@ -11,6 +11,7 @@ end
 class Club < ActiveRecord::Base
   has_many :table, dependent: :destroy
   has_many :photos
+  belongs_to :user
   before_create :create_tables
   after_initialize :set_time_last
   attr_reader :schedule
@@ -43,7 +44,7 @@ class Club < ActiveRecord::Base
   def set_time_last
     #почему это время существует одно, а не для каждого дня отдельно?
     #заказчик так пожелал
-    @time_last = Time.parse(self.time_last) if self.time_last
+    @time_last = Time.parse(self.time_last) unless self.time_last.blank?
   end
 
   protected

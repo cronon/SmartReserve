@@ -35,7 +35,7 @@ class ClubsController < ApplicationController
     @club = Club.new(club_params)
     respond_to do |format|
       if @club.save
-        format.html { redirect_to @club, notice: 'Club was successfully created.' }
+        format.html { redirect_to edit_club_path(@club), notice: 'Club was successfully created.' }
         format.json { render action: 'show', status: :created, location: @club }
       else
         format.html { render action: 'new' }
@@ -76,6 +76,6 @@ class ClubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
-      params.require(:club).permit(:name, :tables_count, :description)
+      params.require(:club).permit(:name, :tables_count, :description, :time_before, :time_after, :time_last)
     end
 end

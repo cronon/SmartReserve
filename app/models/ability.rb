@@ -35,10 +35,10 @@ class Ability
 
     if user.owner_clubs?
       can :create, Club
-      can [:update,:destroy], Club, :owner_id => user.id
+      can [:update,:destroy], Club, :user_id => user.id
       can [:create], Table
-      can [:update, :destroy], Table, club: {owner: user}
-      can [:read,:update, :destroy], Order, :table => { club: {owner: user} }
+      can [:update, :destroy], Table, club: {user: user}
+      can [:read,:update, :destroy], Order, :table => { club: {user: user} }
     end
   end
 

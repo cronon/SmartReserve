@@ -10,6 +10,12 @@ Things you may want to cover:
 * System dependencies
 
 * Configuration
+Env variables AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY should be setup for carrierwave
+config.fog_credentials = {
+    :provider               => 'AWS',
+    :aws_access_key_id      => ENV['AWS_ACCESS_KEY_ID'],
+    :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY']
+  }
 
 * Database creation
 

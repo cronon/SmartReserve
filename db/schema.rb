@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140321152724) do
+ActiveRecord::Schema.define(version: 20140322155522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 20140321152724) do
     t.string   "sat_closes"
     t.string   "sun_opens"
     t.string   "sun_closes"
-    t.integer  "owner_id"
+    t.integer  "user_id"
     t.string   "phone"
     t.string   "adress"
     t.integer  "time_before"
@@ -78,7 +78,7 @@ ActiveRecord::Schema.define(version: 20140321152724) do
     t.string   "time_last"
   end
 
-  add_index "clubs", ["owner_id"], name: "index_clubs_on_owner_id", using: :btree
+  add_index "clubs", ["user_id"], name: "index_clubs_on_user_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
