@@ -120,7 +120,11 @@
     </div>
 
   </div>
-
+<div style="display:none">
+  <% %w[fb.png gplay.png  mp.png yt.png as.png gp.png vk.png twitter.png ].each do |i| %>
+    <img src= "<%= asset_path(i) %>" />
+  <% end %>
+</div>
 
 <div class="modal fade" tabindex="-1" id="modal">
   <div class="modal-dialog">
