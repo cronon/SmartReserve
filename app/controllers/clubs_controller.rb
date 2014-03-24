@@ -9,6 +9,16 @@ class ClubsController < ApplicationController
     @time = Time.parse params[:order][:time]
     @table_id = params[:order][:table_id].to_i
   end
+
+  def rate
+    @club = Club.find(params[:id])
+    @club.rate(params[:stars], current_user, params[:dimension])
+    render :show do |page|
+      page.replace_html @club.wrapper_dom_id(params), ratings_for(@club, params.merge(:wrap => false))
+      page.visual_effect :highlight, @club.wrapper_dom_id(params)
+    end
+  end
+
   # GET /clubs
   # GET /clubs.json
   def index

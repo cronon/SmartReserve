@@ -17,8 +17,8 @@ SmartReserve::Application.routes.draw do
     post 'orders/prepare' => 'orders#prepare', as: :prepare_order
     get 'tables_status' => 'clubs#tables_status', as: :tables_status
     post '/photos' => 'photos#create', as: :create_photo
+    post :rate, :on => :member
   end
-
 
   get 'users/profile', as: 'user_root'
   # The priority is based upon order of creation: first created -> highest priority.

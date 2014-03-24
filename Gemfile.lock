@@ -16,6 +16,13 @@ GIT
       ransack (~> 1.0)
       sass-rails
 
+GIT
+  remote: git://github.com/helloenvoy/ajaxful-rating.git
+  revision: 394f639881a01969ad5c4c6a0be1c00f955135c3
+  branch: rails4
+  specs:
+    ajaxful_rating (3.0.0.beta8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -139,6 +146,8 @@ GEM
     polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.4)
+    protected_attributes (1.0.7)
+      activemodel (>= 4.0.1, < 5.0)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -231,6 +240,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  ajaxful_rating!
   bootstrap-sass
   cancan
   carrierwave
@@ -243,6 +253,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails (~> 4.2.0)
   pg
+  protected_attributes
   rails (= 4.0.3)
   rails_12factor
   rails_layout
