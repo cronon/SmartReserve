@@ -1,7 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :table
   belongs_to :user
-  attr_accessor :confirmation_code
   #attr_reader :table
 
   validate :cannot_book_at_the_past,
@@ -17,7 +16,7 @@ class Order < ActiveRecord::Base
     result.attributes = params
     token = generate_token    
     result.token = token.hash.to_s
-    result.confirmation_code = token
+    result.confirmation = token
     if result.valid?
       send_sms(params[:phone], token)
     end
@@ -44,8 +43,8 @@ class Order < ActiveRecord::Base
   end
 
   def validate_code
-    puts self.confirmation_code.hash, self.token
-    if self.confirmation_code.hash.to_s != self.token
+    puts self.confirmation.hash, self.token
+    if self.confirmation.hash.to_s != self.token
       errors.add(:code, "is invalid")
     end
   end

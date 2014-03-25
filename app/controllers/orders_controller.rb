@@ -9,7 +9,7 @@ class OrdersController < ApplicationController
     @order = Order.prepare :table_id => order_params[:table_id], :time => Time.parse(order_params[:time]), :phone => order_params[:phone], :name => order_params[:name]
     @club = Club.find params[:club_id]
     @tables = @club.table
-    @order.confirmation_code = ""
+    @order.confirmation = ""
     @time = Time.parse(order_params[:time])
     respond_to do |format|
       format.js
