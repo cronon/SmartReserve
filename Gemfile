@@ -37,7 +37,7 @@ gem 'carrierwave'
 gem "fog", "~> 1.3.1"
 
 gem 'ajaxful_rating', github: 'helloenvoy/ajaxful-rating', branch: 'rails4'
-gem 'protected_attributes' #ajaxful_rating uses attr_accessible
+#gem 'protected_attributes' #ajaxful_rating uses attr_accessible
 
 gem 'activeadmin', github: 'gregbell/active_admin'
 group :doc do

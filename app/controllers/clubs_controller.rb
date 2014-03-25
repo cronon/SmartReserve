@@ -11,9 +11,11 @@ class ClubsController < ApplicationController
   end
 
   def rate
+    @clubs = Club.all
     @club = Club.find(params[:id])
     @club.rate(params[:stars], current_user, params[:dimension])
-    render :show do |page|
+    render :index do |page|
+
       page.replace_html @club.wrapper_dom_id(params), ratings_for(@club, params.merge(:wrap => false))
       page.visual_effect :highlight, @club.wrapper_dom_id(params)
     end
@@ -86,6 +88,6 @@ class ClubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
-      params.require(:club).permit(:name, :tables_count, :description, :time_before, :time_after, :time_last)
+      params.require(:club).permit(:dimension,:stars, :show_user_rating, :name, :tables_count, :description, :time_before, :time_after, :time_last)
     end
 end

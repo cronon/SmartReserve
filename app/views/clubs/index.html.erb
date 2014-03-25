@@ -13,7 +13,7 @@
         <% if can? :destroy, club %>
           <%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
-        <%= ratings_for club, :show_user_rating => true, :dimension => :rating %>
+        <%= ratings_for club, :show_user_rating => false, :dimension => :rating %>
       </div>
     <% end %>
   </div>    
