@@ -7,15 +7,47 @@
   <%= @club.description %>
   <%= image_tag((@club.photos.first.image_url if @club.photos.first), height: '150') %>
 </p>
+<script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+<script type="text/javascript">
+    ymaps.ready(init);
+    var myMap;
 
+    function init(){     
+        myMap = new ymaps.Map ("map", {
+            center: [53.888823,27.536139],
+            zoom: 11
+        });
+        myMap.controls.add(
+            new ymaps.control.ZoomControl()
+        );
+        myPlacemark = new ymaps.Placemark([53.888823,27.536139], { 
+            balloonContentHeader: '<%= @club.name %>',
+            balloonContentBody: '<%= @club.adress %>' 
+        });
+        myMap.geoObjects.add(myPlacemark);
+        myPlacemark.balloon.open();
+
+        var myGeocoder = ymaps.geocode('Минск, Независимости 11');
+        myGeocoder.then(
+            function (res) {
+                myMap.geoObjects.add(res.geoObjects);
+            },
+            function (err) {
+                // обработка ошибки
+            }
+        );
+}
+</script>
+
+ <div id="map" style="width: 600px; height: 400px"></div>
 <% @comments = @club.comments %>
-<div id="comments">
+<div id="comments" class="row">
   <% @comments.each do |c| %>
     <% @comment = c %>
     <%= render 'comments/comment' %>
   <% end %>
 </div>
-<div>
+<div class="row">
   <% if can? :create, Comment.new %>
     <%= form_for(Comment.new, :url => club_comments_url(@club), :remote => :true, :action => :create) do |f| %>
       <%= f.text_area :description %>
