@@ -32,6 +32,8 @@ class Ability
     can [:create, :prepare], Order
     can [:read,:update, :destroy], Order, :user_id => user.id
     can [:tables_status, :rate], Club
+    can [:create], Comment
+    can [:destroy], Comment, :user_id => user.id
 
     if user.owner_clubs?
       can :create, Club

@@ -18,8 +18,9 @@ SmartReserve::Application.routes.draw do
     get 'tables_status' => 'clubs#tables_status', as: :tables_status
     post '/photos' => 'photos#create', as: :create_photo
     post :rate, :on => :member
+    resources :comments, only: [:create, :destroy]
   end
-
+  resources :comments, only: [:create, :destroy]
   get 'users/profile', as: 'user_root'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -8,6 +8,22 @@
   <%= image_tag((@club.photos.first.image_url if @club.photos.first), height: '150') %>
 </p>
 
+<% @comments = @club.comments %>
+<div id="comments">
+  <% @comments.each do |c| %>
+    <% @comment = c %>
+    <%= render 'comments/comment' %>
+  <% end %>
+</div>
+<div>
+  <% if can? :create, Comment.new %>
+    <%= form_for(Comment.new, :url => club_comments_url(@club), :remote => :true, :action => :create) do |f| %>
+      <%= f.text_area :description %>
+      <%= f.submit 'Add comment' %>
+    <% end %>
+  <% end %>
+</div>
+
 <%= link_to 'Tables', club_new_order_path(@club) %> |
 <%= link_to 'Edit', edit_club_path(@club) %> |
 <%= link_to 'Back', clubs_path %>
