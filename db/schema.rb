@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325164738) do
+ActiveRecord::Schema.define(version: 20140326181650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,14 @@ ActiveRecord::Schema.define(version: 20140325164738) do
 
   add_index "clubs", ["user_id"], name: "index_clubs_on_user_id", using: :btree
 
+  create_table "clubs_properties", id: false, force: true do |t|
+    t.integer "club_id",     null: false
+    t.integer "property_id", null: false
+  end
+
+  add_index "clubs_properties", ["club_id"], name: "index_clubs_properties_on_club_id", using: :btree
+  add_index "clubs_properties", ["property_id"], name: "index_clubs_properties_on_property_id", using: :btree
+
   create_table "comments", force: true do |t|
     t.text     "description"
     t.datetime "created_at"
@@ -115,6 +123,11 @@ ActiveRecord::Schema.define(version: 20140325164738) do
   end
 
   add_index "photos", ["club_id"], name: "index_photos_on_club_id", using: :btree
+
+  create_table "properties", force: true do |t|
+    t.string "name"
+    t.string "kind"
+  end
 
   create_table "rates", force: true do |t|
     t.integer  "rater_id"
