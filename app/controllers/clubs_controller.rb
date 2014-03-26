@@ -11,13 +11,8 @@ class ClubsController < ApplicationController
   end
 
   def rate
-    @clubs = Club.all
     @club = Club.find(params[:id])
     @club.rate(params[:stars], current_user, params[:dimension])
-    render :index do |page|
-      page.replace_html @club.wrapper_dom_id(params), ratings_for(@club, params.merge(:wrap => false))
-      page.visual_effect :highlight, @club.wrapper_dom_id(params)
-    end
   end
 
   # GET /clubs
