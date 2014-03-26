@@ -10,12 +10,14 @@ class ApplicationController < ActionController::Base
   resource = controller_name.singularize.to_sym
   method = "#{resource}_params"
   params[resource] &&= send(method) if respond_to?(method, true)
+  I18n.locale = :ru
 end
 
 
   protected
 
   def configure_permitted_parameters
+
     #devise_parameter_sanitizer.for(:sign_up) << :phone
     #devise_parameter_sanitizer.for(:sign_up) << :owner_clubs
     devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:phone, :owner_clubs)}

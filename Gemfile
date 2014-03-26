@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 1.2'
 
 gem "jquery-ui-rails", "~> 4.2.0"
 
+gem 'devise-i18n-views'
 gem 'devise', '3.2.2'
 gem "cancan"
 

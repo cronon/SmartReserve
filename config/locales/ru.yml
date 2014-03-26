@@ -1,0 +1,9 @@
+ru:
+  activerecord:
+    attributes:
+      user:
+        email: "Email"
+        phone: 'Номер телефона'
+        password: 'Пароль'
+        password_confirmation: "Подтверждение пароля"
+        owner_clubs: "Ресторатор?"

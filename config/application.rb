@@ -20,8 +20,8 @@ module SmartReserve
     config.time_zone = 'Minsk'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
+    #config.i18n.load_path += Dir[Rails.root.join(['config', 'locales', '**', '*.{rb,yml}'])
+    config.i18n.default_locale = :ru
     config.generators do |g|
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl, dir: 'spec/factories'
