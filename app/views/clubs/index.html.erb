@@ -20,11 +20,20 @@
      <br>
      <br>
 
-  <div id="main">
-        <% @clubs.each do |club| %>
-          <% @club = club %>
-          <%= render 'clubs/single' %>
-        <% end %>
+  <div class="container">
+    <% @clubs.each do |club| %>
+      <% if @clubs.index(club) % 4 == 0 %>
+        <div class="row">
+      <% end -%>
+
+      <div class="col-md-3">
+        <%= render partial: 'single', :locals => {:club => club} %> 
+      </div>
+
+      <% if (@clubs.index(club) + 1) % 4 == 0 || @clubs.index(club) == @clubs.size - 1%>
+        </div>
+      <% end -%>
+    <% end %>
   </div>
 
 
