@@ -39,6 +39,7 @@ class ClubsController < ApplicationController
   # POST /clubs.json
   def create
     @club = current_user.clubs.build(club_params)
+    @club.properties = Property.find(params[:property_ids])
     respond_to do |format|
       if @club.save
         format.html { redirect_to edit_club_path(@club), notice: 'Club was successfully created.' }
@@ -53,6 +54,7 @@ class ClubsController < ApplicationController
   # PATCH/PUT /clubs/1
   # PATCH/PUT /clubs/1.json
   def update
+    @club.properties = Property.find(params[:property_ids])
     respond_to do |format|
       if @club.update(club_params)
         format.html { redirect_to @club, notice: 'Club was successfully updated.' }

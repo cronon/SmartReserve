@@ -41,6 +41,16 @@
     <%= f.text_area :description, :cols => "30", :rows => "10"%>
   </div>
 
+  <% Property.all.group_by{|p| p.kind}.each do |kind, properties| %>
+    <div class="field">
+      <%= kind %>
+      <% properties.each do |property| %>
+        <%= f.label property.name %>
+        <%= check_box_tag 'property_ids[]', property.id, @club.properties.include?(property) %>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

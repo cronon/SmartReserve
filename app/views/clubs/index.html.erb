@@ -3,22 +3,8 @@
 <% @clubs.each_slice(3) do |three_clubs| %>
   <div class="row-fluid">
     <% three_clubs.each do |club| %>
-      <div class="col-md-4">
-        <div id="<%=club.id%>">
-          <h2> <%= club.name %> </h2>
-          <div> <%= club.description %> </div>
-          <%= link_to 'Show', club %>
-          <% if can? :update, club %>
-            <%= link_to 'Edit', edit_club_path(club) %>
-          <% end %>
-          <% if can? :destroy, club %>
-            <%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end %>
-          <div id='rating'>
-            <%= ratings_for club, :show_user_rating => false, :dimension => :rating %>
-          </div>
-        </div>
-      </div>
+      <% @club = club %>
+      <%= render 'clubs/single' %>
     <% end %>
   </div>    
 <% end %>
