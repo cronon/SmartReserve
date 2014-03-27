@@ -18,3 +18,4 @@
 /public/uploads/tmp
 /db/schema.rb
 /config/database.yml
+/Gemfile.lock
