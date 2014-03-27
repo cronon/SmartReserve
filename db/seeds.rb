@@ -45,7 +45,8 @@ clubs = Club.create!([
     :adress => "Minsk, Lenina 23",
     :phone => "+375336660055",
     :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
-    :properties => Property.all
+    :properties => Property.all,
+    :avatar => '/assets/for_seed/1.jpg'
   },
 
   { 
@@ -57,7 +58,8 @@ clubs = Club.create!([
     :adress => "Minsk, Lenina 89",
     :phone => "+375336662255",
     :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
-    :properties => Property.all
+    :properties => Property.all,
+    :avatar => '/assets/for_seed/2.jpg'
   },
 
   { 
@@ -70,7 +72,8 @@ clubs = Club.create!([
     :adress => "Minsk, Lesnay 23",
     :phone => "+375336661155",
     :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
-    :properties => Property.all
+    :properties => Property.all,
+    :avatar => '/assets/for_seed/3.jpg'
   },
 ])
 

@@ -27,14 +27,30 @@
           <% end %> 
         </div>       
     </div>               
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <% @clubs.each do |club| %>
-          <% @club = club %>
-          <%= render 'clubs/single' %>
-        <% end %>
+
+  <div class="container">
+    <% @clubs.each do |club| %>
+      <% if @clubs.index(club) % 4 == 0 %>
+        <div class="row">
+      <% end -%>
+
+      <div class="col-md-3">
+        <%= render partial: 'single', :locals => {:club => club} %> 
       </div>
-    </div>
+
+      <% if (@clubs.index(club) + 1) % 4 == 0 || @clubs.index(club) == @clubs.size - 1%>
+        </div>
+      <% end -%>
+    <% end %>
+  </div>
+
+
+  <div id="knopka"> 
+        <a href=" "> <p> Перейти в каталог </p> </a>
+  </div>
+ 
+ <br>
+>>>>>>> text_on_img
 
     <div class="row">
       <div class="col-md-12">

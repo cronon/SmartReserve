@@ -260,7 +260,7 @@ ru:
       add_club: Добавить клуб
       edit_profile: Редактировать профиль
   clubs:
-    new:
+    form:
       add_club: Добавить заведение 
       name: Название
       tables_count: Количество столиков
@@ -268,3 +268,5 @@ ru:
       time_after: Время после заказа (на уборку столика)
       time_last: За сколько до закрытия не принимаются заказы
       description: Описание заведения
+    single:
+      make_a_reservation: Забронировать
