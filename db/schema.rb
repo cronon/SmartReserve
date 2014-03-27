@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326181650) do
+ActiveRecord::Schema.define(version: 20140327021321) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -122,8 +122,10 @@ ActiveRecord::Schema.define(version: 20140326181650) do
   add_index "photos", ["club_id"], name: "index_photos_on_club_id"
 
   create_table "properties", force: true do |t|
-    t.string "name"
-    t.string "kind"
+    t.string "name_ru"
+    t.string "name_en"
+    t.string "kind_ru"
+    t.string "kind_en"
   end
 
   create_table "rates", force: true do |t|
