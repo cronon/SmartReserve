@@ -1,0 +1,59 @@
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?110"></script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ru_RU/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<style>
+  .a-tab{
+    padding:0px;
+    border-color:blue;
+  }
+  .tab-content{
+    width:260px;
+    height:270px;
+  }
+
+</style>
+<!-- Nav tabs -->
+<ul class="nav nav-pills white">
+  <li class="active"><a href="#vk-widget" style="padding:0px;background-color: white" data-toggle="tab">
+    <img src="<%=asset_path('vk.png')%>">
+  </a></li>
+  <li><a href="#fb-widget" style="padding:0px;background-color: white" data-toggle="tab">
+    <img src="<%=asset_path('fb.png')%>">
+  </a></li>
+  <li><a href="#yt-widget" style="padding:0px;background-color: white" data-toggle="tab">
+    <img src="<%=asset_path('yt.png')%>">
+  </a></li>
+  <li><a href="#gp-widget" style="padding:0px;background-color: white" data-toggle="tab">
+    <img src="<%=asset_path('gp.png')%>">
+  </a></li>
+  <li><a href="#tw-widget" style="padding:0px;background-color: white" data-toggle="tab">
+    <img src="<%=asset_path('twitter.png')%>">
+  </a></li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+  <div class="tab-pane active" id="vk-widget">
+    <div id="vk_groups"></div>
+    <script type="text/javascript">
+    VK.Widgets.Group("vk_groups", {mode: 0, width: "260", height: "260"}, 67797904);
+    </script>
+  </div>
+  <div class="tab-pane" id="fb-widget">
+    <div class="fb-like-box" data-href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" data-width="250" data-height="260" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="false"></div>
+  </div>
+  <div class="tab-pane" id="yt-widget">...</div>
+  <div class="tab-pane" id="gp-widget">...</div>
+  <div class="tab-pane" id="tw-widget">
+    <a class="twitter-timeline"  href="https://twitter.com/SmartReserve" width="250" height="260" data-widget-id="450782283545325568">Tweets by @SmartReserve</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+  </div>
+</div>

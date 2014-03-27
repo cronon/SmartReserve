@@ -1,53 +1,27 @@
-<style type="text/css">
-  #avatar_club{
-    display:  inline-block; 
-    position: relative;
-    border: 1px #333 solid;
-  }
-
-  #text_on_avatar{
-    border: 1px #333 solid;
-    position:absolute;
-    left:    0;
-    bottom:     0;
-    width:   100%;
-
-    box-sizing:         border-box;
-    -moz-box-sizing:    border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing:         border-box; 
-
-    color:            #fff;
-    padding:          10px;
-    background-color: rgba(0,0,0,.3);
-    font-size:        12px;
-  }
-
-</style>
-
-<div id="main_1">
-  <div id="<%= club.id %>">    
-    <div>
-      <!--<%= image_tag club.avatar.url.to_s %>-->
-      <img src="/assets/for_seed/3.jpg"></img>
-      <div>
-        <%= club.properties.find_by_kind_en('Type').send('name_' + I18n.locale.to_s) %> &quot;
-        <%= club.name %>&quot;
-      </div>
+<div id="<%= "club_#{club.id}" %>" class="club-div">
+  <div class="club-image" style="background-image:url('<%= asset_path('club.png') %>')">
+    <div class="text-on-avatar">
+      <%= club.properties.find_by_kind_en('Type').name %> &quot;<%= club.name %>&quot;
     </div>
-
-    <div>
-      <%= link_to t('.make_a_reservation'), club %>
-      <% if can? :update, club %>
-        <%= link_to 'Edit', edit_club_path(club) %>
-      <% end %>
-      <% if can? :destroy, club %>
-        <%= link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-      <div id='rating'>
-        <%= ratings_for club, :show_user_rating => false, :dimension => :rating %>
-      </div>
-    </div>
-    
   </div>
+
+  <div>
+    <% if can? :update, club %>
+      <% link_to 'Edit', edit_club_path(club) %>
+    <% end %>
+    <% if can? :destroy, club %>
+      <% link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+    <div class='rating'>
+      <%= ratings_for club, :show_user_rating => false, :dimension => :rating%>
+    </div>
+      <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+          <div class="reservation-btn-wrapper">
+        <%= link_to t('.make_a_reservation'), club, :class=>'btn-reservation btn btn-danger'%>
+          </div>
+        </div>
+      </div>
+  </div>
+  
 </div>

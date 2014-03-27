@@ -11,8 +11,8 @@
 }
 .ajaxful-rating{
     position: relative;
-    /*width: 125px; this is setted dynamically */
-    height: 25px;
+    width: 60px;
+    height: 12px;
     overflow: hidden;
     list-style: none;
     margin: 0;
@@ -27,7 +27,7 @@
     top: 0;
     left: 0;
     text-indent: -1000em;
-    height: 25px;
+    height: 12px;
     line-height: 25px;
     outline: none;
     overflow: hidden;

@@ -1,3 +1,56 @@
 // Place all the styles related to the Clubs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+h3{
+  color:black;
+}
+
+.club-image{
+  height:140px;
+  width:210px;
+  display: table;
+}
+.club-div{
+  width: 211px;
+  border-color:#ccc;
+  border-style:solid;
+  border-width:1px;
+  border-radius:5px;
+}
+.text-on-avatar{
+  margin-top:15px;
+  height:35px;
+  width:155px;
+  background-color: white;
+  text-align:center;
+  font-size:1.3em;
+  padding-top:5px;
+}
+
+.reservation-btn-wrapper{
+  float:right;
+  padding:10px;
+}
+.btn-danger{
+  background-color: #ed1b24
+}
+.btn-reservation{
+  width: 135px;
+  height:30px;
+  
+}
+.rating{
+  padding: 5px;
+}
+.before_footer_a{
+  font-size:1.1em;
+  color: #082bc5;
+  text-decoration:underline;
+}
+#navigation a{
+  text-decoration: underline;
+}
+
+#restaurants a{
+  color:black;
+}
