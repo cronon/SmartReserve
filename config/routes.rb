@@ -16,7 +16,7 @@ SmartReserve::Application.routes.draw do
     delete 'orders/:id' => 'orders#destroy'
     post 'orders/prepare' => 'orders#prepare', as: :prepare_order
     get 'tables_status' => 'clubs#tables_status', as: :tables_status
-    post '/photos' => 'photos#create', as: :create_photo
+    post '/photos' => 'photos#create', as: :photos
     post :rate, :on => :member
     resources :comments, only: [:create, :destroy]
   end

@@ -18,3 +18,5 @@
 //= require bootstrap
 //= require_tree .
 //= require jquery.datetimepicker
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl

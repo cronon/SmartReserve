@@ -1,7 +1,8 @@
-<div class="col-md-4">
+<div id="main_1">
   <div id="<%= @club.id %>">    
     <h2> <%= @club.name %> </h2>
     <%= @club.properties.find_by_kind_en('Type').send('name_' + I18n.locale.to_s) %>
+    <%= image_tag @club.avatar.url.to_s %>
     <div> <%= @club.description %> </div>
     <%= link_to 'Show', @club %>
     <% if can? :update, @club %>

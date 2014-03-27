@@ -11,12 +11,14 @@ end
 class Club < ActiveRecord::Base
   has_many :table, dependent: :destroy
   has_many :photos
+  mount_uploader :avatar, ImageUploader
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :properties
   belongs_to :user
   before_create :create_tables
   after_initialize :set_time_last
   attr_reader :schedule
+  accepts_nested_attributes_for :photos, :allow_destroy => true
 
   validates :tables_count, :name, presence: true
   validates :tables_count, numericality: { grater_than_or_equal: 1 }
@@ -29,7 +31,7 @@ class Club < ActiveRecord::Base
   def whether_order? time
     time < schedule_at(time)[:closes] and \
       time > schedule_at(time)[:opens] and \
-      cT(time) < cT(@time_last)
+      convert_time(time) < convert_time(@time_last)
   end
 
   def schedule_at time
@@ -55,7 +57,7 @@ class Club < ActiveRecord::Base
       self.tables_count.times{ self.table << Table.new } if self.tables_count
     end
 
-    def cT time #converts datetime to time
+    def convert_time time #converts datetime to time
       Time.at(time.hour * 60 * 60 + time.min * 60 + time.sec)
     end
   end
