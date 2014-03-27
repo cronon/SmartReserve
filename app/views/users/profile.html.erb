@@ -1,4 +1,4 @@
-<%= link_to "Edit profile",  edit_user_registration_path %><br />
+<%= link_to t('.edit_profile'),  edit_user_registration_path %><br />
 
 <% if can? :create, @club %>
 	<%= link_to t('.add_club'), new_club_path %>

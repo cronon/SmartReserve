@@ -10,36 +10,36 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label t('.name') %><br>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :tables_count %><br>
+    <%= f.label t('.tables_count') %><br>
     <%= f.text_field :tables_count%>
   </div>
 
   <div class="field">
-    <%= f.label :time_before %><br>
+    <%= f.label t('.time_before') %><br>
     <%= f.text_field :time_before %>
   </div>
 
   <div class="field">
-    <%= f.label :time_after %><br>
+    <%= f.label t('.time_after') %><br>
     <%= f.text_field :time_after %>
   </div>
 
   <div class="field">
-    <%= f.label :time_last %><br>
+    <%= f.label t('.time_last') %><br>
     <%= f.text_field :time_last %>
   </div>
 
   <div class="field">
-    <%= f.label :description %><br>
+    <%= f.label t('.description') %><br>
     <%= f.text_area :description, :cols => "30", :rows => "10"%>
   </div>
+
 
   <% Property.all.group_by{|p| p.kind}.each do |kind, properties| %>
     <div class="field">
