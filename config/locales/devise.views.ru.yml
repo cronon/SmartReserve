@@ -1,6 +1,5 @@
 ru:
   devise:
-    email: 'имейл'
     confirmations:
       new:
         resend_confirmation_instructions: Выслать повторно письмо с активацией
@@ -44,6 +43,9 @@ ru:
     sessions:
       new:
         sign_in: Войти
+        email: Еmail
+        password: Пароль
+        remember_me: запомнить меня
     shared:
       links:
         didn_t_receive_confirmation_instructions: Не получили подтверждение?
