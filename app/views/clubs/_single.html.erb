@@ -27,10 +27,10 @@
 
 <div id="main_1">
   <div id="<%= club.id %>">    
-    <div id="avatar_club">
+    <div>
       <!--<%= image_tag club.avatar.url.to_s %>-->
-      <img src="/assets/for_seed/3.jpg" width="100" heigth="100"></img>
-      <div id="text_on_avatar">
+      <img src="/assets/for_seed/3.jpg"></img>
+      <div>
         <%= club.properties.find_by_kind_en('Type').send('name_' + I18n.locale.to_s) %> &quot;
         <%= club.name %>&quot;
       </div>

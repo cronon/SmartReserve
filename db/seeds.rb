@@ -32,6 +32,68 @@ properties = Property.create([
     :kind_en => "Atmosphere"
   },
 
+  {
+    :name_ru => "Поминки",
+    :name_en => "Wake",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
+
+  {
+    :name_ru => "Свидание",
+    :name_en => "Appointment",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
+
+  {
+    :name_ru => "Деловая встреча",
+    :name_en => "Business meeting",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
+
+  {
+    :name_ru => "С семьёй",
+    :name_en => "With family",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
+
+  {
+    :name_ru => "Трансляции",
+    :name_en => "Broadcast",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
+
+  {
+    :name_ru => "Отметить",
+    :name_en => "Сelebrate",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
+
+  {
+    :name_ru => "Покушать",
+    :name_en => "Eat",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
+
+  {
+    :name_ru => "Потусоваться",
+    :name_en => "Hang",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
+
+  {
+    :name_ru => "Бухнуть по ярому",
+    :name_en => "Drink",
+    :kind_ru => "Цель",
+    :kind_en => "Goal"
+  },
 ])
 
 clubs = Club.create!([

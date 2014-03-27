@@ -10,7 +10,7 @@
       <p style="font-size:1.7em">Заведения в городе</p>
      
         <div class="row">
-          <% properties = Property.where(:kind_ru => 'Цель').to_a %>
+          <% properties = Property.where(:kind_en => 'Goal') %>
           <div class="col-md-offset-2 col-md-1" style="width:''">
               <a href="#">
                 <img src='<%= asset_path("categories/1.jpg") %>' alt="..." />
