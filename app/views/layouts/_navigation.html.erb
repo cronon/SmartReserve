@@ -1,20 +1,13 @@
 <%# navigation styled for Bootstrap 3.0 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
-      <%= render 'layouts/sign' %>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <%= render 'layouts/navigation_links' %>
-      </ul>
-    </div>
+<div class="col-md-12"  style="border-color: red; border-style:solid">
+  <div class="row col-md-offset-2">
+    <ul class="nav navbar-nav" style="height: 40px; margin-top: -10px;">    
+        <li class="active"><%= link_to 'Home', root_path, class: 'navbar-brand' %></li>
+        <li><%= link_to 'Main', '/main', class: 'navbar-brand' %></li>
+        <li><%= link_to 'About', '/about', class: 'navbar-brand' %></li>
+              
+          <% render 'layouts/sign' %>
+    
+    </ul>
   </div>
-</nav>
+</div>
