@@ -10,7 +10,13 @@
  *
  *= require jquery.ui.all
  *= require_self
- *= require_directory .
+*= require clubs
+*= require orders
+*= require ajaxful_rating
+*= require pages
+*= require tables
+*= require jquery.datetimepicker
+*= require scaffolds
  *= require jquery.datetimepicker
  * require jquery.fileupload-ui
  */
