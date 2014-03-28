@@ -11,6 +11,7 @@ module SmartReserve
   class Application < Rails::Application
     config.assets.enabled = true
     config.serve_static_assets = true
+    config.assets.precompile +=['frameworks_and_overrides.css']
     #config.assets.initialize_on_precompile = false
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

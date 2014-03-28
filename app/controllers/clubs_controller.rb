@@ -3,6 +3,7 @@ class ClubsController < ApplicationController
 
   load_and_authorize_resource
   skip_authorize_resource :only => [:index,:show,:tables_status]
+  
 
   def tables_status
     @tables = Club.find(params[:club_id]).table
