@@ -17,28 +17,47 @@ owners = User.create([
     },
   ])
 
-clubs = Club.create([
+properties = Property.create([
+  {
+    :name_ru => "Бар",
+    :name_en => "Bar",
+    :kind_ru => "Тип",
+    :kind_en => "Type"
+  },
+
+  {
+    :name_ru => "Романтика",
+    :name_en => "Romantic",
+    :kind_ru => "Атмосфера",
+    :kind_en => "Atmosphere"
+  },
+
+])
+
+clubs = Club.create!([
   { 
   	:name => 'Baza',
   	:description => '21+',
   	:tables_count => '3',
   	:time_last =>'22:50',
-    :time_after => '02:00',
-    :time_before => '00:10',
+    :time_after => 3600,
+    :time_before => 3600,
     :adress => "Minsk, Lenina 23",
     :phone => "+375336660055",
-    :owner_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
+    :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
+    :properties => Property.all
   },
 
   { 
     :name => 'Aplha', :description => 'expensive', 
     :tables_count => '1',
     :time_last => '22:50',
-    :time_after => '02:00',
-    :time_before => '00:10',
+    :time_after => 3600,
+    :time_before => 3600,
     :adress => "Minsk, Lenina 89",
     :phone => "+375336662255",
-    :owner_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
+    :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
+    :properties => Property.all
   },
 
   { 
@@ -46,11 +65,12 @@ clubs = Club.create([
     :description => 'great drunken party', 
   	:tables_count => '2',
     :time_last => '22:50',
-    :time_after => '02:00',
-    :time_before => '00:10',
+    :time_after => 3600,
+    :time_before => 3600,
     :adress => "Minsk, Lesnay 23",
     :phone => "+375336661155",
-    :owner_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
+    :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
+    :properties => Property.all
   },
 ])
 
