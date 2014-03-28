@@ -17,6 +17,7 @@
 *= require tables
 *= require jquery.datetimepicker
 *= require scaffolds
+*= require_directory 
  *= require jquery.datetimepicker
  * require jquery.fileupload-ui
  */
