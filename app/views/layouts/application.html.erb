@@ -11,7 +11,19 @@
     <%= favicon_link_tag %>
   </head>
   <body>
-    <div class="col-md-8 col-md-offset-2" style="margin-top:15px">
+    <style>
+
+header{margin-left:15%; 
+          margin-right:15%}
+          *{margin:0; padding:0}
+    </style>
+    <header>
+      <div>
+        <img src="<%= asset_path('temp-1.jpg')%>">
+      </div>       
+    </header>
+    <%= render 'layouts/navigation' %>
+    <!-- <div class="col-md-8 col-md-offset-2" style="margin-top:15px">
         <div id="translate" class="text" style="height:0px;top:20px">
           Рус |
           <a href = "#"> Eng</a>
@@ -33,8 +45,8 @@
       </div>
     </div>
     <div class="row col-md-12"><br /></div>
-    <div class="row">
-      <%= render 'layouts/navigation' %>
+    <div class="row"> -->
+      
     </div>
     <main role="main">
        <%= render 'layouts/messages' %>
