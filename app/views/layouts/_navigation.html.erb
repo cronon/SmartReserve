@@ -1,13 +1,30 @@
 <%# navigation styled for Bootstrap 3.0 %>
-<div class="col-md-12"  style="border-color: red; border-style:solid">
-  <div class="row col-md-offset-2">
-    <ul class="nav navbar-nav" style="height: 40px; margin-top: -10px;">    
-        <li class="active"><%= link_to 'Home', root_path, class: 'navbar-brand' %></li>
-        <li><%= link_to 'Main', '/main', class: 'navbar-brand' %></li>
-        <li><%= link_to 'About', '/about', class: 'navbar-brand' %></li>
-              
-          <% render 'layouts/sign' %>
-    
-    </ul>
-  </div>
-</div>
+<style>
+menu{ border-top:solid red 2px; 
+          border-bottom:solid red 2px}
+
+menu ul li {display:inline; 
+               margin-right:5%}
+
+menu ul li a {text-decoration:none;}
+
+#menu_1{margin-left:15%; 
+              margin-right:15%}
+</style>
+<header>
+<div>
+  <img src="foto/temp-1.jpg">
+</div>       
+</header>
+<br>
+<menu>
+ <div id="menu_1">
+  <ul>
+     <li><a href=" ">Главная</a></li>
+     <li><a href=" ">Посетителям</a></li>
+     <li><a href=" ">Ресторанам</a></li>
+     <li><a href=" ">Новости</a></li>
+     <li><a href=" ">О проекте</a></li>
+  </ul>        
+ </div>
+</menu>
