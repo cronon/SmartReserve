@@ -39,9 +39,7 @@ class ClubsController < ApplicationController
   # POST /clubs
   # POST /clubs.json
   def create
-    puts '###########'
-    photos = params[:club][:photos].map!{|u| Photo.new u}
-    puts '###########'
+    puts params,'#####'
     @club = current_user.clubs.build(club_params)
     @club.properties = Property.find(params[:property_ids])
     respond_to do |format|
@@ -88,7 +86,10 @@ class ClubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
-      params.permit(photo: [])
-      params.require(:club).permit(:dimension,:stars, :show_user_rating, :name, :tables_count, :description, :time_before, :time_after, :time_last)
+      #params.require(:club).permit(:photos_attributes).permit!
+      params.require(:club).permit!#({
+        # :photos_attributes => 
+        #   [:photo => [] ]
+        # },:dimension,:stars, :show_user_rating, :name, :tables_count, :description, :time_before, :time_after, :time_last)
     end
 end

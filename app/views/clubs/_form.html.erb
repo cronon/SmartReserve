@@ -54,6 +54,6 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-   Upload a file: <input type="file" multiple name="photos[]" />
-  <%= render 'clubs/upload_photo'%>
+  <%= f.file_field :avatar %>
+  <%= render 'upload_photo' %>
 <% end %>

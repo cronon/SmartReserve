@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140327021321) do
+ActiveRecord::Schema.define(version: 20140330175321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20140327021321) do
     t.integer  "time_after"
     t.integer  "time_waiting"
     t.string   "time_last"
+    t.string   "avatar"
   end
 
   add_index "clubs", ["user_id"], name: "index_clubs_on_user_id", using: :btree

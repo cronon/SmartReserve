@@ -34,6 +34,7 @@ gem 'devise-i18n-views'
 gem 'devise', '3.2.2'
 gem "cancan"
 
+gem 'jquery-fileupload-rails'
 gem 'carrierwave'
 gem "fog", "~> 1.3.1"
 
