@@ -1,7 +1,10 @@
+<!-- 
+  Добавление - обычный постсо вложенными параметрами, удаление - аяксом.
+  Юзер заливает фоточк в инпут, они отображаются на странице и по сабмиту улетают вместе с формой.
+  Существующие картинки уже показаны на странице, и рядом с ними крестик. По крестику аякс на Photos#delete
+  и убирается фоточка со вьюшки, причем независимо от респонза. 
+-->
 
-<%= form_for(:photo_form, :url => club_create_photo_url(@club), :html => {:method => :post, :id => 'upload_form', :multipart => true}) do |f| %>
- Upload a file: <%= f.file_field :uploaded_data, :multiple => true %>
-<% end %>
 <div id="prev_photo_form_uploaded_data" style="">
   <% @club.photos.each do |photo| %>
     <div style="height:150px;width:150px">

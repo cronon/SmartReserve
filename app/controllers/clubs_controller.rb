@@ -3,7 +3,7 @@ class ClubsController < ApplicationController
 
   load_and_authorize_resource
   skip_authorize_resource :only => [:index,:show,:tables_status]
-  
+
 
   def tables_status
     @tables = Club.find(params[:club_id]).table
@@ -39,6 +39,9 @@ class ClubsController < ApplicationController
   # POST /clubs
   # POST /clubs.json
   def create
+    puts '###########'
+    photos = params[:club][:photos].map!{|u| Photo.new u}
+    puts '###########'
     @club = current_user.clubs.build(club_params)
     @club.properties = Property.find(params[:property_ids])
     respond_to do |format|
@@ -85,6 +88,7 @@ class ClubsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
+      params.permit(photo: [])
       params.require(:club).permit(:dimension,:stars, :show_user_rating, :name, :tables_count, :description, :time_before, :time_after, :time_last)
     end
 end
