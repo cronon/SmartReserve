@@ -1,6 +1,5 @@
 ru:
   devise:
-    email: 'имейл'
     confirmations:
       new:
         resend_confirmation_instructions: Выслать повторно письмо с активацией
@@ -34,16 +33,22 @@ ru:
         change_my_password: Изменить мой пароль        
     registrations:
       edit:
+        password: Пароль
+        password_confirmation: Подтверждения пароля
+        current_password: Текущий пароль
         are_you_sure: Вы уверены?
         cancel_my_account: Удалить учетную запись
         leave_blank_if_you_don_t_want_to_change_it: оставьте поле пустым, если не хотите ничего менять
-        title: Редактировать %{resource}
+        title: Редактировать профиль
         we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
       new:
         sign_up: Регистрация
     sessions:
       new:
         sign_in: Войти
+        email: Еmail
+        password: Пароль
+        remember_me: запомнить меня
     shared:
       links:
         didn_t_receive_confirmation_instructions: Не получили подтверждение?
