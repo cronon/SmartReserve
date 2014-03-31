@@ -1,48 +1,68 @@
+<div class="row"><div class="col-md-12">  <br /></div></div>
 <div class="row">
-  <div style="background:url('<%= asset_path('shapka.jpg')%>') no-repeat;width:100%;height:23em">
+  <div class="col-md-12"style="background:url('<%= asset_path('shapka.jpg')%>')  no-repeat scroll 0% 0% / cover  transparent;width:100%;height:23em">
   </div>
-   <br>
-    <div id="header_3">                         
-      <div id="header_31" >
-             <p>Заведения в городе</p>
-                   
-      <img src="foto/1.jpg">
-      <img src="foto/2.jpg">
-      <img src="foto/3.jpg">
-      <img src="foto/4.jpg">
-      <img src="foto/5.jpg">
-      <img src="foto/6.jpg">
-      <img src="foto/7.jpg">
-      <img src="foto/8.jpg">
-        
-     </div>                      
-    </div>
-     <br>
-     <br>
-
-  <div id="main">
+</div>
+<div class="row"><div class="col-md-12">  <br /></div></div>
+<div class="row" style="width:101%;">
+  <div class="col-md-12">                        
+    <div class="row" style="text-align:center; background-color:#dedddd;height:13em">
+      <p style="font-size:1.7em">Заведения в городе</p>
+     
+        <div class="row">
+          <% properties = Property.where(:kind_ru => 'Цель').to_a %>
+          <div class="col-md-offset-2 col-md-1" style="width:''">
+              <a href="#">
+                <img src='<%= asset_path("categories/1.jpg") %>' alt="..." />
+                <%= properties.shift.name %>
+              </a>
+            </div>
+          <% (2..8).each do |i| %>
+            <div class="col-md-1" style="width:''">
+              <a href="#">
+                <img src='<%= asset_path("categories/#{i}.jpg") %>' alt="..." />
+                <%= properties.shift.name %>
+              </a>
+            </div> 
+          <% end %> 
+        </div>       
+    </div>               
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
         <% @clubs.each do |club| %>
           <% @club = club %>
           <%= render 'clubs/single' %>
         <% end %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <a href=" "> <p style="font-family:sans-serif;font-size:1.5em;color:red;text-align:center"> Перейти в каталог </p> </a>
+      </div>
+    </div>
+
+    <div class="row"><div class="col-md-12">  <br /></div></div>
+    <div class="row">
+      <div class="col-md-12" style="background:url('<%= asset_path('afisha_background.png')%>')  no-repeat scroll 0% 0% / cover  transparent;width:100%;height:15em">
+        <div style="text-align:center">
+          <p style="color:red;font-size:1.5em">Афиша</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <p style="text-align:center;font-size:1.5em"> Наши партнеры </p>
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-4">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-
-  <div id="knopka"> 
-        <a href=" "> <p> Перейти в каталог </p> </a>
-  </div>
- 
- <br>
-
-  <div id="afisha">
-           <p>Афиша</p>
-            <div id="afisha_photo">
-
-            </div>
-  </div>
-  <br>
-    <p id="partner">
-        Наши партнеры
-    </p>
 </div>
-<%= link_to 'New Club', new_club_path %>

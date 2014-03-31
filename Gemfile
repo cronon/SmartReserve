@@ -50,7 +50,7 @@ gem 'bootstrap-sass'
 group :development do
   gem 'rails_layout'
   #for vitek
- 	gem 'sqlite3'
+ 	#gem 'sqlite3'
 end
 
 group :production do

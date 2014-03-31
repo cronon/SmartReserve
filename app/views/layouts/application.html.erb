@@ -11,7 +11,7 @@
     <%= ajaxful_rating_style %>
     <%= favicon_link_tag %>
   </head>
-  <body>
+  <body style="overflow-x:hidden">
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
 (function (d, w, c) {
@@ -63,12 +63,48 @@ d.addEventListener("DOMContentLoaded", f, false);
 </div>
 <%= render 'layouts/navigation' %>
 
-<div class="row col-md-12"><br /></div>
-<div class="row">
-  
-</div>
+
 <%= render 'layouts/messages' %>
 <%= yield %>
+
+<div class="row" style="background-color:#dedddd">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="row">
+      <div class="col-md-12">
+        <br />
+        <style>
+          #footer_nav a{
+            padding: 0 10px;
+            color: white;
+          }
+        </style>
+        <div id="footer_nav" style="text-align:center;color:white">
+          <a href=" ">Главная</a> 
+          <a href=" ">Посетителям</a> 
+          <a href=" ">Ресторанам</a>
+          <a href=" ">Новости</a>
+          <a href=" ">О проекте</a> 
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <img src="<%=asset_path('footer_logo.png')%>" />
+      </div>
+      <div class="col-md-6">
+        <p style="text-align:center; font-size:0.7em">
+          Lorem ipsum dolor sit amet.Dies irae dies illa solvet secum in favilla, teste David cum Sybilla. Quantos tremor est futurus, quando judex est venturus, cunta stricte discussurus.Tuba mirum sparge sonum per sepulchra regionum, coget omnes ante thronum. Rex tremendae majestatis, qui salvando salvas gratis, salva mea fons pietatis.
+        </p>
+      </div>
+      <div class="col-md-3">
+        <img src="<%= asset_path('footer_logo_mini.png') %>" style="float:right"/>
+        SmartReserve @ 2014 <br />
+        <a href="mailto:info@smartreserve.by">info@smartreserve.by</a>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
 
   </body>
