@@ -1,53 +1,48 @@
- <div id="header_2">
-           
+<div class="row">
+  <div style="background:url('<%= asset_path('shapka.jpg')%>') no-repeat;width:100%;height:23em">
+  </div>
+   <br>
+    <div id="header_3">                         
+      <div id="header_31" >
+             <p>Заведения в городе</p>
+                   
+      <img src="foto/1.jpg">
+      <img src="foto/2.jpg">
+      <img src="foto/3.jpg">
+      <img src="foto/4.jpg">
+      <img src="foto/5.jpg">
+      <img src="foto/6.jpg">
+      <img src="foto/7.jpg">
+      <img src="foto/8.jpg">
+        
+     </div>                      
     </div>
      <br>
-      <div id="header_3">                         
-                          <div id="header_31" >
-                                 <p>Заведения в городе</p>
-                                       
-                          <img src="foto/1.jpg">
-                          <img src="foto/2.jpg">
-                          <img src="foto/3.jpg">
-                          <img src="foto/4.jpg">
-                          <img src="foto/5.jpg">
-                          <img src="foto/6.jpg">
-                          <img src="foto/7.jpg">
-                          <img src="foto/8.jpg">
-                            
-                         </div>                      
-      </div>
-       <br>
-       <br>
+     <br>
 
-    <div id="main">
-          <% @clubs.each do |club| %>
-            <% @club = club %>
-            <%= render 'clubs/single' %>
-          <% end %>
-    </div>
+  <div id="main">
+        <% @clubs.each do |club| %>
+          <% @club = club %>
+          <%= render 'clubs/single' %>
+        <% end %>
+  </div>
 
 
-    <div id="knopka"> 
-          <a href=" "> <p> Перейти в каталог </p> </a>
-    </div>
-   
-   <br>
+  <div id="knopka"> 
+        <a href=" "> <p> Перейти в каталог </p> </a>
+  </div>
+ 
+ <br>
 
-    <div id="afisha">
-             <p>Афиша</p>
-              <div id="afisha_photo">
+  <div id="afisha">
+           <p>Афиша</p>
+            <div id="afisha_photo">
 
-              </div>
-    </div>
-    <br>
-      <p id="partner">
-          Наши партнеры
-      </p>
-    <br>
-
-
-
-<br>
-
+            </div>
+  </div>
+  <br>
+    <p id="partner">
+        Наши партнеры
+    </p>
+</div>
 <%= link_to 'New Club', new_club_path %>
