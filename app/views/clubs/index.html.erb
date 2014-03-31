@@ -7,7 +7,7 @@
 <div class="row" style="width:101%;">
   <div class="col-md-12">                        
     <div class="row" style="text-align:center; background-color:#dedddd;height:13em">
-      <p style="font-size:1.7em">Заведения в городе</p>
+      <h3>Заведения в городе</h3>
      
         <div class="row">
           <% properties = Property.where(:kind_ru => 'Цель').to_a %>
@@ -38,7 +38,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <a href=" "> <p style="font-family:sans-serif;font-size:1.5em;color:red;text-align:center"> Перейти в каталог </p> </a>
+        <a href=" "> <h3 style="color:red;text-align:center"> Перейти в каталог </h3> </a>
       </div>
     </div>
 
@@ -46,22 +46,65 @@
     <div class="row">
       <div class="col-md-12" style="background:url('<%= asset_path('afisha_background.png')%>')  no-repeat scroll 0% 0% / cover  transparent;width:100%;height:15em">
         <div style="text-align:center">
-          <p style="color:red;font-size:1.5em">Афиша</p>
+          <h3 style="color:red">Афиша</h3>
         </div>
       </div>
     </div>
     
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
-        <p style="text-align:center;font-size:1.5em"> Наши партнеры </p>
+        <h3 style="text-align:center;"> Наши партнеры </h3>
+          <style> 
+            .partners_image{
+              padding-right:25px;
+              display: inline;
+            }
+          </style><center>
+          <%(1..5).each do |i| %>
+            <img src='<%= asset_path("partners/#{i}.png")%>' class="partners_image" />
+          <% end %></center>
+        
+        <div class="row"><div class="col-md-12">  <br /></div></div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
+            <div class="row">
+              <%= render 'clubs/social_networks' %>
+            </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <style>
+              .before_footer_a{
+                font-size:1.1em;
+                color: #082bc5;
+              }
+            </style>
+            <h3 class="before-footer-h3"> Посетителям </h3>
+            <div style="margin-left:15px">
+              <a href="" class="before_footer_a">Link 1</a><br />
+              <a href="" class="before_footer_a">Link 2</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">Lacrimosa dies illa</a><br />
+            </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <h3 class="before-footer-h3"> Ресторанам </h3>
+            <div style="margin-left:15px">
+              <a href="" class="before_footer_a">Link 1</a><br />
+              <a href="" class="before_footer_a">Link 2</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">Terms and conditions</a><br />
+              <a href="" class="before_footer_a">Privacy</a><br />
+              <a href="" class="before_footer_a">Cosmos 69</a><br />
+              <a href="" class="before_footer_a">29th June 1965</a><br />
+              <a href="" class="before_footer_a">Command is in one second</a><br />
+              <a href="" class="before_footer_a">14:02 GMT</a>
+            </div>
           </div>
         </div>
+        <div class="row"><div class="col-md-12">  <br /></div></div>
+
+
       </div>
     </div>
   </div>
