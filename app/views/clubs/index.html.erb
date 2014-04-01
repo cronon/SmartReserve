@@ -28,28 +28,19 @@
         </div>       
     </div>               
 
-  <div class="container">
-    <% @clubs.each do |club| %>
-      <% if @clubs.index(club) % 4 == 0 %>
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <% @clubs.each_slice(4) do |four_clubs| %>
         <div class="row">
-      <% end -%>
-
-      <div class="col-md-3">
-        <%= render partial: 'single', :locals => {:club => club} %> 
-      </div>
-
-      <% if (@clubs.index(club) + 1) % 4 == 0 || @clubs.index(club) == @clubs.size - 1%>
+          <% four_clubs.each do |club| %>
+            <div class="col-md-3">
+              <%= render 'clubs/single', :club => club %>
+            </div>
+          <% end %>
         </div>
-      <% end -%>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-
-
-  <div id="knopka"> 
-        <a href=" "> <p> Перейти в каталог </p> </a>
-  </div>
- 
- <br>
 >>>>>>> text_on_img
 
     <div class="row">
