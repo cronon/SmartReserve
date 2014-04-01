@@ -1,4 +1,4 @@
-<div id="<%= "club_#{club.id}" %>" class="club-div">    
+<div id="<%= "club_#{club.id}" %>" class="club-div">
   <div class="club-image" style="background-image:url('<%= asset_path('club.png') %>')">
     <div class="text-on-avatar">
       <%= club.properties.find_by_kind_en('Type').name %> &quot;<%= club.name %>&quot;

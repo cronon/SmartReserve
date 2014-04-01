@@ -30,7 +30,7 @@
       <h3>Заведения в городе</h3>
      
         <div class="row">
-          <% properties = Property.where(:kind_ru => 'Цель').to_a %>
+          <% properties = Property.where(:kind_en => 'Goal') %>
           <div class="col-md-offset-2 col-md-1" style="width:''">
               <a href="#">
                 <img src='<%= asset_path("categories/1.jpg") %>' alt="..." />
