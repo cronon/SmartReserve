@@ -3,6 +3,8 @@ SmartReserve::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   #get "users/profile"
+
+  get 'home' => 'clubs#index', as: :clubs
   resources :clubs do
     get 'tables' => 'tables#index', as: :tables
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button

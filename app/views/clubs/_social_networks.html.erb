@@ -50,8 +50,23 @@
   <div class="tab-pane" id="fb-widget">
     <div class="fb-like-box" data-href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" data-width="250" data-height="260" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="false"></div>
   </div>
-  <div class="tab-pane" id="yt-widget">...</div>
-  <div class="tab-pane" id="gp-widget">...</div>
+  <div class="tab-pane" id="yt-widget">
+    <iframe id="fr" src="http://www.youtube.com/subscribe_widget?p=smartreserve" style="overflow: hidden; height: 260px; width: 250px; border: 0;" scrolling="no" frameBorder="0"></iframe>
+  </div>
+  <div class="tab-pane" id="gp-widget">
+    <!-- Place this tag where you want the widget to render. -->
+    <div class="g-page" data-width="250" data-href="https://plus.google.com/107353192218206361990" data-rel="publisher"></div>
+
+    <!-- Place this tag after the last widget tag. -->
+    <script type="text/javascript">
+      window.___gcfg = {lang: '<%= I18n.locale.to_s %>'};
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/platform.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+    </script>
+  </div>
   <div class="tab-pane" id="tw-widget">
     <a class="twitter-timeline"  href="https://twitter.com/SmartReserve" width="250" height="260" data-widget-id="450782283545325568">Tweets by @SmartReserve</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

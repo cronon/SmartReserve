@@ -1,12 +1,26 @@
 <div class="row"><div class="col-md-12">  <br /></div></div>
 <div class="row">
-  <div class="col-md-12"style="background:url('<%= asset_path('shapka.jpg')%>')  no-repeat scroll 0% 0% / cover  transparent;width:100%;height:23em">
+  <div class="col-md-12"style="background:url('<%= asset_path('shapka.jpg')%>')  no-repeat scroll 0% 0% / cover  transparent;width:100%;height:365px">
     <div class="row">
       <div class="col-md-12"style="background:url('<%= asset_path('sales_background.png')%>')  no-repeat scroll 0% 0% / cover  transparent;width:100%;height:62px;margin-top:10px">
         <h3 style="color:red;text-align:center"> Акции и спецпредложения </h3>
       </div>
     </div>
-    
+    <div class="sales-slider">
+      <ul id="sales_slider_ul">
+          <%(1..5).each do |i| %>
+            <li><img src='<%= asset_path("club.png")%>'/></li>
+          <% end %>
+      </ul>
+      <script>
+      $('#sales_slider_ul').bxSlider({
+        minSlides: 3,
+        maxSlides: 4,
+        slideWidth: 210,
+        slideMargin: 10
+      });
+      </script>
+    </div>
   </div>
 </div>
 <div class="row"><div class="col-md-12">  <br /></div></div>
@@ -64,6 +78,29 @@
         <div style="text-align:center">
           <h3 style="color:red">Афиша</h3>
         </div>
+        <div class="news-slider">
+          <ul id="news_slider_ul">
+              <% @clubs.each do |club| %>
+                <li>
+                  <div class="club-image" style="background-image:url('<%= asset_path('club.png') %>')">
+                    <div class="text-on-avatar">
+                      <%= club.properties.find_by_kind_en('Type').name %> &quot;<%= club.name %>&quot;
+                    </div>
+                  </div>
+                </li>
+              <% end %>
+          </ul>
+          <script>
+          $('#news_slider_ul').bxSlider({
+            minSlides: 3,
+            maxSlides: 4,
+            slideWidth: 210,
+            slideMargin: 10
+          });
+          $('.news-slider .bx-prev').toggleClass('disabled');
+          $('.news-slider .bx-next').toggleClass('disabled');
+          </script>
+        </div>        
       </div>
     </div>
     
@@ -88,9 +125,6 @@
             </div>
           </div>
           <div class="col-md-3">
-            <style>
-              
-            </style>
             <h3 class="before-footer-h3"> Посетителям </h3>
             <div style="margin-left:15px">
               <a href="" class="before_footer_a">Link 1</a><br />
