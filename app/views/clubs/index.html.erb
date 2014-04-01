@@ -26,22 +26,25 @@
             </div> 
           <% end %> 
         </div>       
-    </div>               
+    </div> 
 
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-      <% @clubs.each_slice(4) do |four_clubs| %>
-        <div class="row">
-          <% four_clubs.each do |club| %>
-            <div class="col-md-3">
-              <%= render 'clubs/single', :club => club %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+    <div class="row"><div class="col-md-12">  <br /></div></div>              
+
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <% @clubs.each_slice(4) do |four_clubs| %>
+          <div class="row">
+            <% four_clubs.each do |club| %>
+              <div class="col-md-3">
+                <%= render 'clubs/single', :club => club %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  </div>
->>>>>>> text_on_img
+
+    <div class="row"><div class="col-md-12">  <br /></div></div>
 
     <div class="row">
       <div class="col-md-12">

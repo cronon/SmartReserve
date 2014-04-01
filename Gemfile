@@ -5,7 +5,7 @@ ruby '2.1.0'
 gem 'rails', '4.0.3'
 
 # Use sqlite3 as the database for Active Record
-#gem 'pg'
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -38,7 +38,7 @@ gem 'jquery-fileupload-rails'
 gem 'carrierwave'
 gem "fog", "~> 1.3.1"
 
-gem 'ajaxful_rating', github: 'helloenvoy/ajaxful-rating', branch: 'rails4'
+gem 'ajaxful_rating', github: 'cronon/ajaxful-rating', branch: 'rails4'
 #gem 'protected_attributes' #ajaxful_rating uses attr_accessible
 
 gem 'activeadmin', github: 'gregbell/active_admin'

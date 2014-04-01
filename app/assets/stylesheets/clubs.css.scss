@@ -4,3 +4,37 @@
 h3{
   color:black;
 }
+
+.club-image{
+  height:140px;
+  width:210px;
+  display: table;
+}
+.club-div{
+  width: 211px;
+  border-color:#ccc;
+  border-style:solid;
+  border-width:1px;
+  border-radius:5px;
+}
+.text-on-avatar{
+  margin-top:15px;
+  height:35px;
+  width:155px;
+  background-color: white;
+  text-align:center;
+  font-size:1.3em;
+  padding-top:5px;
+}
+
+.reservation-btn-wrapper{
+  float:right;
+  padding:10px;
+}
+.btn-reservation{
+  width: 135px;
+  height:30px;
+}
+.rating{
+  padding: 5px;
+}

@@ -1,4 +1,7 @@
 ru:
+  sign_in: Вход
+  sign_out: Регистрация
+  log_out: Выход
   date:
     abbr_day_names:
     - Вс
