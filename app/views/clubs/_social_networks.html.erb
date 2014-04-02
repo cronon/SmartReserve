@@ -21,21 +21,21 @@
 
 </style>
 <!-- Nav tabs -->
-<ul class="nav nav-pills white">
-  <li class="active"><a href="#vk-widget" style="padding:0px;background-color: white" data-toggle="tab">
-    <img src="<%=asset_path('vk.png')%>">
+<ul class="nav nav-pills" style="background-color:#444;width:260px">
+  <li class="active"><a href="#vk-widget" style="padding:0px;" data-toggle="tab">
+    <img src="<%=asset_path('transparent/vk.png')%>">
   </a></li>
-  <li><a href="#fb-widget" style="padding:0px;background-color: white" data-toggle="tab">
-    <img src="<%=asset_path('fb.png')%>">
+  <li><a href="#fb-widget" style="padding:0px;" data-toggle="tab">
+    <img src="<%=asset_path('transparent/fb.png')%>">
   </a></li>
-  <li><a href="#yt-widget" style="padding:0px;background-color: white" data-toggle="tab">
-    <img src="<%=asset_path('yt.png')%>">
+  <li><a href="#yt-widget" style="padding:0px;" data-toggle="tab">
+    <img src="<%=asset_path('transparent/yt.png')%>">
   </a></li>
-  <li><a href="#gp-widget" style="padding:0px;background-color: white" data-toggle="tab">
-    <img src="<%=asset_path('gp.png')%>">
+  <li><a href="#gp-widget" style="padding:0px;" data-toggle="tab">
+    <img src="<%=asset_path('transparent/gp.png')%>">
   </a></li>
-  <li><a href="#tw-widget" style="padding:0px;background-color: white" data-toggle="tab">
-    <img src="<%=asset_path('twitter.png')%>">
+  <li><a href="#tw-widget" style="padding:0px;" data-toggle="tab">
+    <img src="<%=asset_path('transparent/twitter.png')%>">
   </a></li>
 </ul>
 
@@ -48,18 +48,17 @@
     </script>
   </div>
   <div class="tab-pane" id="fb-widget">
-    <div class="fb-like-box" data-href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" data-width="250" data-height="260" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="false"></div>
+    <div class="fb-like-box" data-href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" data-width="260" data-height="260" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="false"></div>
   </div>
   <div class="tab-pane" id="yt-widget">
-    <iframe id="fr" src="http://www.youtube.com/subscribe_widget?p=smartreserve" style="overflow: hidden; height: 260px; width: 250px; border: 0;" scrolling="no" frameBorder="0"></iframe>
+    <iframe id="fr" src="http://www.youtube.com/subscribe_widget?p=smartreserve" style="overflow: hidden; height: 260px; width: 260px; border: 0;" scrolling="no" frameBorder="0"></iframe>
   </div>
   <div class="tab-pane" id="gp-widget">
     <!-- Place this tag where you want the widget to render. -->
-    <div class="g-page" data-width="250" data-href="https://plus.google.com/107353192218206361990" data-rel="publisher"></div>
+    <div class="g-page" data-layout="landscape" data-width="260" data-href="https://plus.google.com/107353192218206361990" data-rel="publisher"></div>
 
     <!-- Place this tag after the last widget tag. -->
     <script type="text/javascript">
-      window.___gcfg = {lang: '<%= I18n.locale.to_s %>'};
       (function() {
         var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
         po.src = 'https://apis.google.com/js/platform.js';
@@ -68,7 +67,7 @@
     </script>
   </div>
   <div class="tab-pane" id="tw-widget">
-    <a class="twitter-timeline"  href="https://twitter.com/SmartReserve" width="250" height="260" data-widget-id="450782283545325568">Tweets by @SmartReserve</a>
+    <a class="twitter-timeline"  href="https://twitter.com/SmartReserve" width="260" height="260" data-widget-id="450782283545325568">Tweets by @SmartReserve</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </div>
 </div>
