@@ -40,6 +40,16 @@
     <%= f.text_area :description, :cols => "30", :rows => "10"%>
   </div>
 
+  <% [:mon,:tue,:wed,:thu,:fri,:sat,:sun].each do |day| %>
+  <div class="field">
+    <%= day.to_s %>
+    Opens at 
+    <input type="text" name="club[<%= day.to_s+'_opens' %>]">
+    Closes 
+    <input type="text" name="club[<%= day.to_s+'_closes' %>]">
+  </div>
+  <% end %>
+
 
   <% Property.all.group_by{|p| p.kind}.each do |kind, properties| %>
     <div class="field">

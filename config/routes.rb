@@ -5,6 +5,8 @@ SmartReserve::Application.routes.draw do
   #get "users/profile"
 
   get 'home' => 'clubs#index', as: :clubs
+  post 'home' => 'clubs#create'
+  get 'catalog' => 'clubs#catalog'
   resources :clubs do
     get 'tables' => 'tables#index', as: :tables
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button

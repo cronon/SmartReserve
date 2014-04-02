@@ -2,8 +2,18 @@ class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy]
 
   load_and_authorize_resource
-  skip_authorize_resource :only => [:index,:show,:tables_status]
+  skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
 
+  def catalog
+    @clubs = Club.all if not params[:property_ids]
+    Club.transaction do
+      ids = Property.where(:id => params[:property_ids])
+                    .map{|p| p.club_ids}
+                    .flatten
+                    .uniq
+      @clubs = Club.where(:id => ids)
+    end
+  end
 
   def tables_status
     @tables = Club.find(params[:club_id]).table
@@ -39,7 +49,6 @@ class ClubsController < ApplicationController
   # POST /clubs
   # POST /clubs.json
   def create
-    puts params,'#####'
     @club = current_user.clubs.build(club_params)
     @club.properties = Property.find(params[:property_ids])
     respond_to do |format|
