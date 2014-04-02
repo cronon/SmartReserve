@@ -50,17 +50,19 @@
 
     <div class="row"><div class="col-md-12">  <br /></div></div>              
 
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <% @clubs.each_slice(4) do |four_clubs| %>
-          <div class="row">
-            <% four_clubs.each do |club| %>
-              <div class="col-md-3">
-                <%= render 'clubs/single', :club => club %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
+    <div class="container-fixed">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">          
+          <% @clubs.each_slice(4) do |four_clubs| %>
+            <div class="row">           
+              <% four_clubs.each do |club| %>
+                <div class="col-md-3"style="width:220px">
+                  <%= render 'clubs/single', :club => club %>
+                </div>
+              <% end %> 
+            </div>          
+          <% end %>
+        </div>
       </div>
     </div>
 
@@ -95,14 +97,14 @@
             minSlides: 3,
             maxSlides: 4,
             slideWidth: 210,
-            slideMargin: 10
+            slideMargin: 10,
+            nextText: '< img src="<%=asset_path("chevron_right")%>" height="16" width="16"/>',
+            prevText: '< img src="<%=asset_path("chevron_left")%>" height="16" width="16"/>'
           });
-          $('.news-slider .bx-prev').toggleClass('disabled');
-          $('.news-slider .bx-next').toggleClass('disabled');
           </script>
           <p id="all_news">
             <a href="">Все события</a>
-            -&gt;
+            <img style="display:inline" src=<%=asset_path('arrow_right.png') %> />
           </p>
         </div>        
       </div>
