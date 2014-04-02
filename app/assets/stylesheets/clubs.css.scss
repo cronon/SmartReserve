@@ -5,6 +5,10 @@ h3{
   color:black;
 }
 
+.red{
+  color:#ec5c5c;
+}
+
 .club-image{
   height:140px;
   width:210px;
@@ -31,9 +35,7 @@ h3{
   float:right;
   padding:10px;
 }
-.btn-danger{
-  background-color: #ed1b24
-}
+
 .btn-reservation{
   width: 135px;
   height:30px;
@@ -46,6 +48,9 @@ h3{
   font-size:1.1em;
   color: #082bc5;
   text-decoration:underline;
+}
+.before-footer-h3{
+  margin-top:0;
 }
 #navigation a{
   text-decoration: underline;
@@ -65,13 +70,15 @@ h3{
   position: absolute;
   bottom: 0px;
   right: 16.8%;
-  color: red;
   font-size: 1.1em;
 }
 #all_news a{
   text-decoration: underline;
   color: red;
 }
-.nav > li > a:hover{
+#social_widgets > li > a:hover{
   background-color: #555
+}
+#social_widgets > li > a{
+  border:none;
 }
