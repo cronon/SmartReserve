@@ -5,13 +5,16 @@ class ClubsController < ApplicationController
   skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
 
   def catalog
-    @clubs = Club.all if not params[:property_ids]
+    @clubs = Club.all and return if (!params[:property_ids])&&(!params[:price])
+
     Club.transaction do
       ids = Property.where(:id => params[:property_ids])
                     .map{|p| p.club_ids}
                     .flatten
                     .uniq
       @clubs = Club.where(:id => ids)
+              .where("average_price > ?",params[:price][:from])
+              .where("average_price < ?",params[:price][:to])
     end
   end
 
