@@ -29,7 +29,7 @@ h3{
   margin-top:15px;
   height:35px;
   width:155px;
-  background-color: rgba(255,255,255,0.65);
+  background-color: white;
   text-align:center;
   font-size:1.3em;
   padding-top:5px;
@@ -67,8 +67,14 @@ h3{
 .sales-slider{
   margin-top:125px;
 }
+.sales-slider > .bx-wrapper{
+  margin-left:16.6667%;
+}
 .news-slider{
   margin-top: 30px;
+}
+.news-slider > .bx-wrapper{
+  margin-left:17.6667%;
 }
 #all_news{
   position: absolute;
