@@ -2,7 +2,7 @@ class PhotosController < ApplicationController
   #POST /clubs/2/photos
   def create
     photo = Photo.new
-    photo.image = params[:photo_form][:uploaded_data]
+    photo.image = params[:photo][:uploaded_data]
     photo.club_id = params[:club_id]
     photo.save!
  

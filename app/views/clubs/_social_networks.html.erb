@@ -10,22 +10,41 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <style>
+#fb-root {
+    display: none;
+}
 
+/* To fill the container and nothing else */
+
+.fb_iframe_widget, .fb_iframe_widget span, .fb_iframe_widget span iframe[style] {
+    width: 100% !important;
+}
+#vk_groups,
+#vk_groups iframe {
+     width: 100% !important;
+}
 </style>
+<script>
+$(window).resisze(function(){
+  $('.fb-like-box').attr('data-width',$('#fb-widget').width());
+  $('#vk_groups').html('');$('#vk_groups').html('');
+  VK.Widgets.Group("vk_groups", {mode: 0, width:$('#fb-widget').width(), height: "270"}, 67797904);
+})
+</script>
 <div class="row">
   <h3 style="text-align:center"> Присоединяйтесь к нам в социальных сетях </h3>
   <br />
   <div class="col-md-4" id="tw-widget">
-    <a class="twitter-timeline"  href="https://twitter.com/SmartReserve" width="260" height="216" data-widget-id="450782283545325568" data-theme="light">Tweets by @SmartReserve</a>
+    <a class="twitter-timeline"  href="https://twitter.com/SmartReserve" height="270" data-widget-id="450782283545325568" data-theme="light">Tweets by @SmartReserve</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </div>  
   <div class="col-md-4" id="fb-widget">
-    <div class="fb-like-box" data-href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" data-width="260" data-height="216" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
+    <div class="fb-like-box" data-href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" data-width="320" data-height="270" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
   </div>
   <div class="col-md-4" id="vk-widget">
     <div id="vk_groups"></div>
     <script type="text/javascript">
-    VK.Widgets.Group("vk_groups", {mode: 0, width:'255', height: "216"}, 67797904);
+    VK.Widgets.Group("vk_groups", {mode: 0, width:'auto', height: "270"}, 67797904);
     </script>
   </div>
 </div>
