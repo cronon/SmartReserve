@@ -16,18 +16,22 @@
   </div>
 
   <div class="field">
-    <%= f.label t('.description') %><br>
+    <%= f.label t('.city') %><br>
     <%= f.text_field :city %>
   </div>
 
   <div class="field">
-    <%= f.label t('.description') %><br>
+    <%= f.label t('.address') %><br>
     <%= f.text_field :address %>
   </div>
 
   <div class="field">
     <%= f.label t('.tables_count') %><br>
     <%= f.text_field :tables_count%>
+  </div>
+  <div class="field">
+    <%= f.label t('.average_price') %><br>
+    <%= f.text_field :average_price%>
   </div>
 
   <div class="field">
@@ -74,5 +78,11 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-  <%= f.file_field :avatar %>
+  <%= f.file_field :avatar, id: 'avatar_input' %>
+  <div id="prev_avatar" />
+  <script>
+    $('#avatar_input').change(function(){
+      $('#prev_avatar').prepend("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
+    })
+  </script>
 <% end %>
