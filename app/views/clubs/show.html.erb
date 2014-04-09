@@ -17,7 +17,7 @@ function init() {
         behaviors: ['default']
     });
     myMap.controls.add('zoomControl');
-    ymaps.geocode('<%= @club.adress %>', {
+    ymaps.geocode('<%= @club.address %>', {
         // boundedBy: myMap.getBounds(), // Сортировка результатов от центра окна карты
         // strictBounds: true, // Вместе с опцией boundedBy будет искать строго внутри области, указанной в boundedBy
         results: 1 // Если нужен только один результат, экономим трафик пользователей
