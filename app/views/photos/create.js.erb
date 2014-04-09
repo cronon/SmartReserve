@@ -1,1 +1,1 @@
-$('#prev_photo_form_uploaded_data').prepend('<img src="<%=@src%>" />')
+$('#prev_photo_form_uploaded_data').prepend("<%= j render('photos/single', :photo => @photo) %>")

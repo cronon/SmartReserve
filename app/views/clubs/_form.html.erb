@@ -79,10 +79,12 @@
     <%= f.submit %>
   </div>
   <%= f.file_field :avatar, id: 'avatar_input' %>
-  <div id="prev_avatar" />
+  <div id="prev_avatar">
+    <img src="<%= to_http(@club.avatar.url) if @club.avatar %>" />
+  </div>
   <script>
     $('#avatar_input').change(function(){
-      $('#prev_avatar').prepend("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
+      $('#prev_avatar').html("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
     })
   </script>
 <% end %>

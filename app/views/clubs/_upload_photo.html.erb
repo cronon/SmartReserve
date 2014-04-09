@@ -16,9 +16,7 @@
 
 <div id="prev_photo_form_uploaded_data" style="">
   <% @club.photos.each do |photo| %>
-    <div style="height:150px;width:500px">
-      <%= image_tag(photo.image_url, style: 'height:150px;display:inline') %>
-    </div>
+    <%= render 'photos/single', photo: photo %>
   <% end %>
 </div>
 <script>
