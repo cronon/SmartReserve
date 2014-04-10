@@ -23,6 +23,7 @@ SmartReserve::Application.routes.draw do
     resources :photos, only: [:create, :destroy]
     post :rate, :on => :member
     resources :comments, only: [:create, :destroy]
+    resources :news
   end
   resources :comments, only: [:create, :destroy]
   get 'users/profile', as: 'user_root'
