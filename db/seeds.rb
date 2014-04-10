@@ -1,3 +1,4 @@
+#encoding: utf-8 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -104,11 +105,13 @@ clubs = Club.create!([
   	:time_last =>'22:50',
     :time_after => 3600,
     :time_before => 3600,
-    :adress => "Minsk, Lenina 23",
+    :address => "Minsk, Lenina 23",
     :phone => "+375336660055",
     :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
     :properties => Property.all,
-    :avatar => '/assets/for_seed/1.jpg'
+    :avatar => '/assets/for_seed/1.jpg',
+    :city => 'Минск',
+    :average_price => 100
   },
 
   { 
@@ -117,11 +120,13 @@ clubs = Club.create!([
     :time_last => '22:50',
     :time_after => 3600,
     :time_before => 3600,
-    :adress => "Minsk, Lenina 89",
+    :address => "Minsk, Lenina 89",
     :phone => "+375336662255",
     :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
     :properties => Property.all,
-    :avatar => '/assets/for_seed/2.jpg'
+    :avatar => '/assets/for_seed/2.jpg',
+    :city => 'Минск',
+    :average_price => 100
   },
 
   { 
@@ -131,11 +136,13 @@ clubs = Club.create!([
     :time_last => '22:50',
     :time_after => 3600,
     :time_before => 3600,
-    :adress => "Minsk, Lesnay 23",
+    :address => "Minsk, Lesnay 23",
     :phone => "+375336661155",
     :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
     :properties => Property.all,
-    :avatar => '/assets/for_seed/3.jpg'
+    :avatar => '/assets/for_seed/3.jpg',
+    :city => 'Минск',
+    :average_price => 100
   },
 ])
 

@@ -1,5 +1,10 @@
 class PagesController < ApplicationController
   def cap
-    render :layout=> false
+    if current_user
+      @clubs = Club.all
+      render 'clubs/index'
+    else
+      render :layout=> false
+    end
   end
 end
