@@ -1,4 +1,4 @@
 class Photo < ActiveRecord::Base
-  belongs_to :club
+	belongs_to :imageable, :polymorphic => true
   mount_uploader :image, ImageUploader
 end

@@ -1,9 +1,14 @@
 class PhotosController < ApplicationController
   #POST /clubs/2/photos
   def create
-    @photo = Photo.new
+    if params[:type] == "Club"
+      club = Clubs.find(params[:club_id]).first
+      @photo = club.photos.build
+    else params[:type] == "New"
+      news = News.find(params[:new_id]).first
+      @photo = news.photos.build
+    end
     @photo.image = params[:file]
-    @photo.club_id = params[:club_id]
     @photo.save!
  
   # TODO: store photo.id in session OR pass ID back to form for storage in a hidden field

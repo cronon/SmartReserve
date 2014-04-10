@@ -22,6 +22,7 @@
 <script>
 $('#new_photo input').change(function(){
 
+  //array input
   var filedata = $('#new_photo > input')[0],
             formdata = false;
     if (window.FormData) {
@@ -30,6 +31,7 @@ $('#new_photo input').change(function(){
     var i = 0, len = filedata.files.length, img, reader, file;
 
     for (; i < len; i++) {
+        //image
         file = filedata.files[i];
 
         if (window.FileReader) {
@@ -42,7 +44,7 @@ $('#new_photo input').change(function(){
         if (formdata) {
             formdata.append("file", file);
             $.ajax({
-              url: "<%=club_photos_path(@club)%>",
+              url: "<%=photo_create_path(@club)%>?type=club",
               type: "POST",
               data: formdata,
               processData: false,
@@ -56,9 +58,6 @@ $('#new_photo input').change(function(){
             });
         }
     }
-    if (formdata) {
-        
-      }
 });
 
  // $(this).closest('form').ajaxSubmit({

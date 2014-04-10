@@ -21,3 +21,4 @@
 /Gemfile.lock
 Gemfile
 Gemfile.lock
+/config/initializers/carierwave.rb
