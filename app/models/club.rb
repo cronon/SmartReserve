@@ -10,7 +10,8 @@ end
 
 class Club < ActiveRecord::Base
   has_many :table, dependent: :destroy
-  has_many :photos, as: :imageable
+  has_many :photos, :as => :imageable
+  has_many :news, dependent: :destroy
   mount_uploader :avatar, ImageUploader
   has_many :comments, dependent: :destroy
   has_and_belongs_to_many :properties

@@ -21,8 +21,11 @@ SmartReserve::Application.routes.draw do
     post 'orders/prepare' => 'orders#prepare', as: :prepare_order
     get 'tables_status' => 'clubs#tables_status', as: :tables_status
     resources :photos, only: [:create, :destroy]
+    # post 'photos/:owner_type' => 'photos#create', as: :photo_create
+    # delete 'photos/'
     post :rate, :on => :member
     resources :comments, only: [:create, :destroy]
+    resources :news
   end
   resources :comments, only: [:create, :destroy]
   get 'users/profile', as: 'user_root'
