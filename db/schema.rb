@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20140410175538) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
     t.text     "body"
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -43,8 +46,8 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "clubs", force: true do |t|
     t.string   "name"
@@ -78,15 +81,15 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.string   "city"
   end
 
-  add_index "clubs", ["user_id"], name: "index_clubs_on_user_id"
+  add_index "clubs", ["user_id"], name: "index_clubs_on_user_id", using: :btree
 
   create_table "clubs_properties", id: false, force: true do |t|
     t.integer "club_id",     null: false
     t.integer "property_id", null: false
   end
 
-  add_index "clubs_properties", ["club_id"], name: "index_clubs_properties_on_club_id"
-  add_index "clubs_properties", ["property_id"], name: "index_clubs_properties_on_property_id"
+  add_index "clubs_properties", ["club_id"], name: "index_clubs_properties_on_club_id", using: :btree
+  add_index "clubs_properties", ["property_id"], name: "index_clubs_properties_on_property_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.text     "description"
@@ -96,7 +99,7 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.integer  "user_id"
   end
 
-  add_index "comments", ["club_id"], name: "index_comments_on_club_id"
+  add_index "comments", ["club_id"], name: "index_comments_on_club_id", using: :btree
 
   create_table "news", force: true do |t|
     t.integer  "club_id"
@@ -106,7 +109,7 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.datetime "updated_at"
   end
 
-  add_index "news", ["club_id"], name: "index_news_on_club_id"
+  add_index "news", ["club_id"], name: "index_news_on_club_id", using: :btree
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
@@ -122,8 +125,8 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.string   "confirmation"
   end
 
-  add_index "orders", ["table_id"], name: "index_orders_on_table_id"
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  add_index "orders", ["table_id"], name: "index_orders_on_table_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.datetime "created_at"
@@ -150,8 +153,20 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.datetime "updated_at"
   end
 
-  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type"
-  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id"
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+
+  create_table "rating_caches", force: true do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
   create_table "tables", force: true do |t|
     t.integer  "club_id"
@@ -160,7 +175,7 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.string   "status_now", default: "free"
   end
 
-  add_index "tables", ["club_id"], name: "index_tables_on_club_id"
+  add_index "tables", ["club_id"], name: "index_tables_on_club_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -184,7 +199,7 @@ ActiveRecord::Schema.define(version: 20140410175538) do
     t.string   "name"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
