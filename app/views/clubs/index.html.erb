@@ -85,11 +85,12 @@
         </div>
         <div class="news-slider">
           <ul id="news_slider_ul">
-              <% @clubs.each do |club| %>
+              <% News.limit(10).order(created_at: :desc).to_a.each do |news| %>
                 <li>
                   <div class="club-image" style="background-image:url('<%= asset_path('club.png') %>')">
                     <div class="text-on-avatar">
-                      <%= club.properties.find_by_kind_en('Type').name %> &quot;<%= club.name %>&quot;
+                      <div class="date-on-avatar" style="display:none"><%= news.created_at.strftime '%d.%m.%Y'%></div>
+                      <%= news.club.properties.find_by_kind_en('Type').name %> &quot;<%= news.club.name %>&quot;
                     </div>
                   </div>
                 </li>

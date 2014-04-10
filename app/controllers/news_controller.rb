@@ -6,7 +6,7 @@ class NewsController < ApplicationController
     @news.club_id = params[:club_id]
     respond_to do |format|
       if @news.save
-        format.html { redirect_to edit_club_path(@news), notice: 'Club was successfully created.' }
+        format.html { redirect_to @news, notice: 'Club was successfully created.' }
         format.json { render action: 'show', status: :created, location: @news }
       else
         format.html { render action: 'new' }
@@ -39,7 +39,7 @@ class NewsController < ApplicationController
   def show
   end
   def index
-    @news = News.find_by_club_id params[:club_id]
+    @news = News.find_all_by_club_id params[:club_id]
   end
 
   def destroy    
