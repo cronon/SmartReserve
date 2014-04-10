@@ -80,7 +80,7 @@
   </div>
   <%= f.file_field :avatar, id: 'avatar_input' %>
   <div id="prev_avatar">
-    <img src="<%= to_http(@club.avatar.url) if @club.avatar %>" />
+    <img src="<%= to_http(@club.avatar.url) unless @club.avatar.blank? %>" />
   </div>
   <script>
     $('#avatar_input').change(function(){
