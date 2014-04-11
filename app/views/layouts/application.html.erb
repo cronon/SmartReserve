@@ -69,6 +69,82 @@ d.addEventListener("DOMContentLoaded", f, false);
 <%= render 'layouts/messages' %>
 <%= yield %>
 
+<div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h3 style="text-align:center;"> Наши партнеры </h3>
+          <style> 
+            .partners_image{
+              padding-right:25px;
+              display: inline;
+            }
+          </style><center>
+          <%(1..5).each do |i| %>
+            <img src='<%= asset_path("partners/#{i}.png")%>' class="partners_image" />
+          <% end %></center>
+
+
+        <div class="row"><div class="col-md-12" style="border-bottom:1px solid #d0cfcf">  <br /></div></div>
+        <div class="row"><div class="col-md-12">  <br /></div></div>
+        <%= render 'clubs/social_networks' %> 
+        <div class="row"><div class="col-md-12">  <br /></div></div>
+        <div class="row"><div class="col-md-12" style="border-top:1px solid #d0cfcf">  <br /></div></div>        
+        <div class="row">
+          <div class="col-md-3">
+            <h3 class="before-footer-h3"> Посетителям </h3>
+            <div style="margin-left:15px">
+              <a href="" class="before_footer_a">Link 1</a><br />
+              <a href="" class="before_footer_a">Link 2</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">Lacrimosa dies illa</a><br />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h3 class="before-footer-h3"> Ресторанам </h3>
+            <div style="margin-left:15px">
+              <a href="" class="before_footer_a">Link 1</a><br />
+              <a href="" class="before_footer_a">Link 2</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">Terms and conditions</a><br />
+              <a href="" class="before_footer_a">Privacy</a><br />
+              <a href="" class="before_footer_a">Cosmos 69</a><br />
+              <a href="" class="before_footer_a">29th June 1965</a><br />
+              <a href="" class="before_footer_a">Command is in one second</a><br />
+              <a href="" class="before_footer_a">14:02 GMT</a>
+            </div>
+          </div>          
+          <div class="col-md-3">
+            <h3 class="before-footer-h3"> Посетителям </h3>
+            <div style="margin-left:15px">
+              <a href="" class="before_footer_a">Link 1</a><br />
+              <a href="" class="before_footer_a">Link 2</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">Lacrimosa dies illa</a><br />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <h3 class="before-footer-h3"> Ресторанам </h3>
+            <div style="margin-left:15px">
+              <a href="" class="before_footer_a">Link 1</a><br />
+              <a href="" class="before_footer_a">Link 2</a><br />
+              <a href="" class="before_footer_a">URI17</a><br />
+              <a href="" class="before_footer_a">Terms and conditions</a><br />
+              <a href="" class="before_footer_a">Privacy</a><br />
+              <a href="" class="before_footer_a">Cosmos 69</a><br />
+              <a href="" class="before_footer_a">29th June 1965</a><br />
+              <a href="" class="before_footer_a">Command is in one second</a><br />
+              <a href="" class="before_footer_a">14:02 GMT</a>
+            </div>
+          </div>
+        </div>
+        <div class="row"><div class="col-md-12">  <br /></div></div>
+        <div class="row"><div class="col-md-12">  <br /></div></div>
+        <div class="row"><div class="col-md-12">  <br /></div></div>
+
+      </div>
+    </div>
+
 <div class="row" style="background-color:#dedddd">
   <div class="col-md-8 col-md-offset-2">
     <div class="row">

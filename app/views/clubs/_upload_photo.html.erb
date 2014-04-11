@@ -44,7 +44,7 @@ $('#new_photo input').change(function(){
         if (formdata) {
             formdata.append("file", file);
             $.ajax({
-              url: "<%=photo_create_path(@club)%>?type=club",
+              url: "<%=club_photos_path(@club)%>?type=club",
               type: "POST",
               data: formdata,
               processData: false,
