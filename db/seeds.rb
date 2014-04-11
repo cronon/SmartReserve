@@ -15,6 +15,7 @@ owners = User.create([
     #:password => "$2a$10$2q7HC3M1.ho928wlkGx5VeiCctzcoXTLjujbCSLciZ.7D7BniuaPm",
     :password => "12345678",
     :name => "Аникеенко"
+    :locale => "ru"
     },
   ])
 
