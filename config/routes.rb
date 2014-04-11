@@ -3,6 +3,8 @@ SmartReserve::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   #get "users/profile"
+  post 'change_locale/:locale', to: 'application#change_locale', as: :change_locale
+  post 'set_locale', to: 'application#set_locale', as: :set_locale
 
   get 'home' => 'clubs#index', as: :clubs
   post 'home' => 'clubs#create'

@@ -43,8 +43,16 @@ d.addEventListener("DOMContentLoaded", f, false);
 
 <div class="col-md-8 col-md-offset-2" style="margin-top:15px">
   <div id="translate" class="text" style="height:0px;top:20px">
-    Рус |
-    <a href = "#"> Eng</a>
+    <% unless I18n.locale == :ru %>
+      <%= link_to "Рус", change_locale_path(:ru), method: :post %>
+    <% else %>
+      Рус
+    <% end -%> |
+    <% unless I18n.locale == :en %>
+      <%= link_to "Eng", change_locale_path(:en), method: :post %>
+    <% else %>
+      Eng
+    <% end -%>
   </div>
   <div class="row">
     <div class="col-md-6">
