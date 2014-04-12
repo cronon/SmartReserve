@@ -16,10 +16,10 @@
 /log/*.log
 /tmp
 /public/uploads/tmp
-/db/schema.rb
-/config/database.yml
-/Gemfile.lock
-./Gemfile
-./Gemfile.lock
-Gemfile
-Gemfile.lock
+#/db/schema.rb
+#/config/database.yml
+#/Gemfile.lock
+#./Gemfile
+#./Gemfile.lock
+#Gemfile
+#Gemfile.lock
