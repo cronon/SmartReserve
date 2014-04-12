@@ -20,3 +20,4 @@
 //= require jquery.datetimepicker
 //= require jquery-fileupload
 //= require jquery.bxslider.min
+//http://ryanfait.com/resources/custom-checkboxes-and-radio-buttons/

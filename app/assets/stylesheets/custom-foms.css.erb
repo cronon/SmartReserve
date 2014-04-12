@@ -1,0 +1,25 @@
+//= depend_on_asset 'forms/checkbox.png'
+//= depend_on_asset 'forms/radio.png'
+.checkbox, .radio {
+	width: 16px;
+	height: 16px;
+	padding: 0 5px 0 0;
+	background: url(<%= asset_path 'forms/checkbox.png' %>) no-repeat;
+	display: block;
+	clear: left;
+	float: left;
+	margin: 0 0 0 0 !important;
+}
+.radio {
+	background: url(<%= asset_path 'forms/radio.png' %>) no-repeat;
+}
+.select {
+	position: absolute;
+	width: 158px; /* With the padding included, the width is 190 pixels: the actual width of the image. */
+	height: 21px;
+	padding: 0 24px 0 8px;
+	color: #fff;
+	font: 12px/21px arial,sans-serif;
+	background: url(<%= asset_path 'forms/select.png' %>) no-repeat;
+	overflow: hidden;
+}

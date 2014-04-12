@@ -23,20 +23,48 @@
       .row
         .col-md-2.col-md-offset-2.catalog-filter
           = form_tag '/catalog', :method => :get do
+            input[type='text' name='title' placeholder='Поиск по названию']
+            br
             .average-price
-              | Средний чек
-              input#input_from name="price[from]" /
-              input#input_to name="price[to]" /
+              label Средний чек
+              input#input_from name="price[from]" style='display:none'
+              input#input_to name="price[to]" style='display:none'
               #average_price_range
-            - Property.all.group_by{|p| p.kind}.each do |kind, properties|
-              div
-                = label_tag kind
-                div
-                  - properties.each do |property|
-                    = check_box_tag 'property_ids[]', property.id, true
-                    = property.name
-                    br/
-            = submit_tag 'Search'
+              label#label_from[for='input_from'] 0
+              label#label_to[for='input_to' style='position:absolute;right:5px'] 443
+            input.styled[type='radio' name='table_kind' value='smoke']
+            label Курящий
+            br
+            input.styled[type='radio' name='table_kind' value='nonsmoke']
+            label Некурящий
+            br
+            input.styled[type='radio' name='table_kind' value='terrace']
+            label Терраса
+            table
+              tr
+                td: label Интерьер 
+                td: a[href='#' onclick='']  Выбрать
+              tr
+                td: label Атмосфера 
+                td: a[href='#' onclick='']  Выбрать
+              tr
+                td: label Тип заведения 
+                td: a[href='#' onclick='']  Выбрать
+            br
+            - Property.where(kind_ru: "Особенность").limit(6).each do |property|
+              = check_box_tag 'property_ids[]', property.id, (params[:property_ids].include?(property.id) if params[:property_ids]), :class => 'styled'
+              = property.name
+              br/
+            a[href='#' onclick='' style='text-align:right'] Просмотреть все
+            br
+            label Кухня
+            select[name='kitchen']
+              - Property.where(:kind_en => 'Kitchen').each do |k|
+                option[value=k.id] = k.name_en
+
+            br
+            = submit_tag 'Search' 
+            input[type='reset']
         .col-md-6
           - @clubs.each_slice(4) do |four_clubs|
             .row
@@ -44,6 +72,10 @@
                 .col-md-3 style="width:220px" 
                   = render 'clubs/single', :club => club
 javascript:
+  var handleSliderValue = function(value){
+    $(this)[0].value=value;
+    $("label[for='"+$(this).attr("id")+"']").text(value)
+  }
   $("#average_price_range").noUiSlider({
     start: [0, 1000000],
     step: 1000,
@@ -59,12 +91,14 @@ javascript:
     serialization: {
      lower: [
        new $.noUiSlider.Link({
-         target: $("#input_from")
+         target: $("#input_from"),
+         method: handleSliderValue
        })
      ],
      upper: [
        new $.noUiSlider.Link({
-         target: $("#input_to")
+         target: $("#input_to"),
+         method: handleSliderValue
        })
      ],
      format: {
@@ -72,4 +106,8 @@ javascript:
        decimals: 0
      }
     }
+  });
+  $('select').selectize({
+    create: true,
+    sortField: 'text'
   });
