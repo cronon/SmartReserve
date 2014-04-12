@@ -1,0 +1,28 @@
+h1 New order
+javascript:
+  | function showDialogModal()
+  | {
+    | $('#dialog_form').dialog( {
+      | show : "slide",
+      | hide : "toggle",
+      | width: 800,
+      | height: 300,
+      | modal: true,
+      | title: "Create order",
+      | buttons: {
+        | "Cancel" : function()
+        | {
+            | $("#dialog_form").dialog("close");
+        | }
+      | }
+    | }).prev().find(".ui-dialog-titlebar-close").hide(); // To hide the standard close button
+  | }
+
+  | $(document).ready(function() {
+    | $('#dialog_form').hide();
+
+  | });
+#orders_form.row-fluid
+  = render "orders/form"
+#confirmation_dialog.modal.fade tabindex="-1" 
+= link_to 'Back', club_orders_path(@club)

@@ -1,0 +1,13 @@
+#navigation style=("float:right;font-size:1.1em;padding:0;margin-right: -15px;") 
+  - if user_signed_in?
+    = link_to t("Hello, #{current_user.email}"), ''
+    |  | 
+    | #{link_to t('log_out'), ''}
+  - else
+    = link_to t('sign_in'), ''
+    |  | 
+    | #{link_to t('sign_out'), ''}
+- #user_root_path
+- #destroy_user_session_path, :method => 'delete'
+- #new_user_session_path
+- #new_user_registration_path

@@ -1,0 +1,28 @@
+= form_for [@table.club, @table] do |f|
+  - if @table.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@table.errors.count, "error")
+        | prohibited this table from being saved:
+      ul
+        - @table.errors.full_messages.each do |msg|
+          li= msg
+  h1 Listing orders
+  table
+    thead
+      tr
+        th Since
+        th Until
+        th
+        th
+        th
+    tbody
+      - @table.order.each do |order|
+        tr
+          td= order.since
+          td= order.until
+          td= link_to 'Show', order
+          td= link_to 'Edit', edit_order_path(order)
+          td= link_to 'Destroy', order, method: :delete, data:   confirm: 'Are you sure?'  
+  .actions
+    = f.submit

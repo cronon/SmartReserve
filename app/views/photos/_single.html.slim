@@ -1,0 +1,4 @@
+div id="photo_#{photo.id}" style="height:150px" 
+  - #removed https:// because of aws didnt work fine with it
+    = image_tag(('http://'+photo.image_url[8..-1]), style: 'height:150px;display:inline')
+    = link_to('Delete', club_photo_path(photo.club_id,photo.id), :method => :delete, :remote => true)

@@ -1,0 +1,6 @@
+div id="comment_#{@comment.id}" 
+  = link_to('Destroy', comment_path(@comment), :method => :delete, :remote => true) if can? :destroy, @comment
+  = @comment.user.name
+  | at #{@comment.created_at}
+  br/
+  = @comment.description

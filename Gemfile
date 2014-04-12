@@ -38,6 +38,8 @@ gem 'jquery-fileupload-rails'
 gem 'carrierwave'
 gem "fog", "~> 1.3.1"
 
+gem 'slim'
+
 gem 'ajaxful_rating', github: 'cronon/ajaxful-rating', branch: 'rails4'
 #gem 'protected_attributes' #ajaxful_rating uses attr_accessible
 

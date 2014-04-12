@@ -1,0 +1,118 @@
+doctype html
+html lang="en" xmlns="http://www.w3.org/1999/xhtml" 
+  head
+    meta content="width=device-width, initial-scale=1.0" name="viewport" /
+    title= content_for?(:title) ? yield(:title) : "Smart Reserve"
+    meta content=(content_for?(:description) ? yield(:description) : "Smart Reserve") name="description" /
+    = stylesheet_link_tag "application", "data-turbolinks-track" => true
+    = stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    = favicon_link_tag
+    meta content="7562595b0d9d7730" name="yandex-verification" /
+  body
+    .col-md-8.col-md-offset-2 style="margin-top:15px" 
+      #translate.text style="height:0px;top:20px" 
+        | Рус |
+        a href="#"  Eng
+      .row
+        .col-md-6
+          img alt="Логотип" src=asset_path('temp-1.jpg') style="float:left" /
+        .col-md-6
+          #table1 style="float:right;margin-top:20px" 
+            .market-wrapper
+              #as.market_icon
+            .market-wrapper
+              #gplay.market_icon
+            .market-wrapper
+              #mp.market_icon
+      #row2.row
+        .col-md-7
+          #video12
+            iframe allowfullscreen="" frameborder="0" mozallowfullscreen="" src="//player.vimeo.com/video/16063824?title=0&amp;portrait=0&amp;color=ff9933" webkitallowfullscreen="" 
+        .col-md-4.btn-group style="margin-top:-5px;height:365px;" 
+          div
+            p.text
+              | Зарегистрируйтесь и получите возможность первыми протестировать систему SmartReserve
+          = form_for(User.new, remote: true, url: '/users', method:'POST', authenticity_token: true) do |f|
+            input.btn.btn-block.text name="user[email]" placeholder=("Ваш E-mail") size="30" style="border-color:black;cursor:text" type="email" /
+            input.btn.btn-block.text name="button" onclick="$('#modal').modal()" type="submit" value="Зарегистрироваться" /
+            /! input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'"
+            input name="user[password]" type="hidden" value="123456" /
+            input name="user[phone]" type="hidden" value="+375290123456" /
+            div style="position:absolute;bottom:0;width:90%" 
+              input.btn.btn-block.text name="testingService" onclick="window.location.href='/home'" type="submit" value=("Тестировать сервис") /
+        .col-md-1
+          #table2 style=("float:right; padding:0px") 
+            a href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" rel="nofollow" 
+            #fb.sn_icon
+            br/
+            a href="http://twitter.com/smartreserve" rel="nofollow" 
+            #twitter.sn_icon
+            br/
+            a href="http://vk.com/smartreserve" rel="nofollow" 
+            #vk.sn_icon
+            br/
+            a href="http://www.youtube.com/user/smartreserve" 
+            #yt.sn_icon
+            br/
+            a href="https://plus.google.com/107353192218206361990/posts" rel="publisher" 
+            #gp.sn_icon
+            br/
+            a href="" rel="publisher" 
+            #fs.sn_icon
+      .row-fluid
+        #text2.span12.text style=("text-align:justify;background-color: #ffffff;padding:0;width:99.9%") 
+          | Сервис SmartReserve предоставляет возможность бронирования столиков в заведениях Вашего города в режиме онлайн в течение нескольких минут. Организуйте свой досуг или деловую встречу, без дорогостоящих звонков и ожиданий на телефонной линии.
+          p style="text-align:center;font-size:16pt"  SmartReserve - Ваше время в Ваших руках!
+        .row
+          .col-md-4 style="height:86px" 
+            p.text style="position:absolute;bottom:0;font-size:9pt" 
+              | SmartReserve @ 2014
+              br/
+              a href="mailto:info@smartreserve.by" 
+                | info@smartreserve.by
+          .col-md-8 style="float:right" 
+            a href="#" 
+              img src=asset_path('temp-10.png') style="float:right" /
+    div style="display:none" 
+      - %w[fb.png gplay.png  mp.png yt.png as.png gp.png vk.png twitter.png fs.png].each do |i|
+        img src=asset_path(i) /
+    #modal.modal.fade tabindex="-1" 
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close aria-hidden="true" data-dismiss="modal" onclick="$('#modal').modal('hide')" type="button"  &times;
+            h4.modal-title Позравляем!
+          .modal-body
+            | Теперь вы подписаны на наши новости.
+        /! /.modal-content
+      /! /.modal-dialog
+    /! Yandex.Metrika counter
+    javascript:
+      | (function (d, w, c) {
+      | (w[c] = w[c] || []).push(function() {
+      | try {
+      | w.yaCounter24458147 = new Ya.Metrika({id:24458147,
+      | webvisor:true,
+      | clickmap:true,
+      | trackLinks:true,
+      | accurateTrackBounce:true});
+      | } catch(e) { }
+      | });
+      
+      | var n = d.getElementsByTagName("script")[0],
+      | s = d.createElement("script"),
+      | f = function () { n.parentNode.insertBefore(s, n); };
+      | s.type = "text/javascript";
+      | s.async = true;
+      | s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+      
+      | if (w.opera == "[object Opera]") {
+      | d.addEventListener("DOMContentLoaded", f, false);
+      | } else { f(); }
+      | })(document, window, "yandex_metrika_callbacks");
+    noscript
+      div
+        img alt="" src="//mc.yandex.ru/watch/24458147" style=("position:absolute; left:-9999px;") /
+    /! /Yandex.Metrika counter

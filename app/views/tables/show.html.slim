@@ -1,0 +1,26 @@
+p#notice= notice
+p
+  strong Status
+  = @table.status(Time.now)
+br/
+p
+  strong Will free in
+  = Time.now+@table.will_free(Time.now)
+p
+  table
+    thead
+      tr
+        th Order
+        th
+        th
+        th
+        th
+    tbody
+      - @table.order.each_with_index do |o,i|
+        tr
+          td= o
+          td= i+1
+          td= link_to 'Show', club_order_path(@table.club,o)
+= link_to 'Edit', club_edit_table_path(@table.club, @table)
+| \
+| \#{link_to 'Back', club_tables_path(@table.club)}
