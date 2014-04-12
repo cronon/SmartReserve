@@ -8,10 +8,9 @@ ActiveAdmin.register Property do
   #
   # or
   #
-  # permit_params do
-  #  permitted = [:permitted, :attributes]
-  #  permitted << :other if resource.something?
-  #  permitted
-  # end
+  permit_params do
+   permitted = [:kind_en,:kind_ru,:name_en,:name_ru]
+   permitted
+  end
   
 end
