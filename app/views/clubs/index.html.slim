@@ -67,11 +67,12 @@
           ul#news_slider_ul
             - News.limit(10).order(created_at: :desc).to_a.each do |news|
               li
-                .club-image style="background-image:url('#{asset_path('club.png')}')" 
-                  .text-on-avatar
-                    .date-on-avatar style="display:none" = news.created_at.strftime '%d.%m.%Y'
-                    = news.club.properties.find_by_kind_en('Type').name
-                    | \&quot;#{news.club.name}&quot;
+                .club-image style="background-image:url('#{asset_path('club.png')}')"
+                  .white-on-avatar
+                    .date-on-avatar = news.created_at.strftime '%d.%m.%Y'
+                    .text-on-avatar
+                      = news.club.properties.find_by_kind_en('Type').name
+                      |  &quot;#{news.club.name}&quot;
           javascript:
              $('#news_slider_ul').bxSlider({
                minSlides: 3,

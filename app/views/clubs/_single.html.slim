@@ -1,8 +1,9 @@
 .club-div id="club_#{club.id}" 
   .club-image style="background-image:url('#{asset_path('club.png')}')" 
-    .text-on-avatar
-      = club.properties.find_by_kind_en('Type').name
-      | \&quot;#{club.name}&quot;
+    .white-on-avatar
+      .title-on-avatar
+        = club.properties.find_by_kind_en('Type').name
+        |  &quot;#{club.name}&quot;
   div
     - if can? :update, club
       - link_to 'Edit', edit_club_path(club)
