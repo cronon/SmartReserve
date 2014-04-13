@@ -16,6 +16,7 @@ class ClubsController < ApplicationController
               .where("average_price > ?",params[:price][:from])
               .where("average_price < ?",params[:price][:to])
     end
+    @checked_properties = (params[:property_ids] || []).map{|i| i.to_i}
   end
 
   def tables_status
