@@ -83,9 +83,9 @@
               |  
               input.btn-reservation.btn.btn-danger[type='reset' style='width:45%' value='Сбросить']
         .col-md-6
-          - @clubs.each_slice(4) do |four_clubs|
-            .row
-              - four_clubs.each do |club|
+          - @clubs.each_slice(3) do |three_clubs|
+            .row[style="padding-bottom:20px"]
+              - three_clubs.each do |club|
                 .col-md-3 style="width:220px" 
                   = render 'clubs/single', :club => club
 javascript:

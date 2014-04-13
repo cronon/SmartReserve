@@ -1,18 +1,17 @@
 //= depend_on_asset 'forms/checkbox.png'
 //= depend_on_asset 'forms/radio.png'
-.checkbox, .radio {
+span.checkbox-custom, span.radio-custom {
 	width: 16px;
 	height: 16px;
-	padding: 0 5px 0 0;
+	padding: 0 20px 0 0;
 	background: url(<%= asset_path 'forms/checkbox.png' %>) no-repeat;
 	display: block;
 	clear: left;
 	float: left;
-	margin: 0 0 0 0 !important;
-	min-height:20px;
 }
-.radio {
+span.radio-custom {
 	background: url(<%= asset_path 'forms/radio.png' %>) no-repeat;
+	height:20px;
 }
 .select {
 	position: absolute;
