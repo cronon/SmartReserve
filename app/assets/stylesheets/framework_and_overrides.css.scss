@@ -34,6 +34,9 @@ img {
   @extend .btn-primary;
   @extend .btn-lg;
   }
+.checkbox{
+  min-height:initial;
+}
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
