@@ -1,8 +1,26 @@
 // Place all the styles related to the Clubs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.catalog-filter{
-
+.align-right{
+  position:absolute;
+  right:30px;
+}
+div.selectize-input.items.full.has-options{
+  height: 25px;
+  min-height: 25px;
+  padding-top: 4px;
+}
+div.catalog-filter {
+  border: 2px solid #ec5c5c;
+  border-radius: 5px;
+  padding: 30px;
+  font-size: 13px;
+  padding-top:20px;
+  width: calc(100% + 50px);
+  margin-left: -30px;
+}
+div.catalog-filter a {
+  text-decoration: underline;
 }
 h3{
   color:black;

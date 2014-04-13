@@ -3,6 +3,9 @@
  * These styles are required for noUiSlider to function.
  * You don't need to change these rules to apply your design.
  */
+ #average_price_wrapper{
+  height:10px;
+ }
 .noUi-target,
 .noUi-target * {
 -webkit-touch-callout: none;
