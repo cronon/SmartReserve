@@ -94,14 +94,23 @@
               input.styled[type='radio' name='order_by' value='date']
               label Дате добавления
               .row: .col-md-12: br
-              = submit_tag 'Применить', :class=>'btn-reservation btn btn-danger', :style=>'width:51%', remote: true
+              = submit_tag 'Применить', :class=>'btn-reservation btn btn-danger', :style=>'width:51%', remote: true, id: 'submit_tag'
               |  
-              input.btn-reservation.btn.btn-danger[type='reset' style='width:45%' value='Сбросить']
+              input.btn-reservation.btn.btn-danger[type='reset' style='width:45%' value='Сбросить' onclick="resetFilters()"]
         #clubs_div.col-md-6
           - @clubs.each_slice(3) do |three_clubs|
               - three_clubs.each do |club|
                   = render 'clubs/single', :club => club                 
 javascript:
+  var resetFilters = function(){
+    $('.catalog-filter input[type="checkbox"]').
+      toArray().
+      forEach(function(c){
+        c.previousSibling.style.backgroundPosition='0px 0px';
+        c.checked = false;
+      });
+    $('#submit_tag').click();
+  }
   var handleSliderValue = function(value){
     $(this)[0].value=value;
   }
