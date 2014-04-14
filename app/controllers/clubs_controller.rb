@@ -31,6 +31,7 @@ class ClubsController < ApplicationController
   def rate
     @club = Club.find(params[:id])
     @club.rate(params[:stars], current_user, params[:dimension])
+    @club.update_cached_average
   end
 
   # GET /clubs

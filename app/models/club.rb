@@ -24,7 +24,7 @@ class Club < ActiveRecord::Base
   validates :tables_count, :name, presence: true
   validates :tables_count, numericality: { grater_than_or_equal: 1 }
 
-  ajaxful_rateable :stars => 5, :dimensions => [:rating]
+  ajaxful_rateable :stars => 5, :dimensions => [:rating], :cache_column_rating => :rating_average
   def will_free time
     self.table.map{|t| t.will_free(time)}.min
   end

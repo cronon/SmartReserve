@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140411164302) do
+ActiveRecord::Schema.define(version: 20140414175748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 20140411164302) do
     t.string   "avatar"
     t.integer  "average_price"
     t.string   "city"
+    t.decimal  "rating_average", precision: 6, scale: 2, default: 0.0
   end
 
   add_index "clubs", ["user_id"], name: "index_clubs_on_user_id", using: :btree
