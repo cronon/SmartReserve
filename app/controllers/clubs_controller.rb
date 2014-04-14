@@ -5,18 +5,21 @@ class ClubsController < ApplicationController
   skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
 
   def catalog
-    @clubs = Club.all and return if (!params[:property_ids])&&(!params[:price])
-
-    Club.transaction do
+    params[:price] ||= {:from=>0, :to => 999999999999999999}
+    @clubs = params[:name] ? Club.where(name: params[:name]) : Club.all
+    if params[:property_ids]
       ids = Property.where(:id => params[:property_ids])
                     .map{|p| p.club_ids}
                     .flatten
                     .uniq
-      @clubs = Club.where(:id => ids)
-              .where("average_price > ?",params[:price][:from])
-              .where("average_price < ?",params[:price][:to])
+      @clubs = @clubs.where(:id => ids)
+              .where(average_price: params[:price][:from]..params[:price][:to])
     end
     @checked_properties = (params[:property_ids] || []).map{|i| i.to_i}
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
 
   def tables_status

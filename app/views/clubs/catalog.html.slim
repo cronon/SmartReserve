@@ -23,8 +23,8 @@
       .row
         .col-md-2.col-md-offset-2
           .catalog-filter
-            = form_tag '/catalog', :method => :get do
-              input[type='text' name='title' placeholder='Поиск по названию' style='width:100%']
+            = form_tag '/catalog', :method => :get, :remote => true do
+              input[type='text' name='name' placeholder='Поиск по названию' style='width:100%']
               br
               .average-price style='padding-top:5px'
                 label[style='padding-bottom:5px'] Средний чек                
@@ -68,12 +68,12 @@
                       h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
                     .modal-body
                       - Property.where(kind_ru: "Особенность").limit(6).each do |property|
-                        = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id)
+                        = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
                         label = property.name
                         br/
                     .modal-footer
                       button.btn.btn-default data-dismiss="modal" type="button"  Close
-                      button.btn.btn-primary type="button"  Save changes
+                      button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  Save changes
 
               label Кухня
               select[name='kitchen']
@@ -94,14 +94,12 @@
               input.styled[type='radio' name='order_by' value='date']
               label Дате добавления
               .row: .col-md-12: br
-              = submit_tag 'Применить', :class=>'btn-reservation btn btn-danger', :style=>'width:51%'
+              = submit_tag 'Применить', :class=>'btn-reservation btn btn-danger', :style=>'width:51%', remote: true
               |  
               input.btn-reservation.btn.btn-danger[type='reset' style='width:45%' value='Сбросить']
-        .col-md-6
+        #clubs_div.col-md-6
           - @clubs.each_slice(3) do |three_clubs|
-            .row[style="padding-bottom:20px"]
               - three_clubs.each do |club|
-                .col-md-3 style="width:220px" 
                   = render 'clubs/single', :club => club                 
 javascript:
   var handleSliderValue = function(value){
@@ -147,8 +145,15 @@ javascript:
     var modalbox = $('#features_modal input[value="'+thisbox.value+'"]')[0]
     var modalspan = modalbox.previousSibling;
     Custom.check.call(modalspan);
-    console.log(modalbox.checked);
-    console.log(modalbox.value);
+  }
+  var connectWithMain = function(){
+    var modalboxes = $('#features_modal input').toArray();
+    modalboxes.forEach(function(modalbox){
+      var mainbox = $('#features input[value="'+modalbox.value+'"]')[0];
+      var mainspan = mainbox.previousSibling;
+      mainbox.checked = !(modalbox.checked);
+      Custom.check.call(mainspan);
+    }); 
   }
   var clearModal = function(){
     $('#features_modal input').toArray().forEach(function(checkbox){
@@ -158,6 +163,6 @@ javascript:
   }
   $(window).load(function(){
     $('#features > span').click(connectWithModal);
-    $('button.btn.btn-default').click(clearModal);
+    $('.modal-footer button.btn.btn-default').click(clearModal);
   });
   

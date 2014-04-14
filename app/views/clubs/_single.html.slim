@@ -1,17 +1,18 @@
-.club-div id="club_#{club.id}" 
-  .club-image style="background-image:url('#{asset_path('club.png')}')" 
-    .white-on-avatar
-      .title-on-avatar
-        = club.properties.find_by_kind_en('Type').name
-        |  &quot;#{club.name}&quot;
-  div
-    - if can? :update, club
-      - link_to 'Edit', edit_club_path(club)
-    - if can? :destroy, club
-      - link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' }
-    .rating
-      = ratings_for club, :show_user_rating => false, :dimension => :rating
-    .row
-      .col-md-11.col-md-offset-1
-        .reservation-btn-wrapper
-          = link_to t('.make_a_reservation'), club, :class=>'btn-reservation btn btn-danger'
+.club-wrapper
+  .club-div id="club_#{club.id}" 
+    .club-image style="background-image:url('#{asset_path('club.png')}')" 
+      .white-on-avatar
+        .title-on-avatar
+          = club.properties.find_by_kind_en('Type').name
+          |  &quot;#{club.name}&quot;
+    div
+      - if can? :update, club
+        - link_to 'Edit', edit_club_path(club)
+      - if can? :destroy, club
+        - link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' }
+      .rating
+        = ratings_for club, :show_user_rating => false, :dimension => :rating
+      .row
+        .col-md-11.col-md-offset-1
+          .reservation-btn-wrapper
+            = link_to t('.make_a_reservation'), club, :class=>'btn-reservation btn btn-danger'
