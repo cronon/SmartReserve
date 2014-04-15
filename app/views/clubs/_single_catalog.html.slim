@@ -1,0 +1,19 @@
+.club-wrapper-catalog
+  .club-div id="club_#{club.id}" style="background-image:url('#{asset_path('club-catalog.png')}')" 
+    .white-on-avatar style='height:50px;margin-top:15px;'
+      .title-on-avatar
+        = club.properties.find_by_kind_en('Type').name
+        |  &quot;#{club.name}&quot;
+      .address-on-avatar
+        = club.address
+    .white-on-avatar style="height:35px;margin-top:95px"
+      - if can? :update, club
+        - link_to 'Edit', edit_club_path(club)
+      - if can? :destroy, club
+        - link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' }
+      .rating
+        img.rating-img src="#{asset_path('ajaxful_rating/big_star.png')}"
+        span.rating-value
+          = club.rating_average
+      span.reservation-btn-wrapper
+        = link_to t('.make_a_reservation'), club, :class=>'btn-reservation btn btn-danger'

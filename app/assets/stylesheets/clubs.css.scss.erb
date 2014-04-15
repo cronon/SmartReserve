@@ -1,6 +1,56 @@
 // Place all the styles related to the Clubs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.club-wrapper-catalog{
+
+  @extend .club-wrapper;
+
+  .club-div{
+    width: 305px;
+    height:210px;
+    border-color:#ccc;
+    border-style:solid;
+    border-width:1px;
+    border-radius:5px;
+  }
+  .title-on-avatar{
+    width: initial;
+    text-align: left;
+    font-size: 18px;
+    padding-top: 5px;
+  }
+  .white-on-avatar{
+    width: 100%;
+    background-color: rgba(255,255,255,0.65);
+  }
+  .address-on-avatar {
+    font-size: 14px;
+  }
+  .rating{
+    float: left;
+    margin-top: 9px;
+  }
+  .rating-img{
+    /* margin: 0 auto; */
+    display: inline;
+    margin-bottom: 7px;
+  }
+  .rating-value {
+    padding-left: 5px;
+  }
+  .text-on-avatar {
+    font-size: 15px;
+    margin-top: -5px;
+  }
+  .reservation-btn-wrapper{
+    float: right;
+    padding: 0px;
+    padding-top: 3px;
+    padding-right: 8px;
+  }
+}
+
 .align-right{
   position:absolute;
   right:30px;
