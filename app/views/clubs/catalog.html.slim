@@ -24,6 +24,11 @@
         .col-md-2.col-md-offset-2
           .catalog-filter
             = form_tag '/catalog', :method => :get, :remote => true do
+              label[style="font-size:18px"] Подобрать заведение
+              a[href='#'] Оперделить мое местоположение
+              label Или выбрать город
+              select[name='city']
+                option[value='Minsk' name='city'] Minsk
               input[type='text' name='name' placeholder='Поиск по названию' style='width:100%']
               br
               .average-price style='padding-top:5px'
