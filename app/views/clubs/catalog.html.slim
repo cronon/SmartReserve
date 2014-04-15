@@ -78,20 +78,20 @@
               label Кухня
               select[name='kitchen']
                 - Property.where(:kind_en => 'Kitchen').each do |k|
-                  option[value=k.id] = k.name_en
+                  option[value=k.id name='property_ids[]'] = k.name_en
               br
               label Сортировать по:
               br
-              input.styled[type='radio' name='order_by' value='rating']
+              input.styled[type='radio' name='order_by' value='rating_average']
               label Популярности
               br
               input.styled[type='radio' name='order_by' value='closest']
               label Близости(ввести улицу)
               br
-              input.styled[type='radio' name='order_by' value='price']
+              input.styled[type='radio' name='order_by' value='average_price']
               label Доступности
               br
-              input.styled[type='radio' name='order_by' value='date']
+              input.styled[type='radio' name='order_by' value='created_at']
               label Дате добавления
               .row: .col-md-12: br
               = submit_tag 'Применить', :class=>'btn-reservation btn btn-danger', :style=>'width:51%', remote: true, id: 'submit_tag'

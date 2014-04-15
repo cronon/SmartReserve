@@ -15,6 +15,8 @@ class ClubsController < ApplicationController
       @clubs = @clubs.where(:id => ids)
               .where(average_price: params[:price][:from]..params[:price][:to])
     end
+    params[:order_by] ||= :rating_average
+    @clubs = @clubs.order(params[:order_by].to_sym)
     @checked_properties = (params[:property_ids] || []).map{|i| i.to_i}
     respond_to do |format|
       format.js
