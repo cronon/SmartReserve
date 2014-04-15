@@ -20,13 +20,13 @@
       .col-md-12
         br/
     .container-fixed
-      .row
+      .row style="margin-left:5px"
         .col-md-2.col-md-offset-2
           .catalog-filter
             = form_tag '/catalog', :method => :get, :remote => true do
               label[style="font-size:18px"] Подобрать заведение
               a[href='#'] Оперделить мое местоположение
-              label Или выбрать город
+              label Или выбрать город:
               select[name='city']
                 option[value='Minsk' name='city'] Minsk
               input[type='text' name='name' placeholder='Поиск по названию' style='width:100%']
@@ -150,10 +150,12 @@ javascript:
      }
     }
   });
+
   $('select').selectize({
     create: true,
     sortField: 'text'
   });
+  
   var connectWithModal = function(){
     var thisbox = this.nextSibling;    
     var modalbox = $('#features_modal input[value="'+thisbox.value+'"]')[0]

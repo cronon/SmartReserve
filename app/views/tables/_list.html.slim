@@ -1,6 +1,52 @@
-- @table_id = @order.table.id if @order && @order.table
-.btn-group data-toggle="buttons" 
-  - @tables.each do |table|
-    label class=("btn #{get_color_table(table), @time)} #{'active' if @table_id == table.id}" for="table_#{table.id}" 
-      = table.id
-      | <input type="radio" name="order[table_id]" id="table_#{table.id}" value="#{table.id}" data-toggle="button" #{'checked' if @table_id == table.id}/
+.tables-list
+  .current-time
+    label Текущая дата и время:
+    = Time.now.strftime('%d.%m.%Y %H:%M')
+    a[style='float:right;cursor:pointer'] Отобразить на текущий момент
+  .row: col-md-12: br
+  div[style="height:20px"]
+    .date-inputs
+      label Выберите дату 
+      input#datepicker[name="date" style="width:110px"]
+    .time-inputs 
+      div[style='float:left']: label Выберите время 
+      .time-select: select[name='hour']
+        - (0..23).each do |k|
+          option[value=k name='hour'] = k
+      .time-select: select[name='minute']
+        - (0..11).each do |k|
+          option[value=k*5 name='hour'] = k*5
+  .row: col-md-12: br
+  .tables-type style="font-size:14px"
+    a[href='#'] Курящий
+    |  | Некурящий | 
+    a[href='#'] Терраса
+    |  | 
+    a[href='#'] VIP
+  .row: col-md-12: br
+
+  #tables_schema
+    - @table_id = @order.table.id if @order && @order.table
+    .btn-group data-toggle="buttons" 
+      - @tables.each do |table|
+        label[class="btn #{get_color_table(table, @time)} #{'active' if @table_id == table.id}" for="table_#{table.id}"] = table.id
+          input type="radio" name="order[table_id]" id="table_#{table.id}" value="#{table.id}" data-toggle="button" #{'checked' if @table_id == table.id}
+
+javascript:
+  $('#datepicker').datetimepicker({
+   format:'d.m.Y',
+   lang: 'ru',
+   dayOfWeekStart: 1,
+   timepicker: false,
+   onChangeDateTime: function(){
+     $.ajax({
+         type: 'GET',
+         url: "#{club_tables_status_url(@club.id)}", //sumbits it to the given url of the form
+         data: $('#new_order').serialize()
+     });
+   }
+  });
+
+  $('select').selectize({
+    create: true
+  });

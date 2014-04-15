@@ -17,7 +17,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
-//= require jquery.datetimepicker
+// require jquery.datetimepicker
 //= require jquery-fileupload
 //= require jquery.bxslider.min
 //http://ryanfait.com/resources/custom-checkboxes-and-radio-buttons/
