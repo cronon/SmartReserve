@@ -1,1 +1,1 @@
-$("#clubs_div").html('<%= j(@clubs.map{|c| render("clubs/single",:club=>c)}.join.html_safe) %>')
+$("#clubs_div").html('<%= j(@clubs.map{|c| render("clubs/single_catalog",:club=>c)}.join.html_safe) %>')

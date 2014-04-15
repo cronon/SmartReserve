@@ -276,3 +276,5 @@ ru:
       address: Адрес
     single:
       make_a_reservation: Забронировать
+    single_catalog:
+      make_a_reservation: Забронировать
