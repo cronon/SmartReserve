@@ -14,7 +14,7 @@ owners = User.create([
     :owner_clubs => true,
     #:password => "$2a$10$2q7HC3M1.ho928wlkGx5VeiCctzcoXTLjujbCSLciZ.7D7BniuaPm",
     :password => "12345678",
-    :name => "Аникеенко"
+    :name => "Аникеенко",
     :locale => "ru"
     },
   ])
@@ -112,7 +112,8 @@ clubs = Club.create!([
     :properties => Property.all,
     :avatar => '/assets/for_seed/1.jpg',
     :city => 'Минск',
-    :average_price => 100
+    :average_price => 100,
+    :is_certified => true
   },
 
   { 
@@ -127,7 +128,8 @@ clubs = Club.create!([
     :properties => Property.all,
     :avatar => '/assets/for_seed/2.jpg',
     :city => 'Минск',
-    :average_price => 100
+    :average_price => 100,
+    :is_certified => false
   },
 
   { 
@@ -143,7 +145,8 @@ clubs = Club.create!([
     :properties => Property.all,
     :avatar => '/assets/for_seed/3.jpg',
     :city => 'Минск',
-    :average_price => 100
+    :average_price => 100,
+    :is_certified => true
   },
 ])
 
