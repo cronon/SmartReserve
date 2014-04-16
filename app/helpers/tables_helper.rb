@@ -3,9 +3,9 @@ module TablesHelper
 		status = table.status(time)
 
 		color = case
-			when status == :free then "btn-success"
-			when status == :busy then "btn-danger"
-			else "btn-default"
+			when status == :free then "table-free"
+			when status == :busy then "table-busy"
+			else "table-booked"
 		end
 	end
 
