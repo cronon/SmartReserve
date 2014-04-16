@@ -1,36 +1,55 @@
 .tables-list
-  .current-time
-    label Текущая дата и время:
-    = Time.now.strftime('%d.%m.%Y %H:%M')
-    a[style='float:right;cursor:pointer'] Отобразить на текущий момент
-  .row: col-md-12: br
-  div[style="height:20px"]
-    .date-inputs
-      label Выберите дату 
-      input#datepicker[name="date" style="width:110px"]
-    .time-inputs 
-      div[style='float:left']: label Выберите время 
-      .time-select: select[name='hour']
-        - (0..23).each do |k|
-          option[value=k name='hour'] = k
-      .time-select: select[name='minute']
-        - (0..11).each do |k|
-          option[value=k*5 name='hour'] = k*5
-  .row: col-md-12: br
-  .tables-type style="font-size:14px"
-    a[href='#'] Курящий
-    |  | Некурящий | 
-    a[href='#'] Терраса
-    |  | 
-    a[href='#'] VIP
+  .tables-inputs
+    .current-time
+      label Текущая дата и время:
+      = Time.now.strftime('%d.%m.%Y %H:%M')
+      a[style='float:right;cursor:pointer'] Отобразить на текущий момент
+    .row: col-md-12: br
+    div[style="height:20px"]
+      .date-inputs
+        label Выберите дату 
+        input#datepicker[name="date" style="width:110px"]
+      .time-inputs 
+        div[style='float:left']: label Выберите время 
+        .time-select: select[name='hour']
+          - (0..23).each do |k|
+            option[value=k name='hour'] = k
+        .time-select: select[name='minute']
+          - (0..11).each do |k|
+            option[value=k*5 name='hour'] = k*5
+    .row: col-md-12: br
+    .tables-type style="font-size:14px"
+      a[href='#'] Курящий
+      |  | Некурящий | 
+      a[href='#'] Терраса
+      |  | 
+      a[href='#'] VIP
   .row: col-md-12: br
 
   #tables_schema
     - @table_id = @order.table.id if @order && @order.table
-    .btn-group data-toggle="buttons" 
+    #tables_radios
       - @tables.each do |table|
-        label[class="btn #{get_color_table(table, @time)} #{'active' if @table_id == table.id}" for="table_#{table.id}"] = table.id
-          input type="radio" name="order[table_id]" id="table_#{table.id}" value="#{table.id}" data-toggle="button" #{'checked' if @table_id == table.id}
+        .table-cell
+          .table-wrapper[onclick="onTableClick(this)"]
+            input type="radio" name="order[table_id]" id="table_#{table.id}" value="#{table.id}" data-toggle="button" #{'checked' if @table_id == table.id}
+            div[class="table #{get_color_table(table, @time)} #{'active' if @table_id == table.id}"]
+              .table-number
+                | #{table.id}
+            .chair
+              .chair-number
+                | #{rand()<0.5 ? 3 : 14}
+    #tables_legend
+      .row
+        .col-md-4
+          span.circle.circle-free 
+          |   Свободно  
+        .col-md-4
+          span.circle.circle-booked 
+          |   Забронироано  
+        .col-md-4
+          span.circle.circle-busy 
+          |   Занято  
 
 javascript:
   $('#datepicker').datetimepicker({
@@ -50,3 +69,9 @@ javascript:
   $('select').selectize({
     create: true
   });
+
+  var onTableClick = function(table_wrapper){
+    $(table_wrapper).find('input[type="radio"]')[0].checked = true;
+    $('.table.active').toggleClass('active');
+    $(table_wrapper).find('.table').toggleClass('active');
+  }
