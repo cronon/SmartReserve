@@ -1,12 +1,12 @@
 class NewsController < ApplicationController
-  before_action :set_table, only: [:show, :edit, :update, :destroy]
+  before_action :set_news, only: [:show, :edit, :update, :destroy]
 
   def create
     @news = News.new(news_params)
     @news.club_id = params[:club_id]
     respond_to do |format|
       if @news.save
-        format.html { redirect_to @news, notice: 'Club was successfully created.' }
+        format.html { redirect_to club_news_index_url(@news), notice: 'News was successfully created.' }
         format.json { render action: 'show', status: :created, location: @news }
       else
         format.html { render action: 'new' }
@@ -20,7 +20,7 @@ class NewsController < ApplicationController
   def update
     respond_to do |format|
       if @news.update(news_params)
-        format.html { redirect_to @news, notice: 'Club was successfully updated.' }
+        format.html { redirect_to @news, notice: 'News was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -39,7 +39,9 @@ class NewsController < ApplicationController
   def show
   end
   def index
-    @news = News.find_all_by_club_id params[:club_id]
+    @news = News.where(:club_id => params[:club_id])
+    puts "params = #{params}"
+    puts "NEWS = #{@news}"
   end
 
   def destroy    

@@ -28,3 +28,6 @@ en:
         password: 'Пароль'
         password_confirmation: "Подтверждение пароля"
         owner_clubs: "Ресторатор?"
+  news:
+    index:
+      news_main_title: "News"

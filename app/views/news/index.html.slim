@@ -1,4 +1,13 @@
-- @news.each do |news|
-  .news1138
-    = news.title
-    = news.description
+.row
+	.col-md-2
+	.col-md-8
+		h1 = t('.news_main_title')
+		- @news.each do |article|
+		  .news_one
+		  	img alt="..." src=asset_path('club.png') style="float: left"
+		  	font color="red"
+		    	= article.title
+		    	= article.created_at.localtime
+		    br
+		    = article.description
+	.col-md-2

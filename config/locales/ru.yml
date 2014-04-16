@@ -278,3 +278,6 @@ ru:
       make_a_reservation: Забронировать
     single_catalog:
       make_a_reservation: Забронировать
+  news:
+    index:
+      news_main_title: "Новости"

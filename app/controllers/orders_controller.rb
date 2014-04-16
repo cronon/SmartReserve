@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save
         format.js {render action: 'create', notice: 'Order was successfully created.'}
-        format.html { redirect_to club_order_url(@order.table.club, @order), notice: 'Order was successfully created.' }
+        format.html { redirect_to club_news_index_path(club, @order), notice: 'Order was successfully created.' }
         format.json { render action: 'show', status: :created, location: @order }
       else
         format.js
