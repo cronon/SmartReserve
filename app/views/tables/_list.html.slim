@@ -31,7 +31,7 @@
     #tables_radios
       - @tables.each do |table|
         .table-cell
-          .table-wrapper
+          .table-wrapper[onclick="onTableClick(this)"]
             input type="radio" name="order[table_id]" id="table_#{table.id}" value="#{table.id}" data-toggle="button" #{'checked' if @table_id == table.id}
             div[class="table #{get_color_table(table, @time)} #{'active' if @table_id == table.id}"]
               .table-number
@@ -69,3 +69,9 @@ javascript:
   $('select').selectize({
     create: true
   });
+
+  var onTableClick = function(table_wrapper){
+    $(table_wrapper).find('input[type="radio"]')[0].checked = true;
+    $('.table.active').toggleClass('active');
+    $(table_wrapper).find('.table').toggleClass('active');
+  }
