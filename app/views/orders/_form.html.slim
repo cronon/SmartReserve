@@ -1,23 +1,39 @@
 #orders_form.content: .row
   = form_for(@order, url: club_prepare_order_path, :remote => true, :authenticity_token => true, :format => :js) do |f|
-    .col-md-9
+    .col-md-8
       = render "tables/list"
-    .col-md-3
-      - if @order.errors.any?
-        #error_explanation
-          h2
-            = pluralize(@order.errors.count, "error")
-            | prohibited this order from being saved:
-          ul
-            - @order.errors.full_messages.each do |msg|
-              li= msg
-      .field
-        = f.label :name
-        br/
-        = f.text_field :name
-      .field
-        = f.label :phone
-        br/
-        = f.text_field :phone
-      .actions
-        span#submit_form.btn.btn-default onclick="makeCall()"  Submit
+    .col-md-4
+      .order-inputs style='margin-top: 123px;'
+        label[style='font-weight:bold'] Введите ваши данные:
+        - if @order.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@order.errors.count, "error")
+              | prohibited this order from being saved:
+            ul
+              - @order.errors.full_messages.each do |msg|
+                li= msg
+        table
+          tr
+            td 
+              = f.label :name
+            td 
+              = f.text_field :name
+          tr  
+            td 
+              = f.label :phone
+            td 
+              = f.text_field :phone
+          tr  
+            td style="vertical-align:top"
+              = f.label :comment
+            td 
+              = f.text_area :phone
+          tr
+            td
+            td
+              .actions
+                span#submit_form.btn.btn-danger onclick="makeCall()"
+                 label Забронировать
+                 br
+                 | Это бесплатно!
