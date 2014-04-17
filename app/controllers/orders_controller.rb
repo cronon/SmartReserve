@@ -6,11 +6,11 @@ class OrdersController < ApplicationController
 
   # need year, month, day, hour, minute, phone, name, table_id
   def prepare
-    @order = Order.prepare :table_id => order_params[:table_id], :time => Time.parse(order_params[:time]), :phone => order_params[:phone], :name => order_params[:name]
+    @time = parse_time(params)
+    @order = Order.prepare :table_id => order_params[:table_id], :time => @time, :phone => order_params[:phone], :name => order_params[:name]
     @club = Club.find params[:club_id]
     @tables = @club.table
     @order.confirmation = ""
-    @time = Time.parse(order_params[:time])
     respond_to do |format|
       format.js
     end
@@ -101,6 +101,6 @@ class OrdersController < ApplicationController
     end
 
     def parse_time params
-      Time.new(params[:year].to_i, params[:month].to_i, params[:day].to_i, params[:hour].to_i, params[:minute].to_i)
+      Time.parse(params[:date]+' '+params[:hour]+':'+params[:minute])
     end
 end

@@ -8,9 +8,10 @@
     div[style="height:20px"]
       .date-inputs
         label Выберите дату 
-        input#datepicker[name="date" style="width:110px"]
+        input#datepicker[name="date" style="width:110px" value="#{params[:date] || Time.now.strftime('%d.%m.%Y')}"]
       .time-inputs 
         div[style='float:left']: label Выберите время 
+        - p params
         .time-select: select[name='hour']
           - (0..23).each do |k|
             option[value=k name='hour'] = k
@@ -38,7 +39,7 @@
                 | #{table.id}
             .chair
               .chair-number
-                | #{rand()<0.5 ? 3 : 14}
+                | #{table.seats}
     #tables_legend
       .row
         .col-md-4
@@ -52,20 +53,25 @@
           |   Занято  
 
 javascript:
-  $('#datepicker').datetimepicker({
-   format:'d.m.Y',
-   lang: 'ru',
-   dayOfWeekStart: 1,
-   timepicker: false,
-   onChangeDateTime: function(){
+  var onChangeDatetime = function(){
      $.ajax({
          type: 'GET',
          url: "#{club_tables_status_url(@club.id)}", //sumbits it to the given url of the form
          data: $('#new_order').serialize()
      });
-   }
+  };
+
+  $('#datepicker').datetimepicker({
+   format:'d.m.Y',
+   lang: 'ru',
+   dayOfWeekStart: 1,
+   timepicker: false,
+   onChangeDateTime: onChangeDatetime
   });
 
+  $('.time-inputs select').change(onChangeDatetime);
+  $('.time-inputs select')[0].value = "#{params[:hour]}";
+  $('.time-inputs select')[1].value = "#{params[:minute]}";
   $('select').selectize({
     create: true
   });

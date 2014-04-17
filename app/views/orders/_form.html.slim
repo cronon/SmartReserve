@@ -1,8 +1,9 @@
 #orders_form.content: .row
   = form_for(@order, url: club_prepare_order_path, :remote => true, :authenticity_token => true, :format => :js) do |f|
     .col-md-8
-      = render "tables/list"
-    .col-md-4
+      #tables_list
+        = render "tables/list"
+    .col-md-4 style="padding-right:0"
       .order-inputs style='margin-top: 123px;'
         label[style='font-weight:bold'] Введите ваши данные:
         - if @order.errors.any?

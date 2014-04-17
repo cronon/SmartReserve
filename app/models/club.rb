@@ -64,7 +64,7 @@ class Club < ActiveRecord::Base
 
   protected
     def create_tables
-      self.tables_count.times{ self.table << Table.new } if self.tables_count
+      self.tables_count.times{|i| self.table << Table.new(:number=>i) } if self.tables_count
     end
 
     def convert_time time #converts datetime to time
