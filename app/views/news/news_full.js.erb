@@ -1,0 +1,4 @@
+$('#button-<%= @one_news.id%>').attr("class", "set_little_news btn btn-default");
+$('#button-<%= @one_news.id%> > span.more-or-roll-up')[0].innerText = "<%= t('.roll_up')%>";
+$('#button-<%= @one_news.id%> > span.arrow').attr("class", "arrow glyphicon glyphicon-chevron-up");
+$('div#description-<%= @one_news.id%>').html('<%=j @one_news.description%>');

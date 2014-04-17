@@ -42,3 +42,23 @@ class ApplicationController < ActionController::Base
   end
 
 end
+
+class String
+
+  #return closet index '.' in str or index if '.' not include in str
+  def index_closet_point_to index
+    less_index = self.index('.')
+    old_less_index = less_index
+    while less_index < index && less_index != nil
+      old_less_index = less_index
+      less_index = self.index('.', old_less_index + 1)
+    end
+
+    unless old_less_index.nil?
+      old_less_index
+    else
+      index
+    end
+  end
+
+end

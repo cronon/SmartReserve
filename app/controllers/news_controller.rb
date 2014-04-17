@@ -40,12 +40,24 @@ class NewsController < ApplicationController
   end
   def index
     @news = News.where(:club_id => params[:club_id])
-    puts "params = #{params}"
-    puts "NEWS = #{@news}"
   end
 
   def destroy    
     @news.destroy
+  end
+
+  #свернуть/развернуть
+  def news_full
+    @one_news = News.where(:id => params[:id]).first
+    puts "params = #{params}"
+    puts "NEWS = #{@one_news}"
+    respond_to do |format|
+      if params[:mode] == "get_full"
+        format.js{ render "news_full"}
+      else
+        format.js{ render "news_roll_up"}
+      end
+    end
   end
 
   private
