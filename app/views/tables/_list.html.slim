@@ -3,14 +3,15 @@
     .current-time
       label Текущая дата и время:
       = Time.now.strftime('%d.%m.%Y %H:%M')
-      a[style='float:right;cursor:pointer'] Отобразить на текущий момент
+      a[style='float:right;cursor:pointer' onclick="showCurrentState()"] Отобразить на текущий момент
     .row: col-md-12: br
     div[style="height:20px"]
       .date-inputs
         label Выберите дату 
-        input#datepicker[name="date" style="width:110px"]
+        input#datepicker[name="date" style="width:110px" value="#{params[:date] || Time.now.strftime('%d.%m.%Y')}"]
       .time-inputs 
         div[style='float:left']: label Выберите время 
+        - p params
         .time-select: select[name='hour']
           - (0..23).each do |k|
             option[value=k name='hour'] = k
@@ -38,7 +39,7 @@
                 | #{table.id}
             .chair
               .chair-number
-                | #{rand()<0.5 ? 3 : 14}
+                | #{table.seats}
     #tables_legend
       .row
         .col-md-4
@@ -52,26 +53,42 @@
           |   Занято  
 
 javascript:
-  $('#datepicker').datetimepicker({
-   format:'d.m.Y',
-   lang: 'ru',
-   dayOfWeekStart: 1,
-   timepicker: false,
-   onChangeDateTime: function(){
+  var onChangeDatetime = function(){
      $.ajax({
          type: 'GET',
          url: "#{club_tables_status_url(@club.id)}", //sumbits it to the given url of the form
          data: $('#new_order').serialize()
      });
-   }
+  };
+
+  $('#datepicker').datetimepicker({
+   format:'d.m.Y',
+   lang: 'ru',
+   dayOfWeekStart: 1,
+   timepicker: false,
+   onChangeDateTime: onChangeDatetime
   });
 
-  $('select').selectize({
-    create: true
-  });
+  $('.time-inputs select').change(onChangeDatetime);
+  $('.time-inputs select')[0].value = "#{@time.hour || 0}";
+  $('.time-inputs select')[1].value = "#{@time.min || 0}";
 
   var onTableClick = function(table_wrapper){
     $(table_wrapper).find('input[type="radio"]')[0].checked = true;
     $('.table.active').toggleClass('active');
     $(table_wrapper).find('.table').toggleClass('active');
   }
+
+  var showCurrentState = function(){
+    var d = new Date();
+    $('#datepicker')[0].value = [d.getDate(),d.getMonth()+1,d.getFullYear()].join('.');
+    $.ajax({
+         type: 'GET',
+         url: "#{club_tables_status_url(@club.id)}", //sumbits it to the given url of the form
+         data: $('#datepicker').serialize()+'&hour='+d.getHours()+"&minute="+d.getMinutes()
+     });
+  }
+
+  $('select').selectize({
+    create: true
+  });

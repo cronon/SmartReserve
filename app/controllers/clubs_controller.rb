@@ -24,10 +24,19 @@ class ClubsController < ApplicationController
     end
   end
 
+  def round_5 x
+    (x / 5.0).round * 5
+  end
+
+  def round_f f, x
+    Proc.new{(x/ f.to_f).round * f}
+  end
+
   def tables_status
-    @tables = Club.find(params[:club_id]).table
-    @time = Time.parse params[:order][:time]
-    @table_id = params[:order][:table_id].to_i
+    @club = Club.find(params[:club_id])
+    @tables = @club.table
+    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_f(5,params[:minute].to_i).call.to_s
+    @table_id = (params[:order] || {:table_id => 0})[:table_id].to_i
   end
 
   def rate
