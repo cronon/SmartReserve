@@ -18,4 +18,4 @@
         span.rating-value
           = club.rating_average
       span.reservation-btn-wrapper
-        = link_to t('.make_a_reservation'), club, :class=>'btn-reservation btn btn-danger'
+        = link_to t('.make_a_reservation'),  club_new_order_path(club), :class=>'btn-reservation btn btn-danger'

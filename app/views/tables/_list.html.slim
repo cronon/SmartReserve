@@ -68,7 +68,6 @@ javascript:
    timepicker: false,
    onChangeDateTime: onChangeDatetime
   });
-
   $('.time-inputs select').change(onChangeDatetime);
   $('.time-inputs select')[0].value = "#{@time.hour || 0}";
   $('.time-inputs select')[1].value = "#{@time.min || 0}";

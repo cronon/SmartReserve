@@ -29,7 +29,6 @@ class Table < ActiveRecord::Base
     return :busy if self.status_now == :busy and  time < Time.now + self.club.time_after
     order = self.order.find{|o| time < o.until+self.club.time_before and time > o.since - self.club.time_after}
     #order not nil if time попало в акой-то заказ
-    puts "ODER=#{order}"
     return :free if not order
     if order.since - time > 30.minutes and time.now?
       return :free

@@ -48,13 +48,13 @@
               label Терраса
               br
               label Интерьер 
-              a.align-right[href='#' onclick='']  Выбрать
+              a.align-right[href='#' onclick='' data-toggle="modal" data-target="#interior_modal"]  Выбрать
               br
               label Атмосфера 
-              a.align-right[href='#' onclick='']  Выбрать
+              a.align-right[href='#' onclick='' data-toggle="modal" data-target="#atmosphere_modal"]  Выбрать
               br
               label Тип заведения 
-              a.align-right[href='#' onclick='']  Выбрать
+              a.align-right[href='#' onclick='' data-toggle="modal" data-target="#club_type_modal"]  Выбрать
               br
               label Особенности:
               br
@@ -77,8 +77,8 @@
                         label = property.name
                         br/
                     .modal-footer
-                      button.btn.btn-default data-dismiss="modal" type="button"  Close
-                      button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  Save changes
+                      button.btn.btn-default data-dismiss="modal" type="button"  Отмена
+                      button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  ОК
 
               label Кухня
               select[name='kitchen']
@@ -102,10 +102,54 @@
               = submit_tag 'Применить', :class=>'btn-reservation btn btn-danger', :style=>'width:51%', remote: true, id: 'submit_tag'
               |  
               input.btn-reservation.btn.btn-danger[type='reset' style='width:45%' value='Сбросить' onclick="resetFilters()"]
+
+              #interior_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+                      h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
+                    .modal-body
+                      - Property.where(kind_ru: "Интерьер").limit(6).each do |property|
+                        = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
+                        label = property.name
+                        br/
+                    .modal-footer
+                      button.btn.btn-default data-dismiss="modal" type="button"  Отмена
+                      button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  ОК
+              #club_type_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
+                              .modal-dialog
+                                .modal-content
+                                  .modal-header
+                                    button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+                                    h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
+                                  .modal-body
+                                    - Property.where(kind_ru: "Тип").limit(6).each do |property|
+                                      = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
+                                      label = property.name
+                                      br/
+                                  .modal-footer
+                                    button.btn.btn-default data-dismiss="modal" type="button"  Отмена
+                                    button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  ОК
+              #atmosphere_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
+                              .modal-dialog
+                                .modal-content
+                                  .modal-header
+                                    button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+                                    h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
+                                  .modal-body
+                                    - Property.where(kind_ru: "Атмосфера").limit(6).each do |property|
+                                      = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
+                                      label = property.name
+                                      br/
+                                  .modal-footer
+                                    button.btn.btn-default data-dismiss="modal" type="button"  Отмена
+                                    button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  OK
         #clubs_div.col-md-6 style='width: calc(50% + 30px);'
           - @clubs.each_slice(3) do |three_clubs|
               - three_clubs.each do |club|
-                  = render 'clubs/single_catalog', :club => club                 
+                  = render 'clubs/single_catalog', :club => club         
+
 javascript:
   var resetFilters = function(){
     $('.catalog-filter input[type="checkbox"]').
