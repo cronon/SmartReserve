@@ -1,0 +1,5 @@
+$('#button-<%= @one_news.id%>').attr("class", "get_full_news btn btn-default");
+$('#button-<%= @one_news.id%> > span.more-or-roll-up')[0].innerText = "<%= t('.more')%>";
+$('#button-<%= @one_news.id%> > span.arrow').attr("class", "arrow glyphicon glyphicon-chevron-right");
+$('div#description-<%= @one_news.id%>').empty();
+$('div#description-<%= @one_news.id%>').html('<%= j(@one_news.description[0..index_closet_point_to(@one_news.description, 470)])%>');

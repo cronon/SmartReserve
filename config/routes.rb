@@ -29,6 +29,7 @@ SmartReserve::Application.routes.draw do
     resources :comments, only: [:create, :destroy]
     resources :news
   end
+  post 'news/news_full' => 'news#news_full', as: :news_full
   resources :comments, only: [:create, :destroy]
   get 'users/profile', as: 'user_root'
   # The priority is based upon order of creation: first created -> highest priority.
