@@ -35,7 +35,10 @@ class ClubsController < ApplicationController
   def tables_status
     @club = Club.find(params[:club_id])
     @tables = @club.table
-    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_f(5,params[:minute].to_i).call.to_s
+    params[:date] ||= Date.today.to_s
+    params[:hour] ||= Time.now.hour.to_s
+    params[:minute] ||= Time.now.min.to_s
+    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5(params[:minute].to_i).to_s
     @table_id = (params[:order] || {:table_id => 0})[:table_id].to_i
   end
 

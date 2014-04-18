@@ -26,6 +26,10 @@ class OrdersController < ApplicationController
   def show
   end  
 
+  def round_5 x
+    (x / 5.0).round * 5
+  end
+  
   def new
     @order = Order.new 
     @club = Club.find params[:club_id]
@@ -36,7 +40,10 @@ class OrdersController < ApplicationController
     else
       @order.phone = '+375'
     end
-    @time = Time.now
+    params[:date] ||= Date.today.to_s
+    params[:hour] ||= Time.now.hour.to_s
+    params[:minute] ||= Time.now.min.to_s
+    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5(params[:minute].to_i).to_s
   end
 
   # POST /orders
