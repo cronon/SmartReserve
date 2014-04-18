@@ -54,7 +54,7 @@
     .field
       = kind
       - properties.each do |property|
-        = f.label property.name
+        label = property.name
         = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property)
   .actions
     = f.submit
@@ -62,6 +62,6 @@
   #prev_avatar
     img src=(to_http(@club.avatar.url) unless @club.avatar.blank?) /
   javascript:
-    | $('#avatar_input').change(function(){
-      | $('#prev_avatar').html("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
-    | })
+     $('#avatar_input').change(function(){
+       $('#prev_avatar').html("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
+     })
