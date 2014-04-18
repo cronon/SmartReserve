@@ -1,30 +1,37 @@
 .row
 	.col-md-2
 	.col-md-8
-		h1 = t('.news_main_title')
+		p id="news-word" = t('.news_main_title') 
 		- @news.each do |article|
 		  .row
-		  	img alt="..." src=asset_path('club.png') style="float: left"
-	  		div style="float:left; color:#ec5c5c"
-		    	= article.title
-	    	div style="float:right"
-	    		= utc_to_year_mounth_day article.created_at
-		    br
-		    div id="description-#{article.id}"
-		    	= article.description[0..index_closet_point_to(article.description, 470)]
-		    br
-		    button id="button-#{article.id}" class="get_full_news btn btn-default" style="float:right; border-style:solid; border-color:#ec5c5c; color:#ec5c5c;"
+		  	.col-md-12
+		  		span
+		  			img alt="..." src=asset_path('club.png') class="news-img"
+		  		span
+		  			.news-title
+			    		= article.title
+		    		.year-mounth-day
+		    			= utc_to_year_mounth_day article.created_at
+			    br
+			    span
+			    	div id="description-#{article.id}" class="news-description"
+			    		= article.description[0..index_closet_point_to(article.description, 470)]
+			    br
+		    button id="button-#{article.id}" class="get_full_news btn btn-default"
 		    	span.more-or-roll-up
 		    		=t('.more')
-		    	span class="arrow glyphicon glyphicon-chevron-right" style="color:#ec5c5c"
+		    	span class="arrow glyphicon glyphicon-chevron-right"
+		    br
+		    br
+		    br
+		    br
 		    br
 	.col-md-2
 javascript:
 	$(document).ready(function() {
 	  $('button').each(function(){	    
       $(this).on("click", function(){
-        var news_button_id = $(this)[0].id.split('-')[1];	
-        var jsonWithnewsId = {'news_id': news_button_id};
+        var news_button_id = $(this)[0].id.split('-')[1];
         var button_class =  $(this)[0].classList[0];
         var mode = "get_full";
         if (button_class != "get_full_news")
@@ -32,12 +39,9 @@ javascript:
         	mode = "roll_up";
         }
 
-        alert('mode=' +  mode + ' button_id => ' + news_button_id + ' class' + button_class);
-
         $.ajax({
           url: "#{news_full_path()}" + '?id=' + news_button_id + '&mode=' + mode,
           type: "POST",
-          data: jsonWithnewsId,
           processData: false,
           contentType: false,
           success: function(res) {
