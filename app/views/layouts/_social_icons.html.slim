@@ -1,0 +1,29 @@
+css:
+  #table2 .icon-wrapper{
+    padding-left:5px;
+    float:left;
+    cursor: pointer;
+  }
+#table2
+  a href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" rel="nofollow" 
+  .icon-wrapper
+    #fb.sn_icon
+  a href="http://twitter.com/smartreserve" rel="nofollow" 
+  .icon-wrapper
+    #twitter.sn_icon
+  a href="http://vk.com/smartreserve" rel="nofollow" 
+  .icon-wrapper
+    #vk.sn_icon
+  a href="http://www.youtube.com/user/smartreserve" 
+  .icon-wrapper
+    #yt.sn_icon
+  a href="https://plus.google.com/107353192218206361990/posts" rel="publisher" 
+  .icon-wrapper
+    #gp.sn_icon
+  a href="" rel="publisher" 
+  .icon-wrapper
+    #fs.sn_icon
+
+  div style="display:none" 
+      - %w[fb.png gplay.png  mp.png yt.png as.png gp.png vk.png twitter.png fs.png].each do |i|
+        img src=asset_path(i) /

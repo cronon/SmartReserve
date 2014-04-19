@@ -1,11 +1,11 @@
 class PhotosController < ApplicationController
   #POST /clubs/2/photos
   def create
-    if params[:type] == "Club"
-      club = Clubs.find(params[:club_id]).first
+    if params[:type] == "club"
+      club = Club.find(params[:club_id])
       @photo = club.photos.build
-    else params[:type] == "New"
-      news = News.find(params[:new_id]).first
+    else params[:type] == "news"
+      news = News.find(params[:news_id])
       @photo = news.photos.build
     end
     @photo.image = params[:file]
