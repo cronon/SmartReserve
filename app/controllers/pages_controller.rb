@@ -7,4 +7,7 @@ class PagesController < ApplicationController
       render :layout=> false
     end
   end
+
+  def about
+  end
 end
