@@ -77,25 +77,35 @@
                 = @club.average_price.to_s
               div style="display:inline;top:0;color:#ec5c5c;position:absolute;font-size:13px"
                 | руб
-            / .club-info
-            /   .club-contact
-            /     .contact-img: img src="#{asset_path 'clubs_show/on_map.png'}"
-            /     .contact-text
-            /       = @club.address
-            /       br 
-            /       a[href=""] Посмотреть на карте
-            /   .club-contact
-            /     .contact-img: img src="#{asset_path 'clubs_show/phone.png'}"
-            /     .contact-text
-            /       = '+375171234567'
-            /   .club-contact
-            /     .contact-img: img src="#{asset_path 'clubs_show/www.png'}"
-            /     .contact-text: a[href="#"] http://example.com
-            /   .club-contact
-            /     .contact-img: img src="#{asset_path 'clubs_show/email.png'}"
-            /     .contact-text: a[href="mailto:exapmle@example.com"] exapmle@example.com
-            / .club-info
-            / .club-info
+
+      .row: .col-md-12: br
+      .row
+        .col-md-12
+          ul#club_tabs.nav.nav-tabs
+            li.active
+              a data-toggle="tab" href="#description"  Описание
+            li
+              a data-toggle="tab" href="#profile"  Profile
+            li
+              a data-toggle="tab" href="#messages"  Messages
+            li
+              a data-toggle="tab" href="#settings"  Settings
+          .tab-content
+            #description.tab-pane.active
+              label> Кухня: 
+              = @club.properties.find_by_kind_en('Kitchen').name_en
+              br
+              label> Willcomen: 
+              | Alle 
+              br
+              label> Schedule: 
+              | Whole day
+              br
+              label> Description: 
+              => @club.description+'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.'*2
+            #profile.tab-pane ...
+            #messages.tab-pane ...
+            #settings.tab-pane ...
 
 
 

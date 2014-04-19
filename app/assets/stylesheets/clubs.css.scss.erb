@@ -10,6 +10,37 @@ div > div.btn-red{
 
 #clubs_show{
 
+  .tab-content{
+    border: 2px solid #ec5c5c;
+    border-radius:0 0 5px 5px;
+    padding: 20px 20px 40px 20px;
+  }
+  .nav-tabs{
+    border-bottom:none;
+  }
+
+  .nav-tabs > li > a {
+    margin-right: 2px;
+    line-height: 1.428571429;
+    border: 2px solid #ec5c5c;
+    border-radius: 4px 4px 0 0;
+    border-bottom: none;
+    text-decoration: none;
+    color:#ec5c5c;
+  }
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: white;
+    background-color: #ec5c5c;
+    cursor: default;
+  }
+
+  .nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: initial;
+  }
+  .nav > li:not(:first-child) {
+    margin-left:-4px;
+  }
   .average-price{
     position:absolute;
     bottom:0px;
@@ -33,20 +64,6 @@ div > div.btn-red{
       li{
         margin-left: -19px;
       }
-    }
-  }
-
-  .club-contact{
-    display: table-row;
-    padding-bottom:25px;
-    .contact-img {
-      float:left;
-      padding-right: 5px;
-      margin-bottom: 9%;
-    }
-    .contact-text{
-      float:left;
-      width:110px;
     }
   }
 
