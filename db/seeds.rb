@@ -96,6 +96,21 @@ properties = Property.create([
     :kind_ru => "Цель",
     :kind_en => "Goal"
   },
+
+  {
+    :name_ru => "Wi-fi",
+    :name_en => "Wi-fi",
+    :kind_ru => "Особенность",
+    :kind_en => "Feature"
+  },
+
+  {
+    :name_ru => "Скидка для бородатых",
+    :name_en => "Discount for bearded",
+    :kind_ru => "Особенность",
+    :kind_en => "Feature"
+  }
+
 ])
 
 clubs = Club.create!([
