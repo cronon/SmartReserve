@@ -20,7 +20,7 @@
         - @club.photos.limit(5).each do |photo|
           .club-photo-thumb
             = render 'photos/single', photo: photo
-        .club-photo-thumb style="position:relative;width:140px;height:115px"
+        .club-photo-thumb style="position:relative;width:120px;height:115px"
           div style="position:absolute; left:0; bottom:0"
             a[href='#'] Все фото...
       .col-md-6 style='padding-right:0;width:calc(100% - 420px)'
@@ -39,6 +39,63 @@
                 | Заказать такси
               .caption
                 | 7788
+        .row: .col-md-12: br
+        .row
+          .col-md-12 style="position:relative"
+            .club-info
+                table
+                  tr
+                    td: img src="#{asset_path 'clubs_show/on_map.png'}"
+                    td
+                      = @club.address
+                      br 
+                      a[href=""] Посмотреть на карте
+                  tr
+                    td: img src="#{asset_path 'clubs_show/phone.png'}"
+                    td
+                      = '+375171234567'
+                  tr
+                    td: img src="#{asset_path 'clubs_show/www.png'}"
+                    td: a[href="#"] http://example.com
+                  tr
+                    td style="padding-bottom:0": img src="#{asset_path 'clubs_show/email.png'}"
+                    td style="padding-bottom:0": a[href="mailto:exapmle@example.com"] exapmle@example.com
+            .club-info
+              label Особенности
+              ul
+                - @club.properties.where(:kind_ru => 'Особенность').each do |p|
+                  li = p.name
+            .club-info style="padding-right:0"
+              label Интерьер
+              ul
+                - @club.properties.where(:kind_ru => 'Интерьер').each do |p|
+                  li = p.name
+            .average-price
+              span style="font-size:16px"
+                | Средний чек:
+              span style="color:#ec5c5c;font-size:20px"
+                = @club.average_price.to_s
+              div style="display:inline;top:0;color:#ec5c5c;position:absolute;font-size:13px"
+                | руб
+            / .club-info
+            /   .club-contact
+            /     .contact-img: img src="#{asset_path 'clubs_show/on_map.png'}"
+            /     .contact-text
+            /       = @club.address
+            /       br 
+            /       a[href=""] Посмотреть на карте
+            /   .club-contact
+            /     .contact-img: img src="#{asset_path 'clubs_show/phone.png'}"
+            /     .contact-text
+            /       = '+375171234567'
+            /   .club-contact
+            /     .contact-img: img src="#{asset_path 'clubs_show/www.png'}"
+            /     .contact-text: a[href="#"] http://example.com
+            /   .club-contact
+            /     .contact-img: img src="#{asset_path 'clubs_show/email.png'}"
+            /     .contact-text: a[href="mailto:exapmle@example.com"] exapmle@example.com
+            / .club-info
+            / .club-info
 
 
 

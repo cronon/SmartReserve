@@ -10,6 +10,46 @@ div > div.btn-red{
 
 #clubs_show{
 
+  .average-price{
+    position:absolute;
+    bottom:0px;
+    right:0px;
+    font-weight:bold;
+  }
+
+  .club-info{
+    float:left;
+    padding-right:40px;
+    font-size: 13px;
+
+    td{
+      padding: 0 5px 25px 0;
+      max-width:110px;
+    }
+
+    ul{
+      list-style-image: url("<%= asset_path 'clubs_show/marker.png' %>");
+
+      li{
+        margin-left: -19px;
+      }
+    }
+  }
+
+  .club-contact{
+    display: table-row;
+    padding-bottom:25px;
+    .contact-img {
+      float:left;
+      padding-right: 5px;
+      margin-bottom: 9%;
+    }
+    .contact-text{
+      float:left;
+      width:110px;
+    }
+  }
+
   .button-wrapper{
     float:left;
     padding-right: 10px;
