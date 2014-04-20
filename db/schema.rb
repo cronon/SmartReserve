@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417181751) do
+ActiveRecord::Schema.define(version: 20140420095716) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -78,6 +78,9 @@ ActiveRecord::Schema.define(version: 20140417181751) do
     t.string   "city"
     t.decimal  "rating_average", precision: 6, scale: 2, default: 0.0
     t.boolean  "is_certified",                           default: false
+    t.string   "metro_station"
+    t.string   "site"
+    t.string   "email"
   end
 
   add_index "clubs", ["user_id"], name: "index_clubs_on_user_id"
