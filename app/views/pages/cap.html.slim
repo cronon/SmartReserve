@@ -7,6 +7,7 @@ html lang="en" xmlns="http://www.w3.org/1999/xhtml"
     = stylesheet_link_tag "application", "data-turbolinks-track" => true
     = stylesheet_link_tag "//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css" /
     = csrf_meta_tags
     = favicon_link_tag
     meta content="7562595b0d9d7730" name="yandex-verification" /
@@ -35,8 +36,8 @@ html lang="en" xmlns="http://www.w3.org/1999/xhtml"
             p.text
               | Зарегистрируйтесь и получите возможность первыми протестировать систему SmartReserve
           = form_for(User.new, remote: true, url: '/users', method:'POST', authenticity_token: true) do |f|
-            input.btn.btn-block.text name="user[email]" placeholder=("Ваш E-mail") size="30" style="border-color:black;cursor:text" type="email" /
-            input.btn.btn-block.text name="button" onclick="$('#modal').modal()" type="submit" value="Зарегистрироваться" /
+            input#user_email.btn.btn-block.text name="user[email]" placeholder=("Ваш E-mail") style="border-color:black;cursor:text" type="email" /
+            input.btn.btn-block.text name="button" data-remote="true" onclick="window.location.href='/users/sign_up?email='+$('#user_email')[0].value" type="submit" value="Зарегистрироваться" /
             /! input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'"
             input name="user[password]" type="hidden" value="123456" /
             input name="user[phone]" type="hidden" value="+375290123456" /

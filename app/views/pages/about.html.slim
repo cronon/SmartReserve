@@ -1,6 +1,6 @@
 .row
   .col-md-8.col-md-offset-2.about
-    = breadcrumbs content_tag(:span,class: 'glyphicon glyphicon-arrow-right'), 'О проекте'=>'/'
+    = breadcrumbs content_tag(:span,class: 'glyphicon glyphicon-arrow-right'), 'О проекте'=>'/about'
     h2[style="font-weight:bold"] О проекте
     #about_project
       p
@@ -33,7 +33,7 @@
           li
             .teammate
               a href="" data-toggle="modal" data-target="#mikhal_palych_modal" style="color:black"
-                .pic style="background-image: url('#{asset_path "team/cat.png"}');"
+                .pic
                 .caption
                   span.bold Котенок
                   br

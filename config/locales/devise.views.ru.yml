@@ -43,6 +43,7 @@ ru:
         we_need_your_current_password_to_confirm_your_changes: введите текущий пароль для подтверждения изменений
       new:
         sign_up: Регистрация
+        password: Пароль
     sessions:
       new:
         sign_in: Войти
