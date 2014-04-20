@@ -296,6 +296,8 @@ ru:
       metro_station: Станция метро
       site: Сайт
       email: Электронная почта
+      action_reservation: Действие брони
+      duration_action_reservation: Длительность действия брони
   news:
     index:
       news_main_title: Новости
