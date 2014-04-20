@@ -35,23 +35,22 @@
 			    p
 			    	= f.label t('.email')
 			    	= f.text_field :email
-			  .field
-			    = f.label t('.tables_count')
-			    = f.text_field :tables_count
-			  .field
-			    = f.label t('.average_price')
-			    = f.text_field :average_price
-			  .field
-			    = f.label t('.time_before')
-			    = f.text_field :time_before
-			  .field
-			    = f.label t('.time_after')
-			    br/
-			    = f.text_field :time_after
-			  .field
-			    = f.label t('.time_last')
-			    br/
-			    = f.text_field :time_last
+			  .field class="new-club-text-field"
+			    p
+			    	= f.label t('.action_reservation')
+			    	= f.text_field :time_after
+			  .field class="new-club-text-field"
+			    p
+			    	= f.label t('.duration_action_reservation')
+			    	= f.text_field :time_waiting
+			  .field class="new-club-text-field"
+			  	p
+			    	= f.label t('.time_last')
+			    	= f.text_field :time_last
+			  .field class="new-club-text-field"
+			  	p
+			    	= f.label t('.average_price')
+			    	= f.text_field :average_price
 			  .field
 			    = f.label t('.description')
 			    br/
@@ -72,3 +71,5 @@
 			  .actions
 			    = f.submit
 
+		.col-md-6 style="border: 2px solid #ec5c5c;"
+			
