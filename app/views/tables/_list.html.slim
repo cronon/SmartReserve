@@ -20,17 +20,24 @@
             option[value=k*5 name='hour'] = k*5
     .row: col-md-12: br
     .tables-type style="font-size:14px"
-      a[href='#'] Курящий
-      |  | Некурящий | 
-      a[href='#'] Терраса
-      |  | 
-      a[href='#'] VIP
+      - halls = @tables.map{|t| t.hall}.uniq
+      - halls.each_with_index do |hall,i|
+        = hall if hall == params[:hall]
+        = link_to hall, '#', :remote=>true, :onclick => "showCurrentState('#{hall}')" unless hall == params[:hall]
+        = ' | ' unless i + 1 == halls.length
+      / a[href='#' onclick="showCurrentState('Курящий')"] Курящий
+      / |  | Некурящий | 
+      / a[href='#' onclick="showCurrentState('Курящий')"] Терраса
+      / |  | 
+      / a[href='#' onclick="showCurrentState('Курящий')"] VIP
   .row: col-md-12: br
 
   #tables_schema
     - @table_id = @order.table.id if @order && @order.table
     #tables_radios
-      - @tables.each do |table|
+      / !!!!WARNING! Business-logic in view!!!!!!!!!!!!
+      - @tables = @tables.where(:hall => params[:hall]) if params[:hall]
+      - @tables.order(:number).each do |table|
         .table-cell
           .table-wrapper[onclick="onTableClick(this)"]
             input type="radio" name="order[table_id]" id="table_#{table.id}" value="#{table.id}" data-toggle="button" #{'checked' if @table_id == table.id}
@@ -78,12 +85,12 @@ javascript:
     $(table_wrapper).find('.table').toggleClass('active');
   }
 
-  var showCurrentState = function(){
+  var showCurrentState = function(hall){
     var d = new Date();
     $('#datepicker')[0].value = [d.getDate(),d.getMonth()+1,d.getFullYear()].join('.');
     $.ajax({
          type: 'GET',
-         url: "#{club_tables_status_url(@club.id)}", //sumbits it to the given url of the form
+         url: "#{club_tables_status_url(@club.id)}"+"?hall="+hall, //sumbits it to the given url of the form
          data: $('#datepicker').serialize()+'&hour='+d.getHours()+"&minute="+d.getMinutes()
      });
   }

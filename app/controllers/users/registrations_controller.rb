@@ -10,6 +10,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #   resource = User.new :email => params[:email]
     #   #devise_mapping ||= Devise.mappings[:user]
     # end
-
   end
 end

@@ -24,8 +24,9 @@ class ClubsController < ApplicationController
     end
   end
 
-  def round_5 x
+  def round_5_min x
     (x / 5.0).round * 5
+    55 if x==60
   end
 
   def round_f f, x
@@ -38,7 +39,7 @@ class ClubsController < ApplicationController
     params[:date] ||= Date.today.to_s
     params[:hour] ||= Time.now.hour.to_s
     params[:minute] ||= Time.now.min.to_s
-    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5(params[:minute].to_i).to_s
+    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5_min(params[:minute].to_i).to_s
     @table_id = (params[:order] || {:table_id => 0})[:table_id].to_i
   end
 
