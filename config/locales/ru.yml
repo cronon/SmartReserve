@@ -274,10 +274,28 @@ ru:
       description: Описание заведения
       city: Город
       address: Адрес
+      phone: Телефон
+      metro_station: Станция метро
     single:
       make_a_reservation: Забронировать
     single_catalog:
       make_a_reservation: Забронировать
+    new:
+      reg_club: Регистрация заведения
+      add_club: Добавить заведение 
+      average_price: Средний чек
+      name: Название
+      tables_count: Количество столиков
+      time_before: Время до заказа (на подготовку столика)
+      time_after: Время после заказа (на уборку столика)
+      time_last: За сколько до закрытия не принимаются заказы
+      description: Описание заведения
+      city: Город
+      address: Адрес
+      phone: Телефон
+      metro_station: Станция метро
+      site: Сайт
+      email: Электронная почта
   news:
     index:
       news_main_title: Новости

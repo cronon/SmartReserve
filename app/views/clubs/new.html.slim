@@ -1,3 +1,74 @@
-h1= t('.add_club')
-= render 'form'
-= link_to 'Back', clubs_path
+.col-md-8.col-md-offset-2 
+	.row
+		h2= t('.reg_club')
+		.col-md-6 style="border: 2px solid #ec5c5c;"
+			= form_for([@club]) do |f|
+			  - if @club.errors.any?
+			    #error_explanation
+			      h2
+			        = pluralize(@club.errors.count, "error")
+			        | prohibited this club from being saved:
+			      ul
+			        - @club.errors.full_messages.each do |msg|
+			          li= msg
+			  .field class="new-club-text-field"
+			  	p
+			    	= f.label t('.name')
+			    	= f.text_field :name
+			  .field class="new-club-text-field"
+			  	p
+				    = f.label t('.address')
+				    = f.text_field :address
+			  .field class="new-club-text-field"
+			    p
+			    	= f.label t('.metro_station')
+			    	= f.text_field :metro_station
+			  .field class="new-club-text-field"
+			    p
+			    	= f.label t('.phone')
+			    	= f.text_field :phone
+			  .field class="new-club-text-field"
+			    p
+			    	= f.label t('.site')
+			    	= f.text_field :site
+			  .field class="new-club-text-field"
+			    p
+			    	= f.label t('.email')
+			    	= f.text_field :email
+			  .field
+			    = f.label t('.tables_count')
+			    = f.text_field :tables_count
+			  .field
+			    = f.label t('.average_price')
+			    = f.text_field :average_price
+			  .field
+			    = f.label t('.time_before')
+			    = f.text_field :time_before
+			  .field
+			    = f.label t('.time_after')
+			    br/
+			    = f.text_field :time_after
+			  .field
+			    = f.label t('.time_last')
+			    br/
+			    = f.text_field :time_last
+			  .field
+			    = f.label t('.description')
+			    br/
+			    = f.text_area :description, :cols => "30", :rows => "10"
+			  - [:mon,:tue,:wed,:thu,:fri,:sat,:sun].each do |day|
+			    .field
+			      = day.to_s
+			      | Opens at
+			      input name="club[#{day.to_s+'_opens'}]" type="text" /
+			      | Closes
+			      input name="club[#{day.to_s+'_closes'}]" type="text" /
+			  - Property.all.group_by{|p| p.kind}.each do |kind, properties|
+			    .field
+			      = kind
+			      - properties.each do |property|
+			        label = property.name
+			        = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property)
+			  .actions
+			    = f.submit
+
