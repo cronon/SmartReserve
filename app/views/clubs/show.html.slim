@@ -1,6 +1,8 @@
 .row: .col-md-12: br
 .row
   .col-md-8.col-md-offset-2#clubs_show
+    = breadcrumbs ' &rarr; ', 'Главная'=>'/', "Заведения"=>"/catalog", @club.name => '/'+@club.id.to_s
+    .row: .col-md-12: br
     .row
       .col-md-3 style="margin-top:-10px"
         = @club.properties.find_by_kind_en('Type').name
@@ -27,16 +29,19 @@
         .row
           .col-md-12 style='padding-right:0'
             .button-wrapper
-              .btn.btn-red.btn-danger
-                | Забронировать столик
+              a[href="#{club_new_order_path(@club)}"]
+                .btn.btn-red.btn-danger
+                  | Забронировать столик
               .caption
                 | Это бесплатно!
             .button-wrapper
-              .btn.btn-red.btn-danger
-                | Заказать банкет
+              a[href="#{}"]
+                .btn.btn-red.btn-danger
+                  | Заказать банкет
             .button-wrapper
-              .btn.btn-red.btn-danger
-                | Заказать такси
+              a[href="#{}"]
+                .btn.btn-red.btn-danger
+                  | Заказать такси
               .caption
                 | 7788
         .row: .col-md-12: br
@@ -72,10 +77,10 @@
                   li = p.name
             .average-price
               span style="font-size:16px"
-                | Средний чек:
+                ' Средний чек:
               span style="color:#ec5c5c;font-size:20px"
                 = @club.average_price.to_s
-              div style="display:inline;top:0;color:#ec5c5c;position:absolute;font-size:13px"
+              div style="display:inline;top:3px;color:#ec5c5c;position:absolute;font-size:13px"
                 | руб
 
       .row: .col-md-12: br
