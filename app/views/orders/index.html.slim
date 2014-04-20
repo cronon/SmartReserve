@@ -1,18 +1,31 @@
-h1 Listing orders
-table
-  thead
-    tr
-      th Table
-      th Since
-      th Until
-      th
-      th
-      th
-  tbody
-    - @orders.each do |order|
-      tr
-        td= order.table
-        td= order.since
-        td= order.until
-        td= link_to 'Show', order
-        td= link_to 'Destroy', order, method: :delete, data:   confirm: 'Are you sure?'  
+.row: .col-md-12: br
+.row
+  .col-md-8.col-md-offset-2
+    = breadcrumbs ' &rarr; ', 'Главная'=>'/', "Заведения"=>"/catalog", @club.name => '/'+@club.id.to_s, 'Заказы' => '/orders'
+    .row: .col-md-12: br
+    .row: .col-md-12: br
+    .row
+      .col-md-6 style="width:420px; padding-right:0"
+        img src="#{@club.avatar.url || asset_path('avatars/no_avatar.png')}" style="margin:0"
+      .col-md-6 style='padding-right:0;width:calc(100% - 420px)'
+        .row
+          .col-md-12 style='padding-right:0'
+            h3[style="font-weight:bold;margin-top:0;font-size: 1.4em;"] = @club.name
+            p = @club.description
+            a.btn.btn-red-border Редактировать информацию
+
+      .row: .col-md-12: br
+      .row
+        .col-md-12#red-tabs
+          ul.nav.nav-tabs
+            li.active
+              a data-toggle="tab" href="#scheme"  Схема заведения
+            li
+              a data-toggle="tab" href="#statistics"  Статистика
+          .tab-content
+            #scheme.tab-pane.active
+              .row
+                .col-md-8#tables_list
+                  - @tables = @club.table
+                  = render 'tables/list'
+            #statistics.tab-pane ...

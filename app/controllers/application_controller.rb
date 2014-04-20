@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = :ru
   end
   before_filter :set_locale
+  before_filter :set_time
 
   def change_locale
     if current_user.nil?
@@ -23,6 +24,20 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def round_5_min x
+    (x / 5.0).round * 5
+    55 if x==60
+  end
+
+  def set_time
+    puts params
+    params[:date] ||= Date.today.strftime('%d.%m.%Y')
+    params[:hour] ||= Time.now.hour.to_s
+    params[:minute] ||= Time.now.min.to_s
+    puts params.to_s + '###'
+    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5_min(params[:minute].to_i).to_s
+  end
 
   def set_locale
     session[:locale] ||= "ru"

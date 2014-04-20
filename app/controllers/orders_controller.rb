@@ -18,7 +18,8 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Club.find(params[:club_id]).table.map{|t| t.order}.flatten
+    @club = Club.find(params[:club_id])
+    @orders = @club.table.map{|t| t.order}.flatten
   end
 
   # GET /orders/1
@@ -26,8 +27,9 @@ class OrdersController < ApplicationController
   def show
   end  
 
-  def round_5 x
+  def round_5_min x
     (x / 5.0).round * 5
+    55 if x==60
   end
   
   def new
@@ -40,10 +42,10 @@ class OrdersController < ApplicationController
     else
       @order.phone = '+375'
     end
-    params[:date] ||= Date.today.to_s
+    params[:date] ||= Date.today.strftime('%d.%m.%Y')
     params[:hour] ||= Time.now.hour.to_s
     params[:minute] ||= Time.now.min.to_s
-    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5(params[:minute].to_i).to_s
+    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5_min(params[:minute].to_i).to_s
   end
 
   # POST /orders

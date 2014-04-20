@@ -1,6 +1,26 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div > .btn-red-border {
+  background-color: #ffffff;
+  border-color: #ec5c5c;
+  border-width:2px;
+  color: #ec5c5c;
+  height: 36px;
+  font-size:18px;
+  height:50px;
+  padding-top: 10px;
+}
+.btn-red-border > a{
+  color:#ec5c5c;
+  vertical-align: middle;
+}
+.btn-red-border > a:hover{
+  color:#ec5c5c;
+  text-decoration: none;
+}
+
 #orders_form{
   border: 3px solid #ec5c5c;
   padding: 40px;
