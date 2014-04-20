@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       I18n.locale = session[:locale].to_sym
     else
-      I18n.locale = current_user.locale.to_sym
+      I18n.locale = (current_user.locale ||='ru').to_sym
     end
   end
 
