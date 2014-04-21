@@ -24,11 +24,6 @@ class ClubsController < ApplicationController
     end
   end
 
-  def round_5_min x
-    (x / 5.0).round * 5
-    55 if x==60
-  end
-
   def round_f f, x
     Proc.new{(x/ f.to_f).round * f}
   end

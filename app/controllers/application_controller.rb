@@ -24,19 +24,18 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-
   def round_5_min x
-    (x / 5.0).round * 5
-    55 if x==60
+    r = (x / 5.0).round * 5
+    r = 55 if r==60
+    r
   end
 
   def set_time
-    puts params
     params[:date] ||= Date.today.strftime('%d.%m.%Y')
     params[:hour] ||= Time.now.hour.to_s
     params[:minute] ||= Time.now.min.to_s
-    puts params.to_s + '###'
     @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5_min(params[:minute].to_i).to_s
+    puts @time, '###'
   end
 
   def set_locale

@@ -26,11 +26,6 @@ class OrdersController < ApplicationController
   # GET /orders/1.json
   def show
   end  
-
-  def round_5_min x
-    (x / 5.0).round * 5
-    55 if x==60
-  end
   
   def new
     @order = Order.new 
@@ -42,10 +37,10 @@ class OrdersController < ApplicationController
     else
       @order.phone = '+375'
     end
-    params[:date] ||= Date.today.strftime('%d.%m.%Y')
-    params[:hour] ||= Time.now.hour.to_s
-    params[:minute] ||= Time.now.min.to_s
-    @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5_min(params[:minute].to_i).to_s
+    # params[:date] ||= Date.today.strftime('%d.%m.%Y')
+    # params[:hour] ||= Time.now.hour.to_s
+    # params[:minute] ||= Time.now.min.to_s
+    # @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5_min(params[:minute].to_i).to_s
   end
 
   # POST /orders
