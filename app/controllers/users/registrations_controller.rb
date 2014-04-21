@@ -11,4 +11,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     #   #devise_mapping ||= Devise.mappings[:user]
     # end
   end
+
+  def create
+    respond_to :js
+    super
+  end
 end

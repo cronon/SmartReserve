@@ -2,7 +2,7 @@ SmartReserve::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   #devise_for :users
-  devise_for :users, :controllers => { registrations: 'users/registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations' }
   #get "users/profile"
   post 'change_locale/:locale', to: 'application#change_locale', as: :change_locale
   post 'set_locale', to: 'application#set_locale', as: :set_locale
@@ -10,6 +10,7 @@ SmartReserve::Application.routes.draw do
   get 'home' => 'clubs#index', as: :clubs
   post 'home' => 'clubs#create'
   get 'catalog' => 'clubs#catalog'
+  match 'remote_sign_up', to: 'remote_content#remote_sign_up', via: [:get]
   resources :clubs, except: [:index] do    
     get 'tables' => 'tables#index', as: :tables
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button

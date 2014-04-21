@@ -1,5 +1,5 @@
 .col-md-8.col-md-offset-2
-  = breadcrumbs ' &rarr; ', 'Главная'=>'/', "Заведения"=>"/catalog", @club.name => '/'+@club.id.to_s, 'Забронировать' => '/orders/new'
+  = breadcrumbs ' &rarr; ', 'Главная'=>'/', "Заведения"=>"/clubs", @club.name => '/'+@club.id.to_s, 'Забронировать' => '/orders/new'
   h2[style='font-weight:bold'] Бронирование
   .row: .col-md-12: br
   = render "orders/form"

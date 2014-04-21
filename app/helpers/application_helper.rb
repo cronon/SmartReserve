@@ -1,5 +1,21 @@
 module ApplicationHelper
 
+  def flash_normal
+   render "layouts/messages"
+  end
+
+  def resource_name
+   :user
+  end
+
+  def resource
+   @resource ||= User.new
+  end
+
+  def devise_mapping
+   @devise_mapping ||= Devise.mappings[:user]
+  end
+
   # breadcrumbs('->',{'Main'=>'/','Catalog'=>'/clubs','Stopline'=>'/15','Edit'=>'/edit'}) =>
   # Main->Catalog->Stopline->Edit
   def breadcrumbs separator, crumbs

@@ -1,0 +1,6 @@
+<% #if devise_error_messages! %>
+ // $('#sign_up_form .modal-body').html('<%= j render("layouts/sign_up_form") %>');
+<% #else %>
+  $('#sign_up_modal').modal('hide');
+  $('#success_modal').modal();
+<% #end %>

@@ -6,8 +6,52 @@
   - else
     = link_to t('sign_in'), ''
     |  | 
-    | #{link_to t('sign_up'), ''}
+    = link_to t("sign_up"), remote_sign_up_path, :remote => true
 - #user_root_path
 - #destroy_user_session_path, :method => 'delete'
 - #new_user_session_path
 - #new_user_registration_path
+/ br
+/ #sign_up_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
+/   .modal-dialog
+/     .modal-content
+/       .modal-header
+/         button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+/         h4#myModalLabel.modal-title.red[style='text-align:center'] Регистрация
+/       .modal-body
+/         = render 'layouts/sign_up_form'
+#success_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+        h4#myModalLabel.modal-title.red[style='text-align:center'] Выполнено успешно
+      .modal-body
+        button.btn.btn-default data-dismiss="modal" type="button"  ОК
+javascript:
+  $.fn.serializeObject = function() {
+    var values = {}
+    $("form input, form select, form textarea").each( function(){
+      values[this.name] = $(this).val();
+    });
+    return values;
+  }
+     
+  $(function(){
+    $("form#ajax_signup").submit(function(e){
+      e.preventDefault(); //This prevents the form from submitting normally
+      var user_info = $(this).serializeObject();
+      console.log("About to post to /users: " + JSON.stringify(user_info));
+      $.ajax({
+        type: "POST",
+        url: "/users",
+        data: user_info,
+        success: function(json){
+          console.log("The Devise Response: " + JSON.stringify(json));
+          },
+        dataType: "js"
+      });
+      $('#sign_up_modal').modal('hide');
+      $('#success_modal').modal();
+    });
+  });
