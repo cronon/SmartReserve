@@ -1,7 +1,7 @@
 .row: .col-md-12: br
 .row
   .col-md-8.col-md-offset-2#clubs_show
-    = breadcrumbs ' &rarr; ', 'Главная'=>'/', "Заведения"=>"/catalog", @club.name => '/'+@club.id.to_s
+    = breadcrumbs ' &rarr; ', 'Главная'=>'/', "Заведения"=>"/clubs", @club.name => '/'+@club.id.to_s
     .row: .col-md-12: br
     .row
       .col-md-3 style="margin-top:-10px"
@@ -25,7 +25,8 @@
             = render 'photos/single', photo: photo
         .club-photo-thumb style="position:relative;width:120px;height:115px"
           div style="position:absolute; left:0; bottom:0"
-            a[href='#'] Все фото...
+            - if not @club.photos.blank?
+              a[href='#'] Все фото...
       .col-md-6 style='padding-right:0;width:calc(100% - 420px)'
         .row
           .col-md-12 style='padding-right:0'
@@ -105,13 +106,13 @@
               label> Кухня: 
               = @club.properties.find_by_kind_en('Kitchen').name_en
               br
-              label> Willcomen: 
-              | Alle 
+              label> Мы принимаем: 
+              | Всех 
               br
-              label> Schedule: 
-              | Whole day
+              label> Время работы: 
+              | Круглосуточно
               br
-              label> Description: 
+              label> Дополнительная информация: 
               => @club.description+'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.'*2
             #profile.tab-pane ...
             #messages.tab-pane ...
