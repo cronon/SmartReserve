@@ -49,7 +49,7 @@
             input type="radio" name="order[table_id]" id="table_#{table.id}" value="#{table.id}" data-toggle="button" #{'checked' if @table_id == table.id}
             div[class="table #{get_color_table(table, @time)} #{'active' if @table_id == table.id}"]
               .table-number
-                | #{table.id}
+                | #{table.number}
             .chair
               .chair-number
                 | #{table.seats}

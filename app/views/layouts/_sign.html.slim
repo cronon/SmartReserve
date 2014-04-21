@@ -2,11 +2,11 @@
   - if user_signed_in?
     = link_to t("Hello, #{current_user.email}"), ''
     |  | 
-    | #{link_to t('log_out'), ''}
+    | #{link_to t('log_out'), destroy_user_session_path, :method => 'delete'}
   - else
     = link_to t('sign_in'), ''
     |  | 
-    | #{link_to t('sign_out'), ''}
+    | #{link_to t('sign_up'), ''}
 - #user_root_path
 - #destroy_user_session_path, :method => 'delete'
 - #new_user_session_path
