@@ -18,7 +18,8 @@
     .row: .col-md-12: br
     .row
       .col-md-6 style="width:420px; padding-right:0"
-        img src="#{@club.avatar.url || asset_path('avatars/no_avatar.png')}" style="margin:0"
+        / @club.avatar.url || 'avatars/no_avatar.png'
+        img src="#{asset_path('avatars/no_avatar.png')}" style="margin:0"
         - @club.photos.limit(5).each do |photo|
           .club-photo-thumb
             = render 'photos/single', photo: photo
