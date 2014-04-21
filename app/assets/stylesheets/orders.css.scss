@@ -2,6 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#orders_online {
+  border: 3px solid #ec5c5c;
+  border-radius: 5px;
+}
+.order:hover{
+  background-color:#eee;
+  text-decoration: none;
+}
+.order {
+  font-size: 13px;
+  border-bottom: 1px solid #ec5c5c;
+  padding: 12px;
+  color:black;
+  cursor: pointer;
+
+  .modal-label {
+    display: inline-block;
+    width: 30%;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 5px
+  }
+  .modal-description {
+    display: inline-block;
+    width: 70%;
+  }
+}
+
+
 div > .btn-red-border {
   background-color: #ffffff;
   border-color: #ec5c5c;

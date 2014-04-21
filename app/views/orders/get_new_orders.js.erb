@@ -1,0 +1,3 @@
+<% @orders.each do |order| %>
+  $('#tables_online').prepend("<%= j render('orders/single',:order => order) %>")
+<% end %>

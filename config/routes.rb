@@ -21,6 +21,7 @@ SmartReserve::Application.routes.draw do
     put 'orders' => 'orders#update'
     get 'orders/:id' => 'orders#show', as: :order
     delete 'orders/:id' => 'orders#destroy'
+    get 'orders/get_new_orders' => 'orders#get_new_orders',as: :get_new_orders
     post 'orders/prepare' => 'orders#prepare', as: :prepare_order
     get 'tables_status' => 'clubs#tables_status', as: :tables_status
     resources :photos, only: [:create, :destroy]

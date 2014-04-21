@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
 
   validates :phone, format: { with: /\A\+\d{12}\z/,
     message: "is invalid" }
-  validates :table_id, presence: true
+  validates :table_id, presence: true, :numericality => {greater_than: 0}
 
   def self.prepare params 
     result = Table.find(params[:table_id] || Table.last.id).new_order_at params[:time]

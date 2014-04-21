@@ -2,9 +2,13 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   load_and_authorize_resource
-  skip_authorize_resource :only => [:index,:show,:prepare,:create,:new]
+  skip_authorize_resource :only => [:index,:show,:prepare,:create,:new,:get_new_orders]
 
-  # need year, month, day, hour, minute, phone, name, table_id
+
+  def get_new_orders
+    @orders = Order.where(:club_id => params[:club_id]).where('created_at > ?', params[:last_time]).order(:created_at,:desc)
+  end
+
   def prepare
     @time = parse_time(params)
     @order = Order.prepare :table_id => order_params[:table_id], :time => @time, :phone => order_params[:phone], :name => order_params[:name]
