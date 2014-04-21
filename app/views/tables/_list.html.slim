@@ -78,7 +78,7 @@ javascript:
    lang: 'ru',
    dayOfWeekStart: 1,
    timepicker: false,
-   onChangeDateTime: setTimeout(20,function(){showState(current_hall)})
+   onChangeDateTime: function(){showState(current_hall)}
   });
   $('.time-inputs select').change(function(){showState(current_hall)});
   $('.time-inputs select').ready(function(){

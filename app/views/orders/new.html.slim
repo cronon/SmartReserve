@@ -5,3 +5,14 @@
   = render "orders/form"
   #confirmation_dialog.modal.fade tabindex="-1" 
   = link_to 'Back', club_orders_path(@club)
+  #succes_dialog.modal.fade tabindex="-1"
+    .modal-dialog style="width:363px"
+      .modal-content          
+        .modal-body
+          h4#myModalLabel.modal-title.red[style='text-align:center']
+            | Ждем вас 
+            span#succes_date
+            |  в 
+            span#succes_time
+          div style="text-align:center"
+            a.btn.btn-primary data-dismiss="modal" type="button" onclick="window.location.replace('/home')" ОК

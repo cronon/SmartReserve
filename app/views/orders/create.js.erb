@@ -2,6 +2,9 @@
   $('#confirmation_dialog').html("<%= j(render(partial:'confirmation', object: @order)) %>");
 <% else %>
   $('#confirmation_dialog').modal('hide')
-  window.location.replace("<%= club_order_url(@order.table.club, @order) %>");
+  $('#succes_dialog').modal();
+  $('#succes_date').html("<%= j @order.time.strftime('%d.%m.%Y') %>");
+  $('#succes_time').html("<%= j @order.time.strftime('%H:%M') %>");
+  //window.location.replace("<%= club_order_url(@order.table.club, @order) %>");
   <% #  а то по кнопке назад будет confirmation_dialog %>
 <% end %>

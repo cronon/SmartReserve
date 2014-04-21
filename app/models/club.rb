@@ -27,7 +27,7 @@ class Club < ActiveRecord::Base
   ajaxful_rateable :stars => 5, :dimensions => [:rating], :cache_column_rating => :rating_average
 
   def orders
-    self.table.map{|t| t.order}.flatten
+    Order.where(:table_id => self.table_ids)
   end
 
   def certified?

@@ -2,7 +2,7 @@
   .modal-content
     .modal-header
       button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-      h4.modal-title Phone confirmation
+      h4.modal-title Подтверждение заказа
     .modal-body
       = form_for(@order, url: club_order_create_path, remote: true, authenticity_token: true, html: {id: "confirmation_form"}) do |f|
         - if @order.errors.any?
@@ -20,6 +20,7 @@
         = f.hidden_field :phone
         = f.hidden_field :time
         = f.hidden_field :token
+        = f.hidden_field :comment
         .field
           = f.label :confirmation
           br/

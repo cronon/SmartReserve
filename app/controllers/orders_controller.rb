@@ -6,15 +6,17 @@ class OrdersController < ApplicationController
 
 
   def get_new_orders
-    @orders = Order.where(:club_id => params[:club_id]).where('created_at > ?', params[:last_time]).order(:created_at,:desc)
+    @orders = Club.find(params[:club_id]).orders
+    @orders = @orders.where('created_at > ?', Time.parse(params[:last_time])+5.seconds).order(:created_at => :desc)
   end
 
   def prepare
     @time = parse_time(params)
     @order = Order.prepare :table_id => order_params[:table_id], :time => @time, :phone => order_params[:phone], :name => order_params[:name]
+    @order.comment = params[:comment]
     @club = Club.find params[:club_id]
     @tables = @club.table
-    @order.confirmation = ""
+    #@order.confirmation = ""
     respond_to do |format|
       format.js
     end
@@ -23,7 +25,7 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @club = Club.find(params[:club_id])
-    @orders = @club.table.map{|t| t.order}.flatten
+    @orders = @club.orders.order(:created_at => :desc)
   end
 
   # GET /orders/1

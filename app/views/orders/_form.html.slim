@@ -8,7 +8,7 @@
         label[style='font-weight:bold'] Введите ваши данные:
         - if @order.errors.any?
           #error_explanation
-            h2
+            h4
               = pluralize(@order.errors.count, "error")
               | prohibited this order from being saved:
             ul
