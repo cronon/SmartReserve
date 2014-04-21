@@ -10,7 +10,7 @@ SmartReserve::Application.routes.draw do
   get 'home' => 'clubs#index', as: :clubs
   post 'home' => 'clubs#create'
   get 'catalog' => 'clubs#catalog'
-  resources :clubs do
+  resources :clubs, except: [:index] do    
     get 'tables' => 'tables#index', as: :tables
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button
     get 'tables/:id/edit' =>'tables#edit', as: :edit_table #shows orders
@@ -31,6 +31,7 @@ SmartReserve::Application.routes.draw do
     resources :comments, only: [:create, :destroy]
     resources :news
   end
+  get '/clubs' => 'clubs#catalog'
   post 'news/news_full' => 'news#news_full', as: :news_full
   resources :comments, only: [:create, :destroy]
   get 'users/profile', as: 'user_root'

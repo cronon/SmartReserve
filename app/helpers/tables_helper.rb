@@ -8,5 +8,4 @@ module TablesHelper
 			else "table-booked"
 		end
 	end
-
 end

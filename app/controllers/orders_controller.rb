@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
   def prepare
     @time = parse_time(params)
     @order = Order.prepare :table_id => order_params[:table_id], :time => @time, :phone => order_params[:phone], :name => order_params[:name]
-    @order.comment = params[:comment]
+    @order.comment = order_params[:comment]
     @club = Club.find params[:club_id]
     @tables = @club.table
     #@order.confirmation = ""
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @club = Club.find(params[:club_id])
-    @orders = @club.orders.order(:created_at => :desc)
+    @orders = @club.orders.order(:created_at => :desc).limit(5)
   end
 
   # GET /orders/1

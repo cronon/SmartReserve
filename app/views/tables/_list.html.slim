@@ -13,11 +13,12 @@
         div[style='float:left']: label Выберите время 
         - p params
         .time-select: select[name='hour']
-          - (0..23).each do |k|
+          - ('00'..'23').each do |k|
             option[value=k name='hour'] = k
         .time-select: select[name='minute']
-          - (0..11).each do |k|
-            option[value=k*5 name='hour'] = k*5
+          - ('00'..'55').each do |k|
+            - if k.to_i % 5 == 0
+              option[value=k name='hour'] = k
     .row: col-md-12: br
     .tables-type style="font-size:14px"
       / !!!!WARNING! Business-logic in view!!!!!!!!!!!!
@@ -83,8 +84,8 @@ javascript:
   $('.time-inputs select').change(function(){showState(current_hall)});
   $('.time-inputs select').ready(function(){
     console.log("#{@time.min}");
-    $('.time-inputs select')[0].value = "#{@time.hour}";
-    $('.time-inputs select')[1].value = "#{@time.min}";
+    $('.time-inputs select')[0].value = "#{@time.strftime('%H')}";
+    $('.time-inputs select')[1].value = "#{@time.strftime('%M')}";
     $('select').selectize({
       create: true
     });
