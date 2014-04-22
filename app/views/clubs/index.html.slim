@@ -42,11 +42,18 @@
     .container-fixed
       .row
         .col-md-8.col-md-offset-2
-          - @clubs.each_slice(4) do |four_clubs|
+          - @clubs.each_slice(3) do |four_clubs|
             .row
+              css:
+                div.club-wrapper-catalog{
+                  padding-bottom:0;
+                }
+                div.club-wrapper-catalog div.club-div{
+                  width:295px;
+                }
               - four_clubs.each do |club|
-                .col-md-3 style="width:220px" 
-                  = render 'clubs/single', :club => club
+                .col-md-4 
+                  = render 'clubs/single_catalog', :club => club
             .row
               .col-md-12 style="height:20px" 
     .row
