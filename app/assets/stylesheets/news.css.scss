@@ -32,6 +32,14 @@
 	width: 125px;
 	heigth: 50px;
 }
+.get_full_news:hover, .set_little_news:hover, 
+ .get_full_news:active, .set_little_news:active,
+ .set_little_news:focus, .get_full_news:focus{
+ 	background-color: white;
+	border-color:#ec5c5c;
+	color:#ec5c5c;
+}
+
 .arrow{
 	color:#ec5c5c;
 }

@@ -30,11 +30,9 @@ css:
   br/
   javascript:
     $(document).ready(function(){
-        console.log('dsds');
         $(window).resize(function(){
           $('.fb-like-box').attr('data-width',$('#fb-widget').width());
           $('#vk_groups').html('');
-          console.log('asa');
           VK.Widgets.Group("vk_groups", {mode: 0, width:'auto', height: "270"}, 67797904);
         });
       });
