@@ -1,5 +1,12 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  def new
+    super do |resource|
+      p params
+      resource.email = params[:email]
+    end
+  end
+
  def create
    build_resource(sign_up_params)
    if resource.save

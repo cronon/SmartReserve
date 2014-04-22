@@ -7,4 +7,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :clubs
   ajaxful_rater
+
+  def active_for_authentication?
+    true
+  end
 end

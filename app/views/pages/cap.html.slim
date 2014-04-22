@@ -37,7 +37,18 @@ html lang="en" xmlns="http://www.w3.org/1999/xhtml"
               | Зарегистрируйтесь и получите возможность первыми протестировать систему SmartReserve
           = form_for(User.new, remote: true, url: '/users', method:'POST', authenticity_token: true) do |f|
             input#user_email.btn.btn-block.text name="user[email]" placeholder=("Ваш E-mail") style="border-color:black;cursor:text" type="email" /
-            input.btn.btn-block.text name="button" data-remote="true" onclick="window.location.href='/users/sign_up?email='+$('#user_email')[0].value" type="submit" value="Зарегистрироваться" /
+            = link_to "Зарегистрироваться", '#', remote: true, onclick: "sign_up_call()", class: 'btn btn-block text'
+            javascript:
+              var sign_up_call = function(){
+                $.ajax({
+                  url: "#{remote_sign_up_path}.js",
+                  data: 'email='+$("#user_email")[0].value,
+                  method: "GET",
+                  accept: 'text/javascript',
+                  dataType: 'script'
+                })
+              }
+            /input.btn.btn-block.text name="button" data-remote="true" onclick="window.location.href='/users/sign_up?email='+$('#user_email')[0].value" type="submit" value="Зарегистрироваться" /
             /! input type="button" class="btn btn-block" value="Вход" name="button" onclick="window.location.href='/users/sign_in'"
             input name="user[password]" type="hidden" value="123456" /
             input name="user[phone]" type="hidden" value="+375290123456" /
@@ -79,14 +90,14 @@ html lang="en" xmlns="http://www.w3.org/1999/xhtml"
     div style="display:none" 
       - %w[fb.png gplay.png  mp.png yt.png as.png gp.png vk.png twitter.png fs.png].each do |i|
         img src=asset_path(i) /
-    #modal.modal.fade tabindex="-1" 
-      .modal-dialog
-        .modal-content
-          .modal-header
-            button.close aria-hidden="true" data-dismiss="modal" onclick="$('#modal').modal('hide')" type="button"  &times;
-            h4.modal-title Позравляем!
-          .modal-body
-            | Теперь вы подписаны на наши новости.
+    / #modal.modal.fade tabindex="-1" 
+    /   .modal-dialog
+    /     .modal-content
+    /       .modal-header
+    /         button.close aria-hidden="true" data-dismiss="modal" onclick="$('#modal').modal('hide')" type="button"  &times;
+    /         h4.modal-title Позравляем!
+    /       .modal-body
+    /         | Теперь вы подписаны на наши новости.
         /! /.modal-content
       /! /.modal-dialog
     /! Yandex.Metrika counter

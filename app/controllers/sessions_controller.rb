@@ -24,11 +24,13 @@ class SessionsController < Devise::SessionsController
 
 
   def create
-    p request.xhr?
     if request.xhr?
-      p 'sdfdsf'
-      resource = warden.authenticate!(:scope => resource_name, :recall => '#{controller_path}#failure')
-      sign_in_and_redirect(resource_name, resource)
+      resource = warden.authenticate(:scope => resource_name, :recall => '#{controller_path}#failure')
+      if resource
+        sign_in_and_redirect(resource_name, resource)
+      else
+        failure
+      end
     else
       super
     end
@@ -42,6 +44,7 @@ class SessionsController < Devise::SessionsController
   end
  
   def failure
+    flash[:alert] = "Неправильный логин или пароль"
     return render 'remote_content/devise_errors'
   end
 end
