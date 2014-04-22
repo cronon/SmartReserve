@@ -25,15 +25,19 @@ css:
   #tw-widget iframe{
     width:100%;
   }
-/ javascript:
-/   $(window).resise(function(){
-/     $('.fb-like-box').attr('data-width',$('#fb-widget').width());
-/     $('#vk_groups').html('');$('#vk_groups').html('');
-/     VK.Widgets.Group("vk_groups", {mode: 0, width:$('#fb-widget').width(), height: "270"}, 67797904);
-/   })
 .row
   h3 style="text-align:center"  Присоединяйтесь к нам в социальных сетях
   br/
+  javascript:
+    $(document).ready(function(){
+        console.log('dsds');
+        $(window).resize(function(){
+          $('.fb-like-box').attr('data-width',$('#fb-widget').width());
+          $('#vk_groups').html('');
+          console.log('asa');
+          VK.Widgets.Group("vk_groups", {mode: 0, width:'auto', height: "270"}, 67797904);
+        });
+      });
   #tw-widget.col-md-4
     a.twitter-timeline data-theme="light" data-widget-id="450782283545325568" height="270" href="https://twitter.com/SmartReserve"  Tweets by @SmartReserve
     javascript:
