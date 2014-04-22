@@ -2,7 +2,7 @@ SmartReserve::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   #devise_for :users
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' }
   #get "users/profile"
   post 'change_locale/:locale', to: 'application#change_locale', as: :change_locale
   post 'set_locale', to: 'application#set_locale', as: :set_locale

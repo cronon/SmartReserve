@@ -1,0 +1,26 @@
+#sign_in_modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+        h4#myModalLabel.modal-title.red[style='text-align:center'] Войти
+      = form_for(resource, :as => resource_name, :url => session_path(resource_name), :remote => true, :format => :js, :html => {:class => "form-signin"}, :authenticity_token => true) do |f|
+        .modal-body
+          div
+            = f.label 'Email'
+            br/
+            = f.email_field :email
+          div
+            = f.label 'Пароль'
+            br/
+            = f.password_field :password
+          - if devise_mapping.rememberable?
+              div
+                = f.check_box :remember_me
+                = f.label "Запомнить меня"
+          br
+          = link_to "Забыли пароль?", new_user_password_path
+        .modal-footer
+          .form-actions
+            a  href="#" class="btn btn-red-border" data-dismiss="modal"  Отмена
+            = f.submit "Вход", :class => "btn btn-red-border", style: "padding-top:5px"
