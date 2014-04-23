@@ -1,10 +1,13 @@
-script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript" 
+script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"
 javascript:
+  var createMap = function (e) {
+  // do something...
+
    ymaps.ready(init);
    function init() {
        var myMap = new ymaps.Map('map', {
            center: [53.753994, 27.622093],
-           zoom: 9,
+           zoom: 1,
            behaviors: ['default']
        });
        myMap.controls.add('zoomControl');
@@ -66,6 +69,7 @@ javascript:
                 myMap.geoObjects.add(myPlacemark);
                 */
            });
+   }
    }
 #map_modal.modal.fade aria-hidden="true" aria-labelledby="map_modalLabel" role="dialog" tabindex="-1" 
   .modal-dialog style="width:640px"
