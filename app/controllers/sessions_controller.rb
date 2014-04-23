@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class SessionsController < Devise::SessionsController
   skip_authorize_resource :only => [:create,:sign_in_and_redirect,:failure]
 
@@ -44,7 +45,7 @@ class SessionsController < Devise::SessionsController
   end
  
   def failure
-    flash[:alert] = "Неправильный логин или пароль"
+    flash[:alert] = t('.wrong_login_or_pass')
     return render 'remote_content/devise_errors'
   end
 end

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class AddHallToTables < ActiveRecord::Migration
   def change
     add_column :tables, :hall, :string, :default => 'Некурящий'

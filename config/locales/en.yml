@@ -40,3 +40,6 @@ en:
   clubs:
     new:
       reg_club: Registration places
+  sessions:
+    create:
+      wrong_login_or_pass: Wrong login or pass

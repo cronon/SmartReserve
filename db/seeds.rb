@@ -109,6 +109,13 @@ properties = Property.create([
     :name_en => "Discount for bearded",
     :kind_ru => "Особенность",
     :kind_en => "Feature"
+  },
+
+  {
+    :name_ru => "Любая",
+    :name_en => "Any",
+    :kind_ru => "Кухня",
+    :kind_en => "Kitchen"
   }
 
 ])
@@ -125,7 +132,7 @@ clubs = Club.create!([
     :phone => "+375336660055",
     :user_id => owners.select{|o| o[:owner_clubs] == true}.first.id,
     :properties => Property.all,
-    :avatar => '/assets/for_seed/1.jpg',
+    :avatar => '/assets/for_seed/1.jpg', #delete 
     :city => 'Минск',
     :average_price => 100,
     :is_certified => true,

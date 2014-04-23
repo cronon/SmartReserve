@@ -307,3 +307,6 @@ ru:
       roll_up: Свернуть
     news_roll_up:
       more: Подробнее
+  sessions:
+    create:
+      wrong_login_or_pass: Неправильный логин или пароль
