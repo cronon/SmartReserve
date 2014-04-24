@@ -8,7 +8,7 @@ label Галерея
 = form_for(Photo.new, :url => photos_path(@club), :method => :post, :remote => true) do |f|
   div.btn.btn-red.btn-danger
     | Обзор...
-    = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:30px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
+    = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
 
 / there will be resopnse with photos/create.js
 javascript:

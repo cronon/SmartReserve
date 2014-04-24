@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+  
   def round_5_min x
     r = (x / 5.0).round * 5
     r = 55 if r==60
