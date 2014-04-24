@@ -7,6 +7,7 @@ class ClubsController < ApplicationController
   def catalog
     params[:price] ||= {:from=>0, :to => 999999999999999999}
     @clubs = (params[:name] && !params[:name].blank?) ? Club.where(name: params[:name]) : Club.all
+    @clubs = @clubs.where(:submited => true)
     if params[:property_ids]
       ids = Property.where(:id => params[:property_ids])
                     .map{|p| p.club_ids}
@@ -48,6 +49,7 @@ class ClubsController < ApplicationController
   # GET /clubs.json
   def index
     @clubs = Club.all
+    @clubs = @clubs.where(:submited => true)
   end
 
   # GET /clubs/1

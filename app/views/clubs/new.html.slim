@@ -122,7 +122,8 @@
       .col-md-6.input-groups.right-col style="margin-top:22px"
         label Схема заведения
         #prev_avatar style="min-height:150px"
-          img src="#{to_http(@club.avatar.url) unless @club.avatar.blank?}" /
+          - unless @club.avatar.blank?
+            img src="#{to_http(@club.avatar.url) unless @club.avatar.blank?}" /
         div.btn.btn-red.btn-danger
           | Обзор...
           = f.file_field :avatar, id: 'avatar_input', style:"width:30px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
