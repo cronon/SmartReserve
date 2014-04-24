@@ -15,7 +15,7 @@
         table.text-fields
           tr
             td = f.label "Тип заведения"
-            td: input name='club_type' type="text"
+            td: input name='club_type' type="text" value="#{@club.properties.find_by_kind_en('Type') ? @club.properties.find_by_kind_en('Type').name : ''}"
           tr
             td = f.label t('.name')
             td = f.text_field :name
