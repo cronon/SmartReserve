@@ -15,9 +15,7 @@
         table.text-fields
           tr
             td = f.label "Тип заведения"
-            td: select[name='property_ids[]']
-                - Property.where(:kind_en => 'Type').each do |k|
-                    option[value=k.id name='property_ids[]'] = k.name
+            td: input name='club_type' type="text"
           tr
             td = f.label t('.name')
             td = f.text_field :name
@@ -42,13 +40,13 @@
             td = f.label t('.email')
             td = f.text_field :email
           tr
-            td = f.label t('.action_reservation')
+            td = f.label t('.action_reservation')+" (мин)"
             td = f.text_field :time_after
           tr
-            td = f.label t('.duration_action_reservation')
+            td = f.label "Время ожидания (мин)"
             td = f.text_field :time_waiting
           tr
-            td = f.label "Поседняя бронь" 
+            td = f.label "Последняя бронь" 
                           /t('.time_last')
             td = f.text_field :time_last
           tr
@@ -61,6 +59,13 @@
               img.card src="#{asset_path('cards/visa.png')}"
               = check_box_tag 'property_ids[]', Property.find_by_name_en('MasterCard').id, false, class: "styled"
               img.card src="#{asset_path('cards/master_card.png')}"
+          tr
+            td = "Другие (через запятую)"
+            td = f.text_field :payment_methods
+          tr
+            td = f.label "Поседняя бронь" 
+                          /t('.time_last')
+            td = f.text_field :time_last
           tr
             td: label Кухня
             td

@@ -74,6 +74,8 @@ class ClubsController < ApplicationController
   def create
     @club = Club.find(params[:club_id]) #security issue
     @club.properties = Property.find(params[:property_ids])
+    @club.update! schedule_params
+    p schedule_params
     respond_to do |format|
       if @club.update(club_params)
         @club.submited = true
@@ -90,6 +92,8 @@ class ClubsController < ApplicationController
   # PATCH/PUT /clubs/1.json
   def update
     @club.properties = Property.find(params[:property_ids])
+    @club.update! schedule_params
+    p schedule_params
     respond_to do |format|
       if @club.update(club_params)
         format.html { redirect_to @club, notice: 'Club was successfully updated.' }
@@ -115,12 +119,25 @@ class ClubsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_club
       @club = Club.find(params[:id])
+      if not @club.submited
+        not_found
+      end
+    end
+    def schedule_params
+      res = {}
+      keys = [:mon,:tue,:wed,:thu,:fri,:sat,:sun].map{|d| (d.to_s+'_opens').to_sym} +
+             [:mon,:tue,:wed,:thu,:fri,:sat,:sun].map{|d| (d.to_s+'_closes').to_sym}
+      keys.each do |key|
+        res[key] = params[key][:hour]+':'+params[key][:minute]
+      end
+      res
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def club_params
       #params.require(:club).permit(:photos_attributes).permit!
-      params.require(:club).permit!#({
+      params.require(:club).permit!
+      #({
         # :photos_attributes => 
         #   [:photo => [] ]
         # },:dimension,:stars, :show_user_rating, :name, :tables_count, :description, :time_before, :time_after, :time_last)
