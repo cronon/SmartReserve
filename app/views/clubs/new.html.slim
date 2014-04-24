@@ -1,75 +1,141 @@
-.col-md-8.col-md-offset-2 
-	.row
-		h2= t('.reg_club')
-		.col-md-6 style="border: 2px solid #ec5c5c;"
-			= form_for([@club]) do |f|
-			  - if @club.errors.any?
-			    #error_explanation
-			      h2
-			        = pluralize(@club.errors.count, "error")
-			        | prohibited this club from being saved:
-			      ul
-			        - @club.errors.full_messages.each do |msg|
-			          li= msg
-			  .field class="new-club-text-field"
-			  	p
-			    	= f.label t('.name')
-			    	= f.text_field :name
-			  .field class="new-club-text-field"
-			  	p
-				    = f.label t('.address')
-				    = f.text_field :address
-			  .field class="new-club-text-field"
-			    p
-			    	= f.label t('.metro_station')
-			    	= f.text_field :metro_station
-			  .field class="new-club-text-field"
-			    p
-			    	= f.label t('.phone')
-			    	= f.text_field :phone
-			  .field class="new-club-text-field"
-			    p
-			    	= f.label t('.site')
-			    	= f.text_field :site
-			  .field class="new-club-text-field"
-			    p
-			    	= f.label t('.email')
-			    	= f.text_field :email
-			  .field class="new-club-text-field"
-			    p
-			    	= f.label t('.action_reservation')
-			    	= f.text_field :time_after
-			  .field class="new-club-text-field"
-			    p
-			    	= f.label t('.duration_action_reservation')
-			    	= f.text_field :time_waiting
-			  .field class="new-club-text-field"
-			  	p
-			    	= f.label t('.time_last')
-			    	= f.text_field :time_last
-			  .field class="new-club-text-field"
-			  	p
-			    	= f.label t('.average_price')
-			    	= f.text_field :average_price
-			  .field
-			    = f.label t('.description')
-			    br/
-			    = f.text_area :description, :cols => "30", :rows => "10"
-			  - [:mon,:tue,:wed,:thu,:fri,:sat,:sun].each do |day|
-			    .field
-			      = day.to_s
-			      | Opens at
-			      input name="club[#{day.to_s+'_opens'}]" type="text" /
-			      | Closes
-			      input name="club[#{day.to_s+'_closes'}]" type="text" /
-			  - Property.all.group_by{|p| p.kind}.each do |kind, properties|
-			    .field
-			      = kind
-			      - properties.each do |property|
-			        label = property.name
-			        = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property)
-			  .actions
-			    = f.submit
+.col-md-8.col-md-offset-2#clubs_new
+  h2.bold[style="margin-left:-15px"] = t('.reg_club')
+  = form_for([@club]) do |f|
+    input name="club_id" value="#{@club.id}" type="hidden"
+    .row    
+      .col-md-6.input-groups
+        - if @club.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@club.errors.count, "error")
+              | prohibited this club from being saved:
+            ul
+              - @club.errors.full_messages.each do |msg|
+                li= msg
+        table.text-fields
+          tr
+            td = f.label "Тип заведения"
+            td: select[name='property_ids[]']
+                - Property.where(:kind_en => 'Type').each do |k|
+                    option[value=k.id name='property_ids[]'] = k.name
+          tr
+            td = f.label t('.name')
+            td = f.text_field :name
+          tr
+            td = f.label t('.address')
+            td = f.text_field :address
+          tr
+            td = f.label t('.metro_station')
+            td = f.text_field :metro_station
+          tr
+            td = f.label t('.phone')
+            td = f.text_field :phone
+          tr
+            td
+              label[style="margin-bottom:0"] Доп. телефоны
+              div[style="font-size:11px"] через запятую:
+            td: input id="club_additional_phones" name="club[additional_phones]" type="text"
+          tr
+            td = f.label t('.site')
+            td = f.text_field :site
+          tr
+            td = f.label t('.email')
+            td = f.text_field :email
+          tr
+            td = f.label t('.action_reservation')
+            td = f.text_field :time_after
+          tr
+            td = f.label t('.duration_action_reservation')
+            td = f.text_field :time_waiting
+          tr
+            td = f.label "Поседняя бронь" 
+                          /t('.time_last')
+            td = f.text_field :time_last
+          tr
+            td = f.label t('.average_price')
+            td = f.text_field :average_price
+          tr
+            td: label Способы расчета в заведении
+            td.payment-systems
+              = check_box_tag 'property_ids[]', Property.find_by_name_en('Visa').id, false, class: "styled"
+              img.card src="#{asset_path('cards/visa.png')}"
+              = check_box_tag 'property_ids[]', Property.find_by_name_en('MasterCard').id, false, class: "styled"
+              img.card src="#{asset_path('cards/master_card.png')}"
+          tr
+            td: label Кухня
+            td
+              select[name='property_ids[]']
+                - Property.where(:kind_en => 'Kitchen').each do |k|
+                    option[value=k.id name='property_ids[]'] = k.name_en
+        label Режим работы
+        table.schedule-table
+          - [:mon,:tue,:wed,:thu,:fri,:sat,:sun].each do |day|
+            tr
+              td: label = t(day.to_s)+': '
+              td с
+              td == render 'layouts/time_select', :name => day.to_s+'_opens'
+              td по
+              td == render 'layouts/time_select', :name => day.to_s+'_closes'
+        .field
+          = f.label t('.description')
+          br/
+          span[style="font-size:11px"] Только уникальное!
+          br/
+          = f.text_area :description, rows: 10, style: "width:100%"
+        .actions
+          = f.submit
 
-		.col-md-6 style="border: 2px solid #ec5c5c;"
-			
+      .col-md-6.input-groups.right-col
+        .row
+          .col-md-6.properties-group
+            ul
+              .properties-heading 
+                | Категории
+                br
+                span[style="font-weight:normal;font-size:11px"] для выбора цели похода в ваше заведение          
+              - Property.find_all_by_kind_en("Goal").each do |property|
+                li
+                  = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
+                  = property.name
+          .col-md-6.properties-group
+            ul 
+              .properties-heading Залы
+              - %w[Курящий Некурящий VIP Караоке Другое].each do |hall|
+                li
+                  = check_box_tag 'hall', '', false, class: "styled"
+                  = hall
+        .row
+          .col-md-6.properties-group
+            ul 
+              .properties-heading Залы
+              - Property.find_all_by_kind_en("Atmosphere").each do |property|
+                li
+                  = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
+                  = property.name
+          .col-md-6.properties-group
+            ul 
+              .properties-heading Залы
+              - Property.find_all_by_kind_en("Interior").each do |property|
+                li
+                  = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
+                  = property.name    
+      .col-md-6.input-groups.right-col style="margin-top:22px"
+        label Схема заведения
+        #prev_avatar style="min-height:150px"
+          img src="#{to_http(@club.avatar.url) unless @club.avatar.blank?}" /
+        div.btn.btn-red.btn-danger
+          | Обзор...
+          = f.file_field :avatar, id: 'avatar_input', style:"width:30px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
+
+        javascript:
+           $('#avatar_input').change(function(){
+             $('#prev_avatar').html("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
+           })
+    .row: .col-md-12: br/
+    .row
+      .col-md-6.input-groups
+        == render 'clubs/upload_photo'
+javascript:
+  $(document).ready(function(){
+    $('select').selectize();
+  });

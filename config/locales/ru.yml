@@ -1,4 +1,11 @@
 ru:
+  mon: Пн
+  tue: Вт
+  wed: Ср
+  thu: Чт
+  fri: Пт
+  sat: Сб
+  sun: Вс
   sign_in: Вход
   sign_up: Регистрация
   log_out: Выход

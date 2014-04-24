@@ -1,4 +1,5 @@
-div id="photo_#{photo.id}" style="width:125px;height:100px;" 
-  /removed https:// because of aws didnt work fine with it
-  = image_tag(('http://'+photo.image_url[8..-1]), style: 'display:inline;width:125px;height:100px;')
-  /= link_to('Delete', club_photo_path(photo.imageable_id,photo.id), :method => :delete, :remote => true)
+.col-md-3 style="padding:0"
+  div.thumbnail id="photo_#{photo.id}" style="margin-bottom:0"
+    /removed https:// because of aws didnt work fine with it
+    = image_tag(('http://'+photo.image_url[8..-1]), 'data-src'=>"holder.js/100%x180")
+    /= link_to('Delete', club_photo_path(photo.imageable_id,photo.id), :method => :delete, :remote => true)

@@ -1,8 +1,8 @@
 class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy]
 
-  load_and_authorize_resource
-  skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
+  # load_and_authorize_resource
+  # skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
 
   def catalog
     params[:price] ||= {:from=>0, :to => 999999999999999999}
@@ -57,20 +57,24 @@ class ClubsController < ApplicationController
 
   # GET /clubs/new
   def new
-    @club = Club.new
+    #@club = current_user.clubs.build
+    @club = Club.create! :tables_count => 0, :name=>'d'
+    @club.name=''
   end
 
   # GET /clubs/1/edit
   def edit
+    return render 'new'
   end
 
   # POST /clubs
   # POST /clubs.json
   def create
-    @club = current_user.clubs.build(club_params)
+    @club = Club.find(params[:club_id]) #security issue
     @club.properties = Property.find(params[:property_ids])
     respond_to do |format|
-      if @club.save
+      if @club.update(club_params)
+        @club.submited = true
         format.html { redirect_to edit_club_path(@club), notice: 'Club was successfully created.' }
         format.json { render action: 'show', status: :created, location: @club }
       else

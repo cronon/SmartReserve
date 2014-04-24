@@ -1,0 +1,8 @@
+.time-selector
+  .time-select: select[name="#{name}[hour]"]
+    - ('00'..'23').each do |k|
+      option[value=k name="#{name}[hour]"] = k
+  .time-select: select[name="#{name}[minute]"]
+    - ('00'..'55').each do |k|
+      - if k.to_i % 5 == 0
+        option[value=k name="#{name}[minute]"] = k

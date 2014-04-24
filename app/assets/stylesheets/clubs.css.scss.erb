@@ -1,6 +1,101 @@
 // Place all the styles related to the Clubs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.schedule-table{
+  td:nth-child(1){
+    padding-right:5px;
+  }
+  td:nth-child(4){
+    width:18px;
+  }
+  label{
+    margin-bottom: 0;
+  }
+  .selectize-input{
+    padding: 6px 6px;
+  }
+  .selectize-control.single .selectize-input:after{
+    right:6px;
+  }
+  .time-selector{
+    width:150px;
+  }
+  .time-select{
+    padding-left:5px;
+    width:70px;
+    float:left;
+  }
+  .selectize-control{
+    width:100%;
+  }
+}
+
+.payment-systems{
+  .checkbox-custom{
+    padding-top:1px;
+    float:none;
+    display: initial;
+  }
+}
+.card{
+  display: inline;
+  margin: 0;
+  margin-right: 15px;
+}
+.card-visa{
+  width:76px;
+  height:24px;
+  background-image:url("<%= asset_path('cards/visa.png') %>");
+}
+.card-mastercard{
+  width:38px;
+  height:24px;
+  background-image:url("<%= asset_path('cards/master_card.png') %>");
+}
+#clubs_new{
+  .properties-group{
+    ul{
+      list-style: none;
+      padding-left:11px
+    }
+
+    .properties-heading{
+      font-weight: bold;
+      margin-left: -11px;
+    }
+  }
+  .text-fields{
+
+    td{
+      padding-bottom:10px;
+      width:45%;
+
+      input{
+        width:100%;
+      }
+    }
+
+    td:nth-child(2){
+      padding-left:10px;
+    }
+  }
+
+  .input-groups{
+    border: 3px solid #ec5c5c;
+    border-radius: 5px;
+    padding:15px;
+    font-size:13px;
+  }
+  .right-col{
+    margin-left:15px;
+    width: calc(50% - 15px)
+  }
+  .new-club-text-field{
+    input{
+      float: right;
+    }
+  }
+}
 
 div > div.btn-red{
   @extend .btn-danger;
@@ -310,10 +405,4 @@ div > .btn-my {
 .btn-my > a:hover{
   color:#ec5c5c;
   text-decoration: none;
-}
-
-.new-club-text-field{
-  input{
-    float: right;
-  }
 }

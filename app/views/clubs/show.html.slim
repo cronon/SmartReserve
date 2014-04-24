@@ -22,7 +22,8 @@
         img src="#{asset_path('avatars/no_avatar.png')}" style="margin:0"
         - @club.photos.limit(5).each do |photo|
           .club-photo-thumb
-            = render 'photos/single', photo: photo
+            div id="photo_#{photo.id}" style="width:125px;height:100px;"
+              = image_tag(('http://'+photo.image_url[8..-1]), style: 'display:inline;width:125px;height:100px;')
         .club-photo-thumb style="position:relative;width:120px;height:115px"
           div style="position:absolute; left:0; bottom:0"
             - if not @club.photos.blank?

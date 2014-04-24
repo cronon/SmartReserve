@@ -11,14 +11,13 @@
         input#datepicker[name="date" style="width:110px" value="#{params[:date] || Time.now.strftime('%d.%m.%Y')}"]
       .time-inputs 
         div[style='float:left']: label Выберите время 
-        - p params
         .time-select: select[name='hour']
           - ('00'..'23').each do |k|
             option[value=k name='hour'] = k
         .time-select: select[name='minute']
           - ('00'..'55').each do |k|
             - if k.to_i % 5 == 0
-              option[value=k name='hour'] = k
+              option[value=k name='minute'] = k
     .row: col-md-12: br
     .tables-type style="font-size:14px"
       / !!!!WARNING! Business-logic in view!!!!!!!!!!!!

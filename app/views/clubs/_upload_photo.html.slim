@@ -1,23 +1,21 @@
+label Галерея
+<script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
+.row#prev_photo_form_uploaded_data style="margin:0" 
+  - @club.photos.each do |photo|
+    == render 'photos/single', photo: photo
 
-/ Добавление - обычный постсо вложенными параметрами, удаление - аяксом.
-/ Юзер заливает фоточк в инпут, они отображаются на странице и по сабмиту улетают вместе с формой.
-/ Существующие картинки уже показаны на странице, и рядом с ними крестик. По крестику аякс на Photos#delete
-/ и убирается фоточка со вьюшки, причем независимо от респонза.
 
 = form_for(Photo.new, :url => club_photos_path(@club), :method => :post, :remote => true) do |f|
-  = f.label :uploaded_file, t('.upload_new_file')
-  = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]'
+  div.btn.btn-red.btn-danger
+    | Обзор...
+    = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:30px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
 
-  <script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
-  #prev_photo_form_uploaded_data style="" 
-    - @club.photos.each do |photo|
-      = render 'photos/single', photo: photo
-
+/ there will be resopnse with photos/create.js
 javascript:
-   $('#new_photo input').change(function(){
+  $('#photo_uploaded_data').change(function(){
   
     //array input
-     var filedata = $('#new_photo > input')[0],
+     var filedata = $('#photo_uploaded_data')[0],
        formdata = false;
        if (window.FormData) {
           formdata = new FormData();
@@ -44,7 +42,7 @@ javascript:
                  processData: false,
                  contentType: false,
                  success: function(res) {
-  
+
                  },
                  error: function(res) {
   
