@@ -5,7 +5,7 @@ label Галерея
     == render 'photos/single', photo: photo
 
 
-= form_for(Photo.new, :url => club_photos_path(@club), :method => :post, :remote => true) do |f|
+= form_for(Photo.new, :url => photos_path(@club), :method => :post, :remote => true) do |f|
   div.btn.btn-red.btn-danger
     | Обзор...
     = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:30px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
@@ -36,7 +36,7 @@ javascript:
            if (formdata) {
                formdata.append("file", file);
                $.ajax({
-                 url: "#{club_photos_path(@club)}?type=club",
+                 url: "#{photos_path()}?type=club",
                  type: "POST",
                  data: formdata,
                  processData: false,

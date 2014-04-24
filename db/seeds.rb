@@ -116,7 +116,20 @@ properties = Property.create([
     :name_en => "Any",
     :kind_ru => "Кухня",
     :kind_en => "Kitchen"
-  }
+  },
+  {
+    :name_ru => "Visa",
+    :name_en => "Visa",
+    :kind_ru => "",
+    :kind_en => ""
+  },
+
+  {
+    :name_ru => "MasterCard",
+    :name_en => "MasterCard",
+    :kind_ru => "",
+    :kind_en => ""
+  },
 
 ])
 

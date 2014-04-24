@@ -4,6 +4,8 @@ class ClubsController < ApplicationController
   # load_and_authorize_resource
   # skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
 
+  #ID_UNEXIT_CLUB = 1000000
+
   def catalog
     params[:price] ||= {:from=>0, :to => 999999999999999999}
     @clubs = (params[:name] && !params[:name].blank?) ? Club.where(name: params[:name]) : Club.all
@@ -57,9 +59,10 @@ class ClubsController < ApplicationController
 
   # GET /clubs/new
   def new
+    @club = Club.new
     #@club = current_user.clubs.build
-    @club = Club.create! :tables_count => 0, :name=>'d'
-    @club.name=''
+    #@club = Club.create! :tables_count => 0, :name=>'d'
+    #@club.name=''
   end
 
   # GET /clubs/1/edit
@@ -70,11 +73,15 @@ class ClubsController < ApplicationController
   # POST /clubs
   # POST /clubs.json
   def create
-    @club = Club.find(params[:club_id]) #security issue
+    @club = Club.new
+    @club.tables_count = 0
     @club.properties = Property.find(params[:property_ids])
     respond_to do |format|
       if @club.update(club_params)
         @club.submited = true
+        photos = Photo.find session[:photos_for_req_club]
+        #photos.map { |photo| photo.imageable_id = @club.id; photo.update! }
+        @club.photos << photos
         format.html { redirect_to edit_club_path(@club), notice: 'Club was successfully created.' }
         format.json { render action: 'show', status: :created, location: @club }
       else
