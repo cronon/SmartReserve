@@ -62,6 +62,7 @@ class ClubsController < ApplicationController
   # GET /clubs/new
   def new
     @club = Club.new
+    @club
   end
 
   # GET /clubs/1/edit
