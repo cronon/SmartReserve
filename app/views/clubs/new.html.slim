@@ -112,14 +112,14 @@
         .row
           .col-md-6.properties-group
             ul 
-              .properties-heading Залы
+              .properties-heading Атмосфера
               - Property.find_all_by_kind_en("Atmosphere").each do |property|
                 li
                   = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
                   = property.name
           .col-md-6.properties-group
             ul 
-              .properties-heading Залы
+              .properties-heading Интерьер
               - Property.find_all_by_kind_en("Interior").each do |property|
                 li
                   = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
