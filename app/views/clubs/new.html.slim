@@ -77,9 +77,9 @@
           - [:mon,:tue,:wed,:thu,:fri,:sat,:sun].each do |day|
             tr
               td: label = t(day.to_s)+': '
-              td с
+              td style="width:15px;" c 
               td == render 'layouts/time_select', :name => day.to_s+'_opens'
-              td по
+              td style="width:20px;" по 
               td == render 'layouts/time_select', :name => day.to_s+'_closes'
         .field
           = f.label t('.description')
@@ -144,4 +144,14 @@
 javascript:
   $(document).ready(function(){
     $('select').selectize();
+    $('.time').mask('fs:mn', 
+      {
+        translation: {
+          'f': {pattern: /[0-2]/},
+          's': {pattern: /[0-9]/},
+          'm': {pattern: /[0-5]/},
+          'n': {pattern: /[0-9]/}
+        }
+      }
+    );
   });

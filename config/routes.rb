@@ -26,13 +26,13 @@ SmartReserve::Application.routes.draw do
     get 'get_new_orders' => 'orders#get_new_orders',as: :get_new_orders
     post 'orders/prepare' => 'orders#prepare', as: :prepare_order
     get 'tables_status' => 'clubs#tables_status', as: :tables_status
-    resources :photos, only: [:create, :destroy]
     # post 'photos/:owner_type' => 'photos#create', as: :photo_create
     # delete 'photos/'
     post :rate, :on => :member
     resources :comments, only: [:create, :destroy]
     resources :news
   end
+  resources :photos, only: [:create, :destroy]
   get '/clubs' => 'clubs#catalog'
   post 'news/news_full' => 'news#news_full', as: :news_full
   resources :comments, only: [:create, :destroy]
