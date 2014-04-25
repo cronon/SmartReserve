@@ -9,7 +9,6 @@ class ClubsController < ApplicationController
   def catalog
     params[:price] ||= {:from=>0, :to => 999999999999999999}
     @clubs = (params[:name] && !params[:name].blank?) ? Club.where(name: params[:name]) : Club.all
-    @clubs = @clubs.where(:submited => true)
     if params[:property_ids]
       ids = Property.where(:id => params[:property_ids])
                     .map{|p| p.club_ids}
@@ -51,7 +50,6 @@ class ClubsController < ApplicationController
   # GET /clubs.json
   def index
     @clubs = Club.all
-    @clubs = @clubs.where(:submited => true)
   end
 
   # GET /clubs/1
@@ -62,9 +60,6 @@ class ClubsController < ApplicationController
   # GET /clubs/new
   def new
     @club = Club.new
-    #@club = current_user.clubs.build
-    #@club = Club.create! :tables_count => 0, :name=>'d'
-    #@club.name=''
   end
 
   # GET /clubs/1/edit
@@ -82,7 +77,6 @@ class ClubsController < ApplicationController
     p schedule_params
     respond_to do |format|
       if @club.update(club_params)
-        @club.submited = true
         photos = Photo.find session[:photos_for_req_club]
         #photos.map { |photo| photo.imageable_id = @club.id; photo.update! }
         @club.photos << photos
@@ -126,9 +120,6 @@ class ClubsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_club
       @club = Club.find(params[:id])
-      if not @club.submited
-        not_found
-      end
     end
     def schedule_params
       res = {}
