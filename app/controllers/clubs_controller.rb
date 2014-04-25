@@ -33,10 +33,6 @@ class ClubsController < ApplicationController
   def tables_status
     @club = Club.find(params[:club_id])
     @tables = @club.table
-    # params[:date] ||= Date.today.strftime('%d.%m.%Y')
-    # params[:hour] ||= Time.now.hour.to_s
-    # params[:minute] ||= Time.now.min.to_s
-    # @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5_min(params[:minute].to_i).to_s
     @table_id = (params[:order] || {:table_id => 0})[:table_id].to_i
   end
 
@@ -72,12 +68,11 @@ class ClubsController < ApplicationController
   def create
     @club = Club.new
     #@club = current_user.clubs.build
-    @club.tables_count = 0
-    @club.properties = Property.find(params[:property_ids])
+    @club.tables_count =  params[:tables_count] || 0
+    @club.properties = Property.find_by_name_ru(params[:club_type]) || Property.create(:kind_en=>'Type',:kind_ru=>'Тип',:name_ru=>params[:club_type])
     respond_to do |format|
       if @club.update(club_params)
         photos = Photo.find session[:photos_for_req_club]
-        #photos.map { |photo| photo.imageable_id = @club.id; photo.update! }
         @club.photos << photos
         format.html { redirect_to edit_club_path(@club), notice: 'Club was successfully created.' }
         format.json { render action: 'show', status: :created, location: @club }
@@ -92,7 +87,7 @@ class ClubsController < ApplicationController
   # PATCH/PUT /clubs/1.json
   def update
     @club.properties = Property.find(params[:property_ids])
-    @club.properties << Property.find_by_name_ru(params[:club_type])
+    @club.properties <<(Property.find_by_name_ru(params[:club_type]) || Property.create(:kind_en=>'Type',:kind_ru=>'Тип',:name_ru=>params[:club_type]))
     respond_to do |format|
       if @club.update(club_params)
         photos = Photo.find session[:photos_for_req_club]
