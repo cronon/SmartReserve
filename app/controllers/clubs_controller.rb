@@ -62,9 +62,6 @@ class ClubsController < ApplicationController
   # GET /clubs/new
   def new
     @club = Club.new
-    #@club = current_user.clubs.build
-    #@club = Club.create! :tables_count => 0, :name=>'d'
-    #@club.name=''
   end
 
   # GET /clubs/1/edit
@@ -76,10 +73,9 @@ class ClubsController < ApplicationController
   # POST /clubs.json
   def create
     @club = Club.new
+    #@club = current_user.clubs.build
     @club.tables_count = 0
     @club.properties = Property.find(params[:property_ids])
-    @club.update! schedule_params
-    p schedule_params
     respond_to do |format|
       if @club.update(club_params)
         @club.submited = true
@@ -99,10 +95,11 @@ class ClubsController < ApplicationController
   # PATCH/PUT /clubs/1.json
   def update
     @club.properties = Property.find(params[:property_ids])
-    @club.update! schedule_params
-    p schedule_params
+    @club.properties << Property.find_by_name_ru(params[:club_type])
     respond_to do |format|
       if @club.update(club_params)
+        photos = Photo.find session[:photos_for_req_club]
+        @club.photos << photos
         format.html { redirect_to @club, notice: 'Club was successfully updated.' }
         format.json { head :no_content }
       else
@@ -129,15 +126,6 @@ class ClubsController < ApplicationController
       if not @club.submited
         not_found
       end
-    end
-    def schedule_params
-      res = {}
-      keys = [:mon,:tue,:wed,:thu,:fri,:sat,:sun].map{|d| (d.to_s+'_opens').to_sym} +
-             [:mon,:tue,:wed,:thu,:fri,:sat,:sun].map{|d| (d.to_s+'_closes').to_sym}
-      keys.each do |key|
-        res[key] = params[key][:hour]+':'+params[key][:minute]
-      end
-      res
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
