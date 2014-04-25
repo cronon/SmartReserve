@@ -73,7 +73,7 @@
                       button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
                       h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
                     .modal-body
-                      - Property.where(kind_ru: "Особенность").limit(6).each do |property|
+                      - Property.where(kind_ru: "Особенность").each do |property|
                         = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
                         label = property.name
                         br/
@@ -109,9 +109,9 @@
                   .modal-content
                     .modal-header
                       button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-                      h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
+                      h4#myModalLabel.modal-title.red[style='text-align:center'] Интерьер
                     .modal-body
-                      - Property.where(kind_ru: "Интерьер").limit(6).each do |property|
+                      - Property.where(kind_en: "Interior").each do |property|
                         = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
                         label = property.name
                         br/
@@ -125,7 +125,7 @@
                                     button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
                                     h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
                                   .modal-body
-                                    - Property.where(kind_ru: "Тип").limit(6).each do |property|
+                                    - Property.where(kind_en: "Type").each do |property|
                                       = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
                                       label = property.name
                                       br/
@@ -139,7 +139,7 @@
                                     button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
                                     h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
                                   .modal-body
-                                    - Property.where(kind_ru: "Атмосфера").limit(6).each do |property|
+                                    - Property.where(kind_en: "Atmosphere").each do |property|
                                       = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
                                       label = property.name
                                       br/
