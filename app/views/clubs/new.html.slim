@@ -15,7 +15,8 @@
         table.text-fields
           tr
             td = f.label "Тип заведения"
-            td: input name='club_type' class="typeahead" type="text" value="#{@club.properties.find_by_kind_en('Type') ? @club.properties.find_by_kind_en('Type').name : ''}"
+            td
+              input name='club_type' class="typeahead" type="text" value="#{@club.properties.find_by_kind_en('Type') ? @club.properties.find_by_kind_en('Type').name : ''}"
             javascript:
               var substringMatcher = function(strs) {
                 return function findMatches(q, cb) {
@@ -100,10 +101,6 @@
             td = "Другие (через запятую)"
             td = f.text_field :payment_methods
           tr
-            td = f.label "Поседняя бронь" 
-                          /t('.time_last')
-            td = f.text_field :time_last
-          tr
             td: label Кухня
             td
               select[name='property_ids[]']
@@ -111,13 +108,21 @@
                     option[value=k.id name='property_ids[]'] = k.name_en
         label Режим работы
         table.schedule-table
+          thead
+            th
+            th
+            th
+            th
+            th
+            th[style="color:#ec5c5c"] Круглосуточно
           - [:mon,:tue,:wed,:thu,:fri,:sat,:sun].each do |day|
-            tr
+            tr[id="#{day.to_s}_tr"]
               td: label = t(day.to_s)+': '
               td style="width:15px;" c 
               td == render 'layouts/time_select', :name => day.to_s+'_opens'
               td style="width:20px;" по 
               td == render 'layouts/time_select', :name => day.to_s+'_closes'
+              td: input.styled[id="#{day.to_s}_checkbox" data-day="#{day.to_s}" type="checkbox"]
         .field
           = f.label t('.description')
           br/
@@ -179,7 +184,23 @@
       .col-md-6.input-groups
         == render 'clubs/upload_photo'
 javascript:
+  var toggleWholeDayToInputs = function(e){
+    var checkbox_custom = e.target;
+    var checkbox = checkbox_custom.nextSibling;
+    console.log(checkbox.dataset['day']);
+    var inputs = $('#'+checkbox.dataset['day']+'_tr input[type="text"]')
+    if(checkbox.checked){
+      inputs.first().val('00:00');
+      inputs.last().val('24:00');
+      inputs.attr('disabled',true);
+    }else{
+      inputs.attr('disabled',false);
+    }
+  }
   $(document).ready(function(){
+    setTimeout(function(){
+      $('.schedule-table .checkbox-custom').click(toggleWholeDayToInputs);
+      },300);
     $('select').selectize();
     $('.time').mask('fs:mn', 
       {
