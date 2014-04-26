@@ -15,7 +15,44 @@
         table.text-fields
           tr
             td = f.label "Тип заведения"
-            td: input name='club_type' type="text" value="#{@club.properties.find_by_kind_en('Type') ? @club.properties.find_by_kind_en('Type').name : ''}"
+            td: input name='club_type' class="typeahead" type="text" value="#{@club.properties.find_by_kind_en('Type') ? @club.properties.find_by_kind_en('Type').name : ''}"
+            javascript:
+              var substringMatcher = function(strs) {
+                return function findMatches(q, cb) {
+                  var matches, substringRegex;                   
+                  // an array that will be populated with substring matches
+                  matches = [];                   
+                  // regex used to determine if a string contains the substring `q`
+                  substrRegex = new RegExp(q, 'i');                   
+                  // iterate through the pool of strings and for any string that
+                  // contains the substring `q`, add it to the `matches` array
+                  $.each(strs, function(i, str) {
+                    if (substrRegex.test(str)) {
+                      // the typeahead jQuery plugin expects suggestions to a
+                      // JavaScript object, refer to typeahead docs for more info
+                      matches.push({ value: str });
+                    }
+                  });                     
+                    cb(matches);
+                  };
+                };
+                var types = eval('#{Property.where(:kind_en => 'Type').map{|p| p.name}.to_json.html_safe};')      
+                $('.typeahead').
+                  typeahead({
+                      hint: true,
+                      highlight: true,
+                      minLength: 1
+                    },
+                    {
+                      name: '',
+                      displayKey: 'value',
+                      source: substringMatcher(types)
+                  }).
+                  focus(function(){
+                    console.log('sdas');
+                    $('.typeahead').typeahead('open');
+                  })
+                ;
           tr
             td = f.label t('.name')
             td = f.text_field :name

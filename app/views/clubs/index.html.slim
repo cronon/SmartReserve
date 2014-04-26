@@ -29,12 +29,12 @@
         - properties = Property.where(:kind_en => 'Goal')
         .col-md-offset-2.col-md-1 style="width:''" 
           a href="#" 
-            img alt="..." src=asset_path("categories/1.jpg") /
+            img alt="..." src=asset_url("categories/1.jpg") /
             = properties.shift.name
         - (2..8).each do |i|
           .col-md-1 style="width:''" 
             a href="#" 
-              img alt="..." src=asset_path("categories/#{i}.jpg") /
+              img alt="..." src=asset_url("categories/#{i}.jpg") /
               = properties.shift.name
     .row
       .col-md-12

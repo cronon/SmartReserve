@@ -1,6 +1,40 @@
 // Place all the styles related to the Clubs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.twitter-typeahead{
+  width:100%;
+  .tt-dropdown-menu {
+    width: 100%;
+    padding: 1px 1px;
+    background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  .tt-suggestion.tt-cursor {
+    background-color: #ccc;
+  }
+  .tt-suggestion {
+    p{
+      margin:0;
+    }
+    height: 24px;
+    padding: 3px 0px;
+  }
+  .tt-dropdown-menu, .gist {
+      text-align: left;
+  }
+  .tt-hint {
+      color: #999;
+  }
+  .typeahead {
+      background-color: #FFF;
+  }
+  .typeahead, .tt-query, .tt-hint {
+      height:24px;
+      padding: 1px 1px;
+      border: 1px solid #aaa;
+  }
+}
 .schedule-table{
   margin-left:20px;
   td{
