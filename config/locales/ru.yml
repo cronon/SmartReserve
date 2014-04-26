@@ -317,3 +317,12 @@ ru:
   sessions:
     create:
       wrong_login_or_pass: Неправильный логин или пароль
+  orders:
+    index:
+    statistics_orders:
+      data_book: Дата
+      time_book: Время
+      table: Столик
+      name_client: Имя
+      phone_client: Телефон
+      id_book: ID брони

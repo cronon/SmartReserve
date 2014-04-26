@@ -73,4 +73,21 @@ class Order < ActiveRecord::Base
       errors.add(:base, "Time #{self.until} is already booked!")
     end
   end
+
+    #example date_start: 12.04.2014 
+  def self.per_interval(date_start, date_end, limit = -1)
+    if limit == -1
+      orders = Order.where('time > ?', date_start).where('time < ?',date_end)
+    else
+      orders = Order.where('time > ?',date_start).where('time < ?',date_end).limit(limit)
+    end
+    orders
+  end
+
+  #start from Time.now
+  def self.per_today
+    ymd = DateTime.now.strftime("%Y.%m.%d")
+    date_end_day = DateTime.parse("#{ymd} 24:00:00")
+    per_interval(DateTime.parse("#{ymd} 00:00"), date_end_day)
+  end
 end
