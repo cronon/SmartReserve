@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
   # GET /orders.json
   def index
     @club = Club.find(params[:club_id])
-    @orders = @club.orders.order(:created_at => :desc).limit(5)
+    @orders = @club.orders.per_today
   end
 
   # GET /orders/1

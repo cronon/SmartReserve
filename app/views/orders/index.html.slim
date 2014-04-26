@@ -27,14 +27,16 @@
               .row
                 .col-md-8#tables_list
                   - @tables = @club.table
-                  = render 'tables/list'
+                  == render 'tables/list'
                 .col-md-4 style="padding-left:0px"
                   div style="margin-top:97px;text-align:right"
                     label Последние заказы онлайн
                   #orders_online
-                    - @orders.each do |order|
+                    - @orders.limit(5).each do |order|
                       = render 'orders/single', :order=>order
-            #statistics.tab-pane ...
+            #statistics.tab-pane
+              == render 'orders/statistics_orders', :orders => @orders
+
 javascript:
   $(document).ready(function(){
     //$('#orders_online').css('height',$('#tables_schema').css('height'));

@@ -69,4 +69,28 @@ div > .btn-red-border {
   #submit_form{
     width:100%;
   }
+ 
+}
+
+.stat-order-table{
+  border: 1px solid #dcdcdc;
+  width: 100%;
+  margin-left: -5px;
+  width: calc(100% + 10px);
+  max-width: calc(100% + 100px);
+  border-top: none;
+  text-align: left;
+
+  thead th{
+    background-color: #cdcdcd; 
+    color: white; 
+    border: 1px solid #dcdcdc;
+    border-top: none;
+    padding-left: 10px;
+  }
+
+  td{
+    border: 2px solid #dcdcdc;
+    padding-left: 10px;
+  }
 }
