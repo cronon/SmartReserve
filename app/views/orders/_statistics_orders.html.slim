@@ -1,5 +1,12 @@
 .row
   .col-md-12 style="padding:0;"
+    .label-stat-books
+      label.red == t('.stat_books')
+    .datepickers
+      input[name="date_start" style="width:110px" value="#{params[:date_start] || Time.now.strftime('%d.%m.%Y')}"]
+      input[name="date_end" style="width:110px" value="#{params[:date_end] || Time.now.strftime('%d.%m.%Y')}"]
+    .links-orders-by-time
+      - [:yesterday,:today,:week,:month] 
     table.stat-order-table 
       thead
         tr
@@ -18,3 +25,33 @@
             td = order.user.name
             td = order.user.phone
             td = order.confirmation
+
+javascript:
+  $('.datepickers').datetimepicker({
+   format:'d.m.Y',
+   lang: 'ru',
+   dayOfWeekStart: 1,
+   timepicker: false,
+   onChangeDateTime: function(){showState(current_hall)}
+  });
+  var showState = function(hall){
+    var d = new Date();
+    //$('#datepicker')[0].value = [d.getDate(),d.getMonth()+1,d.getFullYear()].join('.');
+
+    $.ajax({
+         type: 'GET',
+         url: "#{club_tables_status_url(@club.id)}", //sumbits it to the given url of the form
+         data: $('#datepicker').serialize()+'&hour='+$('.time-inputs select')[0].value+"&minute="+$('.time-inputs select')[1].value+"&hall="+hall
+     });
+  }
+
+  var showCurrentState = function(hall){
+    var d = new Date();
+    $('#datepicker')[0].value = [d.getDate(),d.getMonth()+1,d.getFullYear()].join('.');
+
+    $.ajax({
+         type: 'GET',
+         url: "#{club_tables_status_url(@club.id)}", //sumbits it to the given url of the form
+         data: $('#datepicker').serialize()+'&hour='+d.getHours()+"&minute="+d.getMinutes()+"&hall="+hall
+     });
+  }

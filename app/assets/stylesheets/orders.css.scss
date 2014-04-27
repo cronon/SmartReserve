@@ -93,4 +93,16 @@ div > .btn-red-border {
     border: 2px solid #dcdcdc;
     padding-left: 10px;
   }
+
+  td:first-child{
+    border-left:  2px transparent;
+  }
+
+  td:last-child {
+    border-right: 2px transparent;
+  }
+}
+
+.label-stat-books{
+  text-align: center;
 }
