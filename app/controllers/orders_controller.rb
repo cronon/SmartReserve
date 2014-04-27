@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   load_and_authorize_resource
-  skip_authorize_resource :only => [:index,:show,:prepare,:create,:new,:get_new_orders]
+  skip_authorize_resource :only => [:index,:show,:prepare,:create,:new,:get_new_orders, :by_interval]
 
 
   def get_new_orders
@@ -26,6 +26,17 @@ class OrdersController < ApplicationController
   def index
     @club = Club.find(params[:club_id])
     @orders = @club.orders.per_today
+  end
+
+  #GET /by_interval?data_start=24.04.2014&data_end=25.04.2014
+  def by_interval
+    date_start = DateTime.parse("#{params[:date_start]} 00:00:00")
+    date_end   = DateTime.parse("#{params[:date_end]} 00:00:00")
+    @club = Club.find(params[:club_id])
+    @orders = @club.orders.per_interval date_start, date_end
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /orders/1

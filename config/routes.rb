@@ -31,6 +31,7 @@ SmartReserve::Application.routes.draw do
     post :rate, :on => :member
     resources :comments, only: [:create, :destroy]
     resources :news
+    get 'by_interval' => 'orders#by_interval', as: :orders_by_interval
   end
   resources :photos, only: [:create, :destroy]
   get '/clubs' => 'clubs#catalog'

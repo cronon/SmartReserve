@@ -11,6 +11,10 @@ class Order < ActiveRecord::Base
     message: "is invalid" }
   validates :table_id, presence: true, :numericality => {greater_than: 0}
 
+  #intervals for clubs/:id/orders
+  @@intervals = [:yesterday, :today, :week, :month, :tree_month, :year]
+  attr_reader :intervals
+
   def self.prepare params 
     result = Table.find(params[:table_id] || Table.last.id).new_order_at params[:time]
     result.attributes = params
