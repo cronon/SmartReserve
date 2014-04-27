@@ -50,37 +50,27 @@
               br
               label Интерьер 
               a.align-right[href='#' onclick='' data-toggle="modal" data-target="#interior_modal"]  Выбрать
+              == render 'clubs/modal_with_checkboxes', :properties => Property.where(kind_en: "Interior"), :id=>'interior_modal', :checked_properties => @checked_properties
               br
               label Атмосфера 
               a.align-right[href='#' onclick='' data-toggle="modal" data-target="#atmosphere_modal"]  Выбрать
+              == render 'clubs/modal_with_checkboxes', :properties => Property.where(kind_en: "Atmosphere"), :id=>'atmosphere_modal', :checked_properties => @checked_properties
               br
               label Тип заведения 
               a.align-right[href='#' onclick='' data-toggle="modal" data-target="#club_type_modal"]  Выбрать
+              == render 'clubs/modal_with_checkboxes', :properties => Property.where(kind_en: "Type"), :id=>'club_type_modal', :checked_properties => @checked_properties
               br
               label Особенности:
               br
+              - features = Property.where(kind_ru: "Особенность")
               #features
-                - Property.where(kind_ru: "Особенность").limit(6).each do |property|
+                - features.limit(6).each do |property|
                   = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id), :class => 'styled'
                   = property.name
                   br/
               a.align-right[href='#' onclick='' data-toggle="modal" data-target="#features_modal"] Посмотреть все
+              == render 'clubs/modal_with_checkboxes', :properties => features, :id=>'features_modal', :checked_properties => @checked_properties
               br
-              #features_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
-                .modal-dialog
-                  .modal-content
-                    .modal-header
-                      button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-                      h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
-                    .modal-body
-                      - Property.where(kind_ru: "Особенность").each do |property|
-                        = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
-                        label = property.name
-                        br/
-                    .modal-footer
-                      button.btn.btn-default data-dismiss="modal" type="button"  Отмена
-                      button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  ОК
-
               label Кухня
               select[name='kitchen']
                 - Property.where(:kind_en => 'Kitchen').each do |k|
@@ -103,49 +93,6 @@
               = submit_tag 'Применить', :class=>'btn-reservation btn btn-danger', :style=>'width:51%', remote: true, id: 'submit_tag'
               |  
               input.btn-reservation.btn.btn-danger[type='reset' style='width:45%' value='Сбросить' onclick="resetFilters()"]
-
-              #interior_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
-                .modal-dialog
-                  .modal-content
-                    .modal-header
-                      button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-                      h4#myModalLabel.modal-title.red[style='text-align:center'] Интерьер
-                    .modal-body
-                      - Property.where(kind_en: "Interior").each do |property|
-                        = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
-                        label = property.name
-                        br/
-                    .modal-footer
-                      button.btn.btn-default data-dismiss="modal" type="button"  Отмена
-                      button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  ОК
-              #club_type_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
-                              .modal-dialog
-                                .modal-content
-                                  .modal-header
-                                    button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-                                    h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
-                                  .modal-body
-                                    - Property.where(kind_en: "Type").each do |property|
-                                      = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
-                                      label = property.name
-                                      br/
-                                  .modal-footer
-                                    button.btn.btn-default data-dismiss="modal" type="button"  Отмена
-                                    button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  ОК
-              #atmosphere_modal.modal.fade aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
-                              .modal-dialog
-                                .modal-content
-                                  .modal-header
-                                    button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-                                    h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
-                                  .modal-body
-                                    - Property.where(kind_en: "Atmosphere").each do |property|
-                                      = check_box_tag 'property_ids[]', property.id, @checked_properties.include?(property.id),:class=>'styled'
-                                      label = property.name
-                                      br/
-                                  .modal-footer
-                                    button.btn.btn-default data-dismiss="modal" type="button"  Отмена
-                                    button.btn.btn-primary data-dismiss="modal" type="button" onclick="connectWithMain()"  OK
         #clubs_div.col-md-6 style='width: calc(50% + 30px);'
           - @clubs.each_slice(3) do |three_clubs|
               - three_clubs.each do |club|
