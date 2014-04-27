@@ -2,16 +2,32 @@
   .col-md-12 style="padding:0;"
     .label-stat-books
       label.red == t('.stat_books')
-    .datepickers
-      input#dp-start[name="date_start" value=Time.now.strftime('%d.%m.%Y')]
-      input#dp-end[name="date_end"   value=Time.now.strftime('%d.%m.%Y')]
+      div
+        p == t('.compare_periods') 
+        span &#58
+      .datepickers 
+        input#dp-start[name="date_start" value=Time.now.strftime('%d.%m.%Y')] - 
+        input#dp-end[name="date_end"   value=Time.now.strftime('%d.%m.%Y')]
+    br
     .links-orders-by-time
-      / - Order.intervals.each do |interval|
-      /   a href="" = interval.to_s
+      - Order.intervals.keys.each_with_index do |interval, index|
+        a onclick="ordersByTimeInterval('#{interval.to_s}')" 
+          = t(".#{interval.to_s}")
+          = " | " if index != Order.intervals.size - 1
+    br
+    br
     .partial-table-orders  
       == render 'orders/table_orders', :orders => orders
 
 javascript:
+  var ordersByTimeInterval = function(interval){
+    $.ajax({
+      type: 'GET',
+      url: "#{club_orders_by_interval_url(@club.id)}?interval=" + interval,
+      data: false
+    });
+  }
+
   $('#dp-start').datetimepicker({
     format:'d.m.Y',
     lang: 'ru',

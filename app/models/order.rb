@@ -11,31 +11,69 @@ class Order < ActiveRecord::Base
     message: "is invalid" }
   validates :table_id, presence: true, :numericality => {greater_than: 0}
 
-  #intervals for clubs/:id/orders
-  @@intervals = [:yesterday, :today, :week, :month, :tree_month, :year]
-  attr_reader :intervals
-
-  def self.prepare params 
-    result = Table.find(params[:table_id] || Table.last.id).new_order_at params[:time]
-    result.attributes = params
-    token = generate_token    
-    result.token = token.hash.to_s
-    result.confirmation = token
-    if result.valid?
-      send_sms(params[:phone], token)
+  class << self
+    
+    def prepare params 
+      result = Table.find(params[:table_id] || Table.last.id).new_order_at params[:time]
+      result.attributes = params
+      token = generate_token    
+      result.token = token.hash.to_s
+      result.confirmation = token
+      if result.valid?
+        send_sms(params[:phone], token)
+      end
+      puts result.serializable_hash
+      puts result.errors.to_json
+      result
     end
-    puts result.serializable_hash
-    puts result.errors.to_json
-    result
+
+    def send_sms phone, token
+      puts '########', phone, token
+    end
+
+    def generate_token
+      (Time.now.nsec*rand() % 10000000).floor.to_s
+    end
+
+    #start from Time.now
+    def per_today
+      interval = @@intervals[:today]
+      per_interval interval.first, interval.second
+    end
+
+    #example date_start: 12.04.2014 
+    def per_interval (date_start, date_end)
+      Order.where('time > ?', date_start).where('time < ?',date_end)
+    end
+
+    def intervals
+      @@intervals
+    end
+
+    private
+
+    def today_start
+      ymd = DateTime.now.strftime("%Y.%m.%d")
+      DateTime.parse("#{ymd} 00:00:00")
+    end
+
+    def yesterday_start
+      ymd = DateTime.yesterday.strftime("%Y%m%d%H")
+      DateTime.parse("#{ymd} 00:00:00")
+    end
+
   end
 
-  def self.send_sms phone, token
-    puts '########', phone, token
-  end
-
-  def self.generate_token
-    (Time.now.nsec*rand() % 10000000).floor.to_s
-  end
+  #intervals for clubs/:id/orders
+  @@intervals = 
+  {
+    :yesterday  => [yesterday_start.utc, (yesterday_start+ 24.hour).utc], 
+    :today      => [today_start , today_start + 24.hour], 
+    :week       => [today_start - 7.day,    today_start], 
+    :month      => [today_start - 1.month,  today_start], 
+    :tree_month => [today_start - 3.month,  today_start], 
+    :year       => [today_start - 1.year,   today_start]
+  }
 
   def cannot_book_at_the_past
     errors.add(:time, "cannot be in the past") if self.time+TIMEOUT<Time.now
@@ -78,20 +116,4 @@ class Order < ActiveRecord::Base
     end
   end
 
-    #example date_start: 12.04.2014 
-  def self.per_interval(date_start, date_end, limit = -1)
-    if limit == -1
-      orders = Order.where('time > ?', date_start).where('time < ?',date_end)
-    else
-      orders = Order.where('time > ?',date_start).where('time < ?',date_end).limit(limit)
-    end
-    orders
-  end
-
-  #start from Time.now
-  def self.per_today
-    ymd = DateTime.now.strftime("%Y.%m.%d")
-    date_end_day = DateTime.parse("#{ymd} 24:00:00")
-    per_interval(DateTime.parse("#{ymd} 00:00"), date_end_day)
-  end
 end

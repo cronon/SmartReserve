@@ -320,10 +320,18 @@ ru:
   orders:
     index:
     statistics_orders:
+      compare_periods: Сравнить периоды
+      stat_books: Статистика заказов
+      yesterday: Вчера
+      today: Сегодня
+      week: Неделя
+      month: Месяц
+      tree_month: Квартал
+      year: Год
+    table_orders:
       data_book: Дата
       time_book: Время
       table: Столик
       name_client: Имя
       phone_client: Телефон
       id_book: ID брони
-      stat_books: Статистика заказов
