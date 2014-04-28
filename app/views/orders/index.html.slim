@@ -37,8 +37,8 @@
             #statistics.tab-pane
               == render 'orders/statistics_orders', :orders => @orders
         br
-        .row
-          .col-md-12#red-tabs
+        .col-md-12
+          == render 'orders/per_day_stat', :orders => @orders
 
 javascript:
   $(document).ready(function(){
@@ -54,4 +54,4 @@ javascript:
     console.log("last_time="+$('.order input[type="hidden"]').first()[0].value)
   }
 
-  / var interval = setInterval(function(){checkNewOrders()},5000);
+  /var interval = setInterval(function(){checkNewOrders()},5000);

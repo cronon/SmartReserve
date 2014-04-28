@@ -1,0 +1,13 @@
+.per_day_stat
+  table
+    thead
+      tr
+        th 
+          == t('table')
+          == t('.time')
+    tbody
+      - @club.table.each do |table|
+        tr
+          td.left-column 
+            == "№#{table.number}, #{table.seats.nil? ? 2: table.seats} "
+            ==  t('.seats')
