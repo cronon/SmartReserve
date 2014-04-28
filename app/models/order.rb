@@ -68,11 +68,11 @@ class Order < ActiveRecord::Base
   @@intervals = 
   {
     :yesterday  => [yesterday_start.utc, (yesterday_start+ 24.hour).utc], 
-    :today      => [today_start , today_start + 24.hour], 
-    :week       => [today_start - 7.day,    today_start], 
-    :month      => [today_start - 1.month,  today_start], 
-    :three_months => [today_start - 3.month,  today_start], 
-    :year       => [today_start - 1.year,   today_start]
+    :today      => [today_start, DateTime.tomorrow], 
+    :week       => [today_start - 7.day, DateTime.tomorrow], 
+    :month      => [today_start - 1.month, DateTime.tomorrow], 
+    :three_months => [today_start - 3.month, DateTime.tomorrow], 
+    :year       => [today_start - 1.year, DateTime.tomorrow]
   }
 
   def cannot_book_at_the_past
