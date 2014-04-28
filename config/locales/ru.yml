@@ -322,13 +322,13 @@ ru:
     statistics_orders:
       compare_periods: Сравнить периоды
       stat_books: Статистика заказов
+    table_orders:
       yesterday: Вчера
       today: Сегодня
       week: Неделя
       month: Месяц
-      tree_month: Квартал
+      three_months: Квартал
       year: Год
-    table_orders:
       data_book: Дата
       time_book: Время
       table: Столик

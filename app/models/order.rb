@@ -71,7 +71,7 @@ class Order < ActiveRecord::Base
     :today      => [today_start , today_start + 24.hour], 
     :week       => [today_start - 7.day,    today_start], 
     :month      => [today_start - 1.month,  today_start], 
-    :tree_month => [today_start - 3.month,  today_start], 
+    :three_months => [today_start - 3.month,  today_start], 
     :year       => [today_start - 1.year,   today_start]
   }
 

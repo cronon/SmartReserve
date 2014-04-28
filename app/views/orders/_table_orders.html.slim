@@ -1,3 +1,11 @@
+.links-orders-by-time
+      - Order.intervals.keys.each_with_index do |interval, index|
+        - if params[:interval] == interval.to_s
+          = t(".#{interval.to_s}")
+        - else
+          a.interval-link onclick="ordersByTimeInterval('#{interval.to_s}')" 
+            = t(".#{interval.to_s}")
+        = " | " if index != Order.intervals.size - 1
 table.stat-order-table 
   thead
     tr
@@ -13,6 +21,6 @@ table.stat-order-table
         td = order.time.time.strftime('%d.%m.%Y')
         td = order.time.time.strftime('%H:%M')
         td = "№#{order.table.number}"
-        td = order.user.name
-        td = order.user.phone
+        td = order.name
+        td = order.phone
         td = order.confirmation

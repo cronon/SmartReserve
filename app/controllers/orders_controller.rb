@@ -26,19 +26,20 @@ class OrdersController < ApplicationController
   def index
     @club = Club.find(params[:club_id])
     @orders = @club.orders.per_today
+    params[:interval] = 'today'
   end
 
   #GET /by_interval?data_start=24.04.2014&data_end=25.04.2014
   def by_interval
     @club = Club.find(params[:club_id])
     if params[:interval].nil?
-      date_start = DateTime.parse("#{params[:date_start]} 00:00:00")
-      date_end   = DateTime.parse("#{params[:date_end]} 00:00:00")
+      @date_start = DateTime.parse("#{params[:date_start]} 00:00:00")
+      @date_end   = DateTime.parse("#{params[:date_end]} 00:00:00")
     else
-      date_start = Order.intervals[params[:interval].to_sym].first
-      date_end   = Order.intervals[params[:interval].to_sym].second
+      @date_start = Order.intervals[params[:interval].to_sym].first
+      @date_end   = Order.intervals[params[:interval].to_sym].second
     end
-    @orders = @club.orders.per_interval date_start, date_end
+    @orders = @club.orders.per_interval @date_start, @date_end
     respond_to do |format|
       format.js
     end

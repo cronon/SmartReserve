@@ -1,20 +1,12 @@
 .row
   .col-md-12 style="padding:0;"
     .label-stat-books
-      label.red == t('.stat_books')
-      div
-        p == t('.compare_periods') 
-        span &#58
-      .datepickers 
-        input#dp-start[name="date_start" value=Time.now.strftime('%d.%m.%Y')] - 
-        input#dp-end[name="date_end"   value=Time.now.strftime('%d.%m.%Y')]
-    br
-    .links-orders-by-time
-      - Order.intervals.keys.each_with_index do |interval, index|
-        a onclick="ordersByTimeInterval('#{interval.to_s}')" 
-          = t(".#{interval.to_s}")
-          = " | " if index != Order.intervals.size - 1
-    br
+      label.red = t('.stat_books')
+      .datepickers
+        label> = t('.compare_periods') + ':'
+        input#dp_start[name="date_start" value=Time.now.strftime('%d.%m.%Y')] 
+        label<> - 
+        input#dp_end[name="date_end"   value=(Time.now+1.day).strftime('%d.%m.%Y')]
     br
     .partial-table-orders  
       == render 'orders/table_orders', :orders => orders
@@ -28,7 +20,7 @@ javascript:
     });
   }
 
-  $('#dp-start').datetimepicker({
+  $('#dp_start').datetimepicker({
     format:'d.m.Y',
     lang: 'ru',
     dayOfWeekStart: 1,
@@ -39,15 +31,13 @@ javascript:
     }
   });
 
-  $('#dp-end').datetimepicker({
+  $('#dp_end').datetimepicker({
     format:'d.m.Y',
     lang: 'ru',
     dayOfWeekStart: 1,
     timepicker: false,
     onChangeDateTime: function()
     {
-      var d = new Date();
-      $(this)[0].value = [d.getDate(),d.getMonth()+1,d.getFullYear()].join('.');
       sendOnByInterval();
     }
   });
@@ -56,6 +46,6 @@ javascript:
     $.ajax({
       type: 'GET',
       url: "#{club_orders_by_interval_url(@club.id)}", //sumbits it to the given url of the form
-      data: $('#dp-start').serialize() + "&" + $('#dp-end').serialize()
+      data: $('#dp_start').serialize() + "&" + $('#dp_end').serialize()
     });
   }

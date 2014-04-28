@@ -1,1 +1,3 @@
-$('.partial-table-orders').html('<%=j render "orders/table_orders", :orders => @orders %>')
+$('.partial-table-orders').html('<%=j render "orders/table_orders", :orders => @orders %>');
+$('#dp_start')[0].value = '<%= @date_start.strftime('%d.%m.%Y') %>';
+$('#dp_end')[0].value = '<%= @date_end.strftime('%d.%m.%Y') %>';
