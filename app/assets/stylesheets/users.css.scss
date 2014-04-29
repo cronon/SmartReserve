@@ -1,0 +1,44 @@
+#user_edit{
+  .text-fields{
+    input{
+      width: 151%;
+    }
+    label{
+    font-size: 13px;
+    }
+  }
+}
+
+#user_tabs.red-tabs .nav-tabs > li > a {
+  padding: 6px;
+}
+
+.orders-list{
+  padding:0;
+  .single-order{
+    padding:18px 20px;
+    border-bottom: 1px solid #ec5c5c;
+    height: 65px;
+  }
+  .btn-red-border{
+    height:30px;
+    padding:5px;
+    font-size:13px;
+    margin-left:30px;
+  }
+  .marker{
+    width:25px;
+    height:25px;
+    display:inline-flex;
+    background-color: #ec5c5c;
+    border-radius: 25px;
+    margin: 1px 10px 0px 0px;
+
+    .number{
+      margin: 0 auto;
+      font-weight: bold;
+      color: white;
+    }
+  }
+  
+}

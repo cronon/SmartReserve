@@ -32,7 +32,9 @@ ru:
         confirm_new_password: Повторите новый пароль
         change_my_password: Изменить мой пароль        
     registrations:
-      edit:
+      form:
+        name: Имя
+        phone: Телефон
         password: Пароль
         password_confirmation: Подтверждения пароля
         current_password: Текущий пароль

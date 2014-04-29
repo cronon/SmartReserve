@@ -1,6 +1,6 @@
 #navigation style=("float:right;font-size:1.1em;padding:0;margin-right: -15px;") 
   - if user_signed_in?
-    = link_to current_user.name.blank? ? current_user.email : current_user.name, ''
+    = link_to current_user.name.blank? ? current_user.email : current_user.name, user_root_path
     |  | 
     | #{link_to t('log_out'), destroy_user_session_path, :method => 'delete'}
   - else

@@ -16,7 +16,7 @@
 
       .row: .col-md-12: br
       .row
-        .col-md-12#red-tabs
+        .col-md-12.red-tabs
           ul.nav.nav-tabs
             li.active
               a data-toggle="tab" href="#scheme"  Схема заведения
@@ -54,4 +54,4 @@ javascript:
     console.log("last_time="+$('.order input[type="hidden"]').first()[0].value)
   }
 
-  /var interval = setInterval(function(){checkNewOrders()},5000);
+  var interval = setInterval(function(){checkNewOrders()},5000);
