@@ -16,7 +16,7 @@
           tr
             td = f.label "Тип заведения"
             td
-              input name='club_type' class="typeahead" type="text" value="#{@club.properties.find_by_kind_en('Type') ? @club.properties.find_by_kind_en('Type').name : ''}"
+              input name='club_type' autocomplete="off" class="typeahead" type="text" value="#{@club.properties.find_by_kind_en('Type') ? @club.properties.find_by_kind_en('Type').name : ''}"
             javascript:
               var substringMatcher = function(strs) {
                 return function findMatches(q, cb) {

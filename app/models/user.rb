@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_many :comments
   has_many :clubs
+  mount_uploader :avatar, ImageUploader
   ajaxful_rater
 
   def active_for_authentication?

@@ -1,0 +1,39 @@
+.row
+  .col-md-8.col-md-offset-2
+    h2.bold Личный кабинет
+    .row
+      = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f|
+        = devise_error_messages!
+        .col-md-5
+          = image_tag asset_url('avatars/no_avatar.png')
+          / didn find these necessary things in visitor.psd
+          / - if current_user.avatar.url.present?
+          /   = image_tag(to_http current_user.avatar.url)
+          / = f.file_field :avatar  
+          / = f.hidden_field :avatar_cache
+        .col-md-7#user_edit
+          div
+            a.btn.btn-danger.btn-red style="float:right" href="/catalog" Перейти в каталог
+            label> Время:
+            = Time.now.strftime('%H:%M:%S')
+          table.text-fields style="margin-top:50px;"
+            tr
+              td = f.label t('.name')
+              td = f.text_field :name
+            tr
+              td = f.label t('.phone')
+              td = f.telephone_field :phone
+            tr
+              td = f.label :email
+              td = f.email_field :email
+            tr
+              td = f.label t('.password')
+              td = f.password_field :password, :autocomplete => "off", title: t('.leave_blank_if_you_don_t_want_to_change_it', :default => "leave blank if you don't want to change it")
+            tr
+              td = f.label t('.password_confirmation')
+              td = f.password_field :password_confirmation, autocomplete: "off"
+            tr
+              td = f.label t('.current_password')
+              td = f.password_field :current_password, title: t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes'), :autocomplete=>"off"
+          div style="text-align:center"
+            = f.submit "Сохранить изменения", :class=>'btn btn-red-border', :style=>'height: 40px;padding: 0 10px;'

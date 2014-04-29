@@ -39,7 +39,6 @@ class ApplicationController < ActionController::Base
     params[:hour] ||= Time.now.hour.to_s
     params[:minute] ||= Time.now.min.to_s
     @time = Time.parse params[:date]+' '+params[:hour]+':'+round_5_min(params[:minute].to_i).to_s
-    puts @time, '###'
   end
 
   def set_locale
@@ -55,8 +54,23 @@ class ApplicationController < ActionController::Base
 
     #devise_parameter_sanitizer.for(:sign_up) << :phone
     #devise_parameter_sanitizer.for(:sign_up) << :owner_clubs
-    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:phone, :owner_clubs, :email, :password,:password_confirmation,:name)}
-    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(:phone, :owner_clubs, :email, :password, :password_confirmation, :current_password)}
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:phone, 
+        :owner_clubs, 
+        :email, 
+        :password,
+        :password_confirmation, 
+        :name,
+        :avatar, 
+        :avatar_cache)}
+    devise_parameter_sanitizer.for(:account_update) {|u| u.permit(
+        :phone,
+        :owner_clubs, 
+        :email, 
+        :password, 
+        :password_confirmation, 
+        :current_password,
+        :avatar, 
+        :avatar_cache)}
   end
 
 end
