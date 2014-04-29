@@ -1,0 +1,20 @@
+.per_day_stat
+  h3 == t('.magazine_orders')
+  table
+    thead
+      tr
+        th 
+          == t('table')
+          == t('.time')
+        - @times_lower_table_stat.each do |time|
+          th
+            .time-sideways 
+              == time.strftime("%H:%M")
+    tbody
+      - @club.table.each do |table|
+        tr
+          td.left-column 
+            == "№#{table.number}, #{table.seats.nil? ? 2: table.seats} "
+            ==  t('.seats')
+          - @times_lower_table_stat.each do |time|
+            td class="#{get_color_table(table, time)}"

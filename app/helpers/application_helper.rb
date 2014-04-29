@@ -42,6 +42,7 @@ module ApplicationHelper
   	parts.reverse.join(".")
   end
 
+  #for news
 	#return closet index '.' in str or index if '.' not include in str
   def index_closet_point_to(str, index)
   	less_index = str.index('.')

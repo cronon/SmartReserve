@@ -123,3 +123,49 @@ a.interval-link{
 .links-orders-by-time{
   text-align: center;
 }
+
+.per_day_stat{
+  margin-top: 20px;
+  border: 3px solid #ec5c5c;
+  
+  table{
+    border: 1px solid #dcdcdc;
+    width: 100%;
+
+    .time-sideways{
+      -webkit-transform: rotate(-90deg); 
+      -moz-transform: rotate(-90deg);
+      filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+      -o-transform: rotate(-90deg);
+      width: 15px;
+    }
+
+    thead th{
+      height: 20px;
+      min-height: 20px;
+    }
+
+    td:first-child{
+      border-left:  2px transparent;
+      background-color: #cdcdcd; 
+      color: white; 
+    }
+
+    td:last-child {
+      border-right: 2px transparent;
+    }
+
+    .table-booked{
+      background-color: yellow;
+    }
+
+    .table-free{
+      background-color: green;
+    }
+
+    .table-busy{
+      background-color: red;
+    }
+  }
+
+}

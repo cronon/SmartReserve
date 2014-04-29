@@ -1,0 +1,16 @@
+table.stat-order-table 
+  thead
+    tr
+      th style="border-style: inset;border-color: gray; background-color: transparent; -moz-border-radius: ;"
+        == t('.table')
+        == t('.time')
+      
+  tbody
+    - orders.each do |order|
+      tr
+        td = order.time.time.strftime('%d.%m.%Y')
+        td = order.time.time.strftime('%H:%M')
+        td = "№#{order.table.number}"
+        td = order.user.name
+        td = order.user.phone
+        td = order.confirmation
