@@ -32,6 +32,7 @@ SmartReserve::Application.routes.draw do
     resources :comments, only: [:create, :destroy]
     resources :news
     get 'by_interval' => 'orders#by_interval', as: :orders_by_interval
+    get 'journal_by_inteval' => 'orders#journal_by_inteval', as: :orders_journal_by_inteval
   end
   resources :photos, only: [:create, :destroy]
   get '/clubs' => 'clubs#catalog'

@@ -124,12 +124,31 @@ a.interval-link{
 }
 
 .per_day_stat{
+
+  label{
+    text-align: center;
+  }
+
+  .slider-inputs{
+    display: none;
+  }
+
+  #day_date{
+    width: 110px;
+  }
+
   margin-top: 20px;
   border: 3px solid #ec5c5c;
+
+  .time-select{
+    padding-left:0px;
+    width:60px;
+  }
   
   table{
     border: 1px solid #dcdcdc;
     width: 100%;
+    margin-top: 100px;
 
     .time-sideways{
       -webkit-transform: rotate(-90deg); 
@@ -140,8 +159,14 @@ a.interval-link{
     }
 
     thead th{
-      height: 20px;
-      min-height: 20px;
+      height: 65px;
+      min-height: 65px;
+      border: 1px solid #dcdcdc;
+      border-top: 2px solid #dcdcdc;
+    }
+
+    td{
+      border: 1px solid #dcdcdc;
     }
 
     td:first-child{

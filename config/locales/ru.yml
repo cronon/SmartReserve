@@ -337,3 +337,9 @@ ru:
       id_book: ID брони
     per_day_stat:
       magazine_orders: Журнал заказов
+      select_date: Выберите дату
+      select_time: Выберите время
+      selected_date: Выбранная дата
+    lower_table_orders:
+      table: Стол
+      time:  Время

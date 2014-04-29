@@ -2,7 +2,8 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   load_and_authorize_resource
-  skip_authorize_resource :only => [:index,:show,:prepare,:create,:new,:get_new_orders, :by_interval]
+  skip_authorize_resource :only => [:index,:show,:prepare,:create,:new,
+    :get_new_orders, :by_interval, :journal_by_inteval]
 
 
   def get_new_orders
@@ -27,7 +28,7 @@ class OrdersController < ApplicationController
     @club = Club.find(params[:club_id])
     @orders = @club.orders.per_today
     params[:interval] = 'today'
-
+    @start_day = Time.now
     #тут должны быть начало и конец рабочего дня, но пока говном
     day = Time.now
     @times_lower_table_stat = Order.calculate_params_lower_stat_table(day.beginning_of_day,
@@ -45,6 +46,21 @@ class OrdersController < ApplicationController
       @date_end   = Order.intervals[params[:interval].to_sym].second
     end
     @orders = @club.orders.per_interval @date_start, @date_end
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  #GET /journal_by_inteval?date_day=24.04.2014&start_time=3&end_time=23
+  def journal_by_inteval
+    @club = Club.find(params[:club_id])
+    puts "journal_by_inteval: params = #{params}"
+    min = params[:minute].nil? ? '00': params[:minute] 
+    @start_day = Time.parse("#{params[:day_date]} #{params[:start_time]}:00:#{min}")
+    @end_day   = Time.parse("#{params[:day_date]} #{params[:end_time]}:00:#{min}")
+
+    @times_lower_table_stat = Order.calculate_params_lower_stat_table(@start_day, @end_day)
+
     respond_to do |format|
       format.js
     end

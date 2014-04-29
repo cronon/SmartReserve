@@ -1,20 +1,119 @@
 .per_day_stat
-  h3 == t('.magazine_orders')
-  table
-    thead
-      tr
-        th 
-          == t('table')
-          == t('.time')
-        - @times_lower_table_stat.each do |time|
-          th
-            .time-sideways 
-              == time.strftime("%H:%M")
-    tbody
-      - @club.table.each do |table|
-        tr
-          td.left-column 
-            == "№#{table.number}, #{table.seats.nil? ? 2: table.seats} "
-            ==  t('.seats')
-          - @times_lower_table_stat.each do |time|
-            td class="#{get_color_table(table, time)}"
+  div style="text-align: center;"
+    label.red == t('.magazine_orders')
+  .row.col-md-12
+    .col-md-4
+      label == t('.select_date') + ':'
+      input#day_date[name="day_date" value=Time.now.strftime('%d.%m.%Y')] 
+      div style="float: left;"
+        label == t('.select_time') + ':'
+      div style="float: right;display:inline-flex;" 
+        .time-select#hour_time style="float: left;"
+          select[name='hour']
+            - ('00'..'23').each do |k|
+              option[value=k name='hour'] = k
+        .time-select#minute_time style="float: left;"
+          select[name='minute']
+            - ('00'..'55').each do |k|
+              - if k.to_i % 5 == 0
+                option[value=k name='minute'] = k
+    .col-md-8
+      label<<< == t('.selected_date') + ': ' + @start_day.strftime('%d.%m.%Y %H:%M')
+      .slider-time
+  .slider-inputs
+    input#input_start name="start_time" value="#{params[:start_time]}"
+    input#input_end name="end_time" value="#{params[:end_time]}"
+  .partial-lower-table-orders
+    == render 'orders/lower_table_orders', :times_lower_table_stat => @times_lower_table_stat
+
+/первые две функции это для ввода одного времени для инпута. надо обсудить как это вообще
+/должно работать
+
+javascript:
+  
+  $('#hour_time').change(function(){
+    var hour = $(this)[0].value;
+    $('#input_start')[0].value = hour;
+    $('#input_end')[0].value   = hour;
+    var minute = $('#minute_time')[0].value;
+
+    $.ajax({
+      type: 'GET',
+      url: "#{club_orders_journal_by_inteval_url(@club.id)}", 
+      data: $('#input_start').serialize() + "&" + $('#input_end').serialize() + "&" + $('#day_date').serialize() + "&minute=" + minute
+    });
+  });
+
+  $('#minute_time').change(function(){
+    var minute = $(this)[0].value;
+
+    $.ajax({
+      type: 'GET',
+      url: "#{club_orders_journal_by_inteval_url(@club.id)}", 
+      data: $('#input_start').serialize() + "&" + $('#input_end').serialize() + "&" + $('#day_date').serialize() + "&minute=" + minute
+    });
+  });
+
+  $('#day_date').datetimepicker({
+    format:'d.m.Y',
+    lang: 'ru',
+    dayOfWeekStart: 1,
+    timepicker: false,
+  });
+
+  var sendOnOrderJournal = function(){
+    $.ajax({
+      type: 'GET',
+      url: "#{club_orders_journal_by_inteval_url(@club.id)}", 
+      data: $('#input_start').serialize() + "&" + $('#input_end').serialize() + "&" + $('#day_date').serialize()
+    });
+  }
+
+  $(".slider-time").noUiSlider({
+    start: [0, 24],
+    step: 1,
+    margin: 1,
+    connect: true,
+    direction: 'ltr',
+    orientation: 'horizontal',
+    behaviour: 'tap',
+    range: {
+     'min': 0,
+     'max': 24
+    },
+    serialization: {
+      lower: [
+       new $.noUiSlider.Link({
+          target: '-tooltip-<div class="start_tooltip"></div>',
+          method: function ( value ) {
+            $(this).html(
+              '<br><span>' + value + ':00</span>'
+            );
+            $('#input_start')[0].value = value;
+            sendOnOrderJournal();
+          } 
+       })
+      ],
+
+      upper: [
+       new $.noUiSlider.Link({
+        target: '-tooltip-<div class="end_tooltip"></div>',
+        method: function ( value ) {
+          $(this).html(
+            '<br><span>' + value + ':00</span>'
+          );
+          $('#input_end')[0].value = value;
+          sendOnOrderJournal();
+        } 
+       })
+      ],
+
+      format: {
+        mark: ',',
+        decimals: 0,
+        encoder: function( value ){
+          return value;
+        } 
+      }
+    }
+  });
