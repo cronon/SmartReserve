@@ -1,11 +1,1 @@
 == render 'devise/registrations/form'
-/ = link_to t('.edit_profile'),  edit_user_registration_path
-/ br/
-/ - if can? :create, @club
-/   p
-/     = t('.list_clubs')
-/   - current_user.clubs.each do |club|
-/     p
-/       = link_to club.name,  club_path(club)
-/       br/
-/   = link_to t('.add_club'), new_club_path

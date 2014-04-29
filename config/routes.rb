@@ -37,7 +37,7 @@ SmartReserve::Application.routes.draw do
   get '/clubs' => 'clubs#catalog'
   post 'news/news_full' => 'news#news_full', as: :news_full
   resources :comments, only: [:create, :destroy]
-  get 'users/profile', as: 'user_root'
+  get 'users/edit', as: 'user_root'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

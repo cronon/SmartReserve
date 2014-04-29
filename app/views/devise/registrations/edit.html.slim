@@ -1,2 +1,39 @@
 == render 'form'
-
+.row: .col-md-12: br/
+.col-md-8.col-md-offset-2.red-tabs#user_tabs
+  ul.nav.nav-tabs
+    li.active
+      a data-toggle="tab" href="#current_orders"  Текущие заказы
+    li
+      a data-toggle="tab" href="#orders_history"  История заказов
+    li
+      a data-toggle="tab" href="#special_offers"  Спецпредложения
+    li
+      a data-toggle="tab" href="#news"  Новости
+    li
+      a data-toggle="tab" href="#subscribes"  Подписки на рассылку
+    li
+      a data-toggle="tab" href="#favorite_clubs"  Любимые заведения
+  .tab-content style="padding:0"
+    #current_orders.tab-pane.active
+      .orders-list
+        - current_user.orders.where("time > ?", Time.now - 1.hour).each_with_index do |order,i|
+          .single-order
+            .marker
+              .number = i+1
+            label> = order.table.club.name + '.'
+            = order.time.strftime('%d.%m.%Y, %H:%M')
+            a.btn.btn-red-border Отменить бронь
+            a.btn.btn-red-border Повторная бронь
+    #orders_history.tab-pane
+      .orders-list
+        - current_user.orders.each_with_index do |order,i|
+          .single-order
+            .marker
+              .number = i+1
+            label> = order.table.club.name + '.'
+            = order.time.strftime('%d.%m.%Y, %H:%M')
+            a.btn.btn-red-border Отменить бронь
+            a.btn.btn-red-border Оставить отзыв
+    #special_offers.tab-pane ...
+    #news.tab-pane ...
