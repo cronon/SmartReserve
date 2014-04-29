@@ -27,6 +27,11 @@ class OrdersController < ApplicationController
     @club = Club.find(params[:club_id])
     @orders = @club.orders.per_today
     params[:interval] = 'today'
+
+    #тут должны быть начало и конец рабочего дня, но пока говном
+    day = Time.now
+    @times_lower_table_stat = Order.calculate_params_lower_stat_table(day.beginning_of_day,
+     day.end_of_day)
   end
 
   #GET /by_interval?data_start=24.04.2014&data_end=25.04.2014

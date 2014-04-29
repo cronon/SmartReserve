@@ -50,6 +50,42 @@ class Order < ActiveRecord::Base
       @@intervals
     end
 
+    #max columns on lower order stat table for clubs/:id/orders
+    MAX_COLUMNS = 30
+
+    #Calculate parameters lower tables for clubs/:id/orders
+    #per start and end time; parameters: array with DateTimes for 
+    #columns
+    def calculate_params_lower_stat_table(start_date, end_date)
+      minutes_intervals = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
+      diff_in_sec = (end_date - start_date).abs
+      minutes_granularity = (diff_in_sec/60 / MAX_COLUMNS).ceil
+      puts "calculate_params_lower_stat_table: minutes_granularity = #{minutes_granularity}
+      minutes_intervals = #{minutes_intervals}"
+      minutes_intervals.each do |gran|
+        if minutes_granularity <= gran
+          minutes_granularity = gran
+          break
+        end
+      end
+
+      count_columns = 0
+      hours_minutes = []
+
+      #паранойя меня взяла под ночь, потом сие удалить
+      start = [start_date, end_date].min
+      real_end =  [start_date, end_date].max
+
+      while start < real_end
+        hours_minutes << start
+        start += minutes_granularity.minute
+        count_columns += 1   
+      end 
+
+      hours_minutes
+    end
+
+    #PRIVATE!!!
     private
 
     def today_start

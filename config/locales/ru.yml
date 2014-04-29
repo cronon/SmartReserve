@@ -335,3 +335,5 @@ ru:
       name_client: Имя
       phone_client: Телефон
       id_book: ID брони
+    per_day_stat:
+      magazine_orders: Журнал заказов
