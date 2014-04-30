@@ -133,7 +133,7 @@ class OrdersController < ApplicationController
   # DELETE /orders/1.json
   def destroy
     respond_to do |format|
-      format.html { redirect_to club_tables_url(@order.table.club) }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
     @order.destroy

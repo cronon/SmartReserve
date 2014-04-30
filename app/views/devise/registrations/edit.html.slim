@@ -23,8 +23,8 @@
               .number = i+1
             label> = order.table.club.name + '.'
             = order.time.strftime('%d.%m.%Y, %H:%M')
-            a.btn.btn-red-border Отменить бронь
-            a.btn.btn-red-border Повторная бронь
+            = link_to "Отменить бронь", club_destroy_order_path(order.table.club_id,order.id), :class => "btn btn-red-border", method: :delete, confirm: "Вы уверены?"
+            a.btn.btn-red-border href="#{club_new_order_path(order.table.club_id)}" Повторная бронь 
     #orders_history.tab-pane
       .orders-list
         - current_user.orders.each_with_index do |order,i|
@@ -33,7 +33,7 @@
               .number = i+1
             label> = order.table.club.name + '.'
             = order.time.strftime('%d.%m.%Y, %H:%M')
-            a.btn.btn-red-border Отменить бронь
+            a.btn.btn-red-border href="#{club_new_order_path(order.table.club_id)}" Повторная бронь 
             a.btn.btn-red-border Оставить отзыв
     #special_offers.tab-pane ...
     #news.tab-pane ...

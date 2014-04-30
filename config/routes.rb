@@ -22,7 +22,7 @@ SmartReserve::Application.routes.draw do
     get 'orders/:id/edit' => 'orders#edit', as: :edit_order
     put 'orders' => 'orders#update'
     get 'orders/:id' => 'orders#show', as: :order
-    delete 'orders/:id' => 'orders#destroy'
+    delete 'orders/:id' => 'orders#destroy', as: :destroy_order
     get 'get_new_orders' => 'orders#get_new_orders',as: :get_new_orders
     post 'orders/prepare' => 'orders#prepare', as: :prepare_order
     get 'tables_status' => 'clubs#tables_status', as: :tables_status
