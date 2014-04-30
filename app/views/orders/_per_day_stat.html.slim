@@ -4,53 +4,51 @@
   .row.col-md-12
     .col-md-4
       label == t('.select_date') + ':'
-      input#day_date[name="day_date" value=Time.now.strftime('%d.%m.%Y')] 
+      input#day_date[name="day_date" value="#{params[:day_date] || Time.now.strftime('%d.%m.%Y')}"] 
       div style="float: left;"
         label == t('.select_time') + ':'
-      div style="float: right;display:inline-flex;" 
-        .time-select#hour_time style="float: left;"
-          select[name='hour']
-            - ('00'..'23').each do |k|
-              option[value=k name='hour'] = k
-        .time-select#minute_time style="float: left;"
-          select[name='minute']
-            - ('00'..'55').each do |k|
-              - if k.to_i % 5 == 0
-                option[value=k name='minute'] = k
+      div style="float: right;display:inline-flex;"
+        .lower-time-inputs 
+          .time-select#hour_time style="float: left;"
+            select[name='lower_hour']
+              - ('00'..'23').each do |k|
+                option[value=k name='hour'] = k
+          .time-select#minute_time style="float: left;"
+            select[name='lower_minute']
+              - ('00'..'55').each do |k|
+                - if k.to_i % 5 == 0
+                  option[value=k name='minute'] = k
     .col-md-8
       label<<< == t('.selected_date') + ': ' + @start_day.strftime('%d.%m.%Y %H:%M')
       .slider-time
   .slider-inputs
-    input#input_start name="start_time" value="#{params[:start_time]}"
+    input#input_start name="start_time"
     input#input_end name="end_time" value="#{params[:end_time]}"
   .partial-lower-table-orders
     == render 'orders/lower_table_orders', :times_lower_table_stat => @times_lower_table_stat
 
-/первые две функции это для ввода одного времени для инпута. надо обсудить как это вообще
-/должно работать
-
+/lower_minute если равно -1, то минуты в слайдере не используются
+/(но передаются в запросе всегда), на -1 проверяется в модельном статическом методе
+/calculate_params_lower_stat_table
 javascript:
-  
-  $('#hour_time').change(function(){
-    var hour = $(this)[0].value;
+  var lower_minute = -1;
+
+  $('.lower-time-inputs select').ready(function(){
+    $('.lower-time-inputs select')[0].value = "#{@start_day.strftime('%H')}";
+    $('.lower-time-inputs select')[1].value = "#{@start_day.strftime('%M')}";
+    $('select').selectize({
+      create: true
+    });
+  }); 
+
+  $('.lower-time-inputs select').change(function(){
+    var hour = $('.lower-time-inputs select')[0].value;
     $('#input_start')[0].value = hour;
     $('#input_end')[0].value   = hour;
-    var minute = $('#minute_time')[0].value;
+    var lower_minute = $('.lower-time-inputs select')[1].value;
 
-    $.ajax({
-      type: 'GET',
-      url: "#{club_orders_journal_by_inteval_url(@club.id)}", 
-      data: $('#input_start').serialize() + "&" + $('#input_end').serialize() + "&" + $('#day_date').serialize() + "&minute=" + minute
-    });
-  });
-
-  $('#minute_time').change(function(){
-    var minute = $(this)[0].value;
-
-    $.ajax({
-      type: 'GET',
-      url: "#{club_orders_journal_by_inteval_url(@club.id)}", 
-      data: $('#input_start').serialize() + "&" + $('#input_end').serialize() + "&" + $('#day_date').serialize() + "&minute=" + minute
+    $(".slider-time").val( [hour, hour], {
+      animate: true
     });
   });
 
@@ -65,14 +63,21 @@ javascript:
     $.ajax({
       type: 'GET',
       url: "#{club_orders_journal_by_inteval_url(@club.id)}", 
-      data: $('#input_start').serialize() + "&" + $('#input_end').serialize() + "&" + $('#day_date').serialize()
+      data: $('#input_start').serialize() + "&" + $('#input_end').serialize() + "&" + $('#day_date').serialize() + "&lower_minute=" + lower_minute,
+      success: function(){
+        lower_minute = -1;
+      },
+
+      error: function(){
+        lower_minute = -1;
+      }
     });
   }
 
   $(".slider-time").noUiSlider({
     start: [0, 24],
     step: 1,
-    margin: 1,
+    margin: 0,
     connect: true,
     direction: 'ltr',
     orientation: 'horizontal',

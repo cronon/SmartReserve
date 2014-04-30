@@ -60,14 +60,15 @@ class Order < ActiveRecord::Base
       minutes_intervals = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
       diff_in_sec = (end_date - start_date).abs
       minutes_granularity = (diff_in_sec/60 / MAX_COLUMNS).ceil
-      puts "calculate_params_lower_stat_table: minutes_granularity = #{minutes_granularity}
-      minutes_intervals = #{minutes_intervals}"
+      
       minutes_intervals.each do |gran|
         if minutes_granularity <= gran
           minutes_granularity = gran
           break
         end
       end
+      puts "calculate_params_lower_stat_table: minutes_granularity = #{minutes_granularity}
+      minutes_intervals = #{minutes_intervals}"
 
       count_columns = 0
       hours_minutes = []
@@ -76,12 +77,14 @@ class Order < ActiveRecord::Base
       start = [start_date, end_date].min
       real_end =  [start_date, end_date].max
 
-      while start < real_end
+      puts "start = #{start} real_end = #{real_end}"
+      while start <= real_end
         hours_minutes << start
         start += minutes_granularity.minute
         count_columns += 1   
+        puts "start = #{start} real_end = #{real_end} minutes_granularity = #{minutes_granularity}"
       end 
-
+      puts "calculate_params_lower_stat_table: hours_minutes = #{hours_minutes}"
       hours_minutes
     end
 
