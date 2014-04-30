@@ -55,17 +55,12 @@ class OrdersController < ApplicationController
   #GET /journal_by_inteval?date_day=24.04.2014&start_time=3&end_time=23
   def journal_by_inteval
     @club = Club.find(params[:club_id])
-    puts "nil? = #{params[:lower_minute].nil?} min = #{params[:lower_minute]}"
-    puts "b = #{(params[:lower_minute].nil? or params[:lower_minute] == @@UNDEFINED_LOWER_MINUTE)}"
-    puts "b1 = #{(params[:lower_minute] == -1)}"
-    puts "params[:lower_minute] = #{(params[:lower_minute])}"
-    puts " @@ UNDEFINED_LOWER_MINUTE = #{@@UNDEFINED_LOWER_MINUTE}"
-    min = (params[:lower_minute].nil? or (params[:lower_minute] == @@UNDEFINED_LOWER_MINUTE)) ? '00': params[:lower_minute] 
-    puts "journal_by_inteval: params = #{params} min=#{min}"
-    @start_day = Time.parse("#{params[:day_date]} #{params[:start_time]}:#{min}:00")
+    min = '00'
+    min = params[:lower_minute] if (params[:lower_minute].to_i != -1) && (!params[:lower_minute].nil?) 
+    
+    @start_day = Time.parse("#{params[:day_date]} #{params[:start_time]}:00:00")
     @end_day   = Time.parse("#{params[:day_date]} #{params[:end_time]}:#{min}:00")
 
-    puts "IN CONTROLLER start_day = #{@start_day} end_day = #{@end_day}"
     @times_lower_table_stat = Order.calculate_params_lower_stat_table(@start_day, @end_day)
 
     respond_to do |format|

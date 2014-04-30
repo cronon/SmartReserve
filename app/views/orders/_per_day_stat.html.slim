@@ -95,6 +95,12 @@ javascript:
               '<br><span>' + value + ':00</span>'
             );
             $('#input_start')[0].value = value;
+            var optionName = value;
+            if (value < 10){
+              optionName = '0' + value;
+            }
+            console.log(optionName);
+            $("#hour_time option[value=" + optionName +"]").attr("selected","selected") ;
             sendOnOrderJournal();
           } 
        })
