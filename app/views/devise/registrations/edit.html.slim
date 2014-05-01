@@ -34,6 +34,6 @@
             label> = order.table.club.name + '.'
             = order.time.strftime('%d.%m.%Y, %H:%M')
             a.btn.btn-red-border href="#{club_new_order_path(order.table.club_id)}" Повторная бронь 
-            a.btn.btn-red-border Оставить отзыв
+            a.btn.btn-red-border href="#{club_path(order.table.club_id)}" Оставить отзыв 
     #special_offers.tab-pane ...
     #news.tab-pane ...
