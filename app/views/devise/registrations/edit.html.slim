@@ -37,3 +37,16 @@
             a.btn.btn-red-border href="#{club_path(order.table.club_id)}" Оставить отзыв 
     #special_offers.tab-pane ...
     #news.tab-pane ...
+    #subscribes.tab-pane ...
+    #favorite_clubs.tab-pane
+      .row
+        - current_user.favorite_clubs.each do |club|
+          .single-club.col-md-6 
+            .single-club-image
+              img src="#{to_http(club.avatar_url||'https://')}"
+            .single-club-content
+              .single-club-caption
+                a href="#{club_path(club)}" = club.name
+              .single-club-links
+                a.btn.btn-red-border href="#{club_new_order_path(club)}" Забронировать
+                a: .img-delete

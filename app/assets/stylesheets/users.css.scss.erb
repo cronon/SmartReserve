@@ -1,0 +1,91 @@
+#favorite_clubs{
+  .row{
+    padding: 12px 48px;
+  }
+  .single-club{
+      height:100%;
+      padding-bottom:20px;
+      .single-club-caption{
+        margin-top:10px;
+        a{
+          color:#ec5c5c;
+          font-size:16px;
+        }
+      }
+      .single-club-links{
+        position:absolute;
+        bottom: 36px;
+        left: 145px;
+      }
+      .btn-red-border{
+        height:20px;
+        padding:0px 5px;
+        font-size:13px;
+      }
+
+      .img-delete{
+        background-image: url(<%= asset_url('users_show/delete.png') %>);
+        width: 19px;
+        height:21px;
+        display:inline-flex;
+        position: absolute;
+        margin-left: 8px;
+      }
+  }
+  .single-club-content{
+    margin-left:110px;
+  }
+  .single-club-image{
+    width:130px;
+    height:95px;
+    float:left;
+    img{
+      max-width:100%;
+      max-height:100%;
+    }
+  }
+}
+#user_edit{
+  .text-fields{
+    input{
+      width: 151%;
+    }
+    label{
+    font-size: 13px;
+    }
+  }
+}
+
+#user_tabs.red-tabs .nav-tabs > li > a {
+  padding: 6px;
+}
+
+.orders-list{
+  padding:0;
+  .single-order{
+    padding:18px 20px;
+    border-bottom: 1px solid #ec5c5c;
+    height: 65px;
+  }
+  .btn-red-border{
+    height:30px;
+    padding:5px;
+    font-size:13px;
+    margin-left:30px;
+  }
+  .marker{
+    width:25px;
+    height:25px;
+    display:inline-flex;
+    background-color: #ec5c5c;
+    border-radius: 25px;
+    margin: 1px 10px 0px 0px;
+
+    .number{
+      margin: 0 auto;
+      font-weight: bold;
+      color: white;
+    }
+  }
+  
+}
