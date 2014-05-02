@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, ImageUploader
   ajaxful_rater
 
+  has_many :favorites
+  has_many :favorite_clubs, :through => :favorites
+
   def active_for_authentication?
     true
   end

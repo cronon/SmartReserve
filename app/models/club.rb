@@ -9,6 +9,8 @@ class Date
 end
 
 class Club < ActiveRecord::Base
+  has_many :favorites
+  has_many :favorite_users, :through => :favorites, :class_name => "User"
   has_many :table, dependent: :destroy
   has_many :photos, :as => :imageable
   has_many :news, dependent: :destroy
