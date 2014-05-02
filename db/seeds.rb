@@ -6,7 +6,37 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+def create_interior name_ru
+  Property.create(:kind_ru => 'Интерьер', kind_en: 'Interior', name_ru: name_ru)
+end
 
+create_interior "Диванчики"
+create_interior "Несколько залов"
+create_interior "Курящие/некурящие зоны"
+["Просторный", "VIP зоны", "Классический европейский", "Оригинальный", "Есть кабинеты", "Домашний",
+ "Роскошный", "Нейтральный", "Строгий", "Гламурный", "Есть сигарные комнаты", "Урбанистический", "Помпезный",
+  "Солидный", "Национальный"].each do |i|
+  create_interior i
+end
+def create_atmosphere name_ru
+  Property.create(:kind_ru => 'Атмосфера', kind_en: 'Atmosphere', name_ru: name_ru)
+end
+["Уютный", "Тихий", "Семейный", "По вечерам шумно", "Домашний", "Солидный", "Популярный", "Модный",
+ "Молодежный", "Лаундж", "Шумный", "Романтичный", "Камерный", "Просторный"].each do |a|
+  create_atmosphere a
+end
+
+def create_feature name_ru
+  Property.create(:kind_ru => 'Особенность', kind_en: 'Feature', name_ru: name_ru)
+end
+["Кальяны", "Барнныя стойка","Wi-Fi", "Детское меню", "Винная карта", "Круглосуточно", "На крыше",
+ "Меню на английском", "Принимаются кредитные карты", "Парковка", "Живая музыка", "Выпечка", 
+ "Проедение банкетов", "Доставка", "DJ", "Шоу-программа", "Караоке", "Кулинария", "Танцпол",
+  "Детская анимация", "Спортивные трансляции", "Сомелье", "мастер-классы", "Кинопросмотры", "Бранчи", 
+  "Настольные игры", "Дегустация", "Устричный бар", "С интересным видом", "Круглосуточная кухня", "У воды", 
+  "Бильярд"].each do |f|
+    create_feature f
+end
 owners = User.create([
   {
     :email => "anikeenko_90@mail.ru",
