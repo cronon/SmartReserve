@@ -28,6 +28,15 @@ class Club < ActiveRecord::Base
 
   ajaxful_rateable :stars => 5, :dimensions => [:rating], :cache_column_rating => :rating_average
 
+  #include ActionView::Helpers::AssetUrlHelper
+  def avatar_url
+    if self.avatar.url
+      to_http self.avatar.url
+    else
+      ActionController::Base.helpers.asset_url("avatars/no_avatar.png")
+    end
+  end
+
   def orders
     Order.where(:table_id => self.table_ids)
   end
@@ -69,6 +78,9 @@ class Club < ActiveRecord::Base
   end
 
   protected
+    def to_http s#from https
+      'http://'+s[8..-1]
+    end
     def create_tables
       self.tables_count.times{|i| self.table << Table.new(:number=>i) } if self.tables_count
     end

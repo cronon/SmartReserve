@@ -43,7 +43,7 @@
         - current_user.favorite_clubs.each do |club|
           .single-club.col-md-6 
             .single-club-image
-              img src="#{to_http(club.avatar_url||'https://')}"
+              img src="#{club.avatar_url}"
             .single-club-content
               .single-club-caption
                 a href="#{club_path(club)}" = club.name
