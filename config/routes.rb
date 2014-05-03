@@ -12,6 +12,7 @@ SmartReserve::Application.routes.draw do
   get 'catalog' => 'clubs#catalog'
   match 'remote_sign_up', to: 'remote_content#remote_sign_up', via: [:get]
   match 'remote_sign_in', to: 'remote_content#remote_sign_in', via: [:get]
+  resources :favorites, only: [:create,:destroy]
   resources :clubs, except: [:index] do    
     get 'tables' => 'tables#index', as: :tables
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button
@@ -26,8 +27,6 @@ SmartReserve::Application.routes.draw do
     get 'get_new_orders' => 'orders#get_new_orders',as: :get_new_orders
     post 'orders/prepare' => 'orders#prepare', as: :prepare_order
     get 'tables_status' => 'clubs#tables_status', as: :tables_status
-    # post 'photos/:owner_type' => 'photos#create', as: :photo_create
-    # delete 'photos/'
     post :rate, :on => :member
     resources :comments, only: [:create, :destroy]
     resources :news

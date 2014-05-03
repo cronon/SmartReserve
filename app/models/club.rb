@@ -28,7 +28,6 @@ class Club < ActiveRecord::Base
 
   ajaxful_rateable :stars => 5, :dimensions => [:rating], :cache_column_rating => :rating_average
 
-  #include ActionView::Helpers::AssetUrlHelper
   def avatar_url
     if self.avatar.url
       to_http self.avatar.url
