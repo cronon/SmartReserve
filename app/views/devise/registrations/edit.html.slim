@@ -26,7 +26,7 @@
             = link_to "Отменить бронь", club_destroy_order_path(order.table.club_id,order.id), :class => "btn btn-red-border", method: :delete, confirm: "Вы уверены?"
             a.btn.btn-red-border href="#{club_new_order_path(order.table.club_id)}" Повторная бронь 
     #orders_history.tab-pane
-      .orders-list
+      .orders-list.red-list
         - current_user.orders.each_with_index do |order,i|
           .single-order
             .marker
@@ -37,7 +37,31 @@
             a.btn.btn-red-border href="#{club_path(order.table.club_id)}" Оставить отзыв 
     #special_offers.tab-pane ...
     #news.tab-pane ...
-    #subscribes.tab-pane ...
+    #subscribes.tab-pane
+      .row
+        .col-md-8
+          table.text-fields
+            tr
+              td: label> Выбор из любимых заведений:
+              td
+                select[name='club_id[]']
+                  - ([Club.new(:id=>-1,:name=>" ")]+current_user.favorite_clubs).each do |c|
+                      option[value=c.name name='club_id[]'] = c.name
+            tr
+              td: label> Выбор из посещенных заведений:
+              td
+                select[name='club_id[]']
+                  - ([Club.new(:id=>-1,:name=>" ")]+current_user.orders.map{|o| o.table.club}).each do |c|
+                      option[value=c.name name='club_id[]'] = c.name
+            tr
+              td: label> Выбор из поиска:
+              td: input type="text"
+            tr
+              td style="padding-bottom:7px": label Выбранные заведения:
+          .new-subscribes-list
+
+          a.btn.btn-red-border Подписаться
+        .col-md-4
     #favorite_clubs.tab-pane
       .row
         - current_user.favorite_clubs.each do |club|
@@ -51,3 +75,25 @@
                 a.btn.btn-red-border href="#{club_new_order_path(club)}" Забронировать
                 a href="/favorites/#{club.id}" data-remote="true" data-method="delete"
                   .img-delete
+
+javascript:
+  var appendSubscribe = function(name){
+    $('.new-subscribes-list').append('<div class="subscribe red-list"><div class="marker"><div class="number">' + 
+       ($('.new-subscribes-list .subscribe').length+1) + 
+          '</div> </div><span class="caption">' + name + 
+        '</span></div>'
+      );
+  }
+  var onSelectChanged = function(e){
+    console.log(e.target)
+    var club_name = e.target.value;
+    if(club_name!=' '){
+      appendSubscribe(club_name);
+    }
+  }
+  $(document).ready(function(){
+    $('select').selectize().
+      change(function(e){
+        onSelectChanged(e);
+      });
+  })
