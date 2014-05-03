@@ -1,9 +1,11 @@
 table
   thead
     tr
-      th 
-        == t('.table')
-        == t('.time')
+      th#diagonal_cell
+        #square
+          span#table = t('.table')
+          span#time = t('.time')
+        #line
       - times_lower_table_stat.each do |time|
         th
           .time-sideways 

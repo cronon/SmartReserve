@@ -4,10 +4,10 @@
   .row.col-md-12
     .col-md-4
       label == t('.select_date') + ':'
-      input#day_date[name="day_date" value="#{params[:day_date] || Time.now.strftime('%d.%m.%Y')}"] 
-      div style="float: left;"
+      input#day_date[style="float:right" name="day_date" value="#{params[:day_date] || Time.now.strftime('%d.%m.%Y')}"] 
+      div style="float: left;margin-top:10px;"
         label == t('.select_time') + ':'
-      div style="float: right;display:inline-flex;"
+      div style="float: right;display:inline-flex;margin-top:10px;"
         .lower-time-inputs 
           .time-select#hour_time style="float: left;"
             select[name='lower_hour']
@@ -57,6 +57,7 @@ javascript:
     lang: 'ru',
     dayOfWeekStart: 1,
     timepicker: false,
+    onChangeDateTime: function(){sendOnOrderJournal()}
   });
 
   var sendOnOrderJournal = function(){
