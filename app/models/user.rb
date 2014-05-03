@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :favorites
   has_many :favorite_clubs, :through => :favorites
 
+  has_many :subscribes
+  has_many :subscribed_clubs, :through => :subscribes
+
   def active_for_authentication?
     true
   end
