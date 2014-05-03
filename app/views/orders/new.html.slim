@@ -2,7 +2,8 @@
   = breadcrumbs ' &rarr; ', 'Главная'=>'/', "Заведения"=>"/clubs", @club.name => '/'+@club.id.to_s, 'Забронировать' => '/orders/new'
   h2[style='font-weight:bold'] Бронирование
   .row: .col-md-12: br
-  = render "orders/form"
+  #orders_form.content
+    == render "orders/form"
   #confirmation_dialog.modal.fade tabindex="-1" 
   = link_to 'Back', club_orders_path(@club)
   #succes_dialog.modal.fade tabindex="-1"

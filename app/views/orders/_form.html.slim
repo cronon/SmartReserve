@@ -1,4 +1,4 @@
-#orders_form.content: .row
+.row
   = form_for(@order, url: club_prepare_order_path, :remote => true, :authenticity_token => true, :format => :js) do |f|
     .col-md-8
       #tables_list
