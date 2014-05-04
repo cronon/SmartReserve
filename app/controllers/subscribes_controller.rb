@@ -1,6 +1,9 @@
 class SubscribesController < ApplicationController
   def create
-    current_user.subscribes.build :club_id => params[:club_id]
+    ids = Club.find_all_by_name(params[:club_names]).map{|c| c.id}
+    ids.each do |id| 
+      (current_user.subscribes.build :club_id =>id).save
+    end
   end
 
   def destroy
