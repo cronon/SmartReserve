@@ -16,7 +16,7 @@
           div style="float:left"
             = render 'layouts/social_icons'
     .row: .col-md-12: br
-    .row
+    .row.top-view
       .col-md-6 style="width:420px; padding-right:0"
         / @club.avatar.url || 'avatars/no_avatar.png'
         img src="#{asset_path('avatars/no_avatar.png')}" style="margin:0"
@@ -87,48 +87,63 @@
               div style="display:inline;top:3px;color:#ec5c5c;position:absolute;font-size:13px"
                 | руб
 
-      .row: .col-md-12: br
-      .row
-        .col-md-12.red-tabs
-          ul#club_tabs.nav.nav-tabs
-            li.active
-              a data-toggle="tab" href="#description"  Описание
-            li
-              a data-toggle="tab" href="#gallery"  Галерея
-            li
-              a data-toggle="tab" href="#messages"  Меню
-            li
-              a data-toggle="tab" href="#settings"  Спецпредложения
-            li
-              a data-toggle="tab" href="#settings"  Отзывы
-            li
-              a data-toggle="tab" href="#settings"  Новости(Афиша)
-          .tab-content
-            #description.tab-pane.active
-              label> Кухня: 
-              = @club.properties.find_by_kind_en('Kitchen').name_en
-              br
-              label> Мы принимаем: 
-              | Всех 
-              br
-              label> Время работы: 
-              | Круглосуточно
-              br
-              label> Дополнительная информация: 
-              => @club.description
-            #gallery.tab-pane
-              .row
-                - @club.photos.each do |photo|
-                  .col-md-3
-                    a href="#" class="thumbnail" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
-                      img data-src="holder.js/100%x180" src="#{to_http photo.image_url}"
-                  .modal.fade id="photo_#{photo.id}_modal" aria-hidden="true" aria-labelledby="map_modalLabel" role="dialog" tabindex="-1"
-                    .modal-dialog
-                      .modal-content                        
-                        .modal-body
-                          button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-                          img src="#{to_http photo.image_url}"
-            #messages.tab-pane ...
-            #settings.tab-pane ...
+    .row: .col-md-12: br
+    .row
+      .col-md-12.red-tabs
+        ul#club_tabs.nav.nav-tabs
+          li
+            a data-toggle="tab" href="#description"  Описание
+          li
+            a data-toggle="tab" href="#gallery"  Галерея
+          li
+            a data-toggle="tab" href="#messages"  Меню
+          li
+            a data-toggle="tab" href="#offers"  Спецпредложения
+          li
+            a data-toggle="tab" href="#comments"  Отзывы
+          li.active
+            a data-toggle="tab" href="#news"  Новости(Афиша)
+        .tab-content
+          #description.tab-pane
+            label> Кухня: 
+            = @club.properties.find_by_kind_en('Kitchen').name_en
+            br
+            label> Мы принимаем: 
+            | Всех 
+            br
+            label> Время работы: 
+            | Круглосуточно
+            br
+            label> Дополнительная информация: 
+            => @club.description
+          #gallery.tab-pane
+            .row
+              - @club.photos.each do |photo|
+                .col-md-3
+                  a href="#" class="thumbnail" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
+                    img data-src="holder.js/100%x180" src="#{to_http photo.image_url}"
+                .modal.fade id="photo_#{photo.id}_modal" aria-hidden="true" aria-labelledby="map_modalLabel" role="dialog" tabindex="-1"
+                  .modal-dialog
+                    .modal-content                        
+                      .modal-body
+                        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+                        img src="#{to_http photo.image_url}"
+          #news.tab-pane.active
+            ul#news_slider_ul
+              - @club.news.each do |news|
+                li
+                  .piece-of-news style="height:200px"
+                    .img: img src="#{to_http (news.photos.first || {:image_url=>asset_url('avatars/no_avatar.png')})[:image_url]}"
+                    .date = news.created_at.strftime('%d.%m.%Y')
+                    .description.red = news.description[0..40]+'...'
+            javascript:
+              $(document).ready(function(){
+                $('#news_slider_ul').bxSlider({
+                 minSlides: 3,
+                 maxSlides: 4,
+                 slideWidth: 196,
+                 slideMargin: 10
+               });
+              })             
+          #settings.tab-pane ...
   
-

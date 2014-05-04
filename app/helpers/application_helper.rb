@@ -31,7 +31,11 @@ module ApplicationHelper
   end
 
   def to_http s#from https
-    'http://'+s[8..-1]
+    if s[0..7] == "https://" 
+      'http://'+s[8..-1]
+    else
+      s
+    end
   end
 
   #dima:  try this -> time.strftime('%d.%m.%Y')
