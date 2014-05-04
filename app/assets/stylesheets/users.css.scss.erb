@@ -1,3 +1,11 @@
+.img-delete{
+  background-image: url(<%= asset_url('users_show/delete.png') %>);
+  width: 19px;
+  height:21px;
+  display:inline-flex;
+  position: absolute;
+  margin-left: 8px;
+}
 .red-list{
   .marker{
     width:25px;
@@ -13,6 +21,12 @@
       color: white;
     }
   }
+  .li{
+    padding-bottom:7px;
+    .caption{
+      font-size:13px;
+    }
+  }
 }
 #subscribes{
   .row{
@@ -21,14 +35,24 @@
   label{
     font-size:13px;
   }
-  .btn-red-border{
+  .text-fields .btn-red-border{
     height:38px;
     padding: 5px 10px;
   }
-  .subscribe{
-    padding-bottom:7px;
+  .red-list{
+    td{
+      padding-bottom:5px;
+    }
     .caption{
+      margin-right: 5px;
+    }
+    .btn-red-border{
+      height:26px;
+      padding: 2px 5px;
       font-size:13px;
+    }
+    .img-delete{
+      position:static;
     }
   }
 }
@@ -56,15 +80,6 @@
         height:20px;
         padding:0px 5px;
         font-size:13px;
-      }
-
-      .img-delete{
-        background-image: url(<%= asset_url('users_show/delete.png') %>);
-        width: 19px;
-        height:21px;
-        display:inline-flex;
-        position: absolute;
-        margin-left: 8px;
       }
   }
   .single-club-content{

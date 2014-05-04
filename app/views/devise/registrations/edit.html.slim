@@ -16,7 +16,7 @@
       a data-toggle="tab" href="#favorite_clubs"  Любимые заведения
   .tab-content style="padding:0"
     #current_orders.tab-pane.active
-      .orders-list
+      .orders-list.red-list
         - current_user.orders.where("time > ?", Time.now - 1.hour).each_with_index do |order,i|
           .single-order
             .marker
@@ -58,10 +58,20 @@
               td: input type="text"
             tr
               td style="padding-bottom:7px": label Выбранные заведения:
-          .new-subscribes-list
-
+          .new-subscribes-list.red-list
           a.btn.btn-red-border Подписаться
         .col-md-4
+          label Уже подписаны:
+          table.red-list
+            - current_user.subscribed_clubs.each_with_index do |club,i|
+              tr.li id="subscribe_#{club.id}"
+                td: .marker: .number = i + 1
+                td: span.caption = club.name
+                td: div: a.btn.btn-red-border Забронировать
+                td: div: a href="/subscribes/#{club.id}" data-remote="true" data-method="delete"
+                      .img-delete
+
+
     #favorite_clubs.tab-pane
       .row
         - current_user.favorite_clubs.each do |club|
@@ -78,8 +88,8 @@
 
 javascript:
   var appendSubscribe = function(name){
-    $('.new-subscribes-list').append('<div class="subscribe red-list"><div class="marker"><div class="number">' + 
-       ($('.new-subscribes-list .subscribe').length+1) + 
+    $('.new-subscribes-list').append('<div class="li"><div class="marker"><div class="number">' + 
+       ($('.new-subscribes-list .li').length+1) + 
           '</div> </div><span class="caption">' + name + 
         '</span></div>'
       );

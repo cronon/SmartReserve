@@ -13,6 +13,7 @@ SmartReserve::Application.routes.draw do
   match 'remote_sign_up', to: 'remote_content#remote_sign_up', via: [:get]
   match 'remote_sign_in', to: 'remote_content#remote_sign_in', via: [:get]
   resources :favorites, only: [:create,:destroy]
+  resources :subscribes, only: [:create,:destroy]
   resources :clubs, except: [:index] do    
     get 'tables' => 'tables#index', as: :tables
     get 'tables/:id' => 'tables#show', as: :table #contain оформить заказ button
