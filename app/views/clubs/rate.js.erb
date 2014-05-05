@@ -1,1 +1,1 @@
-$('#club_<%=@club.id%> .rating').html('<%=j ratings_for(@club, :show_user_rating => true, :dimension => :rating)%>')
+$('#new_comment_<%= params[:dimension] %>').html('<%=j ratings_for(@club, :show_user_rating => true, :dimension => params[:dimension])%>')
