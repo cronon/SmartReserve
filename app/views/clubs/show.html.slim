@@ -167,7 +167,7 @@
                 - if current_user
                   a.btn.btn-red-border data-toggle="modal" data-target="#new_comment" Оставить отзыв
                 - else
-                  a.btn.btn-red-border Зарегистрироваться и оставить отзыв
+                  = link_to 'Зарегистрироваться и оставить отзыв', remote_sign_up_path, :remote => true, :class => "btn btn-red-border"
 
             .modal.fade id="new_comment" aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
               .modal-dialog
@@ -178,6 +178,7 @@
                       h4#myModalLabel.modal-title.red[style='text-align:center'] Оставить отзыв
                     .modal-body
                       table.text-inputs
+                        input type="hidden" name="club_id" value="#{@club.id}"
                         tr
                           td[style="vertical-align:top"]: label Отзыв:
                           td = f.text_area :description, :cols=>30, :rows=>5
@@ -196,10 +197,10 @@
                           td: #new_comment_atmosphere
                             = ratings_for @club, :dimension => :atmosphere, :show_user_rating=>true
                     .modal-footer style="text-align:center"
-                      button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button" ОК
-                      button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button" Отмена
+                      button.btn.btn-red-border type="submit" ОК
+                      button.btn.btn-red-border data-dismiss="modal" type="button" Отмена
 
-            - @club.comments.each do |comment|
+            - @club.comments.reverse.each do |comment|
               .single-comment
                 .user-avatar
                   = image_tag to_http(comment.user.avatar_url)
