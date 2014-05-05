@@ -23,9 +23,6 @@
             = f.label "Подтверждение пароля"
             br/
             = f.password_field :password_confirmation
-          = link_to "Already have an account?", new_user_session_path
-          br
-          = link_to "Forgot your password?", new_user_password_path
           .form-actions style="text-align:center"
             a  href="#" class="btn btn-red-border" data-dismiss="modal"  Отмена
             = f.submit "Зарегистрироваться", :class => "btn btn-red-border", style: "padding-top:5px;margin-left:10px"

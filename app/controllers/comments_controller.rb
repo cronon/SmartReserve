@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.build(comment_params)
     @comment.club_id = params[:club_id]
     @comment.save
+    redirect_to :back
   end
 
   def destroy    
