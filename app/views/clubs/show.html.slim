@@ -133,17 +133,33 @@
               - @club.news.each do |news|
                 li
                   .piece-of-news style="height:200px"
-                    .img: img src="#{to_http (news.photos.first || {:image_url=>asset_url('avatars/no_avatar.png')})[:image_url]}"
+                    a.img data-toggle="modal" data-target="#news_#{news.id}_modal" style="cursor:pointer"
+                     img src="#{to_http (news.photos.first || {:image_url=>asset_url('avatars/no_avatar.png')})[:image_url]}"
                     .date = news.created_at.strftime('%d.%m.%Y')
                     .description.red = news.description[0..40]+'...'
+            - @club.news.each do |news|
+              .modal.fade id="news_#{news.id}_modal" aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
+                .modal-dialog
+                  .modal-content
+                    .modal-header
+                      button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+                      h4#myModalLabel.modal-title.red[style='text-align:center'] = news.title
+                    .modal-body.row
+                      img src="#{to_http (news.photos.first || {:image_url=>asset_url('avatars/no_avatar.png')})[:image_url]}" style="float:left;padding:0 10px 10px 0;width:150px;height:110px"
+                      = news.description
+                    .modal-footer style="text-align:center"
+                      button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button" onclick="connectWithMain()"  Закрыть
+
             javascript:
               $(document).ready(function(){
                 $('#news_slider_ul').bxSlider({
-                 minSlides: 3,
-                 maxSlides: 4,
-                 slideWidth: 196,
-                 slideMargin: 10
-               });
+                  minSlides: 3,
+                  maxSlides: 4,
+                  slideWidth: 196,
+                  slideMargin: 10
+                });
+                // because bxSlider cannot load in hidden tab
+                setTimeout(function(){$('#club_tabs a:first').tab('show')},300);
               })             
           #settings.tab-pane ...
   
