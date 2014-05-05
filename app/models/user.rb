@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
   has_many :subscribes
   has_many :subscribed_clubs, :through => :subscribes
 
+  def avatar_url
+    if self.avatar.url
+      to_http self.avatar.url
+    else
+      ActionController::Base.helpers.asset_url("avatars/no_avatar.png")
+    end
+  end
+
   def active_for_authentication?
     true
   end
