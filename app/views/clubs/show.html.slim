@@ -161,5 +161,23 @@
                 // because bxSlider cannot load in hidden tab
                 setTimeout(function(){$('#club_tabs a:first').tab('show')},300);
               })             
-          #settings.tab-pane ...
-  
+          #comments.tab-pane
+            div style="height:50px"
+              div style="float:right"
+                - if current_user
+                  a.btn.btn-red-border Оставить отзыв
+                - else
+                  a.btn.btn-red-border Зарегистрироваться и оставить отзыв
+            - @club.comments.each do |comment|
+              .single-comment
+                .user-avatar
+                  = image_tag to_http(comment.user.avatar_url)
+                .comment-date = comment.created_at.strftime('%d.%m.%Y')
+                .comment-description = comment.description
+                .comment-ratings
+                  ' Кухня
+                  = ratings_for @club, comment.user, :dimension => :kitchen
+                  ' Сервис
+                  = ratings_for @club, comment.user, :dimension => :service
+                  ' Кухня
+                  = ratings_for @club, comment.user, :dimension => :atmosphere

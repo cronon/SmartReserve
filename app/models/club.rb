@@ -29,7 +29,7 @@ class Club < ActiveRecord::Base
   validates :tables_count, :name, presence: true
   validates :tables_count, numericality: { grater_than_or_equal: 1 }
 
-  ajaxful_rateable :stars => 5, :dimensions => [:rating], :cache_column_rating => :rating_average
+  ajaxful_rateable :stars => 5, :dimensions => [:rating,:kitchen,:service,:atmosphere], :cache_column_rating => :rating_average
 
   def avatar_url
     if self.avatar.url
