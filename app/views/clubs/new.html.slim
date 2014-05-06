@@ -167,9 +167,9 @@
                 li
                   = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
                   = property.name
-          .col-md-12.properties-group
+          .col-md-12.properties-group style="padding:0"
             ul
-              .properties-heading Особенности
+              .properties-heading style="margin-left:5px" Особенности
               - properties = Property.where(:kind_en=>"Feature").to_a
               - properties.each_slice((properties.size/2).round) do |half|
                   .col-md-6                          
@@ -177,7 +177,11 @@
                       li
                         = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
                         = property.name   
-      .col-md-6.input-groups.right-col style="margin-top:22px"
+    .row: .col-md-12: br/
+    .row
+      .col-md-6.input-groups
+        == render 'clubs/upload_photo'
+      .col-md-6.input-groups.right-col
         label Схема заведения
         #prev_avatar style="min-height:150px"
           - unless @club.avatar.blank?
@@ -190,10 +194,6 @@
            $('#avatar_input').change(function(){
              $('#prev_avatar').html("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
            })
-    .row: .col-md-12: br/
-    .row
-      .col-md-6.input-groups
-        == render 'clubs/upload_photo'
 javascript:
   var toggleWholeDayToInputs = function(e){
     var checkbox_custom = e.target;
