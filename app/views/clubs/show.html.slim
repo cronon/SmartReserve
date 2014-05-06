@@ -114,7 +114,10 @@
             label> Время работы: 
             | Круглосуточно
             br
-            label> Дополнительная информация: 
+            label> Дополнительная информация:
+            /a.edit-description data-toggle="modal" data-target="#edit_description" Edit description
+            = form_for @club, :remote=>true do |f|
+              == render 'layouts/text_edit', :f=>f, :id => "edit_description"
             => @club.description
           #gallery.tab-pane
             .row

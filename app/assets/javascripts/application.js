@@ -21,3 +21,5 @@
 //= require jquery-fileupload
 //= require jquery.bxslider.min
 //http://ryanfait.com/resources/custom-checkboxes-and-radio-buttons/
+//= require markitup
+//= require markitup/sets/markdown/set

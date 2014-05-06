@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   has_many :subscribes
   has_many :subscribed_clubs, :through => :subscribes
 
+  include ApplicationHelper
   def avatar_url
     if self.avatar.url
       to_http self.avatar.url

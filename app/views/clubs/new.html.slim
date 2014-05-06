@@ -166,7 +166,17 @@
               - Property.find_all_by_kind_en("Interior").each do |property|
                 li
                   = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
-                  = property.name    
+                  = property.name
+          .col-md-12.properties-group
+            ul
+              .properties-heading Особенности
+              - properties = Property.where(:kind_en=>"Feature").to_a
+              - properties.each_slice((properties.size/2).round) do |half|
+                  .col-md-6                          
+                    - half.each do |property|
+                      li
+                        = check_box_tag 'property_ids[]', property.id, @club.properties.include?(property), class: "styled"
+                        = property.name   
       .col-md-6.input-groups.right-col style="margin-top:22px"
         label Схема заведения
         #prev_avatar style="min-height:150px"
