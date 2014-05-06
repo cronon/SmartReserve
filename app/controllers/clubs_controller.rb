@@ -1,10 +1,22 @@
 class ClubsController < ApplicationController
-  before_action :set_club, only: [:show, :edit, :update, :destroy]
+  before_action :set_club, only: [:show, :edit, :update, :destroy, :update_description]
 
   # load_and_authorize_resource
   # skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
 
   #ID_UNEXIT_CLUB = 1000000
+
+  def update_description
+    respond_to do |format|
+      if @club.update(club_params)
+        format.html { redirect_to @club }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @club.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   def catalog
     params[:price] ||= {:from=>0, :to => 999999999999999999}
@@ -88,10 +100,10 @@ class ClubsController < ApplicationController
   def update
     @club.properties = Property.find(params[:property_ids])
     @club.properties <<(Property.find_by_name_ru(params[:club_type]) || Property.create(:kind_en=>'Type',:kind_ru=>'Тип',:name_ru=>params[:club_type]))
+    photos = Photo.find session[:photos_for_req_club]
+    @club.photos << photos
     respond_to do |format|
       if @club.update(club_params)
-        photos = Photo.find session[:photos_for_req_club]
-        @club.photos << photos
         format.html { redirect_to @club, notice: 'Club was successfully updated.' }
         format.json { head :no_content }
       else

@@ -115,10 +115,12 @@
             | Круглосуточно
             br
             label> Дополнительная информация:
-            /a.edit-description data-toggle="modal" data-target="#edit_description" Edit description
-            = form_for @club, :remote=>true do |f|
+            - if can? :edit, @club
+              a.edit-description data-toggle="modal" data-target="#edit_description" Edit description
+            = form_for @club, :url => club_update_description_path(@club) do |f|
+              input type="hidden" name="id" value="#{@club.id}"
               == render 'layouts/text_edit', :f=>f, :id => "edit_description"
-            => @club.description
+            => markdown(@club.description)
           #gallery.tab-pane
             .row
               - @club.photos.each do |photo|

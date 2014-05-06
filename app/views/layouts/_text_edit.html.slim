@@ -4,9 +4,14 @@
       .modal-body
         = f.text_area :description, :class => 'text_field', :id => "markItUp"
       .modal-footer style="text-align:center"
-        button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button"  ОК
+        button.btn.btn-red-border style="padding-top:5px" type="submit"  ОК
         button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button"  Отмена
       javascript:
         $(document).ready(function(){
-          $("#markItUp").markItUp(markdownSettings);
+          mySettings = $.extend(true,{},markdownSettings); // global for debug purposes
+          mySettings.markupSet = markdownSettings.markupSet. 
+                  filter(function(o){
+                    return ["Quotes","Code Block / Code","Heading 6"].indexOf(o.name)==-1 || o.separator;
+                  });
+          $("#markItUp").markItUp(mySettings);
         });
