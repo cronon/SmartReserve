@@ -4,11 +4,32 @@
     padding: 4px 10px;
   }
 }
-#markItUpMarkItUp{ //id builds with some mmagic
+#markItUpMarkItUp{ //id generates with some magic
+  .markItUpResizeHandle {
+    display:none;
+  }
+  .markItUpHeader{
+    padding-left:5px;
+  }
+  .markItUpContainer {
+    border: none;
+    background: #6c6c6c;
+    padding: 5px 0px 0px 0px;
+    font: 11px Verdana, Arial, Helvetica, sans-serif;
+  }
+  .markItUpPreviewFrame {
+    overflow: auto;
+    background-color: #FFFFFF;
+    border: none;
+    width: 100%;
+    height: 300px;
+    margin: 0px 0;
+  }
   .markItUpEditor {
     font: 15px 'PT Sans' 'Courier New', Courier, monospace;
     padding: 5px 5px 5px 5px;
-    border: 3px solid #3C769D;
+    border: none;
+    margin-top: 5px;
     width: 100%;
     height: 320px;
     background: white;
@@ -21,7 +42,7 @@
     width: 1px;
     height: 16px;
     overflow: hidden;
-    background-color: white;
+    background-color: #6c6c6c;
   }
   .markItUpButton, .markItUpButton a{
     width:47px;
@@ -47,11 +68,5 @@
   }
   .markItUpButton7 a{
     background-image: url(<%= asset_url 'markitup/link.png' %>);
-  }
-  .markItUpContainer {
-    border: 1px solid #3C769D;
-    background: white;
-    padding: 5px 5px 2px 5px;
-    font: 11px Verdana, Arial, Helvetica, sans-serif;
   }
 }
