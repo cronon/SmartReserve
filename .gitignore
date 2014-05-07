@@ -19,8 +19,8 @@
 /db/schema.rb
 /config/database.yml
 #/Gemfile.lock
-#./Gemfile
-#./Gemfile.lock
+./Gemfile
+./Gemfile.lock
 #Gemfile
 #Gemfile.lock
 *.sh

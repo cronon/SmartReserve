@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy, :update_description]
 
