@@ -85,8 +85,7 @@ class ClubsController < ApplicationController
     @club.properties = Property.find_by_name_ru(params[:club_type]) || Property.create(:kind_en=>'Type',:kind_ru=>'Тип',:name_ru=>params[:club_type])
     respond_to do |format|
       if @club.update(club_params)
-        photos = Photo.find session[:photos_for_req_club]
-        @club.photos << photos
+        @club.photos << get_photos
         format.html { redirect_to edit_club_path(@club), notice: 'Club was successfully created.' }
         format.json { render action: 'show', status: :created, location: @club }
       else
@@ -101,8 +100,7 @@ class ClubsController < ApplicationController
   def update
     @club.properties = Property.find(params[:property_ids])
     @club.properties <<(Property.find_by_name_ru(params[:club_type]) || Property.create(:kind_en=>'Type',:kind_ru=>'Тип',:name_ru=>params[:club_type]))
-    photos = Photo.find session[:photos_for_req_club]
-    @club.photos << photos
+    @club.photos << get_photos
     respond_to do |format|
       if @club.update(club_params)
         format.html { redirect_to @club, notice: 'Club was successfully updated.' }
@@ -125,6 +123,13 @@ class ClubsController < ApplicationController
   end
 
   private
+    #get photos from session and clean session
+    def get_photos
+      p = Photo.where(:id => session[:photos_for_req_club]).to_a
+      session[:photos_for_req_club] = nil
+      p
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_club
       @club = Club.find(params[:id])
