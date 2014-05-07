@@ -11,7 +11,15 @@
           mySettings = $.extend(true,{},markdownSettings); // global for debug purposes
           mySettings.markupSet = markdownSettings.markupSet. 
                   filter(function(o){
-                    return ["Quotes","Code Block / Code"].indexOf(o.name)==-1 || o.separator;
+                    return [
+                      "Quotes",
+                      "Code Block / Code",
+                      "First Level Heading",
+                      "Second Level Heading",
+                      "Heading 4",
+                      "Heading 6",
+                      "Heading 5"
+                      ].indexOf(o.name)==-1 || o.separator;
                   });
           $("#markItUp").markItUp(mySettings);
         });
