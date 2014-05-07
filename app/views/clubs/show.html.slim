@@ -113,6 +113,7 @@
             br
             label> Время работы: 
             | Круглосуточно
+            /= @club.schedule_at(Time.now)[:opens].strftime('%H:%M') + ' - ' + @club.schedule_at(Time.now)[:closes].strftime('%H:%M')  # will be 00:00 - 00:00, should be 00:00 - 24:00
             br
             label> Дополнительная информация:
             - if can? :edit, @club
