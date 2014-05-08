@@ -94,6 +94,10 @@
               |  
               input.btn-reservation.btn.btn-danger[type='reset' style='width:45%' value='Сбросить' onclick="resetFilters()"]
         #clubs_div.col-md-6 style='width: calc(50% + 30px);'
+          css:
+            div.club-wrapper-catalog{
+              width: 50%;
+            }
           - @clubs.each_slice(3) do |three_clubs|
               - three_clubs.each do |club|
                   = render 'clubs/single_catalog', :club => club         

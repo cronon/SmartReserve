@@ -8,16 +8,37 @@
         h3.red style="text-align:center"  Акции и спецпредложения
     .sales-slider
       ul#sales_slider_ul
-        - (1..5).each do |i|
+        - (1..9).each do |i|
           li
             img src=asset_path("club.png") /
+      css:
+        .bx-wrapper img{
+          /max-width:210px;
+          /display: block;
+        }
       javascript:
-         $('#sales_slider_ul').bxSlider({
-           minSlides: 3,
-           maxSlides: 4,
-           slideWidth: 210,
-           slideMargin: 10
-         });
+          $(document).ready(function(){
+            var minNumber,
+            maxNumber,
+            width = $(window).width() * 0.666667;
+            if (width < 430) {
+                minNumber = 1;
+                maxNumber = 2;
+            } else if (width < 1024) {
+                minNumber = 4;
+                maxNumber = 4;
+            } else {
+                minNumber = 6;
+                maxNumber = 6;
+            }
+            $('#sales_slider_ul').bxSlider({
+              slideWidth: 210,
+              minSlides: 3,
+              maxSlides: 6,
+              slideMargin: 10,
+              moveSlides: 1
+            });
+          });
 .row
   .col-md-12
     br/
@@ -42,18 +63,10 @@
     .container-fixed
       .row
         .col-md-8.col-md-offset-2
-          - @clubs.each_slice(3) do |four_clubs|
+          - @clubs.each_slice(3) do |three_clubs|
             .row
-              css:
-                div.club-wrapper-catalog{
-                  padding-bottom:0;
-                }
-                div.club-wrapper-catalog div.club-div{
-                  width:288px;
-                }
-              - four_clubs.each do |club|
-                .col-md-4 
-                  = render 'clubs/single_catalog', :club => club
+              - three_clubs.each do |club|
+                  == render 'clubs/single_catalog', :club => club
             .row
               .col-md-12 style="height:20px" 
     .row
