@@ -16,10 +16,8 @@ class NewsController < ApplicationController
   end
 
   def update
-    puts "Hellow"
     respond_to do |format|
       if @news.update(news_params)
-        puts "Hellow"
         format.html { redirect_to :back, notice: 'News was successfully updated.' }
         format.json { head :no_content }
       else

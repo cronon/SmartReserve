@@ -170,37 +170,36 @@
                       = news.description
                     .modal-footer style="text-align:center"
                       button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button" Закрыть
-              .modal.fade id="edit_news_#{news.id}_modal" aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
+              .modal.fade.edit-news-modal id="edit_news_#{news.id}_modal" aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
                 = form_for news do |f|
                   .modal-dialog
                     .modal-content
                       .modal-header
                         button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
                         h4#myModalLabel.modal-title.red[style='text-align:center'] = news.title
-                      .modal-body.row
+                      .modal-body.row style="padding:25px"
                         table.text-fields
                           tr
                             td: label Название
                             td = f.text_field :title
                           tr
                             td: label Текст новости
-                            td = f.text_area :description
+                            td = f.text_area :description, :rows => 7, :cols=>47
                           tr
                             td: label Иллюстрация
                             td
-                              div.btn.btn-red.btn-danger
+                              #prev_avatar style="height:150px"
+                                img src="#{news.avatar_url}" style="max-height:100%;margin-left:0"
+                              div.btn.btn-red.btn-danger style="margin-top:10px"
                                 | Обзор...
                               = f.file_field :avatar, id: 'avatar_input', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
-
-                              #prev_avatar style="width:150px;height:100px"
-                                img src="#{news.avatar_url}" style="padding:0 10px 10px 0;"
                             javascript:
                                $('#avatar_input').change(function(){
                                  $('#prev_avatar').html("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
                                })
-                      .modal-footer style="text-align:center"
-                        button.btn.btn-red-border style="padding-top:5px" type="submit" OK
-                        button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button" Закрыть
+                      div style="text-align:center"
+                        button.btn.btn-red-border type="submit" OK
+                        button.btn.btn-red-border data-dismiss="modal" type="button" Закрыть
 
             javascript:
               $(document).ready(function(){
