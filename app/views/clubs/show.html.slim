@@ -100,10 +100,10 @@
             a data-toggle="tab" href="#description"  Описание
           li
             a data-toggle="tab" href="#gallery"  Галерея
-          li
-            a data-toggle="tab" href="#messages"  Меню
-          li
-            a data-toggle="tab" href="#offers"  Спецпредложения
+          /li
+           / a data-toggle="tab" href="#messages"  Меню
+          /li
+            /a data-toggle="tab" href="#offers"  Спецпредложения
           li
             a data-toggle="tab" href="#comments"  Отзывы
           li.active
@@ -219,9 +219,14 @@
                       button.btn.btn-red-border data-dismiss="modal" type="button" Отмена
 
             - @club.comments.reverse.each do |comment|
-              .single-comment
+              .single-comment id="comment_#{comment.id}"
                 .user-avatar
                   = image_tag to_http(comment.user.avatar_url)
+                - if can? :edit, @club
+                  .comment-destroy
+                    a href="#{comment_path(comment)}" data-method="DELETE" data-remote="true"
+                      span.glyphicon.glyphicon-remove-circle style="color:#ec5c5c"
+
                 .comment-date = comment.created_at.strftime('%d.%m.%Y')
                 .comment-description = comment.description
                 .comment-ratings
@@ -231,3 +236,7 @@
                   = ratings_for @club, comment.user, :dimension => :service
                   ' Кухня
                   = ratings_for @club, comment.user, :dimension => :atmosphere
+              javascript:
+                var removeComment = function(id){
+
+                }
