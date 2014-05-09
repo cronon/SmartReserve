@@ -1,6 +1,6 @@
 .club-wrapper-catalog
   .club-div id="club_#{club.id}" style="background-image:url(#{ asset_url('club-catalog.png') })" 
-    .white-on-avatar style='height:50px;margin-top:15px;'
+    .white-on-avatar style='height:50px;margin-top:15px;overflow-x:hidden'
       a.title-on-avatar href="#{club_path(club)}" 
         = club.properties.find_by_kind_en('Type').name
         |  &quot;#{club.name}&quot;
@@ -8,7 +8,7 @@
         = club.get_address
       .top-right-icon
         img src="#{top_right_icon_src(club)}"
-    .white-on-avatar style="height:35px;margin-top:95px;overflow-x:hidden"
+    .white-on-avatar style="height:35px;margin-top:95px;"
       - if can? :update, club
         - link_to 'Edit', edit_club_path(club)
       - if can? :destroy, club
