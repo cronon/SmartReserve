@@ -7,7 +7,8 @@
       .address-on-avatar
         = club.get_address
       .top-right-icon
-        img src="#{top_right_icon_src(club)}"
+        - if src = top_right_icon_src(club)
+          img src="#{top_right_icon_src(club)}"
     .white-on-avatar style="height:35px;margin-top:95px;"
       - if can? :update, club
         - link_to 'Edit', edit_club_path(club)

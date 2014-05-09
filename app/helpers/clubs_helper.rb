@@ -23,7 +23,7 @@ module ClubsHelper
     elsif club.name == 'Stopline' #not club.discounts.blank?
       asset_path 'top_right_icons/discount.png'
     else
-      ''
+      false
     end
   end  
 end
