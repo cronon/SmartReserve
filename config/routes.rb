@@ -38,6 +38,7 @@ SmartReserve::Application.routes.draw do
   end
   resources :photos, only: [:create, :destroy]
   get '/clubs' => 'clubs#catalog'
+  resources :news
   post 'news/news_full' => 'news#news_full', as: :news_full
   resources :comments, only: [:create, :destroy]
   get 'users/edit', as: 'user_root'

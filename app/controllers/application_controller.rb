@@ -54,7 +54,8 @@ class ApplicationController < ActionController::Base
 
     #devise_parameter_sanitizer.for(:sign_up) << :phone
     #devise_parameter_sanitizer.for(:sign_up) << :owner_clubs
-    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:phone, 
+    devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(
+        :phone, 
         :owner_clubs, 
         :email, 
         :password,

@@ -15,23 +15,20 @@ class NewsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /clubs/1
-  # PATCH/PUT /clubs/1.json
   def update
+    puts "Hellow"
     respond_to do |format|
       if @news.update(news_params)
-        format.html { redirect_to @news, notice: 'News was successfully updated.' }
+        puts "Hellow"
+        format.html { redirect_to :back, notice: 'News was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { redirect_to :back }
         format.json { render json: @news.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def update
-
-  end
   def new
     @news = News.new
   end
@@ -66,6 +63,6 @@ class NewsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def news_params
-      params.require(:news).permit(:description, :title)
+      params.require(:news).permit(:description, :title,:avatar, :avatar_cache)
     end
 end
