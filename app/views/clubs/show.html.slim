@@ -213,7 +213,7 @@
                 - if can? :edit, @club
                   .comment-destroy
                     a href="#{comment_path(comment)}" data-method="DELETE" data-remote="true"
-                      span.glypicon.glyphicon-remove-circle
+                      span.glyphicon.glyphicon-remove-circle style="color:#ec5c5c"
 
                 .comment-date = comment.created_at.strftime('%d.%m.%Y')
                 .comment-description = comment.description
