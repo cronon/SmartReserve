@@ -11,30 +11,17 @@
         ul#sales_slider_ul
           - (1..9).each do |i|
             li
-              img src=asset_path("club.png") /
+              img style="width:210px" src=asset_path("club.png") /
       css:
         .bx-wrapper img{
-          /max-width:210px;
-          /display: block;
+          max-width:210px;
+          display: block;
         }
       javascript:
           $(document).ready(function(){
-            var minNumber,
-            maxNumber,
-            width = $(window).width() * 0.666667;
-            if (width < 430) {
-                minNumber = 1;
-                maxNumber = 2;
-            } else if (width < 1024) {
-                minNumber = 4;
-                maxNumber = 4;
-            } else {
-                minNumber = 6;
-                maxNumber = 6;
-            }
             $('#sales_slider_ul').bxSlider({
-              slideWidth: 210,
-              minSlides: 3,
+              slideWidth: 2100,
+              minSlides: 4,
               maxSlides: 6,
               slideMargin: 10,
               moveSlides: 1
@@ -84,7 +71,7 @@
           ul#news_slider_ul
             - News.limit(10).order(created_at: :desc).to_a.each do |news|
               li
-                .club-image style="background-image:url('#{asset_path('club.png')}')"
+                .club-image style="background-image:url('#{asset_path('club.png')}');margin:0 auto;"
                   .white-on-avatar
                     .date-on-avatar = news.created_at.strftime '%d.%m.%Y'
                     .text-on-avatar
@@ -92,10 +79,11 @@
                       |  &quot;#{news.club.name}&quot;
           javascript:
              $('#news_slider_ul').bxSlider({
-               minSlides: 3,
+               minSlides: 4,
                maxSlides: 4,
-               slideWidth: 210,
+               slideWidth: 21000,
                slideMargin: 10,
+               moveSlide: 1,
                nextText: '< img src="#{asset_path("chevron_right")}" height="16" width="16"/>',
                prevText: '< img src="#{asset_path("chevron_left")}" height="16" width="16"/>'
              });
