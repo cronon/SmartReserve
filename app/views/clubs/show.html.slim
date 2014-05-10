@@ -128,24 +128,14 @@
               == render 'layouts/text_edit', :f=>f, :id => "edit_description"
             => markdown(@club.description)
           #gallery.tab-pane
-            .row
+            #club_photos.row
               - @club.photos.each do |photo|
-                .col-md-3
-                  a href="#" class="thumbnail" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
-                    img data-src="holder.js/100%x180" src="#{to_http photo.image_url}"
-                  span.glyphicon.glyphicon-remove-circle.red
-                  span.glyphicon.glyphicon-zoom-in
-                .modal.fade id="photo_#{photo.id}_modal" aria-hidden="true" aria-labelledby="map_modalLabel" role="dialog" tabindex="-1"
-                  .modal-dialog
-                    .modal-content                        
-                      .modal-body
-                        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-                        img src="#{to_http photo.image_url}"
+                == render "single_club_photo", :photo => photo
             .row style="float:right;"
               = form_for(Photo.new, :url => photos_path(@club), :method => :post, :remote => true) do |f|
                 span.glyphicon.glyphicon-plus-sign.red
                   = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
-                  
+              == render "add_photo", :club => @club   
           #news.tab-pane.active
             ul#news_slider_ul
               - @club.news.each do |news|

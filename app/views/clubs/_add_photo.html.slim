@@ -22,13 +22,14 @@ javascript:
            if (formdata) {
                formdata.append("file", file);
                $.ajax({
-                 url: "#{photos_path()}?type=club&needed_club_id=#{club.id}",
+                 url: "#{photos_path()}?type=club&club_id=#{club.id}",
                  type: "POST",
                  data: formdata,
                  processData: false,
                  contentType: false,
                  success: function(res) {
-
+                  $('#club_photos').append("#{j render 'single_club_photo', :photo => club.photos.last}");
+                  console.log("#{j render 'single_club_photo', :photo => club.photos.last}");
                  },
                  error: function(res) {
 
