@@ -115,27 +115,37 @@ CREATE TABLE clubs (
     updated_at timestamp without time zone,
     tables_count integer,
     description text,
-    mon_opens character varying(255),
-    mon_closes character varying(255),
-    tue_opens character varying(255),
-    tue_closes character varying(255),
-    wed_opens character varying(255),
-    wed_closes character varying(255),
-    thu_opens character varying(255),
-    thu_closes character varying(255),
-    fri_opens character varying(255),
-    fri_closes character varying(255),
-    sat_opens character varying(255),
-    sat_closes character varying(255),
-    sun_opens character varying(255),
-    sun_closes character varying(255),
+    mon_opens character varying(255) DEFAULT '08:00'::character varying,
+    mon_closes character varying(255) DEFAULT '23:00'::character varying,
+    tue_opens character varying(255) DEFAULT '08:00'::character varying,
+    tue_closes character varying(255) DEFAULT '23:00'::character varying,
+    wed_opens character varying(255) DEFAULT '08:00'::character varying,
+    wed_closes character varying(255) DEFAULT '23:00'::character varying,
+    thu_opens character varying(255) DEFAULT '08:00'::character varying,
+    thu_closes character varying(255) DEFAULT '23:00'::character varying,
+    fri_opens character varying(255) DEFAULT '08:00'::character varying,
+    fri_closes character varying(255) DEFAULT '23:00'::character varying,
+    sat_opens character varying(255) DEFAULT '08:00'::character varying,
+    sat_closes character varying(255) DEFAULT '23:00'::character varying,
+    sun_opens character varying(255) DEFAULT '08:00'::character varying,
+    sun_closes character varying(255) DEFAULT '23:00'::character varying,
     user_id integer,
     phone character varying(255),
-    adress character varying(255),
+    address character varying(255),
     time_before integer,
     time_after integer,
     time_waiting integer,
-    time_last character varying(255)
+    time_last character varying(255),
+    avatar character varying(255),
+    average_price integer,
+    city character varying(255),
+    rating_average numeric(6,2) DEFAULT 0,
+    is_certified boolean DEFAULT false,
+    metro_station character varying(255),
+    site character varying(255),
+    email character varying(255),
+    additional_phones character varying(255),
+    payment_methods character varying(255)
 );
 
 
@@ -159,6 +169,114 @@ ALTER SEQUENCE clubs_id_seq OWNED BY clubs.id;
 
 
 --
+-- Name: clubs_properties; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE clubs_properties (
+    club_id integer NOT NULL,
+    property_id integer NOT NULL
+);
+
+
+--
+-- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE comments (
+    id integer NOT NULL,
+    description text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    club_id integer,
+    user_id integer
+);
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: favorites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE favorites (
+    id integer NOT NULL,
+    club_id integer,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE favorites_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: favorites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE favorites_id_seq OWNED BY favorites.id;
+
+
+--
+-- Name: news; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE news (
+    id integer NOT NULL,
+    club_id integer,
+    description text,
+    title character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE news_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE news_id_seq OWNED BY news.id;
+
+
+--
 -- Name: orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -173,7 +291,9 @@ CREATE TABLE orders (
     name character varying(255),
     token character varying(255),
     user_id integer,
-    "time" timestamp without time zone
+    "time" timestamp without time zone,
+    confirmation character varying(255),
+    comment text
 );
 
 
@@ -204,8 +324,9 @@ CREATE TABLE photos (
     id integer NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    club_id integer,
-    image character varying(255)
+    image character varying(255),
+    imageable_id integer,
+    imageable_type character varying(255)
 );
 
 
@@ -229,6 +350,38 @@ ALTER SEQUENCE photos_id_seq OWNED BY photos.id;
 
 
 --
+-- Name: properties; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE properties (
+    id integer NOT NULL,
+    name_ru character varying(255),
+    name_en character varying(255),
+    kind_ru character varying(255),
+    kind_en character varying(255)
+);
+
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE properties_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: properties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE properties_id_seq OWNED BY properties.id;
+
+
+--
 -- Name: rates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -237,7 +390,7 @@ CREATE TABLE rates (
     rater_id integer,
     rateable_id integer,
     rateable_type character varying(255),
-    stars double precision NOT NULL,
+    stars integer NOT NULL,
     dimension character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -308,6 +461,38 @@ CREATE TABLE schema_migrations (
 
 
 --
+-- Name: subscribes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE subscribes (
+    id integer NOT NULL,
+    club_id integer,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: subscribes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE subscribes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: subscribes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE subscribes_id_seq OWNED BY subscribes.id;
+
+
+--
 -- Name: tables; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -316,7 +501,10 @@ CREATE TABLE tables (
     club_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    status_now character varying(255) DEFAULT 'free'::character varying
+    status_now character varying(255) DEFAULT 'free'::character varying,
+    number integer,
+    seats integer,
+    hall character varying(255) DEFAULT 'Некурящий'::character varying
 );
 
 
@@ -363,7 +551,9 @@ CREATE TABLE users (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     owner_clubs boolean DEFAULT false,
-    name character varying(255)
+    name character varying(255),
+    locale character varying(255),
+    avatar character varying(255)
 );
 
 
@@ -411,6 +601,27 @@ ALTER TABLE ONLY clubs ALTER COLUMN id SET DEFAULT nextval('clubs_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY favorites ALTER COLUMN id SET DEFAULT nextval('favorites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
 
 
@@ -425,6 +636,13 @@ ALTER TABLE ONLY photos ALTER COLUMN id SET DEFAULT nextval('photos_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY properties ALTER COLUMN id SET DEFAULT nextval('properties_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY rates ALTER COLUMN id SET DEFAULT nextval('rates_id_seq'::regclass);
 
 
@@ -433,6 +651,13 @@ ALTER TABLE ONLY rates ALTER COLUMN id SET DEFAULT nextval('rates_id_seq'::regcl
 --
 
 ALTER TABLE ONLY rating_caches ALTER COLUMN id SET DEFAULT nextval('rating_caches_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY subscribes ALTER COLUMN id SET DEFAULT nextval('subscribes_id_seq'::regclass);
 
 
 --
@@ -474,6 +699,30 @@ ALTER TABLE ONLY clubs
 
 
 --
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY favorites
+    ADD CONSTRAINT favorites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY news
+    ADD CONSTRAINT news_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -490,6 +739,14 @@ ALTER TABLE ONLY photos
 
 
 --
+-- Name: properties_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY properties
+    ADD CONSTRAINT properties_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: rates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -503,6 +760,14 @@ ALTER TABLE ONLY rates
 
 ALTER TABLE ONLY rating_caches
     ADD CONSTRAINT rating_caches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: subscribes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY subscribes
+    ADD CONSTRAINT subscribes_pkey PRIMARY KEY (id);
 
 
 --
@@ -564,6 +829,34 @@ CREATE INDEX index_clubs_on_user_id ON clubs USING btree (user_id);
 
 
 --
+-- Name: index_clubs_properties_on_club_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_clubs_properties_on_club_id ON clubs_properties USING btree (club_id);
+
+
+--
+-- Name: index_clubs_properties_on_property_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_clubs_properties_on_property_id ON clubs_properties USING btree (property_id);
+
+
+--
+-- Name: index_comments_on_club_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_comments_on_club_id ON comments USING btree (club_id);
+
+
+--
+-- Name: index_news_on_club_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_news_on_club_id ON news USING btree (club_id);
+
+
+--
 -- Name: index_orders_on_table_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -575,13 +868,6 @@ CREATE INDEX index_orders_on_table_id ON orders USING btree (table_id);
 --
 
 CREATE INDEX index_orders_on_user_id ON orders USING btree (user_id);
-
-
---
--- Name: index_photos_on_club_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_photos_on_club_id ON photos USING btree (club_id);
 
 
 --
@@ -700,3 +986,67 @@ INSERT INTO schema_migrations (version) VALUES ('20140322155522');
 INSERT INTO schema_migrations (version) VALUES ('20140322182834');
 
 INSERT INTO schema_migrations (version) VALUES ('20140322182835');
+
+INSERT INTO schema_migrations (version) VALUES ('20140324195246');
+
+INSERT INTO schema_migrations (version) VALUES ('20140325135054');
+
+INSERT INTO schema_migrations (version) VALUES ('20140325164738');
+
+INSERT INTO schema_migrations (version) VALUES ('20140326180214');
+
+INSERT INTO schema_migrations (version) VALUES ('20140326181322');
+
+INSERT INTO schema_migrations (version) VALUES ('20140326181650');
+
+INSERT INTO schema_migrations (version) VALUES ('20140327021321');
+
+INSERT INTO schema_migrations (version) VALUES ('20140330175321');
+
+INSERT INTO schema_migrations (version) VALUES ('20140402184931');
+
+INSERT INTO schema_migrations (version) VALUES ('20140409160003');
+
+INSERT INTO schema_migrations (version) VALUES ('20140409161250');
+
+INSERT INTO schema_migrations (version) VALUES ('20140410164112');
+
+INSERT INTO schema_migrations (version) VALUES ('20140410165620');
+
+INSERT INTO schema_migrations (version) VALUES ('20140410174843');
+
+INSERT INTO schema_migrations (version) VALUES ('20140410175538');
+
+INSERT INTO schema_migrations (version) VALUES ('20140411164302');
+
+INSERT INTO schema_migrations (version) VALUES ('20140414175748');
+
+INSERT INTO schema_migrations (version) VALUES ('20140414202617');
+
+INSERT INTO schema_migrations (version) VALUES ('20140417151847');
+
+INSERT INTO schema_migrations (version) VALUES ('20140417181751');
+
+INSERT INTO schema_migrations (version) VALUES ('20140420094422');
+
+INSERT INTO schema_migrations (version) VALUES ('20140420095015');
+
+INSERT INTO schema_migrations (version) VALUES ('20140420095716');
+
+INSERT INTO schema_migrations (version) VALUES ('20140420165659');
+
+INSERT INTO schema_migrations (version) VALUES ('20140424123311');
+
+INSERT INTO schema_migrations (version) VALUES ('20140424135823');
+
+INSERT INTO schema_migrations (version) VALUES ('20140424185110');
+
+INSERT INTO schema_migrations (version) VALUES ('20140425150441');
+
+INSERT INTO schema_migrations (version) VALUES ('20140425151925');
+
+INSERT INTO schema_migrations (version) VALUES ('20140428164202');
+
+INSERT INTO schema_migrations (version) VALUES ('20140502180500');
+
+INSERT INTO schema_migrations (version) VALUES ('20140503193828');
