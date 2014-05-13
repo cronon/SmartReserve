@@ -38,6 +38,7 @@ class NewsController < ApplicationController
 
   def destroy    
     @news.destroy
+    redirect_to :back
   end
 
   #свернуть/развернуть
