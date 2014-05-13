@@ -19,6 +19,9 @@ class PhotosController < ApplicationController
       @photo = club.photos.build
       @photo.image = params[:file]
       @photo.save!
+      respond_to do |format|
+        format.js{ render action: "create_for_clubs_show"}
+      end
     end
   # TODO: store photo.id in session OR pass ID back to form for storage in a hidden field
   # OR if your main resource already exists, mount the uploader to it directly and go sip on a 

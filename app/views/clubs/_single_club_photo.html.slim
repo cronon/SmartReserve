@@ -1,8 +1,10 @@
 .col-md-3
-  a href="#" class="thumbnail" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
-    img data-src="holder.js/100%x180" src="#{to_http photo.image_url}"
-  span.glyphicon.glyphicon-remove-circle.red
-  span.glyphicon.glyphicon-zoom-in
+  img data-src="holder.js/100%x180" src="#{to_http photo.image_url}"
+  a href="#{photo_path(photo)}" data-method="DELETE"
+  	span.glyphicon.glyphicon-remove-circle.red
+  a href="#" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
+   span.glyphicon.glyphicon-zoom-in style="float: right; color:black;"
+
 .modal.fade id="photo_#{photo.id}_modal" aria-hidden="true" aria-labelledby="map_modalLabel" role="dialog" tabindex="-1"
   .modal-dialog
     .modal-content                        
