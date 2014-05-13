@@ -136,7 +136,7 @@
                 span.glyphicon.glyphicon-plus-sign.red
                   = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
               == render "add_photo", :club => @club   
-          #news.tab-pane.active
+          #news.tab-pane.active.with-gray-slider
             ul#news_slider_ul
               - @club.news.each do |news|
                 li
