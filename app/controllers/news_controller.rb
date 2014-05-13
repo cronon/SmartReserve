@@ -3,13 +3,12 @@ class NewsController < ApplicationController
 
   def create
     @news = News.new(news_params)
-    @news.club_id = params[:club_id]
     respond_to do |format|
       if @news.save
-        format.html { redirect_to club_news_index_url(@news), notice: 'News was successfully created.' }
+        format.html { redirect_to :back, notice: 'News was successfully created.' }
         format.json { render action: 'show', status: :created, location: @news }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to :back }
         format.json { render json: @news.errors, status: :unprocessable_entity }
       end
     end
@@ -39,6 +38,7 @@ class NewsController < ApplicationController
 
   def destroy    
     @news.destroy
+    redirect_to :back
   end
 
   #свернуть/развернуть
@@ -61,6 +61,6 @@ class NewsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def news_params
-      params.require(:news).permit(:description, :title,:avatar, :avatar_cache)
+      params.require(:news).permit(:description, :title,:avatar, :avatar_cache, :club_id)
     end
 end

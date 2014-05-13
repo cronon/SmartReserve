@@ -131,23 +131,28 @@
             #club_photos.row
               - @club.photos.each do |photo|
                 == render "single_club_photo", :photo => photo
-            .row style="float:right;"
+            .add-link
               = form_for(Photo.new, :url => photos_path(@club), :method => :post, :remote => true) do |f|
                 span.glyphicon.glyphicon-plus-sign.red
                   = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
-          == render "add_photo", :club => @club
-          #news.tab-pane.active
+
+          == render "add_photo", :club => @club   
+          #news.tab-pane.active.with-gray-slider
             ul#news_slider_ul
               - @club.news.each do |news|
                 li
                   .piece-of-news style="height:250px" 
                     a.img data-toggle="modal" data-target="#news_#{news.id}_modal" style="cursor:pointer"
                      img src="#{to_http (news.photos.first || {:image_url=>asset_url('avatars/no_avatar.png')})[:image_url]}"
-                    .date = news.created_at.strftime('%d.%m.%Y')
+                    .date 
+                      = news.created_at.strftime('%d.%m.%Y')
+                      - if can? :edit, @club
+                        .edit-news style="float:right;margin-right:5px;font-size:15px"
+                          a data-toggle="modal" data-target="#edit_news_#{news.id}_modal" style="margin-right:5px"
+                            span.glyphicon.glyphicon-pencil style="color:#ec5c5c;cursor:pointer"
+                          a href=news_path(news) data-method="DELETE" style="color:#ec5c5c;cursor:pointer"
+                            span.glyphicon.glyphicon-remove-circle
                     .description.red = news.description[0..40]+'...'
-                    - if can? :edit, @club
-                      .edit-news
-                        a data-toggle="modal" data-target="#edit_news_#{news.id}_modal" Edit news
             - @club.news.each do |news|
               .modal.fade id="news_#{news.id}_modal" aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
                 .modal-dialog
@@ -160,36 +165,12 @@
                       = news.description
                     .modal-footer style="text-align:center"
                       button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button" Закрыть
-              .modal.fade.edit-news-modal id="edit_news_#{news.id}_modal" aria-hidden="true" aria-labelledby="features_modalLabel" role="dialog" tabindex="-1" 
-                = form_for news do |f|
-                  .modal-dialog
-                    .modal-content
-                      .modal-header
-                        button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
-                        h4#myModalLabel.modal-title.red[style='text-align:center'] = news.title
-                      .modal-body.row style="padding:25px"
-                        table.text-fields
-                          tr
-                            td: label Название
-                            td = f.text_field :title
-                          tr
-                            td: label Текст новости
-                            td = f.text_area :description, :rows => 7, :cols=>47
-                          tr
-                            td: label Иллюстрация
-                            td
-                              #prev_avatar style="height:150px"
-                                img src="#{news.avatar_url}" style="max-height:100%;margin-left:0"
-                              div.btn.btn-red.btn-danger style="margin-top:10px"
-                                | Обзор...
-                              = f.file_field :avatar, id: 'avatar_input', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
-                            javascript:
-                               $('#avatar_input').change(function(){
-                                 $('#prev_avatar').html("<img src='"+window.URL.createObjectURL($('#avatar_input')[0].files[0])+"' />");
-                               })
-                      div style="text-align:center"
-                        button.btn.btn-red-border type="submit" OK
-                        button.btn.btn-red-border data-dismiss="modal" type="button" Закрыть
+              == render 'news/form', :news => news, :club_id => @club.id
+            .row
+              a.add-link data-toggle="modal" data-target="#edit_news__modal" style="margin-right:4%"
+                span.glyphicon.glyphicon-plus-sign.red
+            == render 'news/form', :news => News.new, :club_id => @club.id
+
 
             javascript:
               $(document).ready(function(){

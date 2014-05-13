@@ -86,15 +86,15 @@ class Order < ActiveRecord::Base
     #PRIVATE!!!
     private
 
-    def today_start
-      ymd = DateTime.now.strftime("%Y.%m.%d")
-      DateTime.parse("#{ymd} 00:00:00")
-    end
+      def today_start
+        ymd = DateTime.now.strftime("%Y.%m.%d")
+        DateTime.parse("#{ymd} 00:00:00")
+      end
 
-    def yesterday_start
-      ymd = DateTime.yesterday.strftime("%Y%m%d%H")
-      DateTime.parse("#{ymd} 00:00:00")
-    end
+      def yesterday_start
+        ymd = DateTime.yesterday.strftime("%Y%m%d%H")
+        DateTime.parse("#{ymd} 00:00:00")
+      end
 
   end
 
