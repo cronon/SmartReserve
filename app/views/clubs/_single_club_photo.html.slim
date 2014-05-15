@@ -1,11 +1,12 @@
-.div.photo-wrapper
+.div.photo-wrapper id="photo_#{photo.id}"
   div style="height:180px"
     img src="#{to_http photo.image_url}"
-  .photo-buttons
-    a href="#{photo_path(photo)}" data-method="DELETE"
-    	span.glyphicon.glyphicon-remove-circle.red style="float:left"
-    a href="#" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
-     span.glyphicon.glyphicon-zoom-in style="float: right; color:black;"
+  - if can? :edit, photo.imageable
+    .photo-buttons
+      a data-remote="true" data-method="DELETE" href="#{photo_path(photo)}"
+      	span.glyphicon.glyphicon-remove-circle.red style="float:left"
+      a href="#" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
+       span.glyphicon.glyphicon-zoom-in style="float: right; color:black;"
 
 
 .modal.fade id="photo_#{photo.id}_modal" aria-hidden="true" aria-labelledby="map_modalLabel" role="dialog" tabindex="-1"
