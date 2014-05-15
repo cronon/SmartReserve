@@ -131,10 +131,11 @@
             #club_photos.row
               - @club.photos.each do |photo|
                 == render "single_club_photo", :photo => photo
-            .add-link
-              = form_for(Photo.new, :url => photos_path(@club), :method => :post, :remote => true) do |f|
-                span.glyphicon.glyphicon-plus-sign.red
-                  = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
+            - if can? :edit, @club
+              .add-link
+                = form_for(Photo.new, :url => photos_path(@club), :method => :post, :remote => true) do |f|
+                  span.glyphicon.glyphicon-plus-sign.red
+                    = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
 
           == render "add_photo", :club => @club   
           #news.tab-pane.active.with-gray-slider

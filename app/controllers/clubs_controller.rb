@@ -2,8 +2,8 @@
 class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy, :update_description]
 
-  # load_and_authorize_resource
-  # skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
+  load_and_authorize_resource
+  skip_authorize_resource :only => [:index,:show,:tables_status,:catalog]
 
   #ID_UNEXIT_CLUB = 1000000
 
