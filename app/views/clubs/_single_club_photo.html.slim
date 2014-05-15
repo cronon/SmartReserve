@@ -1,9 +1,12 @@
-.col-md-3
-  img data-src="holder.js/100%x180" src="#{to_http photo.image_url}"
-  a href="#{photo_path(photo)}" data-method="DELETE"
-  	span.glyphicon.glyphicon-remove-circle.red
-  a href="#" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
-   span.glyphicon.glyphicon-zoom-in style="float: right; color:black;"
+.div.photo-wrapper
+  div style="height:180px"
+    img src="#{to_http photo.image_url}"
+  .photo-buttons
+    a href="#{photo_path(photo)}" data-method="DELETE"
+    	span.glyphicon.glyphicon-remove-circle.red style="float:left"
+    a href="#" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
+     span.glyphicon.glyphicon-zoom-in style="float: right; color:black;"
+
 
 .modal.fade id="photo_#{photo.id}_modal" aria-hidden="true" aria-labelledby="map_modalLabel" role="dialog" tabindex="-1"
   .modal-dialog
