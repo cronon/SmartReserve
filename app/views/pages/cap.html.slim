@@ -12,14 +12,14 @@ html lang="en" xmlns="http://www.w3.org/1999/xhtml"
     = favicon_link_tag
     meta content="7562595b0d9d7730" name="yandex-verification" /
   body style="font-family:'PT Sans', sans-serif"
-    .col-md-8.col-md-offset-2 style="margin-top:15px" 
+    .col-xs-8.col-xs-offset-2 style="margin-top:15px" 
       #translate.text style="height:0px;top:20px" 
         | Рус |
         a href="#"  Eng
       .row
-        .col-md-6
+        .col-xs-6
           img alt="Логотип" src=asset_path('temp-1.jpg') style="float:left" /
-        .col-md-6
+        .col-xs-6.mobile-hide
           #table1 style="float:right;margin-top:20px" 
             .market-wrapper
               #as.market_icon
@@ -54,7 +54,7 @@ html lang="en" xmlns="http://www.w3.org/1999/xhtml"
             input name="user[phone]" type="hidden" value="+375290123456" /
             div style="position:absolute;bottom:0;width:90%" 
               input.btn.btn-block.text name="testingService" onclick="window.location.href='/home'" type="submit" value=("Тестировать сервис") /
-        .col-md-1
+        .col-md-1.mobile-hide
           #table2 style=("float:right; padding:0px;width:45px") 
             a href="https://www.facebook.com/pages/Smart-Reserve/302094899944486" rel="nofollow" 
               #fb.sn_icon
