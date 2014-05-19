@@ -53,8 +53,9 @@ html
           | Eng
       .row
         .col-xs-6
-          img alt="Логотип" src=asset_url('temp-1.jpg') style="float:left" /
-        .col-xs-6
+          a href="/home"
+            img alt="Логотип" src=asset_url('temp-1.jpg') style="float:left" /
+        .col-xs-6.mobile-hide
           #table1 style="float:right;margin-top:20px" 
             .market-wrapper
               #as.market_icon
@@ -92,7 +93,7 @@ html
         .row
           .col-xs-12 style=("border-top:1px solid #d0cfcf") 
             br/
-        .row
+        .row.mobile-hide
           .col-xs-3
             h3.before-footer-h3 Посетителям
             div style="margin-left:15px" 
