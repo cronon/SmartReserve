@@ -131,10 +131,11 @@
             #club_photos.row
               - @club.photos.each do |photo|
                 == render "single_club_photo", :photo => photo
-            .add-link
-              = form_for(Photo.new, :url => photos_path(@club), :method => :post, :remote => true) do |f|
-                span.glyphicon.glyphicon-plus-sign.red
-                  = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
+            - if can? :edit, @club
+              .add-link
+                = form_for(Photo.new, :url => photos_path(@club), :method => :post, :remote => true) do |f|
+                  span.glyphicon.glyphicon-plus-sign.red
+                    = f.file_field :uploaded_data, multiple: true, name: 'photo[uploaded_data]', style:"width:66px; -moz-opacity: 0; filter: alpha(opacity=0); opacity: 0;margin-top:-26px"
 
           == render "add_photo", :club => @club   
           #news.tab-pane.active.with-gray-slider
@@ -166,10 +167,11 @@
                     .modal-footer style="text-align:center"
                       button.btn.btn-red-border style="padding-top:5px" data-dismiss="modal" type="button" Закрыть
               == render 'news/form', :news => news, :club_id => @club.id
-            .row
-              a.add-link data-toggle="modal" data-target="#edit_news__modal" style="margin-right:4%"
-                span.glyphicon.glyphicon-plus-sign.red
-            == render 'news/form', :news => News.new, :club_id => @club.id
+            - if can? :edit, @club
+              .row
+                a.add-link data-toggle="modal" data-target="#edit_news__modal" style="margin-right:4%"
+                  span.glyphicon.glyphicon-plus-sign.red
+              == render 'news/form', :news => News.new, :club_id => @club.id
 
 
             javascript:

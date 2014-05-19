@@ -1,7 +1,10 @@
 // Place all the styles related to the Clubs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com
-
+.top-goal{
+  float:left;
+  width: calc(100% / 8)
+}
 .with-gray-slider{
   .bx-wrapper .bx-controls-direction a {
     width: 23px;
@@ -27,6 +30,20 @@
   .add-link{
     float:right;
     cursor:pointer;
+  }
+  #gallery.tab-pane{
+    img{
+      max-height: 100%;
+    }
+    .photo-wrapper{
+      float:left;
+      margin: 10px 10px;
+      background-color: #e9e9e9;
+      .photo-buttons{
+        margin-top:2px;
+        color:#ec5c5c;
+      }
+    }
   }
   #comments.tab-pane{
     #new_comment{
@@ -337,6 +354,7 @@ div.red-tabs{
   float:left;
   padding: 0 15px 25px;
   width:33%;
+  min-width: 263px;
 
   .club-div{
     width: 100%;
