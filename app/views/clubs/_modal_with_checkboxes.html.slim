@@ -5,7 +5,7 @@
         button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
         h4#myModalLabel.modal-title.red[style='text-align:center'] Особенности заведения
       .modal-body.row
-        - properties.each_slice((properties.size/2).round) do |half|
+        - properties.each_slice((properties.size/2.0).round) do |half|
           .col-md-6
             - half.each do |property|
               = check_box_tag 'property_ids[]', property.id, checked_properties.include?(property.id),:class=>'styled'
