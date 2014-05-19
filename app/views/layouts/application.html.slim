@@ -40,7 +40,7 @@ html
       div
         img alt="" src="//mc.yandex.ru/watch/24458147" style=("position:absolute; left:-9999px;") /
     /! /Yandex.Metrika counter
-    .col-md-8.col-md-offset-2 style="margin-top:15px" 
+    .col-xs-8.col-xs-offset-2 style="margin-top:15px" 
       #translate.text style="height:0px;top:20px" 
         - unless I18n.locale == :ru
           = link_to "Рус", change_locale_path(:ru), method: :post
@@ -52,9 +52,9 @@ html
         - else
           | Eng
       .row
-        .col-md-6
+        .col-xs-6
           img alt="Логотип" src=asset_url('temp-1.jpg') style="float:left" /
-        .col-md-6
+        .col-xs-6
           #table1 style="float:right;margin-top:20px" 
             .market-wrapper
               #as.market_icon
@@ -63,13 +63,13 @@ html
             .market-wrapper
               #mp.market_icon
     .row
-      .col-md-12
+      .col-xs-12
         br/
     == render 'layouts/navigation'
     / render 'layouts/messages'
     == yield
     .row
-      .col-md-8.col-md-offset-2
+      .col-xs-8.col-xs-offset-2
         h3 style="text-align:center;"  Наши партнеры
         css:
           .partners_image{
@@ -80,20 +80,20 @@ html
           - (1..5).each do |i|
             img.partners_image src=asset_url("partners/#{i}.png") /
         .row
-          .col-md-12 style=("border-bottom:1px solid #d0cfcf") 
+          .col-xs-12 style=("border-bottom:1px solid #d0cfcf") 
             br/
         .row
-          .col-md-12
+          .col-xs-12
             br/
         == render 'layouts/social_networks'
         .row
-          .col-md-12
+          .col-xs-12
             br/
         .row
-          .col-md-12 style=("border-top:1px solid #d0cfcf") 
+          .col-xs-12 style=("border-top:1px solid #d0cfcf") 
             br/
         .row
-          .col-md-3
+          .col-xs-3
             h3.before-footer-h3 Посетителям
             div style="margin-left:15px" 
               a.before_footer_a href=""  Link 1
@@ -106,7 +106,7 @@ html
               br/
               a.before_footer_a href=""  Lacrimosa dies illa
               br/
-          .col-md-3
+          .col-xs-3
             h3.before-footer-h3 Ресторанам
             div style="margin-left:15px" 
               a.before_footer_a href=""  Link 1
@@ -126,7 +126,7 @@ html
               a.before_footer_a href=""  Command is in one second
               br/
               a.before_footer_a href=""  14:02 GMT
-          .col-md-3
+          .col-xs-3
             h3.before-footer-h3 Посетителям
             div style="margin-left:15px" 
               a.before_footer_a href=""  Link 1
@@ -139,7 +139,7 @@ html
               br/
               a.before_footer_a href=""  Lacrimosa dies illa
               br/
-          .col-md-3
+          .col-xs-3
             h3.before-footer-h3 Ресторанам
             div style="margin-left:15px" 
               a.before_footer_a href=""  Link 1
@@ -160,18 +160,18 @@ html
               br/
               a.before_footer_a href=""  14:02 GMT
         .row
-          .col-md-12
+          .col-xs-12
             br/
         .row
-          .col-md-12
+          .col-xs-12
             br/
         .row
-          .col-md-12
+          .col-xs-12
             br/
     .row style="background-color:#dedddd" 
-      .col-md-8.col-md-offset-2
+      .col-xs-8.col-xs-offset-2
         .row
-          .col-md-12
+          .col-xs-12
             br/
             css:
               #footer_nav a{
@@ -185,12 +185,12 @@ html
               a href=(" ")  Новости
               a href=(" ")  О проекте
           .row
-            .col-md-3
+            .col-xs-3
               img src=asset_path('footer_logo.png') /
-            .col-md-6
+            .col-xs-6
               p style=("text-align:center; font-size:0.6em;color:black") 
                 | Lorem ipsum dolor sit amet.Dies irae dies illa solvet secum in favilla, teste David cum Sybilla. Quantos tremor est futurus, quando judex est venturus, cunta stricte discussurus.Tuba mirum sparge sonum per sepulchra regionum, coget omnes ante thronum. Rex tremendae majestatis, qui salvando salvas gratis, salva mea fons pietatis.
-            .col-md-3
+            .col-xs-3
               img src=asset_path('footer_logo_mini.png') style="float:right" /
               | SmartReserve @ 2014
               br/

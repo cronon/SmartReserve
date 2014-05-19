@@ -1,25 +1,25 @@
 .row
-  .col-md-10.col-md-offset-2
+  .col-xs-10.col-xs-offset-2
     = breadcrumbs ' &rarr; ', 'Главная'=>'/', 'Каталог'=>'/catalog'
     h2 style="font-weigth:bold"  Каталог
 .row
-  .col-md-12
+  .col-xs-12
     #restaurants.row style=("text-align:center; background-color:#dedddd;height:13em;") 
       h3 Заведения в городе
       .row style="margin-right:0"
         - properties = Property.where(:kind_en => 'Goal')
-        .col-md-offset-2.col-md-8
+        .col-xs-offset-2.col-xs-8
           - (1..8).each do |i|
             .top-goal 
               a href="#" 
                 img alt="..." src=asset_url("categories/#{i}.jpg") /
                 = properties.shift.name
     .row
-      .col-md-12
+      .col-xs-12
         br/
     .container-fixed
       .row style="margin-left:5px"
-        .col-md-2.col-md-offset-2
+        .col-xs-2.col-xs-offset-2
           .catalog-filter
             = form_tag '/catalog', :method => :get, :remote => true do
               label[style="font-size:18px"] Подобрать заведение
@@ -86,7 +86,7 @@
               br
               input.styled[type='radio' name='order_by' value='created_at']
               label Дате добавления
-              .row: .col-md-12: br
+              .row: .col-xs-12: br
               = submit_tag 'Применить', :class=>'btn-reservation btn btn-danger', :style=>'width:51%', remote: true, id: 'submit_tag'
               |  
               input.btn-reservation.btn.btn-danger[type='reset' style='width:45%' value='Сбросить' onclick="resetFilters()"]
@@ -94,7 +94,7 @@
             div.club-wrapper-catalog{
               width: 50%;
             }
-        #clubs_div.col-md-6 style='width: calc(50% + 30px);'
+        #clubs_div.col-xs-6 style='width: calc(50% + 30px);'
           - @clubs.each_slice(3) do |three_clubs|
               - three_clubs.each do |club|
                   == render 'clubs/single_catalog', :club => club         
