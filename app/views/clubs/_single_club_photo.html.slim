@@ -1,6 +1,6 @@
 .col-md-3
   img data-src="holder.js/100%x180" src="#{to_http photo.image_url}"
-  a href="#{photo_path(photo)}" data-method="DELETE"
+  a data-method="DELETE" data-remote="true" href=photo_path(photo)
   	span.glyphicon.glyphicon-remove-circle.red
   a href="#" data-toggle="modal" data-target="#photo_#{photo.id}_modal"
    span.glyphicon.glyphicon-zoom-in style="float: right; color:black;"
