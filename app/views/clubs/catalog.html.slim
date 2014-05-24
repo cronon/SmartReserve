@@ -23,7 +23,7 @@
           .catalog-filter
             = form_tag '/catalog', :method => :get, :remote => true do
               label[style="font-size:18px"] Подобрать заведение
-              a[href='#'] Оперделить мое местоположение
+              a[href='#'] Определить мое местоположение
               label Или выбрать город:
               select[name='city']
                 option[value='Minsk' name='city'] Minsk
@@ -122,7 +122,7 @@ javascript:
     behaviour: 'tap-drag',
     range: {
      'min': 0,
-     'max': 10000000
+     'max': 5000000
     },
     serialization: {
      lower: [
