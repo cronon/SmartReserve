@@ -9,9 +9,9 @@
       .row style="margin-right:0"
         - properties = Property.where(:kind_en => 'Goal')
         .col-xs-offset-2.col-xs-8
-          - (1..8).each do |i|
+          - (1..8).each_with_index do |i|
             .top-goal 
-              a href="#" 
+              a href="/catalog?property_ids[]=#{properties[i-1].id}" 
                 img alt="..." src=asset_url("categories/#{i}.jpg") /
                 = properties.shift.name
     .row
