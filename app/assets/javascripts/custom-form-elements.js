@@ -142,11 +142,11 @@ var Custom = {
 	}
 }
 $(document).ready(function(){
-	Custom.init();
+	setTimeout(function(){Custom.init();},300);
 	$('span.checkbox').attr('style','min-height:16px'); //chrome doesnt respect default behavior
 	// в инспекторе если убрать птичку с атрибута, который и так зачернут, то эти штуки появляются
-	// var s=$('span.radio-custom').toggleClass('radio-custom');
- //  //я боьше не хочу жить на этой планете
- //  setTimeout(function(){s.toggleClass('radio-custom');},300);
+	var s=$('span.radio-custom').toggleClass('radio-custom');
+  //я боьше не хочу жить на этой планете
+  setTimeout(function(){s.toggleClass('radio-custom');},0);
   
 });
