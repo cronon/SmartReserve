@@ -18,7 +18,7 @@ html lang="en" xmlns="http://www.w3.org/1999/xhtml"
         a href="#"  Eng
       .row
         .col-xs-6
-          img alt="Логотип" src=asset_path('temp-1.jpg') style="float:left" /
+          img alt="Логотип" src=asset_url('temp-1.jpg') style="float:left" /
         .col-xs-6.mobile-hide
           #table1 style="float:right;margin-top:20px" 
             .market-wrapper
@@ -81,10 +81,10 @@ html lang="en" xmlns="http://www.w3.org/1999/xhtml"
                 | info@smartreserve.by
           .col-md-8 style="float:right" 
             a href="#" 
-              img src=asset_path('temp-10.png') style="float:right" /
+              img src=asset_url('temp-10.png') style="float:right" /
     div style="display:none" 
       - %w[fb.png gplay.png  mp.png yt.png as.png gp.png vk.png twitter.png fs.png].each do |i|
-        img src=asset_path(i) /
+        img src=asset_url(i) /
     / #modal.modal.fade tabindex="-1" 
     /   .modal-dialog
     /     .modal-content

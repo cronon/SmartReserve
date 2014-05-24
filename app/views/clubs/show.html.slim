@@ -19,7 +19,7 @@
     .row.top-view
       .col-md-6 style="width:420px; padding-right:0"
         / @club.avatar.url || 'avatars/no_avatar.png'
-        img src="#{asset_path('avatars/no_avatar.png')}" style="margin:0"
+        img src="#{asset_url('avatars/no_avatar.png')}" style="margin:0"
         - @club.photos.limit(5).each do |photo|
           .club-photo-thumb
             div id="photo_#{photo.id}" style="width:125px;height:100px;"
@@ -54,21 +54,21 @@
             .club-info
                 table
                   tr
-                    td: img src="#{asset_path 'clubs_show/on_map.png'}"
+                    td: img src="#{asset_url 'clubs_show/on_map.png'}"
                     td
                       = @club.address
                       br 
                       a[href='#' onclick='createMap()' data-toggle="modal" data-target="#map_modal"] Посмотреть на карте
                       == render 'clubs/map', :club => @club
                   tr
-                    td: img src="#{asset_path 'clubs_show/phone.png'}"
+                    td: img src="#{asset_url 'clubs_show/phone.png'}"
                     td
                       = '+375171234567'
                   tr
-                    td: img src="#{asset_path 'clubs_show/www.png'}"
+                    td: img src="#{asset_url 'clubs_show/www.png'}"
                     td: a[href="#"] http://example.com
                   tr
-                    td style="padding-bottom:0": img src="#{asset_path 'clubs_show/email.png'}"
+                    td style="padding-bottom:0": img src="#{asset_url 'clubs_show/email.png'}"
                     td style="padding-bottom:0": a[href="mailto:exapmle@example.com"] exapmle@example.com
             .club-info
               label Особенности

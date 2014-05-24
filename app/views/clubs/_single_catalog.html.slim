@@ -15,7 +15,7 @@
       - if can? :destroy, club
         - link_to 'Destroy', club, method: :delete, data: { confirm: 'Are you sure?' }
       .rating
-        img.rating-img src="#{asset_path('ajaxful_rating/big_star.png')}"
+        img.rating-img src="#{asset_url('ajaxful_rating/big_star.png')}"
         span.rating-value
           = club.rating_average
       span.reservation-btn-wrapper

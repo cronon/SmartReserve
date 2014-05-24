@@ -1,6 +1,6 @@
 .club-wrapper
   .club-div id="club_#{club.id}" 
-    .club-image style="background-image:url('#{asset_path('club.png')}')" 
+    .club-image style="background-image:url('#{asset_url('club.png')}')" 
       .white-on-avatar
         .title-on-avatar
           = club.properties.find_by_kind_en('Type').name

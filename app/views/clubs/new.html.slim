@@ -95,9 +95,9 @@
             td: label Способы расчета в заведении
             td.payment-systems
               = check_box_tag 'property_ids[]', Property.find_by_name_en('Visa').id, false, class: "styled"
-              img.card src="#{asset_path('cards/visa.png')}"
+              img.card src="#{asset_url('cards/visa.png')}"
               = check_box_tag 'property_ids[]', Property.find_by_name_en('MasterCard').id, false, class: "styled"
-              img.card src="#{asset_path('cards/master_card.png')}"
+              img.card src="#{asset_url('cards/master_card.png')}"
           tr
             td = "Другие (через запятую)"
             td = f.text_field :payment_methods

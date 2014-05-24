@@ -35,7 +35,7 @@ class Ability
     can [:create], Comment
     can [:destroy], Comment, :user_id => user.id
 
-    if AdminUser.where :email => user.email
+    unless AdminUser.where(:email => user.email).blank?
         can :manage, :all
     end
     if user.owner_clubs?
