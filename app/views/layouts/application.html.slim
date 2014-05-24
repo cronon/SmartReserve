@@ -41,16 +41,16 @@ html
         img alt="" src="//mc.yandex.ru/watch/24458147" style=("position:absolute; left:-9999px;") /
     /! /Yandex.Metrika counter
     .col-xs-8.col-xs-offset-2 style="margin-top:15px" 
-      #translate.text style="height:0px;top:20px" 
-        - unless I18n.locale == :ru
-          = link_to "Рус", change_locale_path(:ru), method: :post
-        - else
-          | Рус
-        =" | "
-        - unless I18n.locale == :en
-          = link_to "Eng", change_locale_path(:en), method: :post
-        - else
-          | Eng
+      / #translate.text style="height:0px;top:20px" 
+      /   - unless I18n.locale == :ru
+      /     = link_to "Рус", change_locale_path(:ru), method: :post
+      /   - else
+      /     | Рус
+      /   =" | "
+      /   - unless I18n.locale == :en
+      /     = link_to "Eng", change_locale_path(:en), method: :post
+      /   - else
+      /     | Eng
       .row
         .col-xs-6
           a href="/home"
@@ -71,15 +71,15 @@ html
     == yield
     .row
       .col-xs-8.col-xs-offset-2
-        h3 style="text-align:center;"  Наши партнеры
-        css:
-          .partners_image{
-            padding-right:25px;
-            display: inline;
-          }
-        center
-          - (1..5).each do |i|
-            img.partners_image src=asset_url("partners/#{i}.png") /
+        / h3 style="text-align:center;"  Наши партнеры
+        / css:
+        /   .partners_image{
+        /     padding-right:25px;
+        /     display: inline;
+        /   }
+        / center
+        /   - (1..5).each do |i|
+        /     img.partners_image src=asset_url("partners/#{i}.png") /
         .row
           .col-xs-12 style=("border-bottom:1px solid #d0cfcf") 
             br/
@@ -94,72 +94,15 @@ html
           .col-xs-12 style=("border-top:1px solid #d0cfcf") 
             br/
         .row.mobile-hide
+        - CategoryLink.all.each do |category_link|
           .col-xs-3
-            h3.before-footer-h3 Посетителям
+            h3.before-footer-h3 
+              == category_link.name
             div style="margin-left:15px" 
-              a.before_footer_a href=""  Link 1
-              br/
-              a.before_footer_a href=""  Link 2
-              br/
-              a.before_footer_a href=""  URI17
-              br/
-              a.before_footer_a href=""  URI17
-              br/
-              a.before_footer_a href=""  Lacrimosa dies illa
-              br/
-          .col-xs-3
-            h3.before-footer-h3 Ресторанам
-            div style="margin-left:15px" 
-              a.before_footer_a href=""  Link 1
-              br/
-              a.before_footer_a href=""  Link 2
-              br/
-              a.before_footer_a href=""  URI17
-              br/
-              a.before_footer_a href=""  Terms and conditions
-              br/
-              a.before_footer_a href=""  Privacy
-              br/
-              a.before_footer_a href=""  Cosmos 69
-              br/
-              a.before_footer_a href=""  29th June 1965
-              br/
-              a.before_footer_a href=""  Command is in one second
-              br/
-              a.before_footer_a href=""  14:02 GMT
-          .col-xs-3
-            h3.before-footer-h3 Посетителям
-            div style="margin-left:15px" 
-              a.before_footer_a href=""  Link 1
-              br/
-              a.before_footer_a href=""  Link 2
-              br/
-              a.before_footer_a href=""  URI17
-              br/
-              a.before_footer_a href=""  URI17
-              br/
-              a.before_footer_a href=""  Lacrimosa dies illa
-              br/
-          .col-xs-3
-            h3.before-footer-h3 Ресторанам
-            div style="margin-left:15px" 
-              a.before_footer_a href=""  Link 1
-              br/
-              a.before_footer_a href=""  Link 2
-              br/
-              a.before_footer_a href=""  URI17
-              br/
-              a.before_footer_a href=""  Terms and conditions
-              br/
-              a.before_footer_a href=""  Privacy
-              br/
-              a.before_footer_a href=""  Cosmos 69
-              br/
-              a.before_footer_a href=""  29th June 1965
-              br/
-              a.before_footer_a href=""  Command is in one second
-              br/
-              a.before_footer_a href=""  14:02 GMT
+              - category_link.bottom_links.each do |bottom_link|
+                a.before_footer_a href="#{bottom_link.normalize_link}"  
+                  == bottom_link.name
+                br/
         .row
           .col-xs-12
             br/

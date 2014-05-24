@@ -1,10 +1,10 @@
-ActiveAdmin.register Table do
+ActiveAdmin.register BottomLink do
 
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :club_id, :number, :seats, :hall
+  permit_params :src, :category_link_id, :name
   #
   # or
   #

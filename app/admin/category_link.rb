@@ -1,10 +1,10 @@
-ActiveAdmin.register Table do
+ActiveAdmin.register CategoryLink do
 
   
   # See permitted parameters documentation:
   # https://github.com/gregbell/active_admin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
-  permit_params :club_id, :number, :seats, :hall
+  permit_params :name
   #
   # or
   #
