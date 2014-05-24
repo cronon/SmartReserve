@@ -33,7 +33,7 @@ class NewsController < ApplicationController
   def show
   end
   def index
-    @news = News.where(:club_id => params[:club_id])
+    @news = News.where(:club_id => nil)
   end
 
   def destroy    
@@ -44,8 +44,6 @@ class NewsController < ApplicationController
   #свернуть/развернуть
   def news_full
     @one_news = News.where(:id => params[:id]).first
-    puts "params = #{params}"
-    puts "NEWS = #{@one_news}"
     respond_to do |format|
       if params[:mode] == "get_full"
         format.js{ render "news_full"}

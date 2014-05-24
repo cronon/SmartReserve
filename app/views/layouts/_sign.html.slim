@@ -1,12 +1,8 @@
 #navigation style=("float:right;font-size:1.1em;padding:0;margin-right: -15px;") 
   - if user_signed_in?
-    = link_to current_user.name.blank? ? current_user.email : current_user.name, user_root_path
-    |  | 
     | #{link_to t('log_out'), destroy_user_session_path, :method => 'delete'}
   - else
     = link_to t('sign_in'), remote_sign_in_path, :remote => true
-    |  | 
-    = link_to t("sign_up"), remote_sign_up_path, :remote => true
 - #user_root_path
 - #destroy_user_session_path, :method => 'delete'
 - #new_user_session_path
