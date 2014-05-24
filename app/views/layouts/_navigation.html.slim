@@ -6,23 +6,23 @@ css:
     font-size:12pt;
     padding-top: 5px;
     padding-bottom: 3px;
-    padding-left:10px;
+    padding-left:0px;
   }
 
 div
   .col-xs-12 style=("border-color:#ec5c5c;border-style:solid none") 
     .col-xs-8.col-xs-offset-2
-      #menu.col-xs-8.mobile-hide style="padding:0" 
+      #menu.col-xs-9.mobile-hide style="padding:0" 
         ul#ul.nav.nav-pills style="margin-left:-30px" 
           li
             a href=("/home") style=("lpadding: 0 10px")  Главная
           li
-            a href=(" ") style=("pladding: 0 10px")  Посетителям
+            = link_to "Регистрация посетителя", remote_sign_up_path, :remote => true
           li
-            a href=(" ") style=("paldding: 0 10px")  Ресторанам
+            a href=("/clubs/new") style=("paldding: 0 10px")  Регистрация заведения
           li
-            a href=(" ") style=("paddling: 0 10px")  Новости
-          li
+            a href=("/news") style=("paddling: 0 10px")  Новости
+          li  
             a href=("/about") style=("padlding: 0 10px")  О проекте
-      .col-xs-4 style="padding:0;min-width:150px" 
+      .col-xs-3 style="padding:0;min-width:150px" 
         == render 'layouts/sign'

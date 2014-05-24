@@ -35,6 +35,9 @@ class Ability
     can [:create], Comment
     can [:destroy], Comment, :user_id => user.id
 
+    if AdminUser.where :email => user.email
+        can :manage, :all
+    end
     if user.owner_clubs?
       can :create, Club
       can [:update,:destroy], Club, :user_id => user.id

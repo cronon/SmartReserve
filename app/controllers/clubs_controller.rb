@@ -21,7 +21,7 @@ class ClubsController < ApplicationController
 
   def catalog
     params[:price] ||= {:from=>0, :to => 999999999999999999}
-    @clubs = (params[:name] && !params[:name].blank?) ? Club.where(name: params[:name]) : Club.all
+    @clubs = (params[:name] && !params[:name].blank?) ? Club.where("lower(name) = lower(?)", params[:name]) : Club.all
     if params[:property_ids]
       ids = Property.where(:id => params[:property_ids])
                     .map{|p| p.club_ids}

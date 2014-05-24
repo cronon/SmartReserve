@@ -27,6 +27,11 @@
 		    br
 		    br
 	.col-md-2
+- if can? :manage, :all
+  .row: .col-md-10.col-md-offset-2
+    a.add-link data-toggle="modal" data-target="#edit_news__modal" style="margin-right:4%"
+      | Добавить новость
+  == render 'news/form', :news => News.new, :club_id => nil
 javascript:
 	$(document).ready(function() {
 	  $('button').each(function(){	    
