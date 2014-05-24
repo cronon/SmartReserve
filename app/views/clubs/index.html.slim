@@ -37,11 +37,11 @@
       .row style="margin-right:0"
         - properties = Property.where(:kind_en => 'Goal')
         .col-xs-offset-2.col-xs-8
-          - (1..8).each do |i|
+          - properties.each_with_index do |property,i|
             .top-goal 
-              a href="#" 
-                img alt="..." src=asset_url("categories/#{i}.jpg") /
-                = properties.shift.name
+              a href="/catalog?property_ids[]=#{property.id}" 
+                img alt="..." src=asset_url("categories/#{i+1}.jpg") /
+                = property.name
     .row
       .col-xs-12
         br/
