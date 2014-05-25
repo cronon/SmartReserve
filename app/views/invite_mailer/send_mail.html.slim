@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+  body
+    h1
+      | Welcome to smartreserve.by, #{@user.name}
+    p
+      | You have successfully signed up to smartreserve.by,
+      | your username is: #{@user.name},
+      | password #{@pass}
+      br
+    p
+      | To login to the site, just follow this link: #{@sign_in_invite}.
