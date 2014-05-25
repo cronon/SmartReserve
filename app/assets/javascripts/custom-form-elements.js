@@ -151,9 +151,9 @@ var initPage = function(){
   setTimeout(function(){s.toggleClass('radio-custom');},0);
   
 };
-$(function() {
-  initPage();
-});
+// $(function() {
+//   initPage();
+// });
 $(window).bind('page:change', function() {
   initPage();
 });
