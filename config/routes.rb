@@ -1,6 +1,4 @@
 SmartReserve::Application.routes.draw do
-  #post "invite/send_email", to: 'invite#send_email', as: :send_invite
-  get "invite/sign_in", to: 'invite#sign_in', as: :sign_in_by_invite
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   #devise_for :users
