@@ -23,12 +23,27 @@ class SessionsController < Devise::SessionsController
   #   end
   # end
 
+  def sign_in_owner
+    resource = warden.authenticate(:scope => resource_name, :recall => '#{controller_path}#failure')
+    if resource
+      sign_in_and_redirect(resource_name, resource)
+    else
+      failure
+    end
+  end
 
   def create
     if request.xhr?
       resource = warden.authenticate(:scope => resource_name, :recall => '#{controller_path}#failure')
       if resource
         sign_in_and_redirect(resource_name, resource)
+      else
+        failure
+      end
+    elsif params[:owner]
+      resource = warden.authenticate(:scope => resource_name, :recall => '#{controller_path}#failure')
+      if resource 
+        sign_in_owner(resource_name, resource)
       else
         failure
       end
@@ -48,4 +63,12 @@ class SessionsController < Devise::SessionsController
     flash[:alert] = t('.wrong_login_or_pass')
     return render 'remote_content/devise_errors'
   end
+  protected 
+
+    # def sign_in_owner(resource_or_scope, resource=nil)
+    #   scope = Devise::Mapping.find_scope!(resource_or_scope)
+    #   resource ||= resource_or_scope
+    #   sign_in(scope, resource) unless warden.user(scope) == resource
+    #   redirect_to new_club_url and return
+    # end
 end
