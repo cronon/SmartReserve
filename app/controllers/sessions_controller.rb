@@ -1,34 +1,26 @@
 # encoding: UTF-8
 class SessionsController < Devise::SessionsController
-  skip_authorize_resource :only => [:create,:sign_in_and_redirect,:failure]
-
-  # def create
-  #   self.resource = warden.authenticate!(auth_options)
-  #   set_flash_message(:notice, :signed_in) if is_flashing_format?
-  #   sign_in(resource_name, resource)
-  #   yield resource if block_given?
-  #   puts request.xhr?
-  #   if request.xhr?
-  #     if resource.signed_in?
-  #       flash[:notice] = "Created account, signed in."
-  #       render :template => "remote_content/devise_success_sign_in.js.erb"
-  #       flash.discard
-  #     else
-  #       flash[:alert] = @user.errors.full_messages.to_sentence
-  #       render :template => "remote_content/devise_errors.js.erb"
-  #       flash.discard
-  #     end
-  #   else  
-  #     respond_with resource, location: after_sign_in_path_for(resource)
-  #   end
-  # end
+  skip_authorize_resource :only => [:create,:sign_in_and_redirect,:failure,:sign_in_owner]
 
   def sign_in_owner
-    resource = warden.authenticate(:scope => resource_name, :recall => '#{controller_path}#failure')
-    if resource
-      sign_in_and_redirect(resource_name, resource)
+    resource = User.find_by_email(params[:user][:email])
+    if resource.encrypted_password.blank?      
+      redirect_to(
+        new_user_session_path, 
+        :notice => 'Invalid Email Address or Password. Password is case sensitive.'
+        ) and return
+    end  
+    bcrypt   = BCrypt::Password.new(resource.encrypted_password)
+    password = BCrypt::Engine.hash_secret("#{params[:user][:password]}#{resource.class.pepper}", bcrypt.salt)
+    valid = Devise.secure_compare(password, resource.encrypted_password)
+    if valid
+      sign_in(resource_name, resource)
+      redirect_to new_club_url and return
     else
-      failure
+      redirect_to(
+        new_user_session_path, 
+        :notice => 'Invalid Email Address or Password. Password is case sensitive.'
+        ) and return    
     end
   end
 
