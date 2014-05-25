@@ -10,7 +10,7 @@ SmartReserve::Application.routes.draw do
   get 'home' => 'clubs#index', as: :clubs
   post 'home' => 'clubs#create'
   post 'markitup/preview' => 'markdown#preview'
-  get 'catalog' => 'clubs#catalog'
+  get 'catalog' => 'clubs#catalog', as: :catalog
   match 'remote_sign_up', to: 'remote_content#remote_sign_up', via: [:get]
   match 'remote_sign_in', to: 'remote_content#remote_sign_in', via: [:get]
   resources :favorites, only: [:create,:destroy]
