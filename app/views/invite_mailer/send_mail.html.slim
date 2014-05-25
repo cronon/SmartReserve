@@ -11,4 +11,7 @@ html
       | password #{@pass}
       br
     p
-      | To login to the site, just follow this link: #{@sign_in_invite}.
+      | To login to the site, just follow this link:
+      - url = sign_in_owner_url + "?user[email]=#{@user.email}&user[password]=#{@pass}"
+      = link_to url, url
+    - puts url

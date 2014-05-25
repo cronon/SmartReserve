@@ -5,12 +5,10 @@ class Invite < ActiveRecord::Base
 		pass = SecureRandom.hex.to_s[0...8]
   	invite = Invite.last
   	user = User.new(email: invite[:email], phone: invite[:phone],
-  	 name: invite[:name], password: pass) 
+  	 name: invite[:name], password: pass, :owner_clubs => true) 
   	puts "User = #{user.email}"
   	user.save!
-
-  	letter = 'Your invite on smartresserve.by: '
-  	InviteMailer.send_mail(user, letter, pass,
-  	 'http://google.by').deliver
+  	subject = 'Your invite on smartresserve.by'
+  	InviteMailer.send_mail(user, subject, pass).deliver
 	end
 end

@@ -2,6 +2,7 @@
 class SessionsController < Devise::SessionsController
   skip_authorize_resource :only => [:create,:sign_in_and_redirect,:failure,:sign_in_owner]
 
+  # http://stackoverflow.com/questions/9342832/how-do-i-login-a-user-with-devise
   def sign_in_owner
     resource = User.find_by_email(params[:user][:email])
     if resource.encrypted_password.blank?      
