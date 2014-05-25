@@ -39,7 +39,7 @@
         .col-xs-offset-2.col-xs-8
           - properties.each_with_index do |property,i|
             .top-goal 
-              a href="/catalog?property_ids[]=#{property.id}" 
+              a href="#{catalog_url}?property_ids[]=#{property.id}" 
                 img alt="..." src=asset_url("categories/#{i+1}.jpg") /
                 = property.name
     .row

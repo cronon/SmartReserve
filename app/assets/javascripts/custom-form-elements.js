@@ -141,7 +141,8 @@ var Custom = {
 		}
 	}
 }
-window.onload = function(){
+
+var initPage = function(){
 	setTimeout(function(){Custom.init();},300);
 	$('span.checkbox').attr('style','min-height:16px'); //chrome doesnt respect default behavior
 	// в инспекторе если убрать птичку с атрибута, который и так зачернут, то эти штуки появляются
@@ -150,3 +151,9 @@ window.onload = function(){
   setTimeout(function(){s.toggleClass('radio-custom');},0);
   
 };
+$(function() {
+  initPage();
+});
+$(window).bind('page:change', function() {
+  initPage();
+});
