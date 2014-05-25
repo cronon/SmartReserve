@@ -12,7 +12,8 @@
           .col-md-12 style='padding-right:0'
             h3[style="font-weight:bold;margin-top:0;font-size: 1.4em;"] = @club.name
             p = @club.description
-            a.btn.btn-red-border Редактировать информацию
+            - if can? :edit, @club
+              a.btn.btn-red-border href="#{edit_club_url(@club)}" Редактировать информацию
 
       .row: .col-md-12: br
       .row
@@ -54,4 +55,4 @@ javascript:
     console.log("last_time="+$('.order input[type="hidden"]').first()[0].value)
   }
 
-  /var interval = setInterval(function(){checkNewOrders()},5000);
+  var interval = setInterval(function(){checkNewOrders()},5000);

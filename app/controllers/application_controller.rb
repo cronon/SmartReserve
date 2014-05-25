@@ -64,6 +64,7 @@ class ApplicationController < ActionController::Base
         :avatar, 
         :avatar_cache)}
     devise_parameter_sanitizer.for(:account_update) {|u| u.permit(
+        :name,
         :phone,
         :owner_clubs, 
         :email, 

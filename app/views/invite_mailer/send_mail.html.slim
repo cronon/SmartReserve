@@ -7,11 +7,12 @@ html
       | Welcome to smartreserve.by, #{@user.name}
     p
       | You have successfully signed up to smartreserve.by,
+      br
       | your username is: #{@user.name},
-      | password #{@pass}
+      br
+      | password: #{@pass}
       br
     p
       | To login to the site, just follow this link:
-      - url = sign_in_owner_url + "?user[email]=#{@user.email}&user[password]=#{@pass}"
-      = link_to url, url
-    - puts url
+      - url = (sign_in_owner_url + "?user[email]=#{@user.email}&user[password]=#{@pass}").html_safe
+      a[href="#{url}"] = url
