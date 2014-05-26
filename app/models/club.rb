@@ -9,6 +9,7 @@ class Date
 end
 
 class Club < ActiveRecord::Base
+  has_many :notifications
   has_many :favorites
   has_many :favorite_users, :through => :favorites, :class_name => "User"
   has_many :subscribes

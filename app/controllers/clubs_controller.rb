@@ -80,7 +80,7 @@ class ClubsController < ApplicationController
   # POST /clubs.json
   def create
     @club = Club.new
-    #@club = current_user.clubs.build
+    @club = current_user.clubs.build
     @club.tables_count =  params[:tables_count] || 0
     @club.properties << (Property.find_by_name_ru(params[:club_type]) || Property.create(:kind_en=>'Type',:kind_ru=>'Тип',:name_ru=>params[:club_type]))
     respond_to do |format|

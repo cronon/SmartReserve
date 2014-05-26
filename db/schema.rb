@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525135605) do
+ActiveRecord::Schema.define(version: 20140526174626) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "abouts", force: true do |t|
     t.text     "html"
@@ -30,9 +33,9 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -49,8 +52,8 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "bottom_links", force: true do |t|
     t.string   "src"
@@ -105,15 +108,15 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.string   "payment_methods"
   end
 
-  add_index "clubs", ["user_id"], name: "index_clubs_on_user_id"
+  add_index "clubs", ["user_id"], name: "index_clubs_on_user_id", using: :btree
 
   create_table "clubs_properties", id: false, force: true do |t|
     t.integer "club_id",     null: false
     t.integer "property_id", null: false
   end
 
-  add_index "clubs_properties", ["club_id"], name: "index_clubs_properties_on_club_id"
-  add_index "clubs_properties", ["property_id"], name: "index_clubs_properties_on_property_id"
+  add_index "clubs_properties", ["club_id"], name: "index_clubs_properties_on_club_id", using: :btree
+  add_index "clubs_properties", ["property_id"], name: "index_clubs_properties_on_property_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.text     "description"
@@ -123,7 +126,7 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.integer  "user_id"
   end
 
-  add_index "comments", ["club_id"], name: "index_comments_on_club_id"
+  add_index "comments", ["club_id"], name: "index_comments_on_club_id", using: :btree
 
   create_table "favorites", force: true do |t|
     t.integer  "club_id"
@@ -149,7 +152,17 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.string   "avatar"
   end
 
-  add_index "news", ["club_id"], name: "index_news_on_club_id"
+  add_index "news", ["club_id"], name: "index_news_on_club_id", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.string   "phone"
+    t.boolean  "is_phone"
+    t.string   "email"
+    t.boolean  "is_email"
+    t.integer  "club_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "orders", force: true do |t|
     t.integer  "table_id"
@@ -166,8 +179,8 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.text     "comment"
   end
 
-  add_index "orders", ["table_id"], name: "index_orders_on_table_id"
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+  add_index "orders", ["table_id"], name: "index_orders_on_table_id", using: :btree
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.datetime "created_at"
@@ -194,8 +207,20 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.datetime "updated_at"
   end
 
-  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type"
-  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id"
+  add_index "rates", ["rateable_id", "rateable_type"], name: "index_rates_on_rateable_id_and_rateable_type", using: :btree
+  add_index "rates", ["rater_id"], name: "index_rates_on_rater_id", using: :btree
+
+  create_table "rating_caches", force: true do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            null: false
+    t.integer  "qty",            null: false
+    t.string   "dimension"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type", using: :btree
 
   create_table "subscribes", force: true do |t|
     t.integer  "club_id"
@@ -214,7 +239,7 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.string   "hall",       default: "Некурящий"
   end
 
-  add_index "tables", ["club_id"], name: "index_tables_on_club_id"
+  add_index "tables", ["club_id"], name: "index_tables_on_club_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
@@ -240,7 +265,7 @@ ActiveRecord::Schema.define(version: 20140525135605) do
     t.string   "avatar"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
