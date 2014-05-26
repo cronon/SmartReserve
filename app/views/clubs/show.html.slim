@@ -63,13 +63,13 @@
                   tr
                     td: img src="#{asset_url 'clubs_show/phone.png'}"
                     td
-                      = '+375171234567'
+                      = @club.phone
                   tr
                     td: img src="#{asset_url 'clubs_show/www.png'}"
-                    td: a[href="#"] http://example.com
+                    td: a[href="#{@club.site}"] = @club.site
                   tr
                     td style="padding-bottom:0": img src="#{asset_url 'clubs_show/email.png'}"
-                    td style="padding-bottom:0": a[href="mailto:exapmle@example.com"] exapmle@example.com
+                    td style="padding-bottom:0": a[href="mailto:#{@club.email}"] =@club.email
             .club-info
               label Особенности
               ul
