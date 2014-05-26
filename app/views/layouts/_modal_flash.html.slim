@@ -1,0 +1,15 @@
+- flash.each do |name, msg|
+  - if msg.is_a?(String)
+    #flash.modal.fade
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+            h4#myModalLabel.modal-title.red[style='text-align:center'] = msg
+            .form-actions style="text-align:center;margin-top:15px"
+              a  href="#" class="btn btn-red-border" data-dismiss="modal"  OK
+javascript:
+  $(document).ready(function(){
+    $('#flash').modal({});
+  });
+

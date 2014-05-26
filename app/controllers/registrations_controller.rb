@@ -12,6 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
    if resource.save
      respond_to do |format|
        format.html {
+          flash[:notice] = "Регистрация успешна"
          yield resource if block_given?
          if resource.active_for_authentication?
            set_flash_message :notice, :signed_up if is_flashing_format?
@@ -24,9 +25,9 @@ class RegistrationsController < Devise::RegistrationsController
          end
        }
        format.js {
-         flash[:notice] = "Created account, signed in."
+         flash[:notice] = "Регистрация успешна"
          render :template => "remote_content/devise_success_sign_up.js.erb"
-         flash.discard
+         # flash.discard
          sign_up(resource_name, resource)
        }
      end
