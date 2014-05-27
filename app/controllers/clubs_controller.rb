@@ -86,7 +86,7 @@ class ClubsController < ApplicationController
     respond_to do |format|
       if @club.update(club_params)
         @club.photos << get_photos
-        format.html { redirect_to edit_club_path(@club), notice: 'Club was successfully created.' }
+        format.html { redirect_to club_path(@club), notice: 'Club was successfully created.' }
         format.json { render action: 'show', status: :created, location: @club }
       else
         format.html { render action: 'new' }
