@@ -123,7 +123,7 @@
               td == render 'layouts/time_select', :name => day.to_s+'_opens'
               td style="width:20px;" по 
               td == render 'layouts/time_select', :name => day.to_s+'_closes'
-              td: input.styled[id="#{day.to_s}_checkbox" data-day="#{day.to_s}" type="checkbox"]
+              td: input.styled id="#{day.to_s}_checkbox" data-day="#{day.to_s}" type="checkbox" onchange="toggleWholeDayToInputs(this)"
         .field
           = f.label t('.description')
           br/
@@ -196,7 +196,7 @@
            })
 javascript:
   var toggleWholeDayToInputs = function(e){
-    var checkbox_custom = e.target;
+    var checkbox_custom = e;
     var checkbox = checkbox_custom.nextSibling;
     console.log(checkbox.dataset['day']);
     var inputs = $('#'+checkbox.dataset['day']+'_tr input[type="text"]')

@@ -8,7 +8,7 @@ class Invite < ActiveRecord::Base
   	 name: invite[:name], password: pass, :owner_clubs => true) 
   	puts "User = #{user.email}"
   	user.save!
-  	subject = 'Your invite on smartresserve.by'
+  	subject = 'Your invite to smartresserve.by'
   	InviteMailer.send_mail(user, subject, pass).deliver
 	end
 end

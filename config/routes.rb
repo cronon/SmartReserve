@@ -1,7 +1,7 @@
 SmartReserve::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  #devise_for :users
+
   devise_for :users, :controllers => { registrations: 'registrations', sessions: 'sessions' }
   devise_scope :user do 
     get 'confirm' => 'sessions#sign_in_owner', as: :sign_in_owner
