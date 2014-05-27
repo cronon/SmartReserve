@@ -104,7 +104,7 @@
           tr
             td: label Кухня
             td
-              select[name='property_ids[]']
+              select[name='property_ids[]' value="10"]
                 - Property.where(:kind_en => 'Kitchen').each do |k|
                     option[value=k.id name='property_ids[]'] = k.name_en
         label Режим работы

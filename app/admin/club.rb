@@ -26,7 +26,7 @@ ActiveAdmin.register Club do
       f.input :address
       f.input :city
       f.input(:user_id, :as => :select, 
-        :collection => Hash[User.where(:owner_clubs => true).map{|b| [b.name + ' ' + b.email,b.id]}]
+        :collection => Hash[User.where(:owner_clubs => true).map{|b| [(b.name||'') + ' ' + b.email,b.id]}]
         )
       f.input(:properties, :as => :check_boxes, 
         :collection => Hash[Property.all.map{|b| [b.name,b.id]}]
