@@ -95,7 +95,7 @@ html
           .col-xs-12 style=("border-top:1px solid #d0cfcf") 
             br/
         .row.mobile-hide
-        - CategoryLink.all.each do |category_link|
+        / - CategoryLink.all.each do |category_link|
           .col-xs-3
             h3.before-footer-h3 
               == category_link.name
@@ -124,11 +124,11 @@ html
                 color: black;
               }
             #footer_nav style="text-align:center" 
-              a href=(" ")  Главная
+              a href=("/home")  Главная
               a href=(" ")  Посетителям
               a href=(" ")  Ресторанам
-              a href=(" ")  Новости
-              a href=(" ")  О проекте
+              a href=("/news")  Новости
+              a href=("/about")  О проекте
           .row
             .col-xs-3
               img src=asset_url('footer_logo.png') /
