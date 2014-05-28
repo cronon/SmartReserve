@@ -1,7 +1,7 @@
-label Галерея
+label Галерея (добавить фото)
 <script id="template-upload" type="text/x-tmpl"><div class="upload">{%=o.name%}<div class="progress"><div class="bar" style="width: 0%"></div></div></div></script>
 .row#prev_photo_form_uploaded_data style="margin:0"
-  div style="min-height:100px"
+  div style="min-height:150px"
     - @club.photos.each do |photo|
       == render 'photos/single', photo: photo
 

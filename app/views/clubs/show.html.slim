@@ -116,15 +116,16 @@
             a data-toggle="tab" href="#news"  Новости(Афиша)
         .tab-content
           #description.tab-pane
-            / label> Кухня: 
-            / = @club.properties.find_by_kind_en('Kitchen').name_en
-            / br
-            / label> Мы принимаем: 
-            / | Всех 
+            label> Кухня: 
+            = @club.properties.find_by_kind_en('Kitchen').name_en
+            br
+            label> Мы принимаем: 
+            = @club.properties.where(:kind_en => "Payment").map{|p| p.name_en}.join(", ")
             br
             label> Время работы:  
             / will be 00:00 - 00:00, should be 00:00 - 24:00
             = @club.schedule_at(Time.now)[:opens].strftime('%H:%M') + ' - ' + @club.schedule_at(Time.now)[:closes].strftime('%H:%M')
+            br
             br
             label> Дополнительная информация:
             - if can? :edit, @club
