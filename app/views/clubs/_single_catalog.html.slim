@@ -1,5 +1,5 @@
 .club-wrapper-catalog
-  .club-div id="club_#{club.id}" style="background-image:url(#{ asset_url('club-catalog.png') })" 
+  .club-div id="club_#{club.id}" style="background-image:url(#{ club.avatar_url || asset_url('club-catalog.png') })" 
     .white-on-avatar style='height:50px;margin-top:15px;overflow-x:hidden'
       a.title-on-avatar href="#{club_path(club)}" 
         = club.properties.find_by_kind_en('Type').name
