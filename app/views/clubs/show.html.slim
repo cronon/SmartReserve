@@ -50,26 +50,30 @@
                 /   | 7788
         .row: .col-md-12: br
         .row
-          .col-md-12 style="position:relative"
+          .col-md-12 style="position:relative;min-height:200px"
             .club-info
                 table
-                  tr
-                    td: img src="#{asset_url 'clubs_show/on_map.png'}"
-                    td
-                      = @club.address
-                      br 
-                      a[href='#' onclick='createMap()' data-toggle="modal" data-target="#map_modal"] Посмотреть на карте
-                      == render 'clubs/map', :club => @club
-                  tr
-                    td: img src="#{asset_url 'clubs_show/phone.png'}"
-                    td
-                      = @club.phone
-                  tr
-                    td: img src="#{asset_url 'clubs_show/www.png'}"
-                    td: a[href="#{@club.site}"] = @club.site
-                  tr
-                    td style="padding-bottom:0": img src="#{asset_url 'clubs_show/email.png'}"
-                    td style="padding-bottom:0": a[href="mailto:#{@club.email}"] =@club.email
+                  - if @club.address.present?
+                    tr
+                      td: img src="#{asset_url 'clubs_show/on_map.png'}"
+                      td
+                        = @club.address
+                        br 
+                        a[href='#' onclick='createMap()' data-toggle="modal" data-target="#map_modal"] Посмотреть на карте
+                        == render 'clubs/map', :club => @club
+                  - if @club.phone.present?
+                    tr
+                      td: img src="#{asset_url 'clubs_show/phone.png'}"
+                      td
+                        = @club.phone
+                  - if @club.site.present?
+                    tr
+                      td: img src="#{asset_url 'clubs_show/www.png'}"
+                      td: a[href="#{@club.site}"] = @club.site
+                  - if @club.email.present?
+                    tr
+                      td style="padding-bottom:0": img src="#{asset_url 'clubs_show/email.png'}"
+                      td style="padding-bottom:0": a[href="mailto:#{@club.email}"] =@club.email
             .club-info
               label Особенности
               ul
@@ -80,18 +84,19 @@
               ul
                 - @club.properties.where(:kind_ru => 'Интерьер').each do |p|
                   li = p.name
-            .average-price.mobile-average-price
-              span style="font-size:16px"
-                ' Средний чек:
-              span style="color:#ec5c5c;font-size:20px"
-                = @club.average_price.to_s
-              div style="display:inline;top:3px;color:#ec5c5c;position:absolute;font-size:13px"
-                | руб
-              - if can? :update, @club
-                div style="font-size: 13px; font-weight: normal;"
-                  span.glyphicon.glyphicon-pencil style="color:#ec5c5c;font-size:20px"
-                  a href="#{edit_club_path(@club)}"
-                    = t('.edit_check')
+            - if @club.average_price
+              .average-price.mobile-average-price
+                span style="font-size:16px"
+                  ' Средний чек:
+                span style="color:#ec5c5c;font-size:20px"
+                  = @club.average_price.to_s
+                div style="display:inline;top:3px;color:#ec5c5c;position:absolute;font-size:13px"
+                  | руб
+                - if can? :update, @club
+                  div style="font-size: 13px; font-weight: normal;"
+                    span.glyphicon.glyphicon-pencil style="color:#ec5c5c;font-size:20px"
+                    a href="#{edit_club_path(@club)}"
+                      = t('.edit_check')
 
     .row: .col-md-12: br
     .row
@@ -111,15 +116,15 @@
             a data-toggle="tab" href="#news"  Новости(Афиша)
         .tab-content
           #description.tab-pane
-            label> Кухня: 
-            = @club.properties.find_by_kind_en('Kitchen').name_en
+            / label> Кухня: 
+            / = @club.properties.find_by_kind_en('Kitchen').name_en
+            / br
+            / label> Мы принимаем: 
+            / | Всех 
             br
-            label> Мы принимаем: 
-            | Всех 
-            br
-            label> Время работы: 
-            | Круглосуточно
-            /= @club.schedule_at(Time.now)[:opens].strftime('%H:%M') + ' - ' + @club.schedule_at(Time.now)[:closes].strftime('%H:%M')  # will be 00:00 - 00:00, should be 00:00 - 24:00
+            label> Время работы:  
+            / will be 00:00 - 00:00, should be 00:00 - 24:00
+            = @club.schedule_at(Time.now)[:opens].strftime('%H:%M') + ' - ' + @club.schedule_at(Time.now)[:closes].strftime('%H:%M')
             br
             label> Дополнительная информация:
             - if can? :edit, @club
