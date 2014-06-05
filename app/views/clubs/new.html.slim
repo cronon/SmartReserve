@@ -106,7 +106,7 @@
             td
               select[name='property_ids[]' value="10"]
                 - Property.where(:kind_en => 'Kitchen').each do |k|
-                    option[value=k.id name='property_ids[]'] = k.name_en
+                    option[value=k.id name='property_ids[]'] = k.name_ru
         label Режим работы
         table.schedule-table
           thead

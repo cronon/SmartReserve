@@ -75,15 +75,17 @@
                       td style="padding-bottom:0": img src="#{asset_url 'clubs_show/email.png'}"
                       td style="padding-bottom:0": a[href="mailto:#{@club.email}"] =@club.email
             .club-info
-              label Особенности
-              ul
-                - @club.properties.where(:kind_ru => 'Особенность').each do |p|
-                  li = p.name
+              - if ( f = @club.properties.where(:kind_ru => 'Особенность')).present?
+                label Особенности
+                ul
+                  - f.each do |f|
+                    li = f.name
             .club-info style="padding-right:0"
-              label Интерьер
-              ul
-                - @club.properties.where(:kind_ru => 'Интерьер').each do |p|
-                  li = p.name
+              - if (i = @club.properties.where(:kind_ru => 'Интерьер')).present?
+                label Интерьер
+                ul
+                  - i.each do |i|
+                    li = i.name
             - if @club.average_price
               .average-price.mobile-average-price
                 span style="font-size:16px"
