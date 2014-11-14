@@ -1,930 +1,461 @@
---
--- PostgreSQL database dump
---
-
-SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
-
-SET search_path = public, pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
---
--- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE active_admin_comments (
-    id integer NOT NULL,
-    namespace character varying(255),
-    body text,
-    resource_id character varying(255) NOT NULL,
-    resource_type character varying(255) NOT NULL,
-    author_id integer,
-    author_type character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: active_admin_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE active_admin_comments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: active_admin_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE active_admin_comments_id_seq OWNED BY active_admin_comments.id;
-
-
---
--- Name: admin_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE admin_users (
-    id integer NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying(255),
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: admin_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE admin_users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: admin_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE admin_users_id_seq OWNED BY admin_users.id;
-
-
---
--- Name: clubs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE clubs (
-    id integer NOT NULL,
-    name character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    tables_count integer,
-    description text,
-    mon_opens character varying(255) DEFAULT '08:00'::character varying,
-    mon_closes character varying(255) DEFAULT '23:00'::character varying,
-    tue_opens character varying(255) DEFAULT '08:00'::character varying,
-    tue_closes character varying(255) DEFAULT '23:00'::character varying,
-    wed_opens character varying(255) DEFAULT '08:00'::character varying,
-    wed_closes character varying(255) DEFAULT '23:00'::character varying,
-    thu_opens character varying(255) DEFAULT '08:00'::character varying,
-    thu_closes character varying(255) DEFAULT '23:00'::character varying,
-    fri_opens character varying(255) DEFAULT '08:00'::character varying,
-    fri_closes character varying(255) DEFAULT '23:00'::character varying,
-    sat_opens character varying(255) DEFAULT '08:00'::character varying,
-    sat_closes character varying(255) DEFAULT '23:00'::character varying,
-    sun_opens character varying(255) DEFAULT '08:00'::character varying,
-    sun_closes character varying(255) DEFAULT '23:00'::character varying,
-    user_id integer,
-    phone character varying(255),
-    address character varying(255),
-    time_before integer,
-    time_after integer,
-    time_waiting integer,
-    time_last character varying(255),
-    avatar character varying(255),
-    average_price integer,
-    city character varying(255),
-    rating_average numeric(6,2) DEFAULT 0,
-    is_certified boolean DEFAULT false,
-    metro_station character varying(255),
-    site character varying(255),
-    email character varying(255),
-    additional_phones character varying(255),
-    payment_methods character varying(255)
-);
-
-
---
--- Name: clubs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE clubs_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: clubs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE clubs_id_seq OWNED BY clubs.id;
-
-
---
--- Name: clubs_properties; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE clubs_properties (
-    club_id integer NOT NULL,
-    property_id integer NOT NULL
-);
-
-
---
--- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE comments (
-    id integer NOT NULL,
-    description text,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    club_id integer,
-    user_id integer
-);
-
-
---
--- Name: comments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE comments_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
-
-
---
--- Name: favorites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE favorites (
-    id integer NOT NULL,
-    club_id integer,
-    user_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: favorites_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE favorites_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: favorites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE favorites_id_seq OWNED BY favorites.id;
-
-
---
--- Name: news; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE news (
-    id integer NOT NULL,
-    club_id integer,
-    description text,
-    title character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: news_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE news_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE news_id_seq OWNED BY news.id;
-
-
---
--- Name: orders; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE orders (
-    id integer NOT NULL,
-    table_id integer,
-    since timestamp without time zone,
-    until timestamp without time zone,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    phone character varying(255),
-    name character varying(255),
-    token character varying(255),
-    user_id integer,
-    "time" timestamp without time zone,
-    confirmation character varying(255),
-    comment text
-);
-
-
---
--- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE orders_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
-
-
---
--- Name: photos; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE photos (
-    id integer NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    image character varying(255),
-    imageable_id integer,
-    imageable_type character varying(255)
-);
-
-
---
--- Name: photos_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE photos_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: photos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE photos_id_seq OWNED BY photos.id;
-
-
---
--- Name: properties; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE properties (
-    id integer NOT NULL,
-    name_ru character varying(255),
-    name_en character varying(255),
-    kind_ru character varying(255),
-    kind_en character varying(255)
-);
-
-
---
--- Name: properties_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE properties_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: properties_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE properties_id_seq OWNED BY properties.id;
-
-
---
--- Name: rates; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE rates (
-    id integer NOT NULL,
-    rater_id integer,
-    rateable_id integer,
-    rateable_type character varying(255),
-    stars integer NOT NULL,
-    dimension character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: rates_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE rates_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: rates_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE rates_id_seq OWNED BY rates.id;
-
-
---
--- Name: rating_caches; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE rating_caches (
-    id integer NOT NULL,
-    cacheable_id integer,
-    cacheable_type character varying(255),
-    avg double precision NOT NULL,
-    qty integer NOT NULL,
-    dimension character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: rating_caches_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE rating_caches_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: rating_caches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE rating_caches_id_seq OWNED BY rating_caches.id;
-
-
---
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE schema_migrations (
-    version character varying(255) NOT NULL
-);
-
-
---
--- Name: subscribes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE subscribes (
-    id integer NOT NULL,
-    club_id integer,
-    user_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: subscribes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE subscribes_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: subscribes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE subscribes_id_seq OWNED BY subscribes.id;
-
-
---
--- Name: tables; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE tables (
-    id integer NOT NULL,
-    club_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    status_now character varying(255) DEFAULT 'free'::character varying,
-    number integer,
-    seats integer,
-    hall character varying(255) DEFAULT 'Некурящий'::character varying
-);
-
-
---
--- Name: tables_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE tables_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: tables_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE tables_id_seq OWNED BY tables.id;
-
-
---
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE users (
-    id integer NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    phone character varying(255) NOT NULL,
-    reset_password_token character varying(255),
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp without time zone,
-    last_sign_in_at timestamp without time zone,
-    current_sign_in_ip character varying(255),
-    last_sign_in_ip character varying(255),
-    confirmation_token character varying(255),
-    confirmed_at timestamp without time zone,
-    confirmation_sent_at timestamp without time zone,
-    unconfirmed_email character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    owner_clubs boolean DEFAULT false,
-    name character varying(255),
-    locale character varying(255),
-    avatar character varying(255)
-);
-
-
---
--- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE users_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('active_admin_comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY admin_users ALTER COLUMN id SET DEFAULT nextval('admin_users_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY clubs ALTER COLUMN id SET DEFAULT nextval('clubs_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY favorites ALTER COLUMN id SET DEFAULT nextval('favorites_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY photos ALTER COLUMN id SET DEFAULT nextval('photos_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY properties ALTER COLUMN id SET DEFAULT nextval('properties_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY rates ALTER COLUMN id SET DEFAULT nextval('rates_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY rating_caches ALTER COLUMN id SET DEFAULT nextval('rating_caches_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY subscribes ALTER COLUMN id SET DEFAULT nextval('subscribes_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY tables ALTER COLUMN id SET DEFAULT nextval('tables_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
-
-
---
--- Name: active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY active_admin_comments
-    ADD CONSTRAINT active_admin_comments_pkey PRIMARY KEY (id);
-
-
---
--- Name: admin_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY admin_users
-    ADD CONSTRAINT admin_users_pkey PRIMARY KEY (id);
-
-
---
--- Name: clubs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY clubs
-    ADD CONSTRAINT clubs_pkey PRIMARY KEY (id);
-
-
---
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
-
-
---
--- Name: favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY favorites
-    ADD CONSTRAINT favorites_pkey PRIMARY KEY (id);
-
-
---
--- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY news
-    ADD CONSTRAINT news_pkey PRIMARY KEY (id);
-
-
---
--- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY orders
-    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
-
-
---
--- Name: photos_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY photos
-    ADD CONSTRAINT photos_pkey PRIMARY KEY (id);
-
-
---
--- Name: properties_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY properties
-    ADD CONSTRAINT properties_pkey PRIMARY KEY (id);
-
-
---
--- Name: rates_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY rates
-    ADD CONSTRAINT rates_pkey PRIMARY KEY (id);
-
-
---
--- Name: rating_caches_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY rating_caches
-    ADD CONSTRAINT rating_caches_pkey PRIMARY KEY (id);
-
-
---
--- Name: subscribes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY subscribes
-    ADD CONSTRAINT subscribes_pkey PRIMARY KEY (id);
-
-
---
--- Name: tables_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY tables
-    ADD CONSTRAINT tables_pkey PRIMARY KEY (id);
-
-
---
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY users
-    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
-
-
---
--- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_active_admin_comments_on_author_type_and_author_id ON active_admin_comments USING btree (author_type, author_id);
-
-
---
--- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_active_admin_comments_on_namespace ON active_admin_comments USING btree (namespace);
-
-
---
--- Name: index_active_admin_comments_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_active_admin_comments_on_resource_type_and_resource_id ON active_admin_comments USING btree (resource_type, resource_id);
-
-
---
--- Name: index_admin_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_admin_users_on_email ON admin_users USING btree (email);
-
-
---
--- Name: index_admin_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_admin_users_on_reset_password_token ON admin_users USING btree (reset_password_token);
-
-
---
--- Name: index_clubs_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_clubs_on_user_id ON clubs USING btree (user_id);
-
-
---
--- Name: index_clubs_properties_on_club_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_clubs_properties_on_club_id ON clubs_properties USING btree (club_id);
-
-
---
--- Name: index_clubs_properties_on_property_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_clubs_properties_on_property_id ON clubs_properties USING btree (property_id);
-
-
---
--- Name: index_comments_on_club_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_comments_on_club_id ON comments USING btree (club_id);
-
-
---
--- Name: index_news_on_club_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_news_on_club_id ON news USING btree (club_id);
-
-
---
--- Name: index_orders_on_table_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_orders_on_table_id ON orders USING btree (table_id);
-
-
---
--- Name: index_orders_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_orders_on_user_id ON orders USING btree (user_id);
-
-
---
--- Name: index_rates_on_rateable_id_and_rateable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_rates_on_rateable_id_and_rateable_type ON rates USING btree (rateable_id, rateable_type);
-
-
---
--- Name: index_rates_on_rater_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_rates_on_rater_id ON rates USING btree (rater_id);
-
-
---
--- Name: index_rating_caches_on_cacheable_id_and_cacheable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_rating_caches_on_cacheable_id_and_cacheable_type ON rating_caches USING btree (cacheable_id, cacheable_type);
-
-
---
--- Name: index_tables_on_club_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_tables_on_club_id ON tables USING btree (club_id);
-
-
---
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
-
-
---
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
-
-
---
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
-
-
---
--- PostgreSQL database dump complete
---
-
-SET search_path TO "$user",public;
-
+-- MySQL dump 10.13  Distrib 5.5.40, for debian-linux-gnu (x86_64)
+--
+-- Host: localhost    Database: db_development
+-- ------------------------------------------------------
+-- Server version	5.5.40-0ubuntu0.12.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `abouts`
+--
+
+DROP TABLE IF EXISTS `abouts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `abouts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `html` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `active_admin_comments`
+--
+
+DROP TABLE IF EXISTS `active_admin_comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `active_admin_comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `namespace` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `body` text COLLATE utf8_unicode_ci,
+  `resource_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `resource_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `author_id` int(11) DEFAULT NULL,
+  `author_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_active_admin_comments_on_namespace` (`namespace`),
+  KEY `index_active_admin_comments_on_author_type_and_author_id` (`author_type`,`author_id`),
+  KEY `index_active_admin_comments_on_resource_type_and_resource_id` (`resource_type`,`resource_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `admin_users`
+--
+
+DROP TABLE IF EXISTS `admin_users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `encrypted_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `reset_password_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_password_sent_at` datetime DEFAULT NULL,
+  `remember_created_at` datetime DEFAULT NULL,
+  `sign_in_count` int(11) NOT NULL DEFAULT '0',
+  `current_sign_in_at` datetime DEFAULT NULL,
+  `last_sign_in_at` datetime DEFAULT NULL,
+  `current_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_admin_users_on_email` (`email`),
+  UNIQUE KEY `index_admin_users_on_reset_password_token` (`reset_password_token`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bottom_links`
+--
+
+DROP TABLE IF EXISTS `bottom_links`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bottom_links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `src` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `category_link_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `category_links`
+--
+
+DROP TABLE IF EXISTS `category_links`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category_links` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `clubs`
+--
+
+DROP TABLE IF EXISTS `clubs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clubs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `tables_count` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `mon_opens` varchar(255) COLLATE utf8_unicode_ci DEFAULT '08:00',
+  `mon_closes` varchar(255) COLLATE utf8_unicode_ci DEFAULT '23:00',
+  `tue_opens` varchar(255) COLLATE utf8_unicode_ci DEFAULT '08:00',
+  `tue_closes` varchar(255) COLLATE utf8_unicode_ci DEFAULT '23:00',
+  `wed_opens` varchar(255) COLLATE utf8_unicode_ci DEFAULT '08:00',
+  `wed_closes` varchar(255) COLLATE utf8_unicode_ci DEFAULT '23:00',
+  `thu_opens` varchar(255) COLLATE utf8_unicode_ci DEFAULT '08:00',
+  `thu_closes` varchar(255) COLLATE utf8_unicode_ci DEFAULT '23:00',
+  `fri_opens` varchar(255) COLLATE utf8_unicode_ci DEFAULT '08:00',
+  `fri_closes` varchar(255) COLLATE utf8_unicode_ci DEFAULT '23:00',
+  `sat_opens` varchar(255) COLLATE utf8_unicode_ci DEFAULT '08:00',
+  `sat_closes` varchar(255) COLLATE utf8_unicode_ci DEFAULT '23:00',
+  `sun_opens` varchar(255) COLLATE utf8_unicode_ci DEFAULT '08:00',
+  `sun_closes` varchar(255) COLLATE utf8_unicode_ci DEFAULT '23:00',
+  `user_id` int(11) DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `time_before` int(11) DEFAULT NULL,
+  `time_after` int(11) DEFAULT NULL,
+  `time_waiting` int(11) DEFAULT NULL,
+  `time_last` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `average_price` int(11) DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `rating_average` decimal(6,2) DEFAULT '0.00',
+  `is_certified` tinyint(1) DEFAULT '0',
+  `metro_station` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `site` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `additional_phones` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `payment_methods` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_clubs_on_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `clubs_properties`
+--
+
+DROP TABLE IF EXISTS `clubs_properties`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clubs_properties` (
+  `club_id` int(11) NOT NULL,
+  `property_id` int(11) NOT NULL,
+  KEY `index_clubs_properties_on_club_id` (`club_id`),
+  KEY `index_clubs_properties_on_property_id` (`property_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` text COLLATE utf8_unicode_ci,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `club_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_comments_on_club_id` (`club_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `favorites`
+--
+
+DROP TABLE IF EXISTS `favorites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favorites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `club_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `invites`
+--
+
+DROP TABLE IF EXISTS `invites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `invites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `news`
+--
+
+DROP TABLE IF EXISTS `news`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `club_id` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_news_on_club_id` (`club_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `notifications`
+--
+
+DROP TABLE IF EXISTS `notifications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_phone` tinyint(1) DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `is_email` tinyint(1) DEFAULT NULL,
+  `club_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `table_id` int(11) DEFAULT NULL,
+  `since` datetime DEFAULT NULL,
+  `until` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `time` datetime DEFAULT NULL,
+  `confirmation` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `comment` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`id`),
+  KEY `index_orders_on_table_id` (`table_id`),
+  KEY `index_orders_on_user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `photos`
+--
+
+DROP TABLE IF EXISTS `photos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `photos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `imageable_id` int(11) DEFAULT NULL,
+  `imageable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `properties`
+--
+
+DROP TABLE IF EXISTS `properties`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `properties` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_ru` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name_en` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `kind_ru` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `kind_en` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `rates`
+--
+
+DROP TABLE IF EXISTS `rates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rates` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rater_id` int(11) DEFAULT NULL,
+  `rateable_id` int(11) DEFAULT NULL,
+  `rateable_type` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `stars` int(11) NOT NULL,
+  `dimension` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_rates_on_rater_id` (`rater_id`),
+  KEY `index_rates_on_rateable_id_and_rateable_type` (`rateable_id`,`rateable_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `schema_migrations`
+--
+
+DROP TABLE IF EXISTS `schema_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `schema_migrations` (
+  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `unique_schema_migrations` (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `subscribes`
+--
+
+DROP TABLE IF EXISTS `subscribes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subscribes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `club_id` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tables`
+--
+
+DROP TABLE IF EXISTS `tables`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tables` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `club_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `status_now` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'free',
+  `number` int(11) DEFAULT NULL,
+  `seats` int(11) DEFAULT NULL,
+  `hall` varchar(255) COLLATE utf8_unicode_ci DEFAULT 'ÐÐµÐºÑƒÑ€ÑÑ‰Ð¸Ð¹',
+  PRIMARY KEY (`id`),
+  KEY `index_tables_on_club_id` (`club_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `encrypted_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `phone` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `reset_password_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `reset_password_sent_at` datetime DEFAULT NULL,
+  `remember_created_at` datetime DEFAULT NULL,
+  `sign_in_count` int(11) NOT NULL DEFAULT '0',
+  `current_sign_in_at` datetime DEFAULT NULL,
+  `last_sign_in_at` datetime DEFAULT NULL,
+  `current_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_sign_in_ip` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `confirmation_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `confirmed_at` datetime DEFAULT NULL,
+  `confirmation_sent_at` datetime DEFAULT NULL,
+  `unconfirmed_email` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `owner_clubs` tinyint(1) DEFAULT '0',
+  `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `locale` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `index_users_on_email` (`email`),
+  UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-11-01 13:03:52
 INSERT INTO schema_migrations (version) VALUES ('20140225071243');
 
 INSERT INTO schema_migrations (version) VALUES ('20140225072427');
@@ -971,10 +502,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140313135016');
 
 INSERT INTO schema_migrations (version) VALUES ('20140313145024');
 
-INSERT INTO schema_migrations (version) VALUES ('20140314065504');
-
-INSERT INTO schema_migrations (version) VALUES ('20140314065729');
-
 INSERT INTO schema_migrations (version) VALUES ('20140315121629');
 
 INSERT INTO schema_migrations (version) VALUES ('20140321152717');
@@ -983,17 +510,11 @@ INSERT INTO schema_migrations (version) VALUES ('20140321152724');
 
 INSERT INTO schema_migrations (version) VALUES ('20140322155522');
 
-INSERT INTO schema_migrations (version) VALUES ('20140322182834');
-
-INSERT INTO schema_migrations (version) VALUES ('20140322182835');
-
 INSERT INTO schema_migrations (version) VALUES ('20140324195246');
 
 INSERT INTO schema_migrations (version) VALUES ('20140325135054');
 
 INSERT INTO schema_migrations (version) VALUES ('20140325164738');
-
-INSERT INTO schema_migrations (version) VALUES ('20140326180214');
 
 INSERT INTO schema_migrations (version) VALUES ('20140326181322');
 
@@ -1050,3 +571,17 @@ INSERT INTO schema_migrations (version) VALUES ('20140428164202');
 INSERT INTO schema_migrations (version) VALUES ('20140502180500');
 
 INSERT INTO schema_migrations (version) VALUES ('20140503193828');
+
+INSERT INTO schema_migrations (version) VALUES ('20140509181041');
+
+INSERT INTO schema_migrations (version) VALUES ('20140524155333');
+
+INSERT INTO schema_migrations (version) VALUES ('20140524155452');
+
+INSERT INTO schema_migrations (version) VALUES ('20140524161631');
+
+INSERT INTO schema_migrations (version) VALUES ('20140525103554');
+
+INSERT INTO schema_migrations (version) VALUES ('20140525135605');
+
+INSERT INTO schema_migrations (version) VALUES ('20140526174626');

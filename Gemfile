@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.3'
 
 # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem 'mysql'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -78,7 +78,4 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
 end
-
-
-#[5:40:39 PM] Влад Климовец: и еще. можно к странице заведения привязывать ссылки на соцсети
 

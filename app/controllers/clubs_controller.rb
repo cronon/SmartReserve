@@ -1,3 +1,4 @@
+require 'net/http'
 # encoding: UTF-8
 class ClubsController < ApplicationController
   before_action :set_club, only: [:show, :edit, :update, :destroy, :update_description]
@@ -20,6 +21,7 @@ class ClubsController < ApplicationController
   end
 
   def catalog
+    Net;;HTTP.get('bsuir.by', '/online/showpage.jsp?PageID=88729&resID=100229&lang=ru&menuItemID=102753')
     params[:price] ||= {:from=>0, :to => 999999999999999999}
     @clubs = (params[:name] && !params[:name].blank?) ? Club.where("lower(name) = lower(?)", params[:name]) : Club.all
     if params[:property_ids]

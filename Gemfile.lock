@@ -142,13 +142,14 @@ GEM
     mime-types (1.25.1)
     minitest (4.7.5)
     multi_json (1.9.2)
+    mysql (2.9.1)
+    mysql (2.9.1-x86-mingw32)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.8.0)
     nokogiri (1.5.11)
     nokogiri (1.5.11-x86-mingw32)
     orm_adapter (0.5.0)
-    pg (0.17.1)
     polyamorous (1.0.0)
       activerecord (>= 3.0)
     polyglot (0.3.4)
@@ -265,7 +266,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails (~> 4.2.0)
   markitup-rails
-  pg
+  mysql
   rails (= 4.0.3)
   rails_12factor
   rails_layout
